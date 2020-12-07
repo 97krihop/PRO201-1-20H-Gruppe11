@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <base-site></base-site>
-    <home-select class="home-select-container"></home-select>
+    <home-select class="home-select-container center-screen"></home-select>
   </div>
 </template>
 
@@ -24,5 +24,11 @@ export default {
   position: absolute;
   left: 41vw;
   top: 40vh;
+}
+.center-screen {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 </style>
