@@ -1,7 +1,10 @@
 <template>
   <div class="about">
-    <base-site></base-site>
-    <home-select class="home-select-container"></home-select>
+    <base-site>
+      <nav-bar />
+      <landing-page />
+      <home-select class="home-select-container"></home-select>
+    </base-site>
   </div>
 </template>
 
@@ -9,18 +12,22 @@
 // @ is an alias to /src
 import BaseSite from '@/components/UI/BaseSite.vue'
 import HomeSelect from '@/components/Nav/HomeSelect.vue'
+import NavBar from '../components/Nav/navBar.vue'
+import LandingPage from '../components/UI/LandingPage.vue'
 
 export default {
   name: 'Home',
   components: {
     BaseSite,
-    HomeSelect
+    HomeSelect,
+    NavBar,
+    LandingPage
   }
 }
 </script>
 
 <style scoped>
-.home-select-container{
+.home-select-container {
   position: absolute;
   left: 41vw;
   top: 40vh;
