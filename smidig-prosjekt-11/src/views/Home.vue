@@ -1,9 +1,10 @@
 <template>
-  <div class="about">
+  <div class="home">
     <base-site>
       <nav-bar />
-      <landing-page />
-      <home-select class="home-select-container"></home-select>
+      <landing-page>
+        <home-select class="home-select-container" />
+      </landing-page>
     </base-site>
   </div>
 </template>
