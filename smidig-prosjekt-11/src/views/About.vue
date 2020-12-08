@@ -1,7 +1,6 @@
 <template>
   <div class="about">
     <base-site></base-site>
-
   </div>
 </template>
 

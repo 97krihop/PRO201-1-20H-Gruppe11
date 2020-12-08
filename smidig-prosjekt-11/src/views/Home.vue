@@ -20,15 +20,16 @@ export default {
 </script>
 
 <style scoped>
-.home-select-container{
+.home-select-container {
   position: absolute;
   left: 41vw;
   top: 40vh;
 }
+
 .center-screen {
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 </style>
