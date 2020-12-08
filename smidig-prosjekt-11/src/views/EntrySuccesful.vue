@@ -11,7 +11,7 @@ import BaseSite from '@/components/UI/BaseSite.vue';
 import ApprovedReport from '@/components/Feedback/ApprovedReport.vue';
 
 export default {
-    name: 'Home',
+    name: 'entrySuccesful',
     components: {
         BaseSite,
         ApprovedReport

@@ -1,5 +1,5 @@
 <template>
-    <div class="about">
+    <div>
         <base-site> </base-site>
     </div>
 </template>
@@ -8,7 +8,7 @@
 // @ is an alias to /src
 import BaseSite from '@/components/UI/BaseSite.vue';
 export default {
-    name: 'Home',
+    name: 'about',
     components: {
         BaseSite
     }
