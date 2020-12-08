@@ -1,21 +1,16 @@
 <template>
     <div class="about">
-        <base-site>
-            <nav-bar />
-        </base-site>
-        <h1></h1>
+        <base-site> </base-site>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import BaseSite from '@/components/UI/BaseSite.vue';
-import NavBar from '@/components/Nav/NavBar.vue';
 export default {
     name: 'Home',
     components: {
-        BaseSite,
-        NavBar
+        BaseSite
     }
 };
 </script>

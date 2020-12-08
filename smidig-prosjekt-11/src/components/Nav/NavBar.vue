@@ -14,4 +14,12 @@
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+#nav a {
+    font-weight: bold;
+    color: #3c1964;
+}
+#nav a.router-link-exact-active {
+    color: #9fd18d;
+}
+</style>
