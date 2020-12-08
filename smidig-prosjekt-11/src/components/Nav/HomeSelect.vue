@@ -23,12 +23,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: 'Home',
   components: {}
-}
+};
 </script>
 
 <style scoped>
@@ -55,5 +53,4 @@ export default {
   cursor: pointer;
   width: 100%;
   outline: none;
-}
 </style>
