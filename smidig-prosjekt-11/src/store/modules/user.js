@@ -11,9 +11,7 @@ const mutations = {
     }
 };
 const getters = {
-    userId(state) {
-        return state.userId;
-    }
+    getUserId: state => state.userId
 };
 
 export default {

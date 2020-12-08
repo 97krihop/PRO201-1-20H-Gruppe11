@@ -5,8 +5,6 @@
         <router-link to="/about">About</router-link>
         |
         <router-link to="/entry-succesful">Entry Succesful</router-link>
-        |
-        <router-link to="/login">login</router-link>
     </div>
 </template>
 

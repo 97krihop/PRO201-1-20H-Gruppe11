@@ -7,6 +7,7 @@
                 <div id="employee-div">
                     <h1 class="text-secondary">Employee, Name</h1>
                 </div>
+                <login-button class="pl-20" />
                 <nav-bar class="pl-10" />
             </div>
         </header>
@@ -21,10 +22,14 @@
 
 <script>
 import NavBar from '@/components/Nav/NavBar.vue';
+import LoginButton from '@/components/UI/LoginButton.vue';
 export default {
     name: 'LogoBar',
     setup() {
-        return { NavBar };
+        return {
+            NavBar,
+            LoginButton
+        };
     }
 };
 </script>

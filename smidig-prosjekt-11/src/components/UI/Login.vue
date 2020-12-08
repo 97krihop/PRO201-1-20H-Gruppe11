@@ -12,7 +12,6 @@
                     required
                 />
             </div>
-            {{ user }}
             <div>
                 <label class="block mb-2 text-indigo-500" for="password">Password</label>
                 <input
@@ -43,11 +42,12 @@ export default {
         const store = useStore();
         const username = ref('');
         const password = ref('');
-        let user = computed(() => {
-            store.getters.userId;
+        const user = computed(() => {
+            return store.getters.getUserId;
         });
-
+        console.log(user.value);
         function post() {
+            console.log(user);
             console.log(`${username.value} + ${password.value}`);
             login(username.value);
         }

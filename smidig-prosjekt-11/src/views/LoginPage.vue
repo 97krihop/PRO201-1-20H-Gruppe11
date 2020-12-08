@@ -1,7 +1,8 @@
 <template>
     <div>
         <base-site>
-            <Login />
+            <login />
+            <login-button />
         </base-site>
     </div>
 </template>
