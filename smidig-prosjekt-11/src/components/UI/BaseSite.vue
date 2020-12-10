@@ -5,7 +5,7 @@
             <div id="logo-bar" class="md:w-auto bg-logoBar" v>
                 <img id="logo-img" class="relative" src="@/assets/Images/brightLogo.png" />
                 <div id="employee-div">
-                    <h1 class="font-standardText text-secondary">Employee, Name</h1>
+                    <h1 class="font-standardText text-secondary">Employee, {{ user || 'x' }}</h1>
                 </div>
                 <login-button class="pl-20" />
             </div>
@@ -21,11 +21,18 @@
 
 <script>
 import LoginButton from '@/components/UI/LoginButton.vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 export default {
     name: 'LogoBar',
     setup() {
+        const store = useStore();
+        const user = computed(() => {
+            return store.getters.getUserId;
+        });
         return {
-            LoginButton
+            LoginButton,
+            user
         };
     }
 };

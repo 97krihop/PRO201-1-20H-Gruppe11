@@ -2,7 +2,6 @@
     <div>
         <base-site>
             <login />
-            <login-button />
         </base-site>
     </div>
 </template>
