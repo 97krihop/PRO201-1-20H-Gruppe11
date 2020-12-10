@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import LoginButton from '@/components/UI/LoginButton.vue';
+import LoginButton from '@/components/Login/LoginButton.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 export default {

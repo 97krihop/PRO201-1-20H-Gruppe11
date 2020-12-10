@@ -1,5 +1,5 @@
 <template>
-    <div class="relative container w-full max-w-xs m-auto bg-logoBar rounded p-5 self-center">
+    <div class=" relative container w-full max-w-xs m-auto bg-logoBar rounded p-5 self-center">
         <form @submit.prevent="post">
             <div>
                 <label class="block mb-2 text-indigo-500" for="username">Username</label>
