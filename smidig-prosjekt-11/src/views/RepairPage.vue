@@ -9,7 +9,7 @@
 
         <progress-bar />
     </div>
-    <redirect-login />
+    <redirect-login v-else />
 </template>
 
 <script>
