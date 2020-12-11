@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import HamburgerButton from '../UI/HamburgerButton.vue';
+import HamburgerButton from '@/components/UI/HamburgerButton.vue';
 import LoginButton from '@/components/Login/LoginButton.vue';
 export default {
     name: 'Hamburger',
