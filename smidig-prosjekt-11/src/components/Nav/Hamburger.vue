@@ -6,6 +6,7 @@
             :bValue="but.bValue"
             :icon="but.icon"
             :link="but.link"
+            :alt="but.alt"
         >
         </hamburger-button>
         <div class="triangle"></div>
@@ -32,12 +33,14 @@ export default {
                 {
                     bValue: 'User',
                     icon: 'user-person-icon.png',
-                    link: '/repair'
+                    link: '/repair',
+                    alt: 'User icon'
                 },
                 {
                     bValue: 'Certifications',
                     icon: 'certificate-icon.png',
-                    link: '/entry-successful'
+                    link: '/entry-successful',
+                    alt: 'Certifications icon'
                 }
             ]
         };

@@ -17,7 +17,8 @@ export default {
     props: {
         bValue: String,
         icon: String,
-        link: String
+        link: String,
+        alt: String
     }
 };
 </script>
