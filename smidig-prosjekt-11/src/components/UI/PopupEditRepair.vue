@@ -1,31 +1,17 @@
 <template>
     <div id="container" class="text-center rounded-lg">
-        <!-- PRODUCT-DIV -->
-        <div id="products-container" class="grid-rows-3">
-            <h1>Продукт</h1>
-            <!-- Product -->
-            <div class="content-center">
-                <div id="popup-static-product-style">
-                    <img src="../../assets/Images/Parts/sunbellProductImage.png" alt="Product: Sunbell" />
-                    <h2>Sunbell</h2>
-                </div>
-            </div>
+        
+        <div id="serialnum-container">
+            <h3>серийный номер</h3>
 
-            <hr />
-
-            <div id="serialnum-container">
-                <h3>серийный номер</h3>
-
-                <!-- SERIAL NUMBER -->
-                <input
-                    ref="inputSerialNumber"
-                    v-on:keydown="serialInputIsEmpty = false"
-                    v-bind:class="{ serialInputEmpty: serialInputIsEmpty }"
-                    type="text"
-                    :v-model="serialNr"
-                    placeholder="серийный номер"
-                />
-            </div>
+            <!-- SERIAL NUMBER -->
+            <input
+                ref="inputSerialNumber"
+                v-on:keydown="serialInputIsEmpty = false"
+                v-bind:class="{ serialInputEmpty: serialInputIsEmpty }"
+                :value="serialToEdit"
+                placeholder="серийный номер"
+            />
         </div>
         <!-- PARTS-DIV -->
         <div id="parts" class="col-span-2">
@@ -79,7 +65,7 @@ export default {
             modalTextBody: '',
 
             showModal: false,
-            serialNr: {
+            inputSerial: {
                 Type: Number,
                 Required: true
             },
@@ -119,7 +105,7 @@ export default {
                     partName: 'Torx-5',
                     imgName: 'batteryBoxTorx5-removebg-preview',
                     isChecked: false
-                },
+                },               
                 {
                     partNumber: '7',
                     partName: 'Torx-6',
@@ -196,12 +182,24 @@ export default {
     },
     name: 'PopupEdit',
     props: {
-        pictures: Array
+        pictures: {
+            type: Array
+        },
+        serialToEdit: {
+            type: String,
+            default: ""
+        } 
+    },
+    computed: {
+        edtSrl() {
+            return this.serialToEdit;
+        }
     }
 };
 </script>
 <style lang="scss" scoped>
 #container {
+    border: 3px solid red;
     width: 100%;
     height: 100%;
     user-select: none;
@@ -257,27 +255,32 @@ export default {
             }
         }
 
-        #serialnum-container {
-            grid-row: 3;
-            margin-top: 30px;
 
-            h3 {
-                font-weight: bold;
-                color: #38293c;
-            }
+    }
+    
+    #serialnum-container {
+        position: absolute;
+        grid-row: 3;
+        border: 3px solid blue;
+        left: 40px;
+        bottom: 30px;
 
-            .serialInputEmpty {
-                box-shadow: 0px 0px 8px #cc0000;
-            }
+        h3 {
+            font-weight: bold;
+            color: #38293c;
+        }
 
-            input {
-                border: 1.5px solid #423048;
-                border-radius: 5px;
-                background-color: #fffefd;
-                color: #050505;
-                text-align: center;
-                font-weight: bold;
-            }
+        .serialInputEmpty {
+            box-shadow: 0px 0px 8px #cc0000;
+        }
+
+        input {
+            border: 1.5px solid #423048;
+            border-radius: 5px;
+            background-color: #fffefd;
+            color: #050505;
+            text-align: center;
+            font-weight: bold;
         }
     }
 

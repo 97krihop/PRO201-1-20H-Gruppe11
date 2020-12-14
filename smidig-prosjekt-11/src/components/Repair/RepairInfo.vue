@@ -3,7 +3,9 @@
     <div>
         <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
         <div id="parts-popup" class="border-2 border-gray-500 shadow-lg" v-if="showRepair == true">
-            <popup-select-repair @clicked="closeRepair()">
+            <popup-select-repair 
+            @clicked="closeRepair()">
+             
                 
             </popup-select-repair>
         </div>
@@ -11,7 +13,9 @@
         <div id="edit-popup" 
         class="border-2 border-gray-500 shadow-lg" 
         v-if="showEdit">
-            <popup-edit-repair @clicked="closeEdit()">
+            <popup-edit-repair 
+            @clicked="closeEdit()"
+            :serialToEdit="editSerial">
             </popup-edit-repair>
         </div>
         
@@ -54,7 +58,7 @@ export default {
             entities: [],
             showRepair: false,
             showEdit: false,
-            editSerial: null 
+            editSerial: "EditSerial" 
         };
     },
     created() {
@@ -66,13 +70,14 @@ export default {
         PopupEditRepair
     },
     methods: {
-        editRepair(serialNr) {
-            this.editSerial = serialNr
+        editRepair(serial) {
+            this.editSerial = serial
             this.showEdit = true
         },
         addRepair() {
             // show new overlay
             this.showRepair = true;
+            alert(this.editSerial)
         },
         closeRepair() {
             // show new overlay

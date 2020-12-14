@@ -119,7 +119,7 @@ export default {
                     partName: 'Torx-5',
                     imgName: 'batteryBoxTorx5-removebg-preview',
                     isChecked: false
-                },
+                },               
                 {
                     partNumber: '7',
                     partName: 'Torx-6',
