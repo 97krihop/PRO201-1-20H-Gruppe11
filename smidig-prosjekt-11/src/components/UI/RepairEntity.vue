@@ -7,9 +7,7 @@
                 alt="sunbell"
             />
         </div>
-        <span
-            ><div class="border-solid border-2">{{ this.entitySerialNumber }}</div></span
-        >
+        <span><div class="border-solid border-2">{{ this.entitySerialNumber }}</div></span>
         <!-- Loops through the selected parts for this repair, and displays their images -->
 
         <div id="parts-container">
@@ -27,6 +25,7 @@
                 <img
                     class="edit-delete-img-width"
                     src="@/assets/Images/edit-icon.png"
+                    @click="editEntity(this.entity)"
                     alt="Edit entity button"
                 />
             </button>
@@ -55,6 +54,9 @@ export default {
         }
     },
     methods: {
+        editEntity: function() {
+            this.$emit('edit-entity', this.entitySerialNumber);
+        },
         deleteEntity: function() {
             this.$store.commit('deleteEntity', this.entitySerialNumber);
         }

@@ -4,23 +4,30 @@
         <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
         <div id="parts-popup" class="border-2 border-gray-500 shadow-lg" v-if="showRepair == true">
             <popup-select-repair @clicked="closeRepair()">
-                <img
-                    id="close-repair-btn"
-                    class="self-end cursor-pointer rounded-full transform hover:translate-y-0.5 hover:translate-x-0.5"
-                    src="@/assets/Images/delete-icon.png"
-                    v-on:click="closeRepair"
-                    alt="close repair tab"
-                />
+                
             </popup-select-repair>
         </div>
+        
+        <div id="edit-popup" 
+        class="border-2 border-gray-500 shadow-lg" 
+        v-if="showEdit">
+            <popup-edit-repair @clicked="closeEdit()">
+            </popup-edit-repair>
+        </div>
+        
         <!-- Grid system for submitted models -->
         <section id="entity-list-container">
             <div>
-                <div v-for="entity in entities" :key="entity.entitySerialNr">
-                    <repair-entity
+                <div 
+                v-for="entity in entities" 
+                :key="entity.entitySerialNr"
+                
+                >
+                    <repair-entity 
+                        @edit-entity="editRepair($event)"
                         :entitySerialNumber="entity.entitySerialNr"
-                        :entityParts="entity.parts"
-                    ></repair-entity>
+                        :entityParts="entity.parts">
+                    </repair-entity>
                 </div>
 
                 <img
@@ -38,22 +45,30 @@
 
 <script>
 import PopupSelectRepair from '@/components/UI/PopupSelectRepair.vue';
+import PopupEditRepair from '@/components/UI/PopupEditRepair.vue';
 import RepairEntity from '@/components/UI/RepairEntity.vue';
 
 export default {
     data() {
         return {
             entities: [],
-            showRepair: false
+            showRepair: false,
+            showEdit: false,
+            editSerial: null 
         };
     },
     created() {
         this.entities = this.$store.getters.getEntities;
     },
-    components: { PopupSelectRepair, RepairEntity },
+    components: { 
+        PopupSelectRepair, 
+        RepairEntity,
+        PopupEditRepair
+    },
     methods: {
-        editRepair() {
-            // show entity-spesific repair overlay
+        editRepair(serialNr) {
+            this.editSerial = serialNr
+            this.showEdit = true
         },
         addRepair() {
             // show new overlay
@@ -62,6 +77,12 @@ export default {
         closeRepair() {
             // show new overlay
             this.showRepair = false;
+            // Updates entities from state manually
+            this.entities = this.$store.getters.getEntities;
+        },
+        closeEdit() {
+            // show new overlay
+            this.showEdit = false;
             // Updates entities from state manually
             this.entities = this.$store.getters.getEntities;
         }
@@ -91,11 +112,17 @@ export default {
     border: 1px solid #423048;
 }
 
-#close-repair-btn {
+#edit-popup {
+    background-color: white;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    width: 65vw;
+    height: 60vh;
+    top: 20%;
+    left: 15vw;
+    border: 1px solid #423048;
 }
+
+
 
 #entity-list-container {
     height: 75vh;

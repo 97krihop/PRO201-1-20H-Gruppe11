@@ -52,7 +52,7 @@
                 </a>
             </div>
         </div>
-
+        
         <img
         id="close-repair-btn"
         class="self-end cursor-pointer rounded-full transform hover:translate-y-0.5 hover:translate-x-0.5"
@@ -60,9 +60,9 @@
         v-on:click="closePopup"
         alt="close repair tab"
         />
-        
-        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button>
-        <!-- NEXT -->
+
+        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button
+        ><!-- NEXT -->
     </div>
 </template>
 
@@ -189,19 +189,18 @@ export default {
                 this.showModal = true;
                 this.partsChosen = [];
             }
-        }, 
+        },
         closePopup() {
             this.$emit('clicked');
         }
     },
-    name: 'PopupSelect',
+    name: 'PopupEdit',
     props: {
         pictures: Array
     }
 };
 </script>
 <style lang="scss" scoped>
-
 #container {
     width: 100%;
     height: 100%;
@@ -294,6 +293,12 @@ export default {
         grid-column: 2;
         margin: 0 3vw 0 3vw;
         background-color: #f8f6f2;
+    }
+
+    #exit-btn {
+        position: absolute;
+        top: 0;
+        height: 200px;
     }
 
     #next-btn {
