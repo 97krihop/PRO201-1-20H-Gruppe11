@@ -199,7 +199,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 #container {
-    border: 3px solid red;
     width: 100%;
     height: 100%;
     user-select: none;
@@ -210,8 +209,8 @@ export default {
 
     h1 {
         font-size: 1.5em;
-        margin: 3vh;
-        padding-bottom: 2vh;
+        margin: 1vh;
+        padding-bottom: 1.5vh;
         font-weight: bold;
         color: #38293c;
     }
@@ -227,41 +226,10 @@ export default {
         margin-bottom: 10px;
     }
 
-    #products-container {
-        border-right: 1px solid black;
-        grid-column: 1;
-        background-color: #f8f6f2;
 
-        // Creating grid for products-container to
-        // position both product and serial number
-        display: grid;
-        grid-template-rows: max-content 35% 2px auto;
-        height: 100%;
-
-        #popup-static-product-style {
-            background-color: #7eb46b;
-            width: 15vh;
-            height: 15vh;
-            margin: auto;
-
-            h2 {
-                font-weight: bold;
-                font-size: 17px;
-            }
-
-            img {
-                -webkit-user-drag: none;
-                cursor: default;
-            }
-        }
-
-
-    }
-    
     #serialnum-container {
         position: absolute;
         grid-row: 3;
-        border: 3px solid blue;
         left: 40px;
         bottom: 30px;
 
@@ -293,17 +261,12 @@ export default {
     }
 
     #parts {
+        position: absolute;
+        // border: 3px solid blue;
         grid-column: 2;
-        margin: 0 3vw 0 3vw;
+        margin: 30px;
         background-color: #f8f6f2;
     }
-
-    #exit-btn {
-        position: absolute;
-        top: 0;
-        height: 200px;
-    }
-
     #next-btn {
         width: 85px;
         height: 45px;

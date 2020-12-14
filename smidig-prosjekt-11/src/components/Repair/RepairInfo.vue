@@ -118,12 +118,15 @@ export default {
 }
 
 #edit-popup {
-    background-color: white;
+    z-index: 10;
     position: absolute;
-    width: 65vw;
-    height: 60vh;
+    left: 30vw;
+    width: 38vw;
+    height: 55vh;
     top: 20%;
-    left: 15vw;
+    
+    
+    background-color: white;
     border: 1px solid #423048;
 }
 
