@@ -2,7 +2,8 @@
     <div class="home-button">
         <a href="#">
             <div>
-                <p>HOME</p>
+                <p>Главная</p>
+                <!-- Home -->
                 <img src="@/assets/Images/Icons/home-icon.png" alt="Home button" />
             </div>
         </a>
@@ -16,7 +17,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 a {
     margin: 0;
 
@@ -46,5 +46,4 @@ a {
         }
     }
 }
-
 </style>

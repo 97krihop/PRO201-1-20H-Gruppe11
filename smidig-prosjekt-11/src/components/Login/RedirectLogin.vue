@@ -1,9 +1,8 @@
 <template>
-
     <base-site class="base-site">
-        <h1>Access denied, please log in</h1>
+        <h1>В доступе отказано, пожалуйста, войдите</h1>
+        <!-- Access denied, please log in -->
         <login-button />
-
     </base-site>
 </template>
 
@@ -20,16 +19,14 @@ export default {
 };
 </script>
 
-
 <style>
 .base-site {
     text-align: center;
 }
 h1 {
     margin-top: 16vh;
-    
+
     font-size: 70px;
     color: #405c6a;
 }
-
 </style>
