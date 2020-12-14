@@ -37,9 +37,8 @@
                         :id="product.partNumber"
                         :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
                     />
-                    <h2>
-                        {{ product.partName }}
-                    </h2>
+                    <h2></h2>
+                    <!--{{ product.partName }} -->
                 </a>
             </div>
         </div>

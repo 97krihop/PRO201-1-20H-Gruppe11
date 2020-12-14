@@ -81,9 +81,6 @@ export default {
     font-size: 2em;
 }
 
-#header-image {
-}
-
 .modal-body {
     position: relative;
     padding: 15px 15px;
