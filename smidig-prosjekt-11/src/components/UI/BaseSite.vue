@@ -19,16 +19,18 @@
             </div>
         </header>
 
-
-        <hamburger 
-            :class="{showburger: sideBarVisible, hideburger: !sideBarVisible}"
-            ref="hamburger">
-            </hamburger>
+        <hamburger :class="{ showburger: sideBarVisible, hideburger: !sideBarVisible }" ref="hamburger">
+        </hamburger>
 
         <slot />
         <footer>
             <div id="footer-div" class="absolute">
-                <small class="font-standardText">Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11</small>
+                <small v-if="isDark === 'true'" class="font-standardText cc">
+                    Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
+                </small>
+                <small v-else class="font-standardText">
+                    Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
+                </small>
             </div>
         </footer>
     </div>
@@ -44,6 +46,9 @@ import { useRouter } from 'vue-router';
 export default {
     components: {
         Hamburger
+    },
+    props: {
+        isDark: String
     },
     name: 'LogoBar',
     setup() {
@@ -110,7 +115,9 @@ button {
         }
     }
 }
-
+.cc {
+    color: white;
+}
 #employee-div {
     position: absolute;
     right: 0px;
@@ -150,6 +157,4 @@ button:focus {
     left: -8vw;
     visibility: hidden;
 }
-
-
 </style>

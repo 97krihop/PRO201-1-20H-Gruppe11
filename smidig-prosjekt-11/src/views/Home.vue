@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <base-site>
+        <base-site isDark="true">
             <img src="@/assets/Images/Background/Background.jpg" id="background-image" alt="background" />
             <home-select @click="showModal = true" class="home-select-container" />
         </base-site>
@@ -11,17 +11,21 @@
 // @ is an alias to /src
 import BaseSite from '@/components/UI/BaseSite.vue';
 import HomeSelect from '@/components/Nav/HomeSelect.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
-    data() {
-        return {
-
-        };
-    },
     name: 'Home',
-    components: {
-        BaseSite,
-        HomeSelect,
+    setup() {
+        const store = useStore();
+        const router = useRouter();
+
+        if (store.getters.getUserId == null) router.push({ name: 'LoginPage' });
+
+        return {
+            BaseSite,
+            HomeSelect
+        };
     }
 };
 </script>

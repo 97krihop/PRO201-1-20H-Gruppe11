@@ -20,12 +20,14 @@
         </div>
         <div id="parts" class="col-span-2">
             <modal-error-message v-if="showModal == true" @close="showModal = false">
+
                 <template v-slot:body> серийный номер уже существует </template
                 ><!-- Serial Number Already Exists -->
             </modal-error-message>
 
             <h1>Запчасти</h1>
             <!-- Parts -->
+
             <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5">
                 <a
                     class="popup-products"
