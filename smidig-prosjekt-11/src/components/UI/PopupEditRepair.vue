@@ -1,6 +1,5 @@
 <template>
     <div id="container" class="text-center rounded-lg">
-        
         <div id="serialnum-container">
             <h3>серийный номер</h3>
 
@@ -38,13 +37,13 @@
                 </a>
             </div>
         </div>
-        
+
         <img
-        id="close-repair-btn"
-        class="self-end cursor-pointer rounded-full transform hover:translate-y-0.5 hover:translate-x-0.5"
-        src="@/assets/Images/delete-icon.png"
-        v-on:click="closePopup"
-        alt="close repair tab"
+            id="close-repair-btn"
+            class="self-end cursor-pointer rounded-full transform hover:translate-y-0.5 hover:translate-x-0.5"
+            src="@/assets/Images/delete-icon.png"
+            v-on:click="closePopup"
+            alt="close repair tab"
         />
 
         <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button
@@ -80,7 +79,7 @@ export default {
                     partNumber: '2',
                     partName: 'Battery',
                     imgName: 'battery-removebg-preview',
-                    isChecked: false
+                    isChecked: true
                 },
                 {
                     partNumber: '3',
@@ -105,7 +104,7 @@ export default {
                     partName: 'Torx-5',
                     imgName: 'batteryBoxTorx5-removebg-preview',
                     isChecked: false
-                },               
+                },
                 {
                     partNumber: '7',
                     partName: 'Torx-6',
@@ -159,7 +158,7 @@ export default {
             let newEntity = {
                 entitySerialNr: serialNr,
                 parts: this.partsChosen
-            }
+            };
             var stateEntities = this.$store.getters.getEntities;
 
             let exists = stateEntities.findIndex(
@@ -187,13 +186,19 @@ export default {
         },
         serialToEdit: {
             type: String,
-            default: ""
-        } 
+            default: ''
+        }
     },
     computed: {
         edtSrl() {
             return this.serialToEdit;
         }
+    },
+    watch: {
+        productImages: function() {
+            alert('changed!');
+        }
+        // REACT TO STATE CHANGE -- RUN GET ENTITIES METHOd
     }
 };
 </script>
@@ -225,7 +230,6 @@ export default {
         margin-right: auto;
         margin-bottom: 10px;
     }
-
 
     #serialnum-container {
         position: absolute;

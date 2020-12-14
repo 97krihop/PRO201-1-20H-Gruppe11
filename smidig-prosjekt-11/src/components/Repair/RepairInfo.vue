@@ -24,9 +24,7 @@
             <div>
                 <div 
                 v-for="entity in entities" 
-                :key="entity.entitySerialNr"
-                
-                >
+                :key="entity.entitySerialNr">
                     <repair-entity 
                         @edit-entity="editRepair($event)"
                         :entitySerialNumber="entity.entitySerialNr"
