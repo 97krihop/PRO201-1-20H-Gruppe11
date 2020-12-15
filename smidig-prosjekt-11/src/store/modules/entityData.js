@@ -1,17 +1,24 @@
 const state = {
+    idIncrementor: 0,
     entityArray: []
 };
 
 const mutations = {
-    addEntity(state, payload) {
-        state.entityArray.push(payload);
-        console.log('State updated:  ' + payload);
+    addEntity(state, entity) {
+        entity.id = this.idIncrementor
+        state.entityArray.push(entity);
+        this.idIncrementor++;
+        console.log('State updated:  ' + entity);
     },
     deleteEntity(state, payload) {
         var entityArray = state.entityArray;
         let indexPos = entityArray.findIndex(entity => entity.entitySerialNr === payload);
 
         state.entityArray.splice(indexPos, 1);
+    },
+    editEntity: (state) => (newEntity, oldSN) => {
+        let oldIndex = state.entityArray.findIndex(entity => entity.entitySerialNr === oldSN);
+        state.entityArray[oldIndex] = newEntity;
     }
 };
 

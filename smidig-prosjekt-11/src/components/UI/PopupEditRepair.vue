@@ -19,7 +19,7 @@
                 <!-- Serial Number Already Exists -->
             </modal-error-message>
 
-            <h1 @click="renderSelects">Запчасти</h1>
+            <h1>Запчасти</h1>
             <!-- Parts -->
             <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5">
                 <a
@@ -62,8 +62,8 @@ export default {
     data() {
         return {
             serialInputIsEmpty: false,
+            selectedEntitySerialNumber: 'noneselected',
             modalTextBody: '',
-
             showModal: false,
             inputSerial: {
                 Type: Number,
@@ -119,34 +119,6 @@ export default {
     methods: {
         selectPart(product) {
             product.isChecked = !product.isChecked;
-
-            // product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
-
-            // let parentEl = event.target.parentElement;
-
-            // // To prevent user to change color of the wrong parent
-            // if (parentEl.id === 'parts-cont-no-change') return;
-
-            // if (product.isChecked == true) {
-            //     parentEl.style.backgroundColor = '#7EB46B';
-            // } else {
-            //     parentEl.style.backgroundColor = ' #F8F6F2';
-            // }
-            // return;
-        },
-        renderSelects() {
-            // let entities = this.$store.getters.getEntities;
-            // let currentEntity = entities.find(entity => entity.serialNr === this.serialToEdit);
-            // alert(currentEntity.parts);
-            
-            let currentEntityParts = this.$store.getters.getEntityBySerial(this.serialToEdit).parts;
-            
-            currentEntityParts.forEach(part => {
-                this.productImages[part.partNumber - 1].isChecked = true;
-            });
-            
-            
-            
         },
         submitPartsSelected() {
             // Adding the marked parts to the partsChosen-array
@@ -155,6 +127,7 @@ export default {
                     this.partsChosen.push(this.productImages[i]);
                 }
             }
+
             var serialNr = this.$refs.inputSerialNumber.value;
 
             if (serialNr == '') {
@@ -171,18 +144,39 @@ export default {
                 return;
             }
 
-            let newEntity = {
+            let editedEntity = {
                 entitySerialNr: serialNr,
-                parts: this.partsChosen
-            };
-            var stateEntities = this.$store.getters.getEntities;
+                parts: this.partsChosen,
+                id: -1
+            }
+            
+            let stateEntities = this.$store.getters.getEntities;
+            
+            let oldEntity = stateEntities.find(entity => entity.entitySerialNr === this.serialToEdit);
+            
+            if(editedEntity.entitySerialNr === oldEntity.entitySerialNr) {
+                oldEntity = editedEntity;
+                this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr)
+                return;
+            }
+            
 
-            let exists = stateEntities.findIndex(
-                entity => entity.entitySerialNr === newEntity.entitySerialNr
-            );
+            
+
+            
+            // Count number of instances in array with this serialnumber
+            // Should never be 2, but can be 1 if previous
+
+
+            // let oldEntity = stateEntities.findIndex(
+            //     entity => entity.entitySerialNr === this.serialToEdit
+            // )
+            
+            let exists = 1;
+    
             if (exists == -1) {
                 this.serialInputIsEmpty = true;
-                this.$store.commit('addEntity', newEntity);
+                this.$store.commit('addEntity', editedEntity);
                 this.closePopup();
             } else {
                 //Serial nr doesnt exist
@@ -193,7 +187,18 @@ export default {
         },
         closePopup() {
             this.$emit('clicked');
+        },
+        renderSelects() {
+            let currentEntityParts = this.$store.getters.getEntityBySerial(this.serialToEdit).parts;
+
+            currentEntityParts.forEach(part => {
+                this.productImages[part.partNumber - 1].isChecked = true;
+            });
         }
+    },
+    mounted() {
+        // THis may run again while exited which may cause problems
+        this.renderSelects();
     },
     name: 'PopupEdit',
     props: {
@@ -204,12 +209,6 @@ export default {
             type: String,
             default: ''
         }
-    },
-    watch: {
-        productImages: function() {
-            alert('changed!');
-        }
-        // REACT TO STATE CHANGE -- RUN GET ENTITIES METHOd
     }
 };
 </script>

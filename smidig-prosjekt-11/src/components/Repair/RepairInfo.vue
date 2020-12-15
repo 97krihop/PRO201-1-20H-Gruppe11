@@ -13,7 +13,8 @@
         <div id="edit-popup" 
         class="border-2 border-gray-500 shadow-lg" 
         v-if="showEdit">
-            <popup-edit-repair 
+            <popup-edit-repair
+            ref="editref" 
             @clicked="closeEdit()"
             :serialToEdit="editSerial">
             </popup-edit-repair>
@@ -70,6 +71,10 @@ export default {
     methods: {
         editRepair(serial) {
             this.editSerial = serial
+            
+            //Function to render selected entity parts
+            //this.$refs.editref.renderSelects();
+            
             this.showEdit = true
         },
         addRepair() {

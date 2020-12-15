@@ -174,7 +174,9 @@ export default {
                 entitySerialNr: serialNr,
                 parts: this.partsChosen
             }
+            
             var stateEntities = this.$store.getters.getEntities;
+
 
             let exists = stateEntities.findIndex(
                 entity => entity.entitySerialNr === newEntity.entitySerialNr
