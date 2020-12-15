@@ -80,7 +80,7 @@ export default {
         addRepair() {
             // show new overlay
             this.showRepair = true;
-            alert(this.editSerial)
+            //alert(this.editSerial)
         },
         closeRepair() {
             // show new overlay
@@ -96,9 +96,14 @@ export default {
         }
     },
     watch: {
-        entities: function() {
+        entities: function() { //function(values)
             console.log('entites updated from watch');
-        }
+			/*for (var i in values) {
+				console.log('id: ' + values[i].id + 
+							', entitySerialNr: ' + values[i].entitySerialNr + 
+							', parts.length: ' + values[i].parts.length);
+			}*/
+			}
         // REACT TO STATE CHANGE -- RUN GET ENTITIES METHOd
     }
 };

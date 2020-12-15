@@ -170,14 +170,27 @@ export default {
                 return;
             }
 
-            let newEntity = {
+            var stateEntities = this.$store.getters.getEntities;
+			
+			// Get first available unique id
+			var newId = 0;
+			var takenIds = [];
+            for (let i = 0; i < stateEntities.length; i++) {
+				takenIds[stateEntities[i].id] = true;
+			}
+			for (let i = 0; i <= stateEntities.length; i++) {
+				if (!takenIds[i]) {
+					newId = i;
+					break;
+				}
+			}
+			
+			let newEntity = {
+				id: newId,
                 entitySerialNr: serialNr,
                 parts: this.partsChosen
             }
             
-            var stateEntities = this.$store.getters.getEntities;
-
-
             let exists = stateEntities.findIndex(
                 entity => entity.entitySerialNr === newEntity.entitySerialNr
             );

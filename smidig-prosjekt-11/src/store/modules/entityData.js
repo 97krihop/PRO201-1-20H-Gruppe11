@@ -5,20 +5,35 @@ const state = {
 
 const mutations = {
     addEntity(state, entity) {
-        entity.id = this.idIncrementor
+        //entity.id = this.idIncrementor
         state.entityArray.push(entity);
-        this.idIncrementor++;
-        console.log('State updated:  ' + entity);
+        //this.idIncrementor++;
     },
     deleteEntity(state, payload) {
+        console.log('deleteEntity');
         var entityArray = state.entityArray;
         let indexPos = entityArray.findIndex(entity => entity.entitySerialNr === payload);
 
         state.entityArray.splice(indexPos, 1);
     },
-    editEntity: (state) => (newEntity, oldSN) => {
-        let oldIndex = state.entityArray.findIndex(entity => entity.entitySerialNr === oldSN);
-        state.entityArray[oldIndex] = newEntity;
+    editEntity(state, entity) {
+        let success = false;
+		for (var i = 0; i < state.entityArray.length; i++) {
+			if (state.entityArray[i].id === entity.id) {
+				state.entityArray[i].entitySerialNr = entity.entitySerialNr;
+				state.entityArray[i].parts = entity.parts;
+				success = true;
+				break;
+			}
+		}
+		if (!success) {
+			console.log('editEntity() was unable to locate existing records with matching id, changes will not be saved');
+		} else {
+			console.log('data was saved');
+		}
+		
+        //let oldIndex = state.entityArray.findIndex(entity => entity.entitySerialNr === oldSN);
+        //state.entityArray[oldIndex] = newEntity;
     }
 };
 

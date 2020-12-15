@@ -61,6 +61,7 @@ export default {
     },
     data() {
         return {
+			id: -1, //fetched in renderSelects()
             serialInputIsEmpty: false,
             selectedEntitySerialNumber: 'noneselected',
             modalTextBody: '',
@@ -121,6 +122,7 @@ export default {
             product.isChecked = !product.isChecked;
         },
         submitPartsSelected() {
+
             // Adding the marked parts to the partsChosen-array
             for (let i = 0; i < this.productImages.length; i++) {
                 if (this.productImages[i].isChecked) {
@@ -145,25 +147,22 @@ export default {
             }
 
             let editedEntity = {
+				id: this.id,
                 entitySerialNr: serialNr,
-                parts: this.partsChosen,
-                id: -1
+                parts: this.partsChosen
             }
             
             let stateEntities = this.$store.getters.getEntities;
             
             let oldEntity = stateEntities.find(entity => entity.entitySerialNr === this.serialToEdit);
-            
+          
             if(editedEntity.entitySerialNr === oldEntity.entitySerialNr) {
                 oldEntity = editedEntity;
-                this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr)
+                this.$store.commit('editEntity', editedEntity);
+				//this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr);
                 return;
             }
-            
-
-            
-
-            
+       
             // Count number of instances in array with this serialnumber
             // Should never be 2, but can be 1 if previous
 
@@ -189,7 +188,9 @@ export default {
             this.$emit('clicked');
         },
         renderSelects() {
-            let currentEntityParts = this.$store.getters.getEntityBySerial(this.serialToEdit).parts;
+			const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
+			this.id = entity.id;
+            let currentEntityParts = entity.parts;
 
             currentEntityParts.forEach(part => {
                 this.productImages[part.partNumber - 1].isChecked = true;
