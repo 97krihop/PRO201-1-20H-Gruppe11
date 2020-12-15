@@ -153,16 +153,22 @@ export default {
             }
             
             let stateEntities = this.$store.getters.getEntities;
+			let exists = -1;
+			for (let i = 0; i < stateEntities.length; i++) {
+				if (stateEntities[i].id !== this.id && 
+					stateEntities[i].entitySerialNr === serialNr) {
+					exists = 1;
+				}
+			}
             
-            let oldEntity = stateEntities.find(entity => entity.entitySerialNr === this.serialToEdit);
+            /*let oldEntity = stateEntities.find(entity => entity.entitySerialNr === this.serialToEdit);
           
             if(editedEntity.entitySerialNr === oldEntity.entitySerialNr) {
                 oldEntity = editedEntity;
-                this.$store.commit('editEntity', editedEntity);
-				//this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr);
+				this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr);
                 return;
-            }
-       
+            }*/
+
             // Count number of instances in array with this serialnumber
             // Should never be 2, but can be 1 if previous
 
@@ -171,11 +177,11 @@ export default {
             //     entity => entity.entitySerialNr === this.serialToEdit
             // )
             
-            let exists = 1;
+            //let exists = 1;
     
             if (exists == -1) {
                 this.serialInputIsEmpty = true;
-                this.$store.commit('addEntity', editedEntity);
+                this.$store.commit('editEntity', editedEntity);
                 this.closePopup();
             } else {
                 //Serial nr doesnt exist
@@ -189,7 +195,8 @@ export default {
         },
         renderSelects() {
 			const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
-			this.id = entity.id;
+			 // Get id in order to pass it to entityData.js later when submitting
+			 this.id = entity.id;
             let currentEntityParts = entity.parts;
 
             currentEntityParts.forEach(part => {

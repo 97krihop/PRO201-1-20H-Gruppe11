@@ -27,7 +27,7 @@ const mutations = {
 			}
 		}
 		if (!success) {
-			console.log('editEntity() was unable to locate existing records with matching id, changes will not be saved');
+			console.log('unable to locate existing records with matching id, changes will not be saved');
 		} else {
 			console.log('data was saved');
 		}
