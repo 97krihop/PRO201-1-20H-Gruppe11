@@ -19,13 +19,14 @@
                 <!-- Serial Number Already Exists -->
             </modal-error-message>
 
-            <h1>Запчасти</h1>
+            <h1 @click="renderSelects">Запчасти</h1>
             <!-- Parts -->
             <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5">
                 <a
                     class="popup-products"
                     v-for="product in productImages"
                     :key="product.partNumber"
+                    :class="{ checked: product.isChecked }"
                     @click="selectPart(product)"
                 >
                     <img
@@ -46,8 +47,8 @@
             alt="close repair tab"
         />
 
-        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button
-        ><!-- NEXT -->
+        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button>
+        <!-- NEXT -->
     </div>
 </template>
 
@@ -79,7 +80,7 @@ export default {
                     partNumber: '2',
                     partName: 'Battery',
                     imgName: 'battery-removebg-preview',
-                    isChecked: true
+                    isChecked: false
                 },
                 {
                     partNumber: '3',
@@ -117,21 +118,36 @@ export default {
     },
     methods: {
         selectPart(product) {
-            product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
+            product.isChecked = !product.isChecked;
 
-            let parentEl = event.target.parentElement;
+            // product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
 
-            // To prevent user to change color of the wrong parent
-            if (parentEl.id === 'parts-cont-no-change') return;
+            // let parentEl = event.target.parentElement;
 
-            if (product.isChecked == true) {
-                parentEl.style.backgroundColor = '#7EB46B';
-            } else {
-                parentEl.style.backgroundColor = ' #F8F6F2';
-            }
-            return;
+            // // To prevent user to change color of the wrong parent
+            // if (parentEl.id === 'parts-cont-no-change') return;
+
+            // if (product.isChecked == true) {
+            //     parentEl.style.backgroundColor = '#7EB46B';
+            // } else {
+            //     parentEl.style.backgroundColor = ' #F8F6F2';
+            // }
+            // return;
         },
-
+        renderSelects() {
+            // let entities = this.$store.getters.getEntities;
+            // let currentEntity = entities.find(entity => entity.serialNr === this.serialToEdit);
+            // alert(currentEntity.parts);
+            
+            let currentEntityParts = this.$store.getters.getEntityBySerial(this.serialToEdit).parts;
+            
+            currentEntityParts.forEach(part => {
+                this.productImages[part.partNumber - 1].isChecked = true;
+            });
+            
+            
+            
+        },
         submitPartsSelected() {
             // Adding the marked parts to the partsChosen-array
             for (let i = 0; i < this.productImages.length; i++) {
@@ -187,11 +203,6 @@ export default {
         serialToEdit: {
             type: String,
             default: ''
-        }
-    },
-    computed: {
-        edtSrl() {
-            return this.serialToEdit;
         }
     },
     watch: {
@@ -299,6 +310,10 @@ export default {
         &:hover {
             background-color: #7eb46b;
         }
+    }
+
+    .checked {
+        background-color: #7eb46b;
     }
 }
 </style>

@@ -1,49 +1,5 @@
 const state = {
-    entityArray: [],
-    products: [
-        {
-            partNumber: '1',
-            partName: 'Solar Panel',
-            imgName: 'solarPanelCompleteWithCable-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '2',
-            partName: 'Battery',
-            imgName: 'battery-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '3',
-            partName: 'Seal',
-            imgName: 'powerSwitchCoverNew-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '4',
-            partName: 'USB Connector',
-            imgName: 'directUsbPort-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '5',
-            partName: 'Neck plus light',
-            imgName: 'batteryPackLightUnitComplete-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '6',
-            partName: 'Torx-5',
-            imgName: 'batteryBoxTorx5-removebg-preview',
-            isChecked: false
-        },
-        {
-            partNumber: '7',
-            partName: 'Torx-6',
-            imgName: 'batteryBoxTorx6-removebg-preview',
-            isChecked: false
-        }
-    ]
+    entityArray: []
 };
 
 const mutations = {
@@ -62,6 +18,9 @@ const mutations = {
 const getters = {
     getEntities(state) {
         return state.entityArray;
+    },
+    getEntityBySerial: (state) => (srNr) => {
+        return state.entityArray.find(entity => entity.entitySerialNr === srNr);
     },
     getProducts(state) {
         return state.products;
