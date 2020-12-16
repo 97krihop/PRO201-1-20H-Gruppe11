@@ -1,12 +1,11 @@
 <template>
     <div id="container" class="text-center rounded-lg">
         <!-- PRODUCT-DIV -->
-        <div id="products-container" class="grid-rows-3">
-            <h1>Продукт</h1>
-            <!-- Product -->
+        <div id="products-container" class="grid-rows-3 ">
+            <h1>Product</h1>
             <div class="content-center">
                 <div id="popup-static-product-style">
-                    <img src="../../assets/Images/Parts/sunbellProductImage.png" alt="Product: Sunbell" />
+                    <img src="@/assets/Images/Parts/sunbellProductImage.png" alt="Product: Sunbell" />
                     <h2>Sunbell</h2>
                 </div>
             </div>
@@ -14,16 +13,15 @@
             <hr />
 
             <div id="serialnum-container">
-                <h3>серийный номер</h3>
+                <h3>SERIAL NUMBER</h3>
 
-                <!-- SERIAL NUMBER -->
                 <input
                     ref="inputSerialNumber"
                     v-on:keydown="serialInputIsEmpty = false"
                     v-bind:class="{ serialInputEmpty: serialInputIsEmpty }"
                     type="text"
                     :v-model="serialNr"
-                    placeholder="серийный номер"
+                    placeholder="Example: 1234 5678"
                 />
             </div>
         </div>
@@ -34,9 +32,8 @@
                 <!-- Serial Number Already Exists -->
             </modal-error-message>
 
-            <h1>Запчасти</h1>
-            <!-- Parts -->
-            <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5">
+            <h1>Parts</h1>
+            <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5 ">
                 <a
                     class="popup-products"
                     v-for="product in productImages"
@@ -44,25 +41,24 @@
                     @click="selectPart(product)"
                 >
                     <img
+                        class="duration-75 transform rounded-md hover:scale-105 "
                         :id="product.partNumber"
                         :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
                     />
-                    <h2></h2>
-                    <!--{{ product.partName }} -->
+                    <h2>{{ product.partName }}</h2>
                 </a>
             </div>
         </div>
 
-        <img
-        id="close-repair-btn"
-        class="self-end cursor-pointer rounded-full transform hover:translate-y-0.5 hover:translate-x-0.5"
-        src="@/assets/Images/delete-icon.png"
-        v-on:click="closePopup"
-        alt="close repair tab"
-        />
-        
-        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button>
-        <!-- NEXT -->
+        <!-- Creating space for the close button of the project -->
+        <slot />
+        <button
+            class="font-standardText duration-75 transform rounded-md hover:scale-105 motion-reduce:transform-none bg-universalGreen"
+            id="next-btn"
+            @click="submitPartsSelected"
+        >
+            <h3>NEXT</h3>
+        </button>
     </div>
 </template>
 
@@ -70,6 +66,11 @@
 import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
 
 export default {
+    name: 'PopupSelect',
+    props: {
+        pictures: Array
+    },
+    emits: ['clicked'],
     components: {
         ModalErrorMessage
     },
@@ -77,12 +78,12 @@ export default {
         return {
             serialInputIsEmpty: false,
             modalTextBody: '',
-
             showModal: false,
             serialNr: {
                 Type: Number,
                 Required: true
             },
+
             productImages: [
                 {
                     partNumber: '1',
@@ -119,7 +120,7 @@ export default {
                     partName: 'Torx-5',
                     imgName: 'batteryBoxTorx5-removebg-preview',
                     isChecked: false
-                },               
+                },
                 {
                     partNumber: '7',
                     partName: 'Torx-6',
@@ -134,7 +135,7 @@ export default {
         selectPart(product) {
             product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
 
-            let parentEl = event.target.parentElement;
+            const parentEl = event.target.parentElement;
 
             // To prevent user to change color of the wrong parent
             if (parentEl.id === 'parts-cont-no-change') return;
@@ -154,75 +155,70 @@ export default {
                     this.partsChosen.push(this.productImages[i]);
                 }
             }
-            var serialNr = this.$refs.inputSerialNumber.value;
+            const serialNr = this.$refs.inputSerialNumber.value;
 
             if (serialNr == '') {
                 this.partsChosen = [];
                 this.serialInputIsEmpty = true;
                 //Please input serial number
-                this.modalTextBody = 'серийный номер уже существует';
+                this.modalTextBody = 'Please input serial number';
                 this.showModal = true;
                 return;
             } else if (this.partsChosen.length == 0) {
                 //Please choose part
-                this.modalTextBody = 'существует номер серийный';
+                this.modalTextBody = 'Please choose part';
                 this.showModal = true;
                 return;
             }
 
-            var stateEntities = this.$store.getters.getEntities;
-			
-			// Get first available unique id
-			var newId = 0;
-			var takenIds = [];
+            const stateEntities = this.$store.getters.getEntities;
+
+            // Get first available unique id
+            let newId = 0;
+            const takenIds = [];
             for (let i = 0; i < stateEntities.length; i++) {
-				takenIds[stateEntities[i].id] = true;
-			}
-			for (let i = 0; i <= stateEntities.length; i++) {
-				if (!takenIds[i]) {
-					newId = i;
-					break;
-				}
-			}
-			
-			let newEntity = {
-				id: newId,
+                takenIds[stateEntities[i].id] = true;
+            }
+            for (let i = 0; i <= stateEntities.length; i++) {
+                if (!takenIds[i]) {
+                    newId = i;
+                    break;
+                }
+            }
+
+            const newEntity = {
+                id: newId,
                 entitySerialNr: serialNr,
                 parts: this.partsChosen
-            }
-            
-            let exists = stateEntities.findIndex(
+            };
+
+            const exists = stateEntities.findIndex(
                 entity => entity.entitySerialNr === newEntity.entitySerialNr
             );
+            // Check for serialnumber
+            // Validation for serialnumber should prob be added
             if (exists == -1) {
                 this.serialInputIsEmpty = true;
                 this.$store.commit('addEntity', newEntity);
                 this.closePopup();
             } else {
-                //Serial nr doesnt exist
-                this.modalTextBody = 'серийный номер уже существует';
+                this.modalTextBody = 'Serial Number Already Submitted';
                 this.showModal = true;
                 this.partsChosen = [];
             }
-        }, 
+        },
         closePopup() {
             this.$emit('clicked');
         }
-    },
-    name: 'PopupSelect',
-    props: {
-        pictures: Array
     }
 };
 </script>
 <style lang="scss" scoped>
-
 #container {
     width: 100%;
     height: 100%;
     user-select: none;
     background-color: #f8f6f2;
-
     display: grid;
     grid-template-columns: auto 70%;
 
@@ -293,6 +289,7 @@ export default {
                 color: #050505;
                 text-align: center;
                 font-weight: bold;
+                font-style: italic;
             }
         }
     }
@@ -318,7 +315,6 @@ export default {
         right: 30px;
         bottom: 30px;
         border: 1px solid black;
-        border-radius: 2px;
     }
 
     .popup-products {

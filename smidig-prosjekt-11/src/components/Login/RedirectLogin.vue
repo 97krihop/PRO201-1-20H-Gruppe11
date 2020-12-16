@@ -1,7 +1,8 @@
 <template>
+    <!-- redirect page to login  -->
     <base-site class="base-site">
-        <h1>В доступе отказано, пожалуйста, войдите</h1>
-        <!-- Access denied, please log in -->
+        <h1>Access denied, please log in</h1>
+
         <login-button />
     </base-site>
 </template>
@@ -26,7 +27,7 @@ export default {
 h1 {
     margin-top: 16vh;
 
-    font-size: 70px;
+    font-size: 45px;
     color: #405c6a;
 }
 </style>

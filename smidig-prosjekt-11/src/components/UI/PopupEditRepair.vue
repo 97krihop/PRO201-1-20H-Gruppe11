@@ -1,15 +1,14 @@
 <template>
     <div id="container" class="text-center rounded-lg">
         <div id="serialnum-container">
-            <h3>серийный номер</h3>
+            <h3>SERIAL NUMBER</h3>
 
-            <!-- SERIAL NUMBER -->
             <input
                 ref="inputSerialNumber"
                 v-on:keydown="serialInputIsEmpty = false"
                 v-bind:class="{ serialInputEmpty: serialInputIsEmpty }"
                 :value="serialToEdit"
-                placeholder="серийный номер"
+                placeholder="Example: 1234 5678"
             />
         </div>
         <!-- PARTS-DIV -->
@@ -19,8 +18,7 @@
                 <!-- Serial Number Already Exists -->
             </modal-error-message>
 
-            <h1>Запчасти</h1>
-            <!-- Parts -->
+            <h1>Parts</h1>
             <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5">
                 <a
                     class="popup-products"
@@ -47,8 +45,7 @@
             alt="close repair tab"
         />
 
-        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">следующий</button>
-        <!-- NEXT -->
+        <button class="bg-universalGreen" id="next-btn" @click="submitPartsSelected">NEXT</button>
     </div>
 </template>
 
@@ -56,12 +53,23 @@
 import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
 
 export default {
+    name: 'PopupEdit',
+    props: {
+        pictures: {
+            type: Array
+        },
+        serialToEdit: {
+            type: String,
+            default: ''
+        }
+    },
+    emits: ['clicked'],
     components: {
         ModalErrorMessage
     },
     data() {
         return {
-			id: -1, //fetched in renderSelects()
+            id: -1, //fetched in renderSelects()
             serialInputIsEmpty: false,
             selectedEntitySerialNumber: 'noneselected',
             modalTextBody: '',
@@ -122,7 +130,6 @@ export default {
             product.isChecked = !product.isChecked;
         },
         submitPartsSelected() {
-
             // Adding the marked parts to the partsChosen-array
             for (let i = 0; i < this.productImages.length; i++) {
                 if (this.productImages[i].isChecked) {
@@ -130,62 +137,43 @@ export default {
                 }
             }
 
-            var serialNr = this.$refs.inputSerialNumber.value;
+            const serialNr = this.$refs.inputSerialNumber.value;
 
             if (serialNr == '') {
                 this.partsChosen = [];
                 this.serialInputIsEmpty = true;
                 //Please input serial number
-                this.modalTextBody = 'серийный номер уже существует';
+                this.modalTextBody = 'Please input serial number';
                 this.showModal = true;
                 return;
             } else if (this.partsChosen.length == 0) {
                 //Please choose part
-                this.modalTextBody = 'существует номер серийный';
+                this.modalTextBody = 'Please choose part';
                 this.showModal = true;
                 return;
             }
 
-            let editedEntity = {
-				id: this.id,
+            const editedEntity = {
+                id: this.id,
                 entitySerialNr: serialNr,
                 parts: this.partsChosen
+            };
+
+            const stateEntities = this.$store.getters.getEntities;
+            let exists = -1;
+            for (let i = 0; i < stateEntities.length; i++) {
+                if (stateEntities[i].id !== this.id && stateEntities[i].entitySerialNr === serialNr) {
+                    exists = 1;
+                }
             }
-            
-            let stateEntities = this.$store.getters.getEntities;
-			let exists = -1;
-			for (let i = 0; i < stateEntities.length; i++) {
-				if (stateEntities[i].id !== this.id && 
-					stateEntities[i].entitySerialNr === serialNr) {
-					exists = 1;
-				}
-			}
-            
-            /*let oldEntity = stateEntities.find(entity => entity.entitySerialNr === this.serialToEdit);
-          
-            if(editedEntity.entitySerialNr === oldEntity.entitySerialNr) {
-                oldEntity = editedEntity;
-				this.$store.commit(editedEntity, editedEntity, oldEntity.entitySerialNr);
-                return;
-            }*/
 
-            // Count number of instances in array with this serialnumber
-            // Should never be 2, but can be 1 if previous
-
-
-            // let oldEntity = stateEntities.findIndex(
-            //     entity => entity.entitySerialNr === this.serialToEdit
-            // )
-            
-            //let exists = 1;
-    
             if (exists == -1) {
                 this.serialInputIsEmpty = true;
                 this.$store.commit('editEntity', editedEntity);
                 this.closePopup();
             } else {
                 //Serial nr doesnt exist
-                this.modalTextBody = 'серийный номер уже существует';
+                this.modalTextBody = 'Serial nr doesnt exist';
                 this.showModal = true;
                 this.partsChosen = [];
             }
@@ -194,10 +182,10 @@ export default {
             this.$emit('clicked');
         },
         renderSelects() {
-			const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
-			 // Get id in order to pass it to entityData.js later when submitting
-			 this.id = entity.id;
-            let currentEntityParts = entity.parts;
+            const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
+            // Get id in order to pass it to entityData.js later when submitting
+            this.id = entity.id;
+            const currentEntityParts = entity.parts;
 
             currentEntityParts.forEach(part => {
                 this.productImages[part.partNumber - 1].isChecked = true;
@@ -207,16 +195,6 @@ export default {
     mounted() {
         // THis may run again while exited which may cause problems
         this.renderSelects();
-    },
-    name: 'PopupEdit',
-    props: {
-        pictures: {
-            type: Array
-        },
-        serialToEdit: {
-            type: String,
-            default: ''
-        }
     }
 };
 </script>
