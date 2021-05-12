@@ -2,25 +2,24 @@
     <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
     <div class="base">
         <header>
-            <div id="logo-bar" class="md:w-auto bg-logoBar" v>
-                <div class="image-container">
-                    <hamburger-icon @click="toggleSidebar" />
+            <div class="nav-bar">
+                <!-- <hamburger-icon @click="toggleSidebar" /> -->
 
-                    <router-link to="/">
+                <div class="image-container">
+                    <router-link class="logo-link" to="/">
                         <img id="logo-img" src="@/assets/Images/brightLogo.png" alt="Bright" />
                     </router-link>
+                    <div class="nav-bar-menu"></div>
                 </div>
+                <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
 
-                <div id="employee-div">
-                    <h1 class="font-standardText text-secondary">Employee, {{ user || ' ' }}</h1>
-                </div>
             </div>
         </header>
 
-        <hamburger :class="{ showburger: sideBarVisible, hideburger: !sideBarVisible }" ref="hamburger">
-        </hamburger>
+        <!-- <hamburger :class="{ showburger: sideBarVisible, hideburger: !sideBarVisible }" ref="hamburger" /> -->
 
         <slot />
+        
         <footer>
             <div id="footer-div" class="absolute">
                 <small class="font-standardText white-text">
@@ -32,15 +31,15 @@
 </template>
 
 <script>
-import Hamburger from '@/components/UI/Menu/Hamburger.vue';
-import HamburgerIcon from '@/components/UI/Menu/HamburgerIcon.vue';
-import LoginButton from '@/components/Login/LoginButton.vue';
+// import Hamburger from '@/components/UI/Menu/Hamburger.vue';
+// import HamburgerIcon from '@/components/UI/Menu/HamburgerIcon.vue';
+// import LoginButton from '@/components/Login/LoginButton.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 export default {
     components: {
-        Hamburger
+        // Hamburger
     },
     name: 'LogoBar',
     setup() {
@@ -53,9 +52,8 @@ export default {
             router.push({ name: 'home' });
         }
         return {
-            Hamburger,
-            HamburgerIcon,
-            LoginButton,
+            // HamburgerIcon,
+            // LoginButton,
             user,
             goHome
         };
@@ -81,42 +79,51 @@ button {
     cursor: pointer;
 }
 
-#logo-bar {
-    width: 100vw;
-    height: 8vh;
-    display: grid;
-    grid-template-rows: max-content auto max-content;
+.nav-bar {
+    width: 100%;
+    height: 80px;
+    background: #405c6a;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    display: flex;
+    align-items: center;
 }
 
 .image-container {
-    position: absolute;
-    height: 8vh;
-    width: 410px;
+    height: 60%;
+    width: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 30px;
-
+    align-self: center;
+    align-items: center;    
+    
     img {
-        height: 90%;
-        margin-top: 5px;
+        height: 100%;
+        
+    }
+    
+    .logo-link {
+        height: 100%;
     }
 }
-.white-text {
-    color: white;
-}
-#employee-div {
+
+.user-header {
     position: absolute;
     right: 20px;
-    height: 8vh;
-    width: 200px;
+    font-size: 1rem;
+    color: #7eb46b;
+}
 
-    h1 {
-        position: absolute;
-        bottom: 1vh;
-        font-size: 20px;
-        white-space: nowrap;
-    }
+.nav-bar-menu {
+//   border: 1px solid salmon;  
+}
+
+
+
+
+
+.white-text {
+    color: white;
 }
 
 #footer-div {
