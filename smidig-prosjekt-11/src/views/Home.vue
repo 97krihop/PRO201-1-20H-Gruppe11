@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 import HomeSelect from '@/components/Nav/HomeSelect.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';

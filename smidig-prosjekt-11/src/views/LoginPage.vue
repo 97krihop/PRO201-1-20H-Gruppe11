@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 import Login from '@/components/Login/Login.vue';
 export default {
     name: 'LoginPage',
