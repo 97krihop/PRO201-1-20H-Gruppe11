@@ -1,13 +1,13 @@
 <template>
     <div class="nav-bar">
-        <div class="menu-btn"></div>
+        <div class="menu-btn" @click="toggleMenu()"></div>
 
         <div class="image-container">
             <router-link class="logo-link" to="/">
                 <img id="logo-img" src="@/assets/Images/brightLogo.png" alt="Bright" />
             </router-link>
         </div>
-        <ul class="nav-menu">
+        <ul class="nav-menu" v-bind:class="{ active: showMenu }">
             <li v-for="(it, index) in menuItems" class="nav-menu-item" v-bind:key="index">{{ it.bValue }}</li>
         </ul>
         <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
@@ -37,8 +37,16 @@ export default {
                     link: '/login',
                     alt: 'Login icon'
                 }
-            ]
+            ],
+            showMenu: false
         };
+    },
+    methods: {
+        toggleMenu() {
+            const menuBool = this.showMenu;
+            this.showMenu = !menuBool;
+            console.log(this.showMenu);
+        }
     }
 };
 </script>
@@ -100,18 +108,22 @@ export default {
 
 @media screen and (max-width: 960px) {
     .nav-menu {
-        
         position: absolute;
         height: calc(100% - 80px);
         margin-left: 0;
         top: 80px;
-        left: 0%;
+        left: -30%;
         background: #25353d;
-        
+        transition: all 0.5s ease;
+
         flex-direction: column;
         justify-content: flex-start;
     }
-    
+
+    .nav-menu.active {
+        left: 0;
+    }
+
     .nav-menu-item {
         margin-top: 20px;
     }

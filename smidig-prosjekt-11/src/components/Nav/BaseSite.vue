@@ -1,6 +1,6 @@
 <template>
     <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
-    <div class="base">
+    <div class="base-container">
         <header>
             <nav-bar/>
         </header>
@@ -72,7 +72,9 @@ button {
 
 
 
-
+.base-container {
+    z-index: 999;
+}
 
 
 
