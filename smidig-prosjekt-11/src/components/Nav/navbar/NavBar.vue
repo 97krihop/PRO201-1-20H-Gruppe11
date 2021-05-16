@@ -1,20 +1,22 @@
 <template>
     <div class="nav-bar">
-        <div class="menu-btn" @click="toggleMenu()"></div>
+        <hamburger-button @click="toggleMenu()" :is-selected="menuIsOpen" />
 
         <div class="image-container">
             <router-link class="logo-link" to="/">
                 <img id="logo-img" src="@/assets/Images/brightLogo.png" alt="Bright" />
             </router-link>
         </div>
-        <ul class="nav-menu" v-bind:class="{ active: showMenu }">
+        <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
             <li v-for="(it, index) in menuItems" class="nav-menu-item" v-bind:key="index">{{ it.bValue }}</li>
         </ul>
         <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
     </div>
 </template>
 <script>
+import HamburgerButton from './HamburgerButton.vue';
 export default {
+    components: { HamburgerButton },
     name: 'NavBar',
     data() {
         return {
@@ -38,14 +40,13 @@ export default {
                     alt: 'Login icon'
                 }
             ],
-            showMenu: false
+            menuIsOpen: false
         };
     },
     methods: {
         toggleMenu() {
-            const menuBool = this.showMenu;
-            this.showMenu = !menuBool;
-            console.log(this.showMenu);
+            const temp = this.menuIsOpen;
+            this.menuIsOpen = !temp;
         }
     }
 };
@@ -62,7 +63,7 @@ export default {
     align-items: center;
 }
 
-.menu-btn {
+.hamburger-button {
     display: none;
 }
 
@@ -91,7 +92,6 @@ export default {
 }
 
 .nav-menu {
-    // border: 1px solid greenyellow;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -112,12 +112,16 @@ export default {
         height: calc(100% - 80px);
         margin-left: 0;
         top: 80px;
-        left: -30%;
+        left: -100%;
         background: #25353d;
         transition: all 0.5s ease;
 
         flex-direction: column;
         justify-content: flex-start;
+    }
+
+    .hamburger-button {
+        display: flex;
     }
 
     .nav-menu.active {
@@ -126,14 +130,6 @@ export default {
 
     .nav-menu-item {
         margin-top: 20px;
-    }
-
-    .menu-btn {
-        height: 35px;
-        width: 35px;
-        background: red;
-        margin-right: 10px;
-        display: block;
     }
 }
 </style>
