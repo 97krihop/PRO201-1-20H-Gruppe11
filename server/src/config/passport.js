@@ -1,20 +1,17 @@
 const LocalStrategy = require("passport-local").Strategy;
-//Importing user storage -- Should be stored in database
-//TODO communicate with DB
-const users = require("../data/users");
-//controllers
-//TODO communicate with DB
-const { addUser } = require("../controllers/userController");
 //Bcrypt - Hashing
 const bcrypt = require("bcrypt");
 
-//Oauth20 strategy - Adds user to server storage after authentication is done.
+const monk = require("monk");
+const db = monk(process.env.MONGO_URI);
+const users = db.get("users");
+
 module.exports = function initialize(passport) {
   //Local login-strategy using bcrypt to decrypt passwords
   passport.use(
     new LocalStrategy(async (username, password, done) => {
-      const user = users.find((user) => username === user.username);
-      console.log("user" + user);
+      const user = await users.findOne({ username: username });
+      console.log("user : " + user);
       if (!user) {
         console.log("No user with that username");
         return done(null, false, { message: "Incorrect username/password." });
