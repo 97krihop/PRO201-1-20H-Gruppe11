@@ -31,7 +31,7 @@ const rateSpeedLimit = rateSpeedLimiter({
 //use middleware
 app.use(bodyParser.json());
 app.use(sessionParser);
-app.use(helmet);
+app.use(helmet());
 app.use(rateSpeedLimit);
 
 app.get('/', (req, res) => {
