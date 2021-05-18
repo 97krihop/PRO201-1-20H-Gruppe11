@@ -1,9 +1,9 @@
 <template>
-    <div id="container" class="text-center rounded-lg">
+    <div id="container">
         <!-- PRODUCT-DIV -->
-        <div id="products-container" class="grid-rows-3 ">
+        <div id="products-container">
             <h1>Product</h1>
-            <div class="content-center">
+            <div>
                 <div id="popup-static-product-style">
                     <img src="@/assets/Images/Parts/sunbellProductImage.png" alt="Product: Sunbell" />
                     <h2>Sunbell</h2>
@@ -26,14 +26,14 @@
             </div>
         </div>
         <!-- PARTS-DIV -->
-        <div id="parts" class="col-span-2">
+        <div id="parts">
             <modal-error-message v-if="showModal == true" @close="showModal = false">
                 <template v-slot:body>{{ modalTextBody }}</template>
                 <!-- Serial Number Already Exists -->
             </modal-error-message>
 
             <h1>Parts</h1>
-            <div id="parts-cont-no-change" class="grid grid-flow grid-cols-4 grid-rows-2 gap-5 ">
+            <div id="parts-cont-no-change" class="parts-container">
                 <a
                     class="popup-products"
                     v-for="product in productImages"
@@ -41,7 +41,6 @@
                     @click="selectPart(product)"
                 >
                     <img
-                        class="duration-75 transform rounded-md hover:scale-105 "
                         :id="product.partNumber"
                         :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
                     />
@@ -50,14 +49,14 @@
             </div>
         </div>
 
-        <!-- Creating space for the close button of the project -->
+        <!-- Creating a slot for the close button of the project -->
         <slot />
         <button
-            class="font-standardText duration-75 transform rounded-md hover:scale-105 motion-reduce:transform-none bg-logoBar"
+            class="font-standardText bg-logoBar"
             id="next-btn"
             @click="submitPartsSelected"
         >
-            <h3 style="color: white;">Submit</h3>
+            <h3>Submit</h3>
         </button>
     </div>
 </template>
@@ -229,6 +228,7 @@ export default {
     width: 100%;
     height: 100%;
     user-select: none;
+    text-align: center;
     background-color: #f8f6f2;
     display: grid;
     grid-template-columns: auto 70%;
@@ -309,6 +309,13 @@ export default {
         grid-column: 2;
         margin: 0 3vw 0 3vw;
         background-color: #f8f6f2;
+
+        .parts-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
     }
 
     #next-btn {
@@ -317,7 +324,17 @@ export default {
         position: absolute;
         right: 30px;
         bottom: 30px;
-        border: 1px solid black;
+        border: 1px solid #423048;
+        border-radius: 2px;
+
+        &:hover {
+            transform: scale(1.05);
+            transition-duration: 75ms;
+        }
+
+        h3 {
+            color: #fff;
+        }
     }
 
     .popup-products {

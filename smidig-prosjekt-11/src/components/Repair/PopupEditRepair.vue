@@ -339,7 +339,7 @@ export default {
         }
 
         h3 {
-            color: white;
+            color: #fff;
         }
     }
 }
