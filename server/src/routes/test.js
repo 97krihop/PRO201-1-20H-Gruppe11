@@ -3,7 +3,7 @@ const monk = require('monk');
 
 const router = express.Router();
 
-const db = monk('mongoadmin:secret@localhost:27888');
+const db = monk(process.env.MONGO_URI);
 const user = db.get('users');
 
 router.get('/user', async (req, res) => {
