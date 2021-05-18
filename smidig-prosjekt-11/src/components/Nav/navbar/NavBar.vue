@@ -8,22 +8,28 @@
             </router-link>
         </div>
         <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
-            <li v-for="(it, index) in menuItems" class="nav-menu-item" v-bind:key="index">{{ it.bValue }}</li>
+            <!-- <li v-for="(it, index) in menuItems" class="nav-menu-item" v-bind:key="index">{{ it.bValue }}</li> -->
+            <nav-link v-for="(it, index) in menuItems" 
+            :key="index"
+            :textValue="it.bValue"
+            :iconFileName="it.icon"
+            />
         </ul>
         <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
     </div>
 </template>
 <script>
 import HamburgerButton from './HamburgerButton.vue';
+import NavLink from './NavLink.vue';
 export default {
-    components: { HamburgerButton },
+    components: { HamburgerButton, NavLink },
     name: 'NavBar',
     data() {
         return {
             menuItems: [
                 {
-                    bValue: 'User',
-                    icon: 'user-person-icon.png',
+                    bValue: 'Profile',
+                    icon: 'ic_profile.png',
                     link: '/repair',
                     alt: 'User icon'
                 },
@@ -97,13 +103,7 @@ export default {
     text-align: center;
     margin-left: 60px;
     width: 300px;
-}
-
-.nav-menu-item {
-    // border: 1px solid red;
-    color: #7eb46b;
-    font-size: 1.2rem;
-    font-weight: 600;
+    z-index: 999;
 }
 
 @media screen and (max-width: 960px) {

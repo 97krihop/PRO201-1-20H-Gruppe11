@@ -70,14 +70,6 @@ button {
     cursor: pointer;
 }
 
-
-
-.base-container {
-    z-index: 999;
-}
-
-
-
 .white-text {
     color: white;
 }
