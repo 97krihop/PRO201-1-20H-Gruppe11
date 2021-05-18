@@ -1,7 +1,7 @@
 <template>
     <div class="home-button">
         <a href="#">
-            <div class="transform hover:scale-110 duration-50">
+            <div>
                 <p>Home</p>
                 <img src="@/assets/Images/Icons/home-icon.png" alt="Home button" />
             </div>
@@ -46,6 +46,8 @@ a {
 
         &:hover {
             background-color: #423048;
+            transform: scale(1.1);
+            transition-duration: 50ms;
         }
     }
 }
