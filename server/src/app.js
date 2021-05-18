@@ -1,14 +1,23 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const session = require("express-session");
-const helmet = require("helmet");
-const rateSpeedLimiter = require("express-slow-down");
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const helmet = require('helmet');
+const rateSpeedLimiter = require('express-slow-down');
 
 const app = express();
-app.set("trust proxy", 1);
+app.set('trust proxy', 1);
+
+//Passport
+const passport = require('passport');
+const initializePassport = require('./config/passport');
+
+//Passport initialization
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 const sessionParser = session({
-  secret: process.env.SESSION_SECRET || "secret",
+  secret: process.env.SESSION_SECRET || 'secret',
   resave: false,
   saveUninitialized: false,
 });
@@ -25,8 +34,8 @@ app.use(sessionParser);
 app.use(helmet);
 app.use(rateSpeedLimit);
 
-app.get("/", (req, res) => {
-  res.send("test");
+app.get('/', (req, res) => {
+  res.send('test');
 });
 
 module.exports = app;
