@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const helmet = require('helmet');
 const rateSpeedLimiter = require('express-slow-down');
-
+const auth = require('server/src/routes/auth.js')
 const app = express();
 app.set('trust proxy', 1);
 
@@ -33,6 +33,9 @@ app.use(bodyParser.json());
 app.use(sessionParser);
 app.use(helmet());
 app.use(rateSpeedLimit);
+
+//routers
+app.use(auth)
 
 app.get('/', (req, res) => {
   res.send('test');

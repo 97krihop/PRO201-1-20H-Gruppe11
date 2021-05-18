@@ -1,4 +1,8 @@
 //Stores user object after authentication/registration
-const users = [];
+let users = [];
 
-module.exports = users;
+function resetAllUsers() {
+    users = [];
+}
+
+module.exports = {users,resetAllUsers};
