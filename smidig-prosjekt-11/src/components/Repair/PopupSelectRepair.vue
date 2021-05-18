@@ -331,7 +331,6 @@ export default {
             font-size: 17px;
         }
 
-
         img {
             -webkit-user-drag: none;
         }
