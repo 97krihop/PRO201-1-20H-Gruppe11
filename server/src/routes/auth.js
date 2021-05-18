@@ -43,7 +43,7 @@ router.post("/register", async (req, res) => {
     } catch (e) {
       res.status(500).send(e);
     }
-  else res.status(409).send("Username already exists");
+  else res.status(409).json({ messages: "Username already exists" });
 });
 //Invoking logout() will remove the req.user property and clear the login session (if any).
 router.get("/logout", (req, res, next) => {
