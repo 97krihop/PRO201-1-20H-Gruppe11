@@ -2,15 +2,15 @@
     <teleport to="body">
         <transition name="modal-fade">
             <!-- Modal takes props form parent component and injects into corresponding slot. This makes custom modal messages -->
-            <div class="modal-backdrop z-50">
+            <div class="modal-backdrop">
                 <div
-                    class="rounded-lg modal"
+                    class="modal"
                     role="dialog"
                     aria-labelledby="modalTitle"
                     aria-describedby="modalDescription"
                 >
                     <header class="modal-header" id="modalTitle">
-                        <img src="@/assets/Images/alert.png" id="header-image" />
+                        <img src="@/assets/Images/alert.png" id="header-image" alt="Alert image" />
                         <slot class="slot-text font-standardText" name="header" />
                     </header>
                     <section class="modal-body" id="modalDescription">
@@ -56,6 +56,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 50;
 }
 
 .modal {
@@ -64,6 +65,7 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+    border-radius: 0.5rem;
 }
 
 .modal-header {
@@ -106,15 +108,5 @@ export default {
     border-radius: 2px;
     width: 40%;
     height: 40px;
-}
-
-.modal-fade-enter,
-.modal-fade-leave-active {
-    opacity: 0;
-}
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-    transition: opacity 0.5s ease;
 }
 </style>
