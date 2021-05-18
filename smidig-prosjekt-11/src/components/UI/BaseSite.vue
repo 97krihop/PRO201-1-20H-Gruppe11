@@ -2,7 +2,7 @@
     <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
     <div class="base">
         <header>
-            <div id="logo-bar" class="md:w-auto bg-logoBar" v>
+            <div id="logo-bar" class="bg-logoBar">
                 <div class="image-container">
                     <hamburger-icon @click="toggleSidebar" />
 
@@ -22,8 +22,8 @@
 
         <slot />
         <footer>
-            <div id="footer-div" class="absolute">
-                <small class="font-standardText white-text">
+            <div id="footer-div">
+                <small class="font-standardText">
                     Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
                 </small>
             </div>
@@ -120,8 +120,13 @@ button {
 }
 
 #footer-div {
+    position: absolute;
     left: 1vw;
     bottom: 1vh;
+
+    small {
+        color: #fff;
+    }
 }
 
 // Removes blue outline of hamburgerbar
