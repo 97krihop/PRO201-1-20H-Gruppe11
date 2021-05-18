@@ -1,16 +1,12 @@
 <template>
     <div id="progress-bar-border-top">
         <div id="progress-bar">
-            <div class="relative pt-8 w-3/5 m-auto">
+            <div id="progress-bar-container">
                 <!-- Green line -->
-                <div
-                    id="progress-bar-border"
-                    class="overflow-hidden h-1 mb-4 text-xs flex rounded bg-pink-200"
-                >
+                <div id="progress-bar-border">
                     <!-- Setting class if isSuccessfulReport and/or isUnsuccessfulReport is true -->
                     <div
                         id="progress-bar-width"
-                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
                         :class="{
                             'progress-bar-successful-line': isSuccessfulReport,
                             'progress-bar-unsuccessful-line': isUnsuccessfulReport
@@ -46,7 +42,7 @@
             <!-- Button to go back to previous page -->
             <router-link :to="'/' + prevBtn">
                 <img
-                    class="progress-bar-btns"
+                    class="progress-bar-buttons"
                     id="back-btn"
                     src="@/assets/Images/Icons/forward-back-icon.png"
                     alt="Go to previous page"
@@ -56,19 +52,12 @@
             <!-- Button to go to next page -->
             <!-- Setting class if isSuccessfulReport is true -->
             <router-link :to="'/' + nextBtn" :class="{ 'next-btn-none': isSuccessfulReport }">
-                <button
-                    id="forward-btn"
-                    class="text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center duration-75 hover:text-white transform hover:scale-105 motion-reduce:transform-none "
-                >
-                    <span class="font-standardText">Submit <span style="font-size: 1.1em;">{{ updateTotalProducts }}</span> Repairs</span>
+                <button id="forward-btn">
+                    <span class="font-standardText"
+                        >Submit <span style="font-size: 1.1em;">{{ updateTotalProducts }}</span> Repairs</span
+                    >
                     <img src="@/assets/Images/Icons/enter.png" alt="Go to next page" id="submit-icon" />
                 </button>
-                <!-- <img
-                    class="progress-bar-btns"
-                    id="forward-btn"
-                    src="@/assets/Images/Icons/forward-back-icon.png"
-                    alt="Go to previous page"
-                /> -->
             </router-link>
             <!-- Using a getter from store to display the amount of products rendered -->
         </div>
@@ -125,11 +114,22 @@ export default {
         margin: auto;
         width: 60%;
 
-        #progress-bar-border {
-            background-color: #848484;
+        #progress-bar-container {
+            position: relative;
+            padding-top: 2rem;
+            width: 50%;
+            margin: auto;
 
-            #progress-bar-width {
-                background-color: #7eb46b;
+            #progress-bar-border {
+                overflow: hidden;
+                height: 0.25rem;
+                margin-bottom: 1rem;
+                background-color: #848484;
+                display: flex;
+
+                #progress-bar-width {
+                    background-color: #7eb46b;
+                }
             }
         }
 
@@ -159,7 +159,7 @@ export default {
         }
 
         // Classes to change from done and not done steps
-        // in the repair prosess
+        // in the repair process
         .progress-bar-done {
             background-color: #7eb46b;
         }
@@ -169,7 +169,7 @@ export default {
         }
 
         // Buttons to go back and forward
-        .progress-bar-btns {
+        .progress-bar-buttons {
             position: absolute;
             width: 45px;
         }
@@ -187,15 +187,23 @@ export default {
         }
 
         #forward-btn {
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: inline-flex;
             right: -120px;
             top: 10px;
             position: absolute;
             background-color: white;
             border: 2px solid gray;
-        }
-        #forward-btn:hover {
-            background-color: #405C6A;
-            color: white;
+            outline: none;
+
+            &:hover {
+                background-color: #405c6a;
+                color: white;
+                transform: scale(1.05);
+                transition-duration: 73ms;
+            }
         }
     }
 }
