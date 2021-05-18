@@ -2,11 +2,10 @@
     <!-- Root element -->
     <div :class="{ backdrop: showRepair || showEdit }">
         <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
-        <div id="parts-popup" class="border-2 border-gray-500 shadow-lg" v-if="showRepair == true">
+        <div id="parts-popup" v-if="showRepair == true">
             <popup-select-repair @clicked="closeRepair()">
                 <img
                     id="close-repair-btn"
-                    class="self-end duration-75 cursor-pointer rounded-full transform hover:scale-110 "
                     src="@/assets/Images/delete-icon.png"
                     v-on:click="closeRepair"
                     alt="close repair tab"
@@ -14,7 +13,7 @@
             </popup-select-repair>
         </div>
 
-        <div id="edit-popup" class="border-2 border-gray-500 shadow-lg" v-if="showEdit">
+        <div id="edit-popup" v-if="showEdit">
             <popup-edit-repair ref="editref" @clicked="closeEdit()" :serialToEdit="editSerial">
             </popup-edit-repair>
         </div>
@@ -34,7 +33,6 @@
                 <img
                     v-show="showRepair == false"
                     id="plus-btn"
-                    class="duration-75 cursor-pointer hover:bg-gray-400 rounded-full transform hover:scale-105"
                     src="@/assets/Images/Icons/plus-icon.png"
                     v-on:click="addRepair()"
                     alt="add new repair"
@@ -114,6 +112,13 @@ export default {
     margin: 2.5vh auto;
     width: 3vw;
     outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+        transition-duration: 75ms;
+    }
 }
 
 #parts-popup {
@@ -150,6 +155,13 @@ export default {
     width: 30px;
     right: 10px;
     top: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+
+    &:hover {
+        transform: scale(1.15);
+        transition-duration: 75ms;
+    }
 }
 
 #entity-list-container {
