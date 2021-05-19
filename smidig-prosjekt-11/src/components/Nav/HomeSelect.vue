@@ -1,6 +1,6 @@
 <template>
     <!-- Component creates two buttons. Is used in home screen for selecting Repair/Elearning if user is logged in -->
-    <div id="button-div" class="rounded-lg shadow-lg ring-2 ring-black ring-opacity-50">
+    <div id="button-div">
         <router-link
             v-if="isAdmin === true"
             tag="button"
@@ -14,7 +14,7 @@
             tag="button"
             to="/repair"
             type="button"
-            class="font-standardText button shadow-lg home-repair-ico-src home-ico-style duration-75 transform hover:scale-105 motion-reduce:transform-none"
+            class="font-standardText button home-repair-ico-src home-ico-style"
         >
             <h4>Register Repair</h4>
         </router-link>
@@ -23,7 +23,7 @@
             tag="button"
             to="/#"
             type="button"
-            class="font-standardText button shadow-lg home-learn-ico-src home-ico-style duration-75 transform hover:scale-105 motion-reduce:transform-none"
+            class="font-standardText button home-learn-ico-src home-ico-style"
         >
             <h4>E-learning</h4>
         </router-link>
@@ -64,29 +64,37 @@ export default {
 
 <style lang="scss" scoped>
 #button-div {
-    padding: 0px 1vw;
+    padding: 0 1vw;
     height: auto;
-    width: 20vw;
+    width: 30vw;
+    border-radius: 5px;
     background-color: #405c6a;
-    padding-bottom: 1%;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+        0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07);
 }
 .button {
     background-color: #9fd18d;
     text-align: center;
     font-size: 1.5em;
     font-weight: bold;
-    border: 2px solid #433149;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #423048;
     cursor: pointer;
-    width: 100%;
-    height: 30%;
-    margin: auto;
-    margin-top: 7%;
+    width: 90%;
+    height: 6vh;
+    margin: 5% 10% auto 5%;
     outline: none;
+    box-shadow: 2px 3px #899599;
 
     &:hover {
-        background-color: white;
+        background-color: #c0f6ae;
+    }
+
+    &:active {
+        transform: scale(0.99);
+        transition-duration: 10ms;
+        box-shadow: 0 0 #000;
     }
 
     h4 {

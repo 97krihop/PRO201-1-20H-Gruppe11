@@ -8,7 +8,7 @@
             />
         </div>
         <span
-            ><div class="border-solid border-2">{{ this.entitySerialNumber }}</div></span
+            ><div id="product-serial-number">{{ this.entitySerialNumber }}</div></span
         >
 
         <!-- Loops through the selected parts for this repair, and displays their images -->
@@ -24,10 +24,7 @@
         </div>
         <!-- Div to hold both edit and repair -->
         <div class="edit-delete-img">
-            <button
-                class="duration-75 transform hover:scale-110 motion-reduce:transform-none"
-                @click="editEntity(this.entity)"
-            >
+            <button class="edit-delete-buttons" @click="editEntity(this.entity)">
                 <img
                     class="edit-delete-img-width"
                     src="@/assets/Images/edit-icon.png"
@@ -35,10 +32,7 @@
                 />
             </button>
 
-            <button
-                class="duration-75 transform hover:scale-110 motion-reduce:transform-none"
-                @click="deleteEntity(this.entity)"
-            >
+            <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
                 <img
                     class="edit-delete-img-width"
                     id="delete-img"
@@ -90,6 +84,10 @@ export default {
         margin: auto;
     }
 
+    #product-serial-number {
+        border: 1px solid #c6c6c6;
+    }
+
     input {
         border: 1.5px solid #423048;
         border-radius: 5px;
@@ -102,9 +100,7 @@ export default {
     .part-imgs {
         height: 5vh;
         width: 3vw;
-        margin: auto;
-        margin-left: 4vw;
-        margin-right: auto;
+        margin: auto auto auto 4vw;
     }
 
     #part-image-separator {
@@ -129,6 +125,11 @@ export default {
             margin: 5px;
         }
 
+        .edit-delete-buttons:hover {
+            transform: scale(1.15);
+            transition-duration: 50ms;
+        }
+
         #delete-img {
             margin-left: 40px;
         }
@@ -144,6 +145,26 @@ export default {
         width: 93%;
         margin: auto;
         border-top: 0.5px solid #707070;
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #product-container {
+        height: 80px;
+        .product-image-sunbell {
+            width: 45px;
+        }
+
+        #product-serial-number {
+            font-size: 12px;
+            width: 25vh;
+        }
+
+        .edit-delete-img {
+            .edit-delete-img-width {
+                width: 15px;
+            }
+        }
     }
 }
 </style>
