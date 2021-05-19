@@ -51,11 +51,7 @@
 
         <!-- Creating a slot for the close button of the project -->
         <slot />
-        <button
-            class="font-standardText bg-logoBar"
-            id="next-btn"
-            @click="submitPartsSelected"
-        >
+        <button class="font-standardText bg-logoBar" id="next-btn" @click="submitPartsSelected">
             <h3>Submit</h3>
         </button>
     </div>
@@ -354,6 +350,55 @@ export default {
 
         &:hover {
             background-color: #7eb46b;
+        }
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #container {
+        h1 {
+            font-size: 1em;
+        }
+        img {
+            margin-bottom: 5px;
+        }
+
+        #products-container {
+            #popup-static-product-style {
+                h2 {
+                    font-size: 12px;
+                }
+            }
+
+            #serialnum-container {
+                h3 {
+                    font-size: 12px;
+                }
+
+                input {
+                    font-size: 10px;
+                    width: 90%;
+                    font-style: normal;
+                }
+            }
+        }
+
+        #parts {
+            .parts-container {
+                a {
+                    width: 80px;
+
+                    h2 {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+
+        #next-btn {
+            width: 65px;
+            height: 30px;
+            font-size: 12px;
         }
     }
 }

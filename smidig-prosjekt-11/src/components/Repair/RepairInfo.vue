@@ -150,12 +150,12 @@ export default {
 }
 
 #close-repair-btn {
-    position: absolute;
     height: 30px;
     width: 30px;
+    cursor: pointer;
+    position: absolute;
     right: 10px;
     top: 10px;
-    cursor: pointer;
     border-radius: 50%;
 
     &:hover {
@@ -168,5 +168,24 @@ export default {
     height: 82vh;
     width: 100%;
     overflow-y: scroll;
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #close-repair-btn {
+        height: 15px;
+        width: 15px;
+    }
+
+    #entity-list-container {
+        height: 75vh;
+    }
+
+    #plus-btn {
+        width: 4vw;
+    }
+
+    #edit-popup {
+        width: 55vw;
+    }
 }
 </style>

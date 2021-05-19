@@ -147,4 +147,24 @@ export default {
         border-top: 0.5px solid #707070;
     }
 }
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #product-container {
+        height: 80px;
+        .product-image-sunbell {
+            width: 45px;
+        }
+
+        #product-serial-number {
+            font-size: 12px;
+            width: 25vh;
+        }
+
+        .edit-delete-img {
+            .edit-delete-img-width {
+                width: 15px;
+            }
+        }
+    }
+}
 </style>

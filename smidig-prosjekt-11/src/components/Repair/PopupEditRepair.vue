@@ -303,12 +303,13 @@ export default {
     }
 
     #close-repair-btn {
-        position: absolute;
-        cursor: pointer;
         height: 50px;
         width: 50px;
+        cursor: pointer;
+        position: absolute;
         right: 10px;
         top: 10px;
+        border-radius: 50%;
 
         &:hover {
             transform: scale(1.15);
@@ -340,6 +341,52 @@ export default {
 
         h3 {
             color: #fff;
+        }
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #container {
+        h1 {
+            font-size: 1em;
+        }
+
+        img {
+            width: 7vw;
+            height: 10vh;
+        }
+
+        #parts-cont-no-change {
+            .popup-products {
+                margin: 0;
+                width: 13vh;
+                height: 13vh;
+
+                h2 {
+                    font-size: 10px;
+                }
+            }
+        }
+
+        #serialnum-container {
+            h3 {
+                font-size: 12px;
+            }
+
+            input {
+                font-size: 11px;
+            }
+        }
+
+        #close-repair-btn {
+            height: 35px;
+            width: 35px;
+        }
+
+        #next-btn {
+            width: 55px;
+            height: 30px;
+            font-size: 12px;
         }
     }
 }
