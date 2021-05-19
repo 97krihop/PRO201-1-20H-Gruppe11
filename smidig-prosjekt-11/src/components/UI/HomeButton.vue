@@ -51,4 +51,22 @@ a {
         }
     }
 }
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    a {
+        div {
+            width: 175px;
+            height: 50px;
+
+            p {
+                font-size: 25px;
+                padding: 7px 20px;
+            }
+
+            img {
+                top: -4px;
+            }
+        }
+    }
+}
 </style>

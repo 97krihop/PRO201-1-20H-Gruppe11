@@ -36,4 +36,16 @@ export default {
         width: 18vw;
     }
 }
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #approved-report-container {
+        h1 {
+            font-size: 30px;
+        }
+
+        img {
+            width: 15vw;
+        }
+    }
+}
 </style>
