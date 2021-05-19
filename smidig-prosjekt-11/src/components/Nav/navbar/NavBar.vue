@@ -98,22 +98,24 @@ export default {
 }
 
 .nav-menu {
-    position: relative;
+    position: absolute;
+    right: 20px;
     display: flex;
     z-index: 999;
+    // border: 1px solid red;
 }
 
 @media screen and (max-width: 960px) {
     .nav-menu {
-        position: absolute;
         height: calc(100vh - 80px);
         top: 80px;
         left: -100%;
+        right: auto;
+        // width: 300px;
         background: #25353d;
         transition: all 0.5s ease;
 
         padding: 20px;
-
         flex-direction: column;
         justify-content: flex-start;
     }

@@ -3,7 +3,7 @@
         <div class="icon-container">
             <icon-base :iconName="icon" iconColor="#7eb46b" iconWidth="100%" iconHeight="100%" />
         </div>
-        <div>
+        <div class="item-title">
             {{ textValue }}
         </div>
     </div>
@@ -32,23 +32,20 @@ export default {
 <style lang="scss" scoped>
 .nav-menu-item {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    margin-left: 100px;
+    margin-left: 60px;
     // border: 1px solid orange;
-    color: #7eb46b;
-    font-size: 1.3rem;
-
-    
-    // border: 1px solid red;
-    // font-weight: 600;
 }
 
 .icon-container {
     height: 24px;
     width: 24px;
-    // border: 1px solid blue;
     margin-right: 5px;
+}
+
+.item-title {
+    color: #7eb46b;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 960px) {
@@ -57,14 +54,19 @@ export default {
         border-radius: 10px;
         padding: 10px;
         margin-left: 0;
-        margin-bottom: 25px;
-        justify-content: center;
-        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
 
+    .item-title {
+        margin-left: 8px;
+        color: #7eb46b;
+        font-size: 0.9rem;
+        // flex: 1;
+        text-align: center;
     }
 
     .nav-menu-item:hover {
-        background: #405C6A;
+        background: #405c6a;
     }
 }
 </style>
