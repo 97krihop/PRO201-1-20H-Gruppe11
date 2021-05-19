@@ -16,7 +16,7 @@
             type="button"
             class="font-standardText button shadow-lg home-repair-ico-src home-ico-style duration-75 transform hover:scale-105 motion-reduce:transform-none"
         >
-            <h4>Repair</h4>
+            <h4>Register Repair</h4>
         </router-link>
 
         <router-link
