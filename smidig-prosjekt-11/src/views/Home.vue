@@ -4,7 +4,6 @@
             <div class="home-select-container">
                 <home-select @click="showModal = true" class="home-select" />
             </div>
-            <img src="@/assets/Images/Background/Background.jpg" id="background-image" alt="background" />
         </base-site>
     </div>
 </template>
@@ -43,6 +42,8 @@ export default {
     height: 100%;
     z-index: 2;
     margin: auto;
+    background: rgb(249, 254, 244);
+    background: linear-gradient(120deg, rgba(249, 254, 244, 1) 0%, rgb(251, 246, 237) 100%);
 }
 
 .home-select {
@@ -50,17 +51,8 @@ export default {
     position: relative;
     top: 37%;
     z-index: 2;
-    }
-
-#background-image {
-    z-index: 0;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 80px);
-    background-image: url('../assets/Images/Background/Background.jpg');
-    filter: grayscale(100%);
-    overflow: hidden;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+        0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07);
 }
 </style>

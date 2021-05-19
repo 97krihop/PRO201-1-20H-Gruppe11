@@ -61,7 +61,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .content-container {
-    border: 1px solid salmon;
     height: calc(100vh - 80px);
 }
 
