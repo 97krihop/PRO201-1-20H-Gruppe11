@@ -34,6 +34,8 @@ app.use(sessionParser);
 app.use(helmet());
 app.use(rateSpeedLimit);
 
+//routes
+app.use("/api", require("./routes/report"));
 app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/test"));
 

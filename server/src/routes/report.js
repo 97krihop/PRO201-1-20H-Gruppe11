@@ -1,39 +1,38 @@
 const express = require("express");
+const monk = require("monk");
+
 const router = express.Router();
 const db = monk(process.env.MONGO_URI);
-
 
 const report = db.get("report");
 const users = db.get("users");
 
 
+router.post("/report",async (req, res) => {
+    console.log(JSON.stringify(req.user))
 
-router.post("/report",async (req, res, next) => {
-    const userName = await req.body.username
-
-    if(!userName || users.findOne(userName) === null) res.status(401).json("please log in")
-
-
+//    if (!req.user) return res.status(401).send();
+//TODO: fix sewssion login to validate that that the is logged in before sending report
     //body example
-    // body ={
-    //     userName,
-    //     serialNumbers,
-    //     modalTextBody,
-    //     inputSerial,
-    //     parts:{
-    //         partNumber,
-    //         partName,
-    //         imgName,
-    //     }
-    // }
-    let reportData = req.body;
+    /*{
+
+        "username" :"terst",
+        "serialNumbers": "fddsfs",
+        "modalTextBody": "sdfsf",
+        "inputSerial" : "fsdfs",
+        "parts":{
+        "partNumber":"fdsd",
+            "partName": "fcsd",
+            "imgName": "sadf"
+    }*/
+
+    const reportData = req.body;
     try {
         await report.insert(reportData);
         res.sendStatus(200);
     }catch (e){
         res.status(500).send(e);
     }
-
-
-
 })
+
+module.exports = router;

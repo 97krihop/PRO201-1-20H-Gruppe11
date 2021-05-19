@@ -7,9 +7,9 @@ const router = express.Router();
 
 const db = monk(process.env.MONGO_URI);
 const users = db.get("users");
-console.log("hello")
 //Local login route -- Authenticates with passport and bcrypt for password hashing/unh
 router.post("/login/local", (req, res, next) => {
+
   passport.authenticate("local", function (err, user, info) {
     if (err) return next(err);
 
