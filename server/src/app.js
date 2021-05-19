@@ -38,7 +38,7 @@ app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/test"));
 
 app.get("/", (req, res) => {
-  res.send("test");
+  res.json({ name: "test" });
 });
 
 module.exports = app;

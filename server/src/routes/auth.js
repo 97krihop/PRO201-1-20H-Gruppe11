@@ -9,7 +9,7 @@ const db = monk(process.env.MONGO_URI);
 const users = db.get("users");
 
 //Local login route -- Authenticates with passport and bcrypt for password hashing/unh
-router.post("/login/local", (req, res, next) => {
+router.post("/login", (req, res, next) => {
   passport.authenticate("local", function (err, user, info) {
     if (err) return next(err);
 
@@ -27,6 +27,7 @@ router.post("/login/local", (req, res, next) => {
     });
   })(req, res);
 });
+
 //Registration route -- Saves user in user storage after hashing password. -- Error handling and a bit of input validation/sanitation is done in frontend.
 router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -46,7 +47,7 @@ router.post("/register", async (req, res) => {
   else res.status(409).json({ messages: "Username already exists" });
 });
 //Invoking logout() will remove the req.user property and clear the login session (if any).
-router.get("/logout", (req, res, next) => {
+router.get("/logout", (req, res) => {
   req.logout();
   //TODO Update redirect route
   res.redirect("/");
