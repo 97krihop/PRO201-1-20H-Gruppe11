@@ -56,7 +56,7 @@ export default {
     },
     data() {
         return {
-            isAdmin: true //this.retrieveIsAdmin()
+            isAdmin: this.retrieveIsAdmin()
         };
     }
 };
