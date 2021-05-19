@@ -225,4 +225,38 @@ export default {
     right: -150px;
     bottom: -10px;
 }
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #progress-bar-border-top {
+        height: 60px;
+
+        #progress-bar {
+            #progress-bar-container {
+                padding-top: 1.75rem;
+            }
+
+            .progress-bar-icons {
+                width: 30px;
+                height: 30px;
+            }
+
+            .progress-bar-buttons {
+                width: 30px;
+            }
+
+            #forward-btn {
+                font-size: 11px;
+                height: 30px;
+                top: 13px;
+                right: -90px;
+                padding: 0.4em;
+
+                #submit-icon {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+}
 </style>
