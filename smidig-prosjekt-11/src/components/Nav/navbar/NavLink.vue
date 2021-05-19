@@ -1,14 +1,11 @@
 <template>
     <div class="nav-menu-item">
         <div class="icon-container">
-            <icon-base :iconName="icon" iconColor="#7eb46b"  />
-
-            <!-- <svg class="icon-svg" width="200" height="40">
-                <use xlink:href="../../../assets/Images/Icons/sprite.svg#icon-profile"></use>
-            </svg> -->
+            <icon-base :iconName="icon" iconColor="#7eb46b" iconWidth="100%" iconHeight="100%" />
         </div>
-
-        <!-- {{ textValue }} -->
+        <div>
+            {{ textValue }}
+        </div>
     </div>
 </template>
 <script>
@@ -34,22 +31,28 @@ export default {
 </script>
 <style lang="scss" scoped>
 .nav-menu-item {
-    border: 1px solid salmon;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 100px;
+    // border: 1px solid orange;
     color: #7eb46b;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-img {
-    color: orange;
-}
-
-.icon-svg {
+    font-size: 1.1rem;
     border: 1px solid red;
+    // font-weight: 600;
 }
 
 .icon-container {
-    height: 50px;
-    width: 50px;
+    height: 24px;
+    width: 24px;
+    // border: 1px solid blue;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 960px) {
+    .nav-menu-item {
+        margin-left: 0;
+        margin-top: 50px;
+    }
 }
 </style>

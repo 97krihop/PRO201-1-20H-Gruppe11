@@ -13,13 +13,13 @@
         </g>
     </svg> -->
 
-    <svg class="icon-svg">
+    <svg class="icon-svg" width="100%" height="auto">
         <!-- <use :xlink:href="`../../assets/Images/Icons/sprite.svg#icon-${iconName}`"></use> -->
-        <use 
-        :xlink:href="require('../../assets/Images/Icons/sprite.svg')+ '#icon-' + iconName"
-        :fill="iconColor"
-        :width="iconWidth"
-        :height="iconHeight"
+        <use
+            :xlink:href="require('../../assets/Images/Icons/sprite.svg') + '#icon-' + iconName"
+            :fill="iconColor"
+            :width="iconWidth"
+            :height="iconHeight"
         ></use>
     </svg>
 

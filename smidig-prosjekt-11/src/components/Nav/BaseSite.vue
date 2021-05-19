@@ -2,27 +2,21 @@
     <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
     <div class="base-container">
         <header>
-            <nav-bar/>
+            <nav-bar />
         </header>
+        <div class="content-container">
+            <slot />
+        </div>
 
-        <!-- <hamburger :class="{ showburger: sideBarVisible, hideburger: !sideBarVisible }" ref="hamburger" /> -->
-
-        <slot />
-        
-        <footer>
-            <div id="footer-div" class="absolute">
-                <small class="font-standardText white-text">
-                    Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
-                </small>
+        <!-- <footer>
+            <div class="copyright-header">
+                Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
             </div>
-        </footer>
+        </footer> -->
     </div>
 </template>
 
 <script>
-// import Hamburger from '@/components/UI/Menu/Hamburger.vue';
-// import HamburgerIcon from '@/components/UI/Menu/HamburgerIcon.vue';
-// import LoginButton from '@/components/Login/LoginButton.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -66,35 +60,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-button {
-    cursor: pointer;
+.content-container {
+    border: 1px solid salmon;
+    height: calc(100vh - 80px);
 }
 
 .white-text {
     color: white;
 }
 
-#footer-div {
-    left: 1vw;
-    bottom: 1vh;
-}
-
-// Removes blue outline of hamburgerbar
-button:focus {
-    outline: 0;
-}
-
-.showburger {
-    transition: all 0.3s;
-    opacity: 1;
-    left: 0vw;
-    visibility: visible;
-}
-
-.hideburger {
-    transition: all 0.3s;
-    opacity: 0;
-    left: -8vw;
-    visibility: hidden;
+.copyright-header {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    color: white;
 }
 </style>

@@ -2,20 +2,19 @@
     <div class="nav-bar">
         <hamburger-button @click="toggleMenu()" :is-selected="menuIsOpen" />
 
-        <div class="image-container">
+        <div class="logo-container">
             <router-link class="logo-link" to="/">
                 <img id="logo-img" src="@/assets/Images/brightLogo.png" alt="Bright" />
             </router-link>
         </div>
         <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
-            <!-- <li v-for="(it, index) in menuItems" class="nav-menu-item" v-bind:key="index">{{ it.bValue }}</li> -->
             <nav-link v-for="(it, index) in menuItems" 
             :key="index"
-            :textValue="it.bValue"
+            :textValue="it.itemTitle"
             :icon="it.iconName"
             />
         </ul>
-        <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
+        <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
     </div>
 </template>
 <script>
@@ -28,19 +27,19 @@ export default {
         return {
             menuItems: [
                 {
-                    bValue: 'Profile',
+                    itemTitle: 'Profile',
                     iconName: 'user',
                     link: '/repair',
                     alt: 'User icon'
                 },
                 {
-                    bValue: 'Certifications',
+                    itemTitle: 'Certifications',
                     iconName: 'profile',
                     link: '/entry-successful',
                     alt: 'Certifications icon'
                 },
                 {
-                    bValue: 'Log in',
+                    itemTitle: 'Log in',
                     iconName: 'enter',
                     link: '/login',
                     alt: 'Login icon'
@@ -60,11 +59,12 @@ export default {
 <style lang="scss" scoped>
 .nav-bar {
     width: 100%;
+    max-width: 100%;
     height: 80px;
     background: #405c6a;
     padding-left: 20px;
     padding-right: 20px;
-
+    border: 1px solid red;
     display: flex;
     align-items: center;
 }
@@ -73,12 +73,14 @@ export default {
     display: none;
 }
 
-.image-container {
+.logo-container {
     height: 60%;
     width: auto;
     display: flex;
     align-self: center;
     align-items: center;
+    
+    border: 1px solid pink;
 
     img {
         height: 100%;
@@ -90,27 +92,24 @@ export default {
 }
 
 .user-header {
-    position: absolute;
-    right: 20px;
-    top: 5px;
+    // position: absolute;
+    // right: 0px;
+    // top: 0px;
     font-size: 1rem;
     color: #7eb46b;
 }
 
 .nav-menu {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-left: 60px;
-    width: 300px;
     z-index: 999;
+    border: 1px solid blue;
 }
 
 @media screen and (max-width: 960px) {
     .nav-menu {
         position: absolute;
-        height: calc(100% - 80px);
-        margin-left: 0;
+        height: calc(100vh - 80px);
         top: 80px;
         left: -100%;
         background: #25353d;
@@ -126,10 +125,6 @@ export default {
 
     .nav-menu.active {
         left: 0;
-    }
-
-    .nav-menu-item {
-        margin-top: 20px;
     }
 }
 </style>
