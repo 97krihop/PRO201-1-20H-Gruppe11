@@ -3,21 +3,21 @@ const users = require("../../src/data/users");
 const app = require("../../src/app");
 
 beforeEach(() => {
-    users.resetAllUsers();
+  users.resetAllUsers();
 });
 
 let userInfo = {
-    username: "username",
-    firstName: "firstName",
-    lastName: "lastname",
-    email: "email",
+  username: "username",
+  firstName: "firstName",
+  lastName: "lastname",
+  email: "email",
 };
 
 test("Test fail when try to log in when not registered ", async () => {
-    const response = await request(app)
-        .post("/login/local")
-        .send(userInfo)
-        .set("Content-Type", "application/json");
+  const response = await request(app)
+    .post("/login/local")
+    .send(userInfo)
+    .set("Content-Type", "application/json");
 
-    expect(response.statusCode).toBe(401);
+  expect(response.statusCode).toBe(401);
 });

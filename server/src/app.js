@@ -1,19 +1,19 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const helmet = require('helmet');
-const cors = require('cors');
-const rateSpeedLimiter = require('express-slow-down');
-const auth = require('server/src/routes/auth.js')
+const express = require("express");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const helmet = require("helmet");
+const cors = require("cors");
+const rateSpeedLimiter = require("express-slow-down");
+
 const app = express();
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 //Passport
-const passport = require('passport');
-const initializePassport = require('./config/passport');
+const passport = require("passport");
+const initializePassport = require("./config/passport");
 
 const sessionParser = session({
-  secret: process.env.SESSION_SECRET || 'secret',
+  secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false,
 });
@@ -24,10 +24,10 @@ const rateSpeedLimit = rateSpeedLimiter({
   delayMs: 2500, // slow down time
 });
 
-const whitelist = ['http://localhost:8080', 'http://example2.com'];
+const whitelist = ["http://localhost:8080", "http://example2.com"];
 const corsOptionsDelegate = function (req, callback) {
   const corsOptions =
-    whitelist.indexOf(req.header('Origin')) !== -1
+    whitelist.indexOf(req.header("Origin")) !== -1
       ? { origin: true }
       : { origin: false };
   callback(null, corsOptions);
@@ -45,10 +45,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routers
-app.use(auth)
+app.use(auth);
 
-app.get('/', (req, res) => {
-  res.send('test');
+app.use("/api", require("./routes/auth"));
+app.use("/api", require("./routes/test"));
+
+app.get("/", (req, res) => {
+  res.json({ name: "test" });
 });
 
 module.exports = app;
