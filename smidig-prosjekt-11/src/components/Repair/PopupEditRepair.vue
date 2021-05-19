@@ -1,5 +1,5 @@
 <template>
-    <div id="container" class="text-center rounded-lg">
+    <div id="container">
         <div id="serialnum-container">
             <h3>SERIAL NUMBER</h3>
 
@@ -12,7 +12,7 @@
             />
         </div>
         <!-- PARTS-DIV -->
-        <div id="parts" class="col-span-2">
+        <div id="parts">
             <modal-error-message v-if="showModal == true" @close="showModal = false">
                 <template v-slot:body>{{ modalTextBody }}</template>
                 <!-- Serial Number Already Exists -->
@@ -44,12 +44,8 @@
             alt="close repair tab"
         />
 
-        <button
-            class="font-standardText duration-75 transform rounded-md hover:scale-105 motion-reduce:transform-none bg-logoBar"
-            id="next-btn"
-            @click="submitPartsSelected"
-        >
-            <h3 style="color: white;">Update</h3>
+        <button class="font-standardText bg-logoBar" id="next-btn" @click="submitPartsSelected">
+            <h3>Update</h3>
         </button>
     </div>
 </template>
@@ -221,6 +217,7 @@ export default {
     width: 100%;
     user-select: none;
     background-color: #f8f6f2;
+    text-align: center;
 
     h1 {
         font-size: 1.5em;
@@ -249,6 +246,7 @@ export default {
         row-gap: 2vh;
         margin: auto;
 
+        
         .popup-products {
             background-color: #f8f6f2;
             width: 15vh;
@@ -293,7 +291,7 @@ export default {
         }
 
         .serialInputEmpty {
-            box-shadow: 0px 0px 8px #cc0000;
+            box-shadow: 0 0 8px #cc0000;
         }
 
         input {
@@ -307,15 +305,23 @@ export default {
     }
 
     #close-repair-btn {
-        position: absolute;
         height: 50px;
         width: 50px;
+        cursor: pointer;
+        position: absolute;
         right: 10px;
         top: 10px;
+        border-radius: 50%;
+
+        &:hover {
+            transform: scale(1.15);
+            transition-duration: 75ms;
+        }
     }
 
     #parts {
         position: relative;
+        grid-column: span 2 / span 2;
         margin: 30px;
         background-color: #f8f6f2;
     }
@@ -327,8 +333,63 @@ export default {
         position: absolute;
         right: 30px;
         bottom: 20px;
-        border: 1px solid black;
+        border: 1px solid #423048;
         border-radius: 2px;
+
+        &:hover {
+            transform: scale(1.05);
+            transition-duration: 75ms;
+        }
+
+        h3 {
+            color: #fff;
+        }
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #container {
+        h1 {
+            font-size: 1em;
+        }
+
+        img {
+            width: 7vw;
+            height: 10vh;
+        }
+
+        #parts-cont-no-change {
+            .popup-products {
+                margin: 0;
+                width: 13vh;
+                height: 13vh;
+
+                h2 {
+                    font-size: 10px;
+                }
+            }
+        }
+
+        #serialnum-container {
+            h3 {
+                font-size: 12px;
+            }
+
+            input {
+                font-size: 11px;
+            }
+        }
+
+        #close-repair-btn {
+            height: 35px;
+            width: 35px;
+        }
+
+        #next-btn {
+            width: 55px;
+            height: 30px;
+            font-size: 12px;
+        }
     }
 }
 </style>

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 import HomeButton from '@/components/UI/HomeButton.vue';
 
 export default {

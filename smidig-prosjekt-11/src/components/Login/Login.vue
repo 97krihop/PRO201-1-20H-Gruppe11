@@ -1,16 +1,12 @@
 <template>
     <!-- main page to login -->
-    <div
-        id="login-container"
-        class="relative container w-full max-w-xs m-auto bg-logoBar rounded p-5 self-center rounded-lg shadow-lg ring-2 ring-black ring-opacity-50"
-    >
+    <div id="login-container" class="bg-logoBar">
         <!-- from to post -->
         <form @submit.prevent="post">
             <div>
-                <!-- username innput -->
-                <label class="block mb-2" for="username">Username</label>
+                <!-- username input -->
+                <label for="username">Username</label>
                 <input
-                    class="w-full p-2 mb-6 border-b-2 border-green-500 outline-none focus:bg-gray-300"
                     v-model="username"
                     type="text"
                     placeholder="Enter Username"
@@ -19,10 +15,9 @@
                 />
             </div>
             <div>
-                <!-- password innput -->
-                <label class="block mb-2" for="password">Password</label>
+                <!-- password input -->
+                <label for="password">Password</label>
                 <input
-                    class="w-full p-2 mb-6 border-b-2 border-green-500 outline-none focus:bg-gray-300"
                     v-model="password"
                     type="password"
                     placeholder="Enter Password"
@@ -35,7 +30,6 @@
                 <!-- submit button -->
                 <input
                     id="login-submit"
-                    class="w-full hover:bg-universalGreen text-white font-bold py-2 px-4 mb-6 rounded"
                     type="submit"
                 />
             </div>
@@ -47,7 +41,7 @@ import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 export default {
-    //composision API
+    //composition API
     setup() {
         const store = useStore();
         const router = useRouter();
@@ -81,21 +75,39 @@ export default {
 
 <style lang="scss" scoped>
 #login-container {
-    margin-top: 20vh;
+    position: relative;
+    width: 100%;
+    max-width: 20rem;
+    margin: 20vh auto auto auto;
+    padding: 1.25rem;
+    border: 1.5px solid #433149;
+    border-radius: 5px;
 
-    label {
-        font-weight: bold;
-        color: #a8d598;
-    }
+    form {
+        label {
+            font-weight: bold;
+            color: #a8d598;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
 
-    input {
-        color: #433149;
-        border-color: #433149;
-        font-weight: bold;
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #433149;
+            border-color: #433149;
+            border-bottom-width: 2px;
+            font-weight: bold;
+            outline: none;
+        }
     }
 
     #login-submit {
         background-color: #a8d598;
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 5px;
 
         &:hover {
             background-color: rgb(231, 241, 227);

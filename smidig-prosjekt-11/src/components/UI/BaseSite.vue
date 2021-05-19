@@ -24,7 +24,7 @@
         <footer>
             <div id="footer-div" class="absolute">
                 <small class="font-standardText white-text">
-                    Copyright &copy; 2021 - Smidig-Prosjekt Gruppe 11
+                    Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
                 </small>
             </div>
         </footer>
