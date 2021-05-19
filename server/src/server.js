@@ -19,6 +19,6 @@ const server =
 
 server.listen(port, () => {
   console.log(
-    `server started on https://localhost:${port} or https://webapps.kristiania.no:${port}`
+    `server started on http://localhost:${port} or https://localhost:${port}`
   );
 });
