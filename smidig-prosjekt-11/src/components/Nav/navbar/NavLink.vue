@@ -1,11 +1,13 @@
 <template>
-    <div class="nav-menu-item">
-        <div class="icon-container">
-            <icon-base :iconName="icon" iconColor="#7eb46b" iconWidth="100%" iconHeight="100%" />
-        </div>
-        <div class="item-title">
-            {{ textValue }}
-        </div>
+    <div>
+        <router-link :to="'/' + linkDestination" class="nav-menu-item">
+                <div class="icon-container">
+                    <icon-base :iconName="icon" iconColor="#7eb46b" iconWidth="100%" iconHeight="100%" />
+                </div>
+                <div class="item-title">
+                    {{ textValue }}
+                </div>
+        </router-link>
     </div>
 </template>
 <script>
@@ -34,7 +36,6 @@ export default {
     display: flex;
     align-items: center;
     margin-left: 60px;
-    // border: 1px solid orange;
 }
 
 .icon-container {
@@ -59,14 +60,7 @@ export default {
 
     .item-title {
         margin-left: 8px;
-        color: #7eb46b;
         font-size: 0.9rem;
-        // flex: 1;
-        text-align: center;
-    }
-
-    .nav-menu-item:hover {
-        background: #405c6a;
     }
 }
 </style>

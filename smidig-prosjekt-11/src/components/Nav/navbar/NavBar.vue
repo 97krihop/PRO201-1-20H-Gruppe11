@@ -13,6 +13,7 @@
                 :key="index"
                 :textValue="it.itemTitle"
                 :icon="it.iconName"
+                :linkDestination="it.link"
             />
         </ul>
         <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
@@ -30,19 +31,19 @@ export default {
                 {
                     itemTitle: 'Profile',
                     iconName: 'user',
-                    link: '/repair',
+                    link: 'repair',
                     alt: 'User icon'
                 },
                 {
                     itemTitle: 'Certifications',
                     iconName: 'profile',
-                    link: '/entry-successful',
+                    link: 'repair',
                     alt: 'Certifications icon'
                 },
                 {
                     itemTitle: 'Log in',
                     iconName: 'enter',
-                    link: '/login',
+                    link: 'repair',
                     alt: 'Login icon'
                 }
             ],
