@@ -70,4 +70,10 @@ router.get("/logout", (req, res) => {
   //TODO Update redirect route
   res.status(200).send();
 });
+
+router.get("/admin", async (req, res) => {
+  if (!req.user) return res.status(401).send();
+  res.status(200).json({ admin: req.user.admin });
+});
+
 module.exports = router;
