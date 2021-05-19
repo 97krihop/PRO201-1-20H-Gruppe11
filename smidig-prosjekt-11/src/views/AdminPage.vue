@@ -1,6 +1,8 @@
 <template>
     <div v-if="isAdmin === true">
-        <base-site />
+        <base-site>
+            <side-bar-menu />
+        </base-site>
     </div>
 </template>
 
@@ -9,6 +11,7 @@
 import BaseSite from '@/components/UI/BaseSite.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import SideBarMenu from '@/components/AdminPage/SideBarMenu';
 
 export default {
     name: 'adminPage',
@@ -21,6 +24,7 @@ export default {
         };
     },
     components: {
+        SideBarMenu,
         BaseSite
     },
     methods: {
