@@ -13,7 +13,7 @@
         </g>
     </svg> -->
 
-    <svg class="icon-svg" width="100%" height="auto">
+    <svg class="icon-svg" width="100%" height="100%">
         <!-- <use :xlink:href="`../../assets/Images/Icons/sprite.svg#icon-${iconName}`"></use> -->
         <use
             :xlink:href="require('../../assets/Images/Icons/sprite.svg') + '#icon-' + iconName"

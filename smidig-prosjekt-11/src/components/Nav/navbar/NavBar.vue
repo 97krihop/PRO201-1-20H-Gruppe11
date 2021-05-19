@@ -8,10 +8,11 @@
             </router-link>
         </div>
         <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
-            <nav-link v-for="(it, index) in menuItems" 
-            :key="index"
-            :textValue="it.itemTitle"
-            :icon="it.iconName"
+            <nav-link
+                v-for="(it, index) in menuItems"
+                :key="index"
+                :textValue="it.itemTitle"
+                :icon="it.iconName"
             />
         </ul>
         <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
@@ -78,7 +79,7 @@ export default {
     display: flex;
     align-self: center;
     align-items: center;
-    
+
     img {
         height: 100%;
     }
@@ -110,9 +111,8 @@ export default {
         left: -100%;
         background: #25353d;
         transition: all 0.5s ease;
-        
-        padding: 20px; 
 
+        padding: 20px;
 
         flex-direction: column;
         justify-content: flex-start;

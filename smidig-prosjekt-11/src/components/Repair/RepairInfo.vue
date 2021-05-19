@@ -177,7 +177,7 @@ export default {
     }
 
     #entity-list-container {
-        height: 75vh;
+        height: 71vh;
     }
 
     #plus-btn {
