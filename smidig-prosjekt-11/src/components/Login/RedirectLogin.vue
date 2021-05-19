@@ -9,7 +9,7 @@
 
 <script>
 import LoginButton from '@/components/Login/LoginButton.vue';
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 export default {
     setup() {
         return {
