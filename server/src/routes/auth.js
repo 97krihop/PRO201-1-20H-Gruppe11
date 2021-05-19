@@ -1,22 +1,27 @@
-const express = require('express');
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const monk = require('monk');
-const Joi = require('joi');
+const express = require("express");
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+const monk = require("monk");
+const Joi = require("joi");
 
 const router = express.Router();
 
 const db = monk(process.env.MONGO_URI);
-const users = db.get('users');
+db.then(() => {
+  console.log("connection success");
+}).catch((e) => {
+  console.error("Error !", e);
+});
+const users = db.get("users");
 
 const schema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,30}$')),
+  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,30}$")),
 });
 
 //Local login route -- Authenticates with passport and bcrypt for password hashing/unh
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', function (err, user, info) {
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", function (err, user, info) {
     if (err) return next(err);
 
     if (!user) return res.status(401).send({ messages: info });
@@ -35,7 +40,7 @@ router.post('/login', (req, res, next) => {
 });
 
 //Registration route -- Saves user in user storage after hashing password. -- Error handling and a bit of input validation/sanitation is done in frontend.
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   let value;
   try {
@@ -56,12 +61,12 @@ router.post('/register', async (req, res) => {
     } catch (e) {
       return res.status(500).send(e);
     }
-  return res.status(409).json({ messages: 'Username already exists' });
+  return res.status(409).json({ messages: "Username already exists" });
 });
 //Invoking logout() will remove the req.user property and clear the login session (if any).
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
   req.logout();
   //TODO Update redirect route
-  res.redirect('/');
+  res.status(200).send();
 });
 module.exports = router;
