@@ -1,8 +1,6 @@
 const express = require("express");
 const monk = require("monk");
 const Joi = require("joi");
-const { x } = require("joi");
-const { compareSync } = require("bcrypt");
 
 const router = express.Router();
 const db = monk(process.env.MONGO_URI);
@@ -26,12 +24,12 @@ const schema = Joi.array().items(
     }),
   })
 );
+
 router.post("/report", async (req, res) => {
   if (!req.user) return res.status(401).send();
 
   //body example
-  /*
-[
+  /*[
 	{
 		"serialNumber": "12345",
 		"partName": "SunBell",
@@ -43,19 +41,18 @@ router.post("/report", async (req, res) => {
 			}
 		]
 	}
-]
-  */
+]*/
+
   try {
     value = await schema.validateAsync(req.body);
     const data = value.map((x) => {
       return { ...x, username: req.user.username };
     });
-    console.log(JSON.stringify(data));
     try {
       await report.insert(data);
       res.sendStatus(200);
     } catch (e) {
-      res.status(500).send(e);
+      res.status(500).send({ error: e });
     }
   } catch (err) {
     return res.status(400).json({ error: err });
