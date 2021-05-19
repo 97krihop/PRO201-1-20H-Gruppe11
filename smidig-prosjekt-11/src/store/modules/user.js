@@ -1,5 +1,6 @@
 const state = {
-    userId: null
+    userId: null,
+    isAdmin: true
 };
 
 const mutations = {
@@ -11,7 +12,8 @@ const mutations = {
     }
 };
 const getters = {
-    getUserId: state => state.userId
+    getUserId: state => state.userId,
+    getIsAdmin: state => state.isAdmin
 };
 
 export default {

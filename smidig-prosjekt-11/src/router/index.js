@@ -29,6 +29,11 @@ const routes = [
         path: '/logout',
         name: 'Logout page',
         component: () => import('@/views/Logout.vue')
+    },
+    {
+        path: '/admin',
+        name: 'AdminPage',
+        component: () => import('@/views/AdminPage.vue')
     }
 ];
 

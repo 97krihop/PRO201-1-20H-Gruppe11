@@ -2,6 +2,15 @@
     <!-- Component creates two buttons. Is used in home screen for selecting Repair/Elearning if user is logged in -->
     <div id="button-div" class="rounded-lg shadow-lg ring-2 ring-black ring-opacity-50">
         <router-link
+            v-if="isAdmin === true"
+            tag="button"
+            to="/admin"
+            type="button"
+            class="font-standardText button shadow-lg home-learn-ico-src home-ico-style duration-75 transform hover:scale-105 motion-reduce:transform-none"
+        >
+            <h4>Admin</h4>
+        </router-link>
+        <router-link
             tag="button"
             to="/repair"
             type="button"
@@ -22,18 +31,44 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 export default {
     name: 'Home',
-    components: {}
+    setup() {
+        const store = useStore();
+        const router = useRouter();
+        return {
+            store,
+            router
+        };
+    },
+    methods: {
+        retrieveIsAdmin() {
+            const result = useStore().getters.getIsAdmin;
+            if (result === false) {
+                this.router.push({ name: 'Home' });
+            } else {
+                return true;
+            }
+        }
+    },
+    data() {
+        return {
+            isAdmin: true //this.retrieveIsAdmin()
+        };
+    }
 };
 </script>
 
 <style lang="scss" scoped>
 #button-div {
     padding: 0px 1vw;
-    height: 20vh;
+    height: auto;
     width: 20vw;
     background-color: #405c6a;
+    padding-bottom: 1%;
 }
 .button {
     background-color: #9fd18d;
@@ -57,6 +92,9 @@ export default {
     h4 {
         margin-top: 2%;
     }
+}
+.isAdminClass {
+    height: 30vh;
 }
 .home-repair-ico-src {
     background-image: url('../../assets/Images/Icons/landing_repair.png');

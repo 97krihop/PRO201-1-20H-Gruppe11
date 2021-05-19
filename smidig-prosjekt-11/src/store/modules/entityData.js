@@ -1,6 +1,6 @@
 const state = {
     idIncrementor: 0,
-    entityArray: []
+    entityArray: [],
 };
 
 const mutations = {
