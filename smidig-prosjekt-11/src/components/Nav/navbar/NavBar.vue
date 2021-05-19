@@ -64,7 +64,6 @@ export default {
     background: #405c6a;
     padding-left: 20px;
     padding-right: 20px;
-    border: 1px solid red;
     display: flex;
     align-items: center;
 }
@@ -80,8 +79,6 @@ export default {
     align-self: center;
     align-items: center;
     
-    border: 1px solid pink;
-
     img {
         height: 100%;
     }
@@ -103,7 +100,6 @@ export default {
     position: relative;
     display: flex;
     z-index: 999;
-    border: 1px solid blue;
 }
 
 @media screen and (max-width: 960px) {
@@ -114,6 +110,9 @@ export default {
         left: -100%;
         background: #25353d;
         transition: all 0.5s ease;
+        
+        padding: 20px; 
+
 
         flex-direction: column;
         justify-content: flex-start;

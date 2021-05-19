@@ -37,8 +37,10 @@ export default {
     margin-left: 100px;
     // border: 1px solid orange;
     color: #7eb46b;
-    font-size: 1.1rem;
-    border: 1px solid red;
+    font-size: 1.3rem;
+
+    
+    // border: 1px solid red;
     // font-weight: 600;
 }
 
@@ -51,8 +53,18 @@ export default {
 
 @media screen and (max-width: 960px) {
     .nav-menu-item {
+        border: 2px solid #7eb46b;
+        border-radius: 10px;
+        padding: 10px;
         margin-left: 0;
-        margin-top: 50px;
+        margin-bottom: 25px;
+        justify-content: center;
+        font-size: 1.1rem;
+
+    }
+
+    .nav-menu-item:hover {
+        background: #405C6A;
     }
 }
 </style>
