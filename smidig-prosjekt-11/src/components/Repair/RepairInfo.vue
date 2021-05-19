@@ -4,11 +4,11 @@
         <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
         <div id="parts-popup" v-if="showRepair == true">
             <popup-select-repair @clicked="closeRepair()">
-                <img
-                    id="close-repair-btn"
-                    src="@/assets/Images/delete-icon.png"
+                <icon-base
+                    class="close-repair-ic"
+                    iconName="cross"
+                    iconColor="darkred"
                     v-on:click="closeRepair"
-                    alt="close repair tab"
                 />
             </popup-select-repair>
         </div>
@@ -46,6 +46,7 @@
 import PopupSelectRepair from '@/components/Repair/PopupSelectRepair.vue';
 import RepairEntity from '@/components/Repair/RepairEntity.vue';
 import PopupEditRepair from '@/components/Repair/PopupEditRepair.vue';
+import IconBase from '../UI/IconBase.vue';
 
 export default {
     data() {
@@ -66,7 +67,8 @@ export default {
     components: {
         PopupSelectRepair,
         RepairEntity,
-        PopupEditRepair
+        PopupEditRepair,
+        IconBase
     },
     methods: {
         editRepair(serial) {
@@ -150,8 +152,6 @@ export default {
 }
 
 #close-repair-btn {
-    height: 30px;
-    width: 30px;
     cursor: pointer;
     position: absolute;
     right: 10px;
@@ -162,6 +162,18 @@ export default {
         transform: scale(1.15);
         transition-duration: 75ms;
     }
+}
+
+.icon-container {
+    width: 30px;
+    height: 30px;
+}
+
+.close-repair-ic {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 #entity-list-container {
