@@ -44,7 +44,11 @@
             alt="close repair tab"
         />
 
-        <button class="font-standardText duration-75 transform rounded-md hover:scale-105 motion-reduce:transform-none bg-logoBar" id="next-btn" @click="submitPartsSelected">
+        <button
+            class="font-standardText duration-75 transform rounded-md hover:scale-105 motion-reduce:transform-none bg-logoBar"
+            id="next-btn"
+            @click="submitPartsSelected"
+        >
             <h3 style="color: white;">Update</h3>
         </button>
     </div>
@@ -218,7 +222,6 @@ export default {
     user-select: none;
     background-color: #f8f6f2;
 
-
     h1 {
         font-size: 1.5em;
         margin: 1vh;
@@ -246,7 +249,6 @@ export default {
         row-gap: 2vh;
         margin: auto;
 
-        
         .popup-products {
             background-color: #f8f6f2;
             width: 15vh;
