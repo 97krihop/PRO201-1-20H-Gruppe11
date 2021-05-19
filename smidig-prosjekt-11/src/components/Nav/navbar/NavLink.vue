@@ -1,12 +1,21 @@
 <template>
     <div class="nav-menu-item">
-        <img src="../../../assets/Images/Icons/ic_user.svg" :alt="altText" />
-        {{ textValue }}
+        <div class="icon-container">
+            <icon-base :iconName="icon" iconColor="#7eb46b"  />
+
+            <!-- <svg class="icon-svg" width="200" height="40">
+                <use xlink:href="../../../assets/Images/Icons/sprite.svg#icon-profile"></use>
+            </svg> -->
+        </div>
+
+        <!-- {{ textValue }} -->
     </div>
 </template>
 <script>
+import IconBase from '../../UI/IconBase.vue';
 export default {
     name: 'NavLink',
+    components: { IconBase },
     props: {
         textValue: {
             type: String
@@ -14,7 +23,7 @@ export default {
         linkDestination: {
             type: String
         },
-        iconFileName: {
+        icon: {
             type: String
         },
         altText: {
@@ -32,6 +41,15 @@ export default {
 }
 
 img {
-    color: salmon;
+    color: orange;
+}
+
+.icon-svg {
+    border: 1px solid red;
+}
+
+.icon-container {
+    height: 50px;
+    width: 50px;
 }
 </style>

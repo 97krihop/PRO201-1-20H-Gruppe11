@@ -12,7 +12,7 @@
             <nav-link v-for="(it, index) in menuItems" 
             :key="index"
             :textValue="it.bValue"
-            :iconFileName="it.icon"
+            :icon="it.iconName"
             />
         </ul>
         <h1 class="user-header">{{ user || 'Not logged in' }}</h1>
@@ -29,19 +29,19 @@ export default {
             menuItems: [
                 {
                     bValue: 'Profile',
-                    icon: 'ic_profile.png',
+                    iconName: 'user',
                     link: '/repair',
                     alt: 'User icon'
                 },
                 {
                     bValue: 'Certifications',
-                    icon: 'certificate-icon.png',
+                    iconName: 'profile',
                     link: '/entry-successful',
                     alt: 'Certifications icon'
                 },
                 {
                     bValue: 'Log in',
-                    icon: 'login-icon.png',
+                    iconName: 'enter',
                     link: '/login',
                     alt: 'Login icon'
                 }
