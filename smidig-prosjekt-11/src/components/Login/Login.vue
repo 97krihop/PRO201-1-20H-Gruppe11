@@ -6,13 +6,7 @@
             <div>
                 <!-- username input -->
                 <label for="username">Username</label>
-                <input
-                    v-model="username"
-                    type="text"
-                    placeholder="Enter Username"
-                    name="username"
-                    required
-                />
+                <input v-model="username" type="text" placeholder="Enter Username" name="username" required />
             </div>
             <div>
                 <!-- password input -->
@@ -28,10 +22,7 @@
 
             <div>
                 <!-- submit button -->
-                <input
-                    id="login-submit"
-                    type="submit"
-                />
+                <input id="login-submit" type="submit" />
             </div>
         </form>
     </div>
@@ -76,9 +67,10 @@ export default {
 <style lang="scss" scoped>
 #login-container {
     position: relative;
+    top: 200px;
     width: 100%;
     max-width: 20rem;
-    margin: 20vh auto auto auto;
+    margin: auto;
     padding: 1.25rem;
     border: 1.5px solid #433149;
     border-radius: 5px;
@@ -112,6 +104,12 @@ export default {
         &:hover {
             background-color: rgb(231, 241, 227);
         }
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+    #login-container {
+        top: 50px;
     }
 }
 </style>
