@@ -2,11 +2,17 @@ const express = require("express");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const monk = require("monk");
+const Joi = require("joi");
 
 const router = express.Router();
 
 const db = monk(process.env.MONGO_URI);
 const users = db.get("users");
+
+const schema = Joi.object({
+  username: Joi.string().alphanum().min(3).max(30).required(),
+  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,30}$")),
+});
 
 //Local login route -- Authenticates with passport and bcrypt for password hashing/unh
 router.post("/login", (req, res, next) => {
@@ -31,20 +37,26 @@ router.post("/login", (req, res, next) => {
 //Registration route -- Saves user in user storage after hashing password. -- Error handling and a bit of input validation/sanitation is done in frontend.
 router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const username = await users.findOne({ username: req.body.username });
+  let value;
+  try {
+    value = await schema.validateAsync(req.body);
+  } catch (err) {
+    return res.status(400).json({ error: err });
+  }
+  const username = await users.findOne({ username: value.username });
   if (!username)
     try {
       const user = {
-        ...req.body,
+        ...value,
         password: hashedPassword,
       };
       await users.insert(user);
 
-      res.sendStatus(200);
+      return res.sendStatus(200);
     } catch (e) {
-      res.status(500).send(e);
+      return res.status(500).send(e);
     }
-  else res.status(409).json({ messages: "Username already exists" });
+  return res.status(409).json({ messages: "Username already exists" });
 });
 //Invoking logout() will remove the req.user property and clear the login session (if any).
 router.get("/logout", (req, res) => {
