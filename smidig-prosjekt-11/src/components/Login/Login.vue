@@ -1,6 +1,6 @@
 <template>
   <!-- main page to login -->
-  <div id="login-container" class="bg-logoBar">
+  <div id="login-container">
     <!-- from to post -->
     <form @submit.prevent="post">
       <div>
@@ -74,6 +74,7 @@ export default {
 
 <style lang="scss" scoped>
 #login-container {
+  background: #2c2a29;
   position: relative;
   top: 200px;
   width: 100%;
@@ -98,21 +99,24 @@ export default {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1.5rem;
-      color: #423048;
-      border-color: #433149;
+      color: #2c2a29;
       font-weight: bold;
       outline: none;
     }
 
     .login-input {
       box-shadow: inset -2px -2px #899599;
-      background: #e7e7e7;
+      background: #cdcdcd;
+
+      &::placeholder {
+        color: #6d6d6d;
+      }
     }
   }
 
   #login-submit {
-    background-color: #9fd18d;
-    color: #423048;
+    background-color: #ececec;
+    color: #2c2a29;
     width: 100%;
     padding: 0.5rem;
     border-radius: 5px;
