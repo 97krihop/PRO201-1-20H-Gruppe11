@@ -41,13 +41,13 @@ export default {
                     alt: 'Certifications icon'
                 },
                 {
-                    itemTitle: 'Log in',
+                    itemTitle: 'Log out',
                     iconName: 'enter',
-                    link: 'repair',
+                    link: 'logout',
                     alt: 'Login icon'
                 }
             ],
-            menuIsOpen: false
+            menuIsOpen: false // Trenger vi denne?
         };
     },
     methods: {
