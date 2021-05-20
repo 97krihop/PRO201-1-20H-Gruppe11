@@ -1,19 +1,17 @@
 <template>
-    <div id="container">
+    <div id="popup-container">
         <!-- PRODUCT-DIV -->
-        <div id="products-container">
-            <h1>Product</h1>
-            <div>
+        <div class="product-container">
+            <div class="product-section">
+                <h1>Product</h1>
                 <div id="popup-static-product-style">
                     <img src="@/assets/Images/Parts/sunbellProductImage.png" alt="Product: Sunbell" />
                     <h2>Sunbell</h2>
                 </div>
             </div>
 
-            <hr />
-
-            <div id="serialnum-container">
-                <h3>SERIAL NUMBER</h3>
+            <div class="serial-section">
+                <h1>Serial number</h1>
 
                 <input
                     ref="inputSerialNumber"
@@ -25,35 +23,38 @@
                 />
             </div>
         </div>
+        <modal-error-message v-if="showModal == true" @close="showModal = false">
+            <template v-slot:body>{{ modalTextBody }}</template>
+            <!-- Serial Number Already Exists -->
+        </modal-error-message>
         <!-- PARTS-DIV -->
-        <div id="parts">
-            <modal-error-message v-if="showModal == true" @close="showModal = false">
-                <template v-slot:body>{{ modalTextBody }}</template>
-                <!-- Serial Number Already Exists -->
-            </modal-error-message>
-
+        <div class="part-container">
             <h1>Parts</h1>
-            <div id="parts-cont-no-change" class="parts-container">
-                <a
-                    class="popup-products"
+            <div id="parts-cont-no-change" class="part-grid">
+                <div
+                    class="part-grid-entity"
                     v-for="product in productImages"
                     :key="product.partNumber"
                     @click="selectPart(product)"
                 >
                     <img
+                        class="part-icon"
+                        :class="{ partchecked: product.isChecked }"
                         :id="product.partNumber"
                         :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
                     />
                     <h2>{{ product.partName }}</h2>
-                </a>
+                </div>
             </div>
+            <icon-base
+                class="close-repair-ic"
+                iconName="cross"
+                iconColor="darkred"
+                v-on:click="closeFunction"
+            />
         </div>
-        
-        <icon-base class="close-repair-ic" iconName="cross" iconColor="darkred" v-on:click="closeFunction" />
 
-        <button class="font-standardText bg-logoBar" id="next-btn" @click="submitPartsSelected">
-            <h3>Submit</h3>
-        </button>
+        <icon-base class="submit-ic" iconName="arrow-right" iconColor="darkgreen" @click="submitPartsSelected" />
     </div>
 </template>
 
@@ -93,38 +94,44 @@ export default {
                 },
                 {
                     partNumber: '2',
-                    partName: 'Battery',
-                    imgName: 'battery-removebg-preview',
+                    partName: '12V charger',
+                    imgName: 'ic-part-adapter-charger',
                     isChecked: false
                 },
                 {
                     partNumber: '3',
-                    partName: 'Seal',
-                    imgName: 'powerSwitchCoverNew-removebg-preview',
+                    partName: 'Battery',
+                    imgName: 'ic-part-battery',
                     isChecked: false
                 },
                 {
                     partNumber: '4',
-                    partName: 'USB Connector',
-                    imgName: 'directUsbPort-removebg-preview',
+                    partName: 'Power button',
+                    imgName: 'ic-part-button',
                     isChecked: false
                 },
                 {
                     partNumber: '5',
-                    partName: 'Neck plus light',
-                    imgName: 'batteryPackLightUnitComplete-removebg-preview',
+                    partName: 'Light bulb',
+                    imgName: 'ic-part-lightbulb',
                     isChecked: false
                 },
                 {
                     partNumber: '6',
-                    partName: 'Torx-5',
-                    imgName: 'batteryBoxTorx5-removebg-preview',
+                    partName: 'Screen',
+                    imgName: 'ic-part-screen',
                     isChecked: false
                 },
                 {
                     partNumber: '7',
-                    partName: 'PCBA',
-                    imgName: 'pcbaRevD2.6-removebg-preview',
+                    partName: 'Socket charger',
+                    imgName: 'ic-part-socket-charger',
+                    isChecked: false
+                },
+                {
+                    partNumber: '8',
+                    partName: 'Solar panel',
+                    imgName: 'ic-part-solar-panel',
                     isChecked: false
                 }
             ],
@@ -134,20 +141,7 @@ export default {
     methods: {
         selectPart(product) {
             product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
-
-            const parentEl = event.target.parentElement;
-
-            // To prevent user to change color of the wrong parent
-            if (parentEl.id === 'parts-cont-no-change') return;
-
-            if (product.isChecked == true) {
-                parentEl.style.backgroundColor = '#7EB46B';
-            } else {
-                parentEl.style.backgroundColor = ' #F8F6F2';
-            }
-            return;
         },
-
         submitPartsSelected() {
             // Adding the marked parts to the partsChosen-array
             for (let i = 0; i < this.productImages.length; i++) {
@@ -225,7 +219,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#container {
+#popup-container {
     width: 100%;
     height: 100%;
     user-select: none;
@@ -236,33 +230,24 @@ export default {
 
     h1 {
         font-size: 1.5em;
-        margin: 3vh;
-        padding-bottom: 2vh;
+        // margin: 3vh;
+        // padding-bottom: 2vh;
         font-weight: bold;
+        margin: 0;
         color: #38293c;
     }
 
-    img {
-        width: 8vw;
-        max-width: 125px;
-        height: 11vh;
-        cursor: pointer;
-        padding: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 10px;
-    }
-
-    #products-container {
+    .product-container {
         border-right: 1px solid black;
-        grid-column: 1;
-        background-color: #f8f6f2;
-
         // Creating grid for products-container to
         // position both product and serial number
         display: grid;
-        grid-template-rows: max-content 35% 2px auto;
         height: 100%;
+        grid-template-rows: 60% 40%;
+
+        .product-section {
+            border-bottom: 1px solid black;
+        }
 
         #popup-static-product-style {
             background-color: #7eb46b;
@@ -281,12 +266,14 @@ export default {
             }
         }
 
-        #serialnum-container {
-            grid-row: 3;
-            margin-top: 30px;
+        .serial-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-            h3 {
-                font-weight: bold;
+            h1 {
+                position: relative;
                 color: #38293c;
             }
 
@@ -306,55 +293,69 @@ export default {
         }
     }
 
-    #parts {
-        grid-column: 2;
-        margin: 0 3vw 0 3vw;
-        background-color: #f8f6f2;
+    .part-container {
+        display: flex;
+        flex-direction: column;
 
-        .parts-container {
+        align-items: center;
+        background-color: #f8f6f2;
+        padding: 10px;
+        // border: 1px solid blue;
+
+        .part-grid {
+            // border: 1px solid red;
+            height: 80%;
+            width: 100%;
+            margin: 10px 0 10px 0;
             display: grid;
+            grid-auto-flow: column;
+            align-items: center;
+            justify-items: center;
+
             grid-template-columns: repeat(4, minmax(0, 1fr));
             grid-template-rows: repeat(2, minmax(0, 1fr));
-            gap: 1.25rem;
+            gap: 0px 20px;
+        }
+
+        .part-grid-entity {
+            // border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+
+            width: 90%;
+            height: 90%;
+
+            &:hover img {
+                background: #7eb46b;
+            }
+
+            .part-icon {
+                background-color: #e2e2e2;
+                flex: 1;
+                align-self: center;
+                -webkit-user-drag: none;
+            }
+
+            h2 {
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+        }
+
+        .part-grid-entity .partchecked {
+            background-color: #7eb46b;
         }
     }
 
-    #next-btn {
-        width: 85px;
-        height: 45px;
+    .submit-ic {
         position: absolute;
-        right: 30px;
-        bottom: 30px;
-        border: 1px solid #423048;
-        border-radius: 2px;
-
-        &:hover {
-            transform: scale(1.05);
-            transition-duration: 75ms;
-        }
+        right: 10px;
+        bottom: 10px;
 
         h3 {
             color: #fff;
-        }
-    }
-
-    .popup-products {
-        background-color: #f8f6f2;
-        width: 15vh;
-        height: 15vh;
-
-        h2 {
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 17px;
-        }
-
-        img {
-            -webkit-user-drag: none;
-        }
-
-        &:hover {
-            background-color: #7eb46b;
         }
     }
 
@@ -379,18 +380,6 @@ export default {
             #popup-static-product-style {
                 h2 {
                     font-size: 12px;
-                }
-            }
-
-            #serialnum-container {
-                h3 {
-                    font-size: 12px;
-                }
-
-                input {
-                    font-size: 10px;
-                    width: 90%;
-                    font-style: normal;
                 }
             }
         }

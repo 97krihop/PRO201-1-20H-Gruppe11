@@ -88,44 +88,50 @@ export default {
             productImages: [
                 {
                     partNumber: '1',
-                    partName: 'Solar Panel',
-                    imgName: 'solarPanelCompleteWithCable-removebg-preview',
+                    partName: 'Lamp',
+                    imgName: 'ic-part-lamp',
                     isChecked: false
                 },
                 {
                     partNumber: '2',
-                    partName: 'Battery',
-                    imgName: 'battery-removebg-preview',
+                    partName: '12V charger',
+                    imgName: 'ic-part-adapter-charger',
                     isChecked: false
                 },
                 {
                     partNumber: '3',
-                    partName: 'Seal',
-                    imgName: 'powerSwitchCoverNew-removebg-preview',
+                    partName: 'Battery',
+                    imgName: 'ic-part-battery',
                     isChecked: false
                 },
                 {
                     partNumber: '4',
-                    partName: 'USB Connector',
-                    imgName: 'directUsbPort-removebg-preview',
+                    partName: 'Power button',
+                    imgName: 'ic-part-button',
                     isChecked: false
                 },
                 {
                     partNumber: '5',
-                    partName: 'Neck plus light',
-                    imgName: 'batteryPackLightUnitComplete-removebg-preview',
+                    partName: 'Light bulb',
+                    imgName: 'ic-part-lightbulb',
                     isChecked: false
                 },
                 {
                     partNumber: '6',
-                    partName: 'Torx-5',
-                    imgName: 'batteryBoxTorx5-removebg-preview',
+                    partName: 'Screen',
+                    imgName: 'ic-part-screen',
                     isChecked: false
                 },
                 {
                     partNumber: '7',
-                    partName: 'PCBA',
-                    imgName: 'pcbaRevD2.6-removebg-preview',
+                    partName: 'Socket charger',
+                    imgName: 'ic-part-socket-charger',
+                    isChecked: false
+                },
+                {
+                    partNumber: '8',
+                    partName: 'Solar panel',
+                    imgName: 'ic-part-solar-panel',
                     isChecked: false
                 }
             ],

@@ -11,11 +11,11 @@
 
         <div id="parts-container">
             <img
-                v-for="parts in entityParts"
-                :key="parts.partNumber"
+                v-for="part in entityParts"
+                :key="part.partNumber"
                 class="part-img"
-                :src="require('@/assets/Images/Parts/' + parts.imgName + '.png')"
-                alt="{{parts.partName}}"
+                :src="require('@/assets/Images/Parts/' + part.imgName + '.png')"
+                alt="{{part.partName}}"
             />
         </div>
         <!-- Div to hold both edit and repair -->
@@ -93,9 +93,8 @@ export default {
         // border: 1px solid blue;
 
         .serial-number {
-            border: 1px solid #c6c6c6;
-            padding: 3px;
-            font-weight: 600;
+            background-color: #e2e2e2;
+            padding: 5px;
         }
     }
 
@@ -117,7 +116,6 @@ export default {
     }
 
     #parts-container {
-        border: 1px solid green;
         height: 100%;
         width: 40vw;
         display: flex;
