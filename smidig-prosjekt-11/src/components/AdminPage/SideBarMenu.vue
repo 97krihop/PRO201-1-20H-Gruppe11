@@ -1,24 +1,101 @@
 <template>
   <div class="container">
+    <div>{{ timestamp }}</div>
     <div class="flex-container">
       <div class="flex-items">
-        <div class="section-item-styling">
-          <p class="section-item-text">Dashboard</p>
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Dashboard' }"
+          @click="selectSection('Dashboard')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Dashboard' }"
+            >
+              Dashboard
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'home'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
         </div>
       </div>
       <div class="flex-items">
-        <div class="section-item-styling section-selected">
-          <p class="section-item-text ">Parts Overview</p>
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Parts' }"
+          @click="selectSection('Parts')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Parts' }"
+            >
+              Parts Overview
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'cogs'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
         </div>
       </div>
       <div class="flex-items">
-        <div class="section-item-styling">
-          <p class="section-item-text">Camp Overview</p>
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Camps' }"
+          @click="selectSection('Camps')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Camps' }"
+            >
+              Camp Overview
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'earth'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
         </div>
       </div>
       <div class="flex-items">
-        <div class="section-item-styling">
-          <p class="section-item-text">User Administration</p>
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Users' }"
+          @click="selectSection('Users')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Users' }"
+            >
+              User Administration
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'users'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -27,8 +104,8 @@
 
 <script>
 // @ is an alias to /src
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import IconBase from "../UI/IconBase";
 
 export default {
   name: "SideBarMenu",
@@ -38,30 +115,49 @@ export default {
       router
     };
   },
-  components: {},
+  components: { IconBase },
+  created() {
+    setInterval(this.getNow, 1000);
+  },
   methods: {
-    retrieveIsAdmin() {
-      const result = useStore().getters.getIsAdmin;
-      if (result === false) {
-        this.router.push({ name: "Home" });
-      } else {
-        return true;
-      }
+    selectSection(event) {
+      this.selected = event;
+      this.$emit("childToParent", event);
+    },
+    getNow() {
+      const today = new Date();
+      const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date + " " + time;
+      this.timestamp = dateTime;
     }
   },
   data() {
     return {
-      isAdmin: this.retrieveIsAdmin()
+      timestamp: "",
+      selected: "Dashboard"
     };
   }
 };
 </script>
 
 <style scoped>
+.icon-container {
+  position: relative;
+  bottom: 45px;
+  left: 20px;
+  filter: grayscale(100%);
+}
 .container {
   width: 13vw;
   height: 92vh;
-  background-color: #e6e6eb;
+  background-color: #fbf6ed;
 }
 
 .flex-container {
@@ -127,24 +223,24 @@ export default {
 }
 
 .section-item-styling:hover {
-  background-color: #e7e9eb;
   cursor: pointer;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
   height: 100%;
-  text-align: center;
+  text-align: start;
   font-size: 1em;
   font-family: "Open Sans", sans-serif;
   color: #828b96;
   line-height: 100%;
-  padding: 10px;
+  padding: 14px 14px 14px 60px;
 }
 .section-selected {
   background-color: #a9a9a9;
+  transition: all 0.1s 0s ease, all 0.1s 0s ease;
 }
-.section-selected + p {
-  color: black;
+.section-selected-text {
+  color: white;
 }
 </style>
