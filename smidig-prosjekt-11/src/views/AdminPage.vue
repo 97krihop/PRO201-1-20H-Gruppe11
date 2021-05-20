@@ -1,10 +1,12 @@
 <template>
     <div v-if="isAdmin === true">
         <base-site>
-            <side-bar-menu v-on:childToParent="recievedClickInChildSideMenu" />
-            <camp-data-page />
+            <div class="grid-layout">
+                <side-bar-menu class="side-bar" v-on:childToParent="recievedClickInChildSideMenu" />
+                <camp-data-page />
+                <DashboardPage />
+            </div>
         </base-site>
-        <DashboardPage />
     </div>
 </template>
 
@@ -57,4 +59,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.grid-layout {
+    display: flex;
+    flex-flow: row;
+    align-content: flex-start;
+}
+.side-bar {
+    width: auto;
+}
+</style>
