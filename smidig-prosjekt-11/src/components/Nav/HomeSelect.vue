@@ -94,7 +94,7 @@ export default {
     &:active {
         transform: scale(0.98);
         transition-duration: 10ms;
-        box-shadow: inset -2px -2px 2px #899599;
+        box-shadow: inset 2px 2px 2px #899599;
         background-color: #d6ffcb;
     }
 

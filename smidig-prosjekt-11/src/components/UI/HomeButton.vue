@@ -27,6 +27,7 @@ a {
         background-color: #405c6a;
         position: relative;
         border-radius: 5px;
+        box-shadow: -1px -2px #899599;
 
         p {
             color: #ffffff;
@@ -45,9 +46,14 @@ a {
         }
 
         &:hover {
-            background-color: #423048;
-            transform: scale(1.1);
-            transition-duration: 50ms;
+            background-color: #5f7f8e;
+        }
+
+        &:active {
+            transform: scale(0.98);
+            transition-duration: 10ms;
+            box-shadow: inset 3px 3px 2px #899599;
+            background-color: #81aabd;
         }
     }
 }
