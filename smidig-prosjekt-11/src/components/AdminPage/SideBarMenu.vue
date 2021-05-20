@@ -1,146 +1,150 @@
 <template>
-    <div class="container">
-        <div class="flex-container">
-            <div class="flex-items">
-                <div class="section-item-styling">
-                    <p class="section-item-text">Dashboard</p>
-                </div>
-            </div>
-            <div class="flex-items">
-                <div class="section-item-styling section-selected">
-                    <p class="section-item-text ">Parts Overview</p>
-                </div>
-            </div>
-            <div class="flex-items">
-                <div class="section-item-styling"><p class="section-item-text">Camp Overview</p></div>
-            </div>
-            <div class="flex-items">
-                <div class="section-item-styling"><p class="section-item-text">User Administration</p></div>
-            </div>
+  <div class="container">
+    <div class="flex-container">
+      <div class="flex-items">
+        <div class="section-item-styling">
+          <p class="section-item-text">Dashboard</p>
         </div>
+      </div>
+      <div class="flex-items">
+        <div class="section-item-styling section-selected">
+          <p class="section-item-text ">Parts Overview</p>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div class="section-item-styling">
+          <p class="section-item-text">Camp Overview</p>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div class="section-item-styling">
+          <p class="section-item-text">User Administration</p>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
-    name: 'SideBarMenu',
-    setup() {
-        const router = useRouter();
-        return {
-            router
-        };
-    },
-    components: {},
-    methods: {
-        retrieveIsAdmin() {
-            const result = useStore().getters.getIsAdmin;
-            if (result === false) {
-                this.router.push({ name: 'Home' });
-            } else {
-                return true;
-            }
-        }
-    },
-    data() {
-        return {
-            isAdmin: this.retrieveIsAdmin()
-        };
+  name: "SideBarMenu",
+  setup() {
+    const router = useRouter();
+    return {
+      router
+    };
+  },
+  components: {},
+  methods: {
+    retrieveIsAdmin() {
+      const result = useStore().getters.getIsAdmin;
+      if (result === false) {
+        this.router.push({ name: "Home" });
+      } else {
+        return true;
+      }
     }
+  },
+  data() {
+    return {
+      isAdmin: this.retrieveIsAdmin()
+    };
+  }
 };
 </script>
 
 <style scoped>
 .container {
-    width: 13vw;
-    height: 92vh;
-    background-color: #e6e6eb;
+  width: 13vw;
+  height: 92vh;
+  background-color: #e6e6eb;
 }
 
 .flex-container {
-    width: 100%;
-    height: 92vh;
-    background-color: #e6e6eb;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: center;
+  width: 100%;
+  height: 92vh;
+  background-color: #e6e6eb;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: center;
 }
 
 .flex-items:nth-child(1) {
-    margin-top: 120px;
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  margin-top: 120px;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(2) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(3) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(4) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .section-item-styling {
-    height: 45px;
-    margin-top: 10px;
-    background: #fafafa;
-    border: 1px solid #d1d1d1;
-    border-radius: 5px;
-    box-shadow: 3px 3px 12px #e8e8e8;
+  height: 45px;
+  margin-top: 10px;
+  background: #fafafa;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  box-shadow: 3px 3px 12px #e8e8e8;
 }
 
 .section-item-styling:hover {
-    background-color: #e7e9eb;
-    cursor: pointer;
+  background-color: #e7e9eb;
+  cursor: pointer;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
-    height: 100%;
-    text-align: center;
-    font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
-    color: #828b96;
-    line-height: 100%;
-    padding: 10px;
+  height: 100%;
+  text-align: center;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
+  color: #828b96;
+  line-height: 100%;
+  padding: 10px;
 }
 .section-selected {
-    background-color: #a9a9a9;
+  background-color: #a9a9a9;
 }
 .section-selected + p {
-    color: black;
+  color: black;
 }
 </style>
