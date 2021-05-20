@@ -30,12 +30,12 @@
                     src="@/assets/Images/edit-icon.png"
                     alt="Edit entity button"
                 /> -->
-                <icon-base
+              <!-- <icon-base
                     class="edit-delete-img-width"
                     iconName="cross"
                     iconColor="darkred"
                     
-                />
+                /> -->
             </button>
 
             <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
@@ -56,7 +56,7 @@ export default {
     data() {
         return {};
     },
-    component: { IconBase },
+    //component: { IconBase },
     props: {
         entityParts: {
             Type: Object
