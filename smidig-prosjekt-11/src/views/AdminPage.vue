@@ -2,17 +2,9 @@
     <div v-if="isAdmin === true">
         <base-site>
             <side-bar-menu v-on:childToParent="recievedClickInChildSideMenu" />
-            <template>
-                <camp-data-page></camp-data-page>
-            </template>
-            </base-site>
-
-            <side-bar-menu />
-            <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src="" />
-            <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
-            <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
+            <camp-data-page />
         </base-site>
-        <div class="grid-container" v-if="isAdmin === true"></div>
+        <DashboardPage />
     </div>
 </template>
 
@@ -21,8 +13,8 @@
 import BaseSite from '@/components/Nav/BaseSite.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import TopMetric from '@/components/AdminPage/TopMetrics';
 import SideBarMenu from '@/components/AdminPage/SideBarMenu';
+import DashboardPage from '../components/AdminPage/DashboardPage';
 
 export default {
     name: 'adminPage',
@@ -35,9 +27,9 @@ export default {
         };
     },
     components: {
-        TopMetric,
         SideBarMenu,
-        CampDataPage,
+        DashboardPage,
+        // CampDataPage,
         BaseSite
     },
     methods: {

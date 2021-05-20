@@ -1,12 +1,19 @@
 <template>
-    <div><h3>Camp Data Page</h3></div></template
->
+    <div><h3>Camp Data Page</h3></div>
+    <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src="" />
+    <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
+    <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
+</template>
 
 <script>
+import TopMetric from '@/components/AdminPage/TopMetrics';
+
 export default {
     name: 'DashboardPage',
     setup() {},
-    components: {},
+    components: {
+        TopMetric
+    },
     methods: {},
     data() {
         return {};
