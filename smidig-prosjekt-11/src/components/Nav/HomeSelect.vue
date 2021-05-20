@@ -74,6 +74,7 @@ export default {
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 }
+
 .button {
   background-color: #ececec;
   text-align: center;
@@ -103,15 +104,19 @@ export default {
     margin-top: 2%;
   }
 }
+
 .isAdminClass {
   height: 30vh;
 }
+
 .home-repair-ico-src {
   background-image: url("../../assets/Images/Icons/landing_repair.png");
 }
+
 .home-learn-ico-src {
   background-image: url("../../assets/Images/Icons/landing_elearn.png");
 }
+
 .home-ico-style {
   background-repeat: no-repeat;
   background-position: right 10px center;
