@@ -1,101 +1,104 @@
 <template>
-  <div id="product-container">
-    <div class="ProductImg">
-      <img
-        class="product-image-sunbell"
-        src="@/assets/Images/Parts/sunbellProductImage.png"
-        alt="sunbell"
-      />
-    </div>
-    <span>
-      <div id="product-serial-number">
-        {{ this.entitySerialNumber }}
-      </div>
-    </span>
+    <div id="product-container">
+        <img class="product-img" src="@/assets/Images/Parts/sunbellProductImage.png" alt="sunbell" />
+        <!-- <div class="product-img-container">
+        </div> -->
+        <div class="serial-container">
+            <span class="serial-number">#{{ this.entitySerialNumber }}</span>
+        </div>
 
     <!-- Loops through the selected parts for this repair, and displays their images -->
 
-    <div id="parts-container">
-      <img
-        v-for="parts in entityParts"
-        :key="parts.partNumber"
-        class="part-imgs"
-        :src="require('@/assets/Images/Parts/' + parts.imgName + '.png')"
-        alt="{{parts.partName}}"
-      />
-    </div>
-    <!-- Div to hold both edit and repair -->
-    <div class="edit-delete-img">
-      <button class="edit-delete-buttons" @click="editEntity(this.entity)">
-        <!-- <img
-            class="edit-delete-img-width"
-            src="@/assets/Images/edit-icon.png"
-            alt="Edit entity button"
-        /> -->
-        <!-- <icon-base
-            class="edit-delete-img-width"
-            iconName="cross"
-            iconColor="darkred"
-            
-        /> -->
-      </button>
+        <div class="parts-container">
+            <img
+                v-for="part in entityParts"
+                :key="part.partNumber"
+                class="part-img"
+                :src="require('@/assets/Images/Parts/' + part.imgName + '.png')"
+                alt="{{part.partName}}"
+            />
+        </div>
+        <!-- Div to hold both edit and repair -->
+        <div class="edit-delete-icons">
+            <button class="edit-delete-buttons" @click="editEntity(this.entity)">
+                <!-- <img
+                    class="edit-delete-img-width"
+                    src="@/assets/Images/edit-icon.png"
+                    alt="Edit entity button"
+                /> -->
+                <div class="edit-delete-ic-container">
+                    <icon-base iconName="pencil" iconColor="darkblue" iconWidth="100%" iconHeight="100%" />
+                </div>
+            </button>
 
-      <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
-        <img
-          class="edit-delete-img-width"
-          id="delete-img"
-          src="@/assets/Images/delete-icon.png"
-          alt="Delete button"
-        />
-      </button>
+            <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
+                <div class="edit-delete-ic-container">
+                    <icon-base
+                        id="delete-ic"
+                        iconName="cross"
+                        iconColor="darkred"
+                        iconWidth="100%"
+                        iconHeight="100%"
+                    />
+                </div>
+            </button>
+        </div>
     </div>
     <hr />
-  </div>
 </template>
 
 <script>
+import IconBase from '../UI/IconBase.vue';
 export default {
-  data() {
-    return {};
-  },
-  //component: { IconBase },
-  props: {
-    entityParts: {
-      Type: Object
+    data() {
+        return {};
     },
-    entitySerialNumber: {
-      Type: String
-    }
-  },
-  methods: {
-    editEntity: function() {
-      this.$emit("edit-entity", this.entitySerialNumber);
+    components: { IconBase },
+    props: {
+        entityParts: {
+            Type: Object
+        },
+        entitySerialNumber: {
+            Type: String
+        }
     },
-    deleteEntity: function() {
-      this.$store.commit("deleteEntity", this.entitySerialNumber);
+    methods: {
+        editEntity: function() {
+            this.$emit('edit-entity', this.entitySerialNumber);
+        },
+        deleteEntity: function() {
+            this.$store.commit('deleteEntity', this.entitySerialNumber);
+        }
     }
-  }
 };
 </script>
 
 <style lang="scss">
 #product-container {
-  width: 100%;
-  height: 100px;
-  align-items: center;
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 40% 17vw 20px;
-  grid-template-rows: auto 2px;
+    // width: 100%;
+    height: 100px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
 
-  .product-image-sunbell {
-    width: 55px;
-    margin: auto;
-  }
+    .product-img {
+        margin-left: 50px;
+        height: 80%;
+        // border: 1px solid black;
+    }
 
-  #product-serial-number {
-    border: 1px solid #c6c6c6;
-  }
+    .serial-container {
+        width: 250px;
+        // border: 1px solid blue;
+
+        .serial-number {
+            font-size: 1.2rem;
+            background-color: #dad2cb;
+            border-radius: 8px;
+            padding: 10px;
+        }
+    }
 
   input {
     border: 1.5px solid #423048;
@@ -106,45 +109,36 @@ export default {
     font-weight: bold;
   }
 
-  .part-imgs {
-    height: 5vh;
-    width: 3vw;
-    margin: auto auto auto 4vw;
-  }
-
-  #part-image-separator {
-    border-right: 1px solid #dedede;
-    margin-right: -10px; /* size of gutter */
-    padding-right: 10px; /* size of gutter */
-  }
-
-  #parts-container {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 100%;
-  }
-
-  .edit-delete-img {
-    grid-column: 4;
-
-    .edit-delete-img-width {
-      border: 1px solid blue;
-      width: 20px;
-      margin: 5px;
+    .parts-container {
+        height: 100%;
+        width: 40vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .edit-delete-buttons:hover {
-      transform: scale(1.15);
-      transition-duration: 50ms;
+    .part-img {
+        height: 90%;
+        border-radius: 10px;
+        background-color: #dad2cb;
+        margin-left: 8px;
     }
 
-    #delete-img {
-      margin-left: 40px;
-    }
-  }
+    .edit-delete-icons {
+        // border: 1px solid black;
+        margin-right: 50px;
+        width: 100px;
+        display: flex;
+        justify-content: space-between;
 
+        .edit-delete-ic-container {
+            width: 23px;
+            height: 23px;
+        }
+    }
+
+
+    /*
   button {
     outline: none;
   }
@@ -156,26 +150,31 @@ export default {
     margin: auto;
     border-top: 0.5px solid #707070;
   }
+
+     */
 }
 
-@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
-  #product-container {
-    height: 80px;
+@media only screen and (min-device-width: 600px) and (max-width: 960px) {
+    #product-container {
+        height: 80px;
+        // .product-image-sunbell {
+        //     width: 45px;
+        // }
 
-    .product-image-sunbell {
-      width: 45px;
-    }
+        // #product-serial-number {
+        //     font-size: 12px;
+        //     width: 25vh;
+        // }
 
-    #product-serial-number {
-      font-size: 12px;
-      width: 25vh;
-    }
+        .edit-delete-icons {
+            margin-right: 10px;
+            width: 50px;
 
-    .edit-delete-img {
-      .edit-delete-img-width {
-        width: 15px;
-      }
+            .edit-delete-ic-container {
+                width: 15px;
+                height: 15px;
+            }
+        }
     }
-  }
 }
 </style>

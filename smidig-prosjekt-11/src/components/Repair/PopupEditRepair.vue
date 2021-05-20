@@ -36,13 +36,15 @@
       </div>
     </div>
 
-    <img
-      id="close-repair-btn"
-      class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
-      src="@/assets/Images/delete-icon.png"
-      v-on:click="closePopup"
-      alt="close repair tab"
-    />
+        <!-- <img
+            id="close-repair-btn"
+            class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
+            src="@/assets/Images/delete-icon.png"
+            v-on:click="closePopup"
+            alt="close repair tab"
+        /> -->
+
+        <icon-base class="close-repair-ic" iconName="cross" iconColor="darkred" v-on:click="closePopup" />
 
     <button
       class="font-standardText bg-logoBar"
@@ -55,95 +57,103 @@
 </template>
 
 <script>
-import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
+import IconBase from '../UI/IconBase.vue';
 
 export default {
-  name: "PopupEdit",
-  props: {
-    pictures: {
-      type: Array
-    },
-    serialToEdit: {
-      type: String,
-      default: ""
-    }
-  },
-  emits: ["clicked"],
-  components: {
-    ModalErrorMessage
-  },
-  data() {
-    return {
-      id: -1, //fetched in renderSelects()
-      serial: -1,
-      serialInputIsEmpty: false,
-      selectedEntitySerialNumber: "noneselected",
-      modalTextBody: "",
-      showModal: false,
-      inputSerial: {
-        Type: Number,
-        Required: true
-      },
-      productImages: [
-        {
-          partNumber: "1",
-          partName: "Solar Panel",
-          imgName: "solarPanelCompleteWithCable-removebg-preview",
-          isChecked: false
+    name: 'PopupEdit',
+    props: {
+        pictures: {
+            type: Array
         },
-        {
-          partNumber: "2",
-          partName: "Battery",
-          imgName: "battery-removebg-preview",
-          isChecked: false
-        },
-        {
-          partNumber: "3",
-          partName: "Seal",
-          imgName: "powerSwitchCoverNew-removebg-preview",
-          isChecked: false
-        },
-        {
-          partNumber: "4",
-          partName: "USB Connector",
-          imgName: "directUsbPort-removebg-preview",
-          isChecked: false
-        },
-        {
-          partNumber: "5",
-          partName: "Neck plus light",
-          imgName: "batteryPackLightUnitComplete-removebg-preview",
-          isChecked: false
-        },
-        {
-          partNumber: "6",
-          partName: "Torx-5",
-          imgName: "batteryBoxTorx5-removebg-preview",
-          isChecked: false
-        },
-        {
-          partNumber: "7",
-          partName: "PCBA",
-          imgName: "pcbaRevD2.6-removebg-preview",
-          isChecked: false
+        serialToEdit: {
+            type: String,
+            default: ''
         }
-      ],
-      partsChosen: []
-    };
-  },
-  methods: {
-    selectPart(product) {
-      product.isChecked = !product.isChecked;
-      //console.log('selectPart(), serialToEdit: ' + this.serialToEdit);
     },
-    submitPartsSelected() {
-      // Adding the marked parts to the partsChosen-array
-      this.partsChosen = [];
-      for (let i = 0; i < this.productImages.length; i++) {
-        if (this.productImages[i].isChecked) {
-          this.partsChosen.push(this.productImages[i]);
-        }
-      }
+    emits: ['clicked'],
+    components: {
+        ModalErrorMessage,
+        IconBase
+    },
+    data() {
+        return {
+            id: -1, //fetched in renderSelects()
+            serial: -1,
+            serialInputIsEmpty: false,
+            selectedEntitySerialNumber: 'noneselected',
+            modalTextBody: '',
+            showModal: false,
+            inputSerial: {
+                Type: Number,
+                Required: true
+            },
+            productImages: [
+                {
+                    partNumber: '1',
+                    partName: 'Lamp',
+                    imgName: 'ic-part-lamp',
+                    isChecked: false
+                },
+                {
+                    partNumber: '2',
+                    partName: '12V charger',
+                    imgName: 'ic-part-adapter-charger',
+                    isChecked: false
+                },
+                {
+                    partNumber: '3',
+                    partName: 'Battery',
+                    imgName: 'ic-part-battery',
+                    isChecked: false
+                },
+                {
+                    partNumber: '4',
+                    partName: 'Power button',
+                    imgName: 'ic-part-button',
+                    isChecked: false
+                },
+                {
+                    partNumber: '5',
+                    partName: 'Light bulb',
+                    imgName: 'ic-part-lightbulb',
+                    isChecked: false
+                },
+                {
+                    partNumber: '6',
+                    partName: 'Screen',
+                    imgName: 'ic-part-screen',
+                    isChecked: false
+                },
+                {
+                    partNumber: '7',
+                    partName: 'Socket charger',
+                    imgName: 'ic-part-socket-charger',
+                    isChecked: false
+                },
+                {
+                    partNumber: '8',
+                    partName: 'Solar panel',
+                    imgName: 'ic-part-solar-panel',
+                    isChecked: false
+                }
+            ],
+            partsChosen: []
+        };
+    },
+    methods: {
+        selectPart(product) {
+            product.isChecked = !product.isChecked;
+            //console.log('selectPart(), serialToEdit: ' + this.serialToEdit);
+        },
+        submitPartsSelected() {
+            // Adding the marked parts to the partsChosen-array
+            this.partsChosen = [];
+            for (let i = 0; i < this.productImages.length; i++) {
+                if (this.productImages[i].isChecked) {
+                    this.partsChosen.push(this.productImages[i]);
+                }
+            }
 
       const serialNr = this.$refs.inputSerialNumber.value;
       if (serialNr == "") {
@@ -325,12 +335,19 @@ export default {
     }
   }
 
-  #parts {
-    position: relative;
-    grid-column: span 2 / span 2;
-    margin: 30px;
-    background-color: #f8f6f2;
-  }
+    .close-repair-ic {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    #parts {
+        position: relative;
+        grid-column: span 2 / span 2;
+        margin: 30px;
+        background-color: #f8f6f2;
+    }
 
   #next-btn {
     width: 85px;

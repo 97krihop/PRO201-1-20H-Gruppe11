@@ -1,22 +1,18 @@
 <template>
-  <!-- redirect page to login  -->
-  <base-site class="base-site">
-    <h1>Access denied, please log in</h1>
-
-    <login-button />
-  </base-site>
+    <!-- redirect page to login  -->
+    <base-site class="base-site">
+        <h1>Access denied, please log in</h1>
+    </base-site>
 </template>
 
 <script>
-import LoginButton from "@/components/Login/LoginButton.vue";
-import BaseSite from "@/components/Nav/BaseSite.vue";
+import BaseSite from '@/components/Nav/BaseSite.vue';
 export default {
-  setup() {
-    return {
-      LoginButton,
-      BaseSite
-    };
-  }
+    setup() {
+        return {
+            BaseSite
+        };
+    }
 };
 </script>
 
