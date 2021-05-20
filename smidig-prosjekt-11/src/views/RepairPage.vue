@@ -26,6 +26,7 @@ export default {
             ListOfRepairs: []
         };
     },
+    
     name: 'Repair',
     components: {
         BaseSite,
