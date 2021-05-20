@@ -1,19 +1,19 @@
 <template>
-    <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
-    <div class="base-container">
-        <header>
-            <nav-bar />
-        </header>
-        <div class="content-container">
-            <slot />
-        </div>
+  <!-- Base site layout. Can be used as a component inside other pages. Includes Logo, Logo-Bar and employee name -->
+  <div class="base-container">
+    <header>
+      <nav-bar />
+    </header>
+    <div class="content-container">
+      <slot />
+    </div>
 
-        <!-- <footer>
+    <!-- <footer>
             <div class="copyright-header">
                 Copyright &copy; 2020 - Smidig-Prosjekt Gruppe 11
             </div>
         </footer> -->
-    </div>
+  </div>
 </template>
 
 <script>
@@ -28,52 +28,52 @@ export default {
 
         // Hamburger
     },
-    name: 'LogoBar',
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const user = computed(() => {
-            return store.getters.getUserId;
-        });
-        function goHome() {
-            router.push({ name: 'home' });
-        }
-        return {
-            // HamburgerIcon,
-            // LoginButton,
-            user,
-            goHome
-        };
-    },
-    data() {
-        return {
-            sideBarVisible: false
-        };
-    },
-    methods: {
-        toggleSidebar() {
-            const sideBarBool = this.sideBarVisible;
-            this.sideBarVisible = !sideBarBool;
-            this.$refs.hamburger.updateloginValues();
-        }
+    name: "LogoBar",
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const user = computed(() => {
+      return store.getters.getUserId;
+    });
+    function goHome() {
+      router.push({ name: "home" });
     }
+    return {
+      // HamburgerIcon,
+      // LoginButton,
+      user,
+      goHome
+    };
+  },
+  data() {
+    return {
+      sideBarVisible: false
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      const sideBarBool = this.sideBarVisible;
+      this.sideBarVisible = !sideBarBool;
+      this.$refs.hamburger.updateloginValues();
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .content-container {
-    height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
 .white-text {
-    color: white;
+  color: white;
 }
 
 .copyright-header {
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
-    color: white;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  color: white;
 }
 </style>

@@ -115,72 +115,72 @@ export default {
 }
 
 .flex-container {
-    width: 100%;
-    height: 92vh;
-    background-color: #e6e6eb;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: center;
+  width: 100%;
+  height: 92vh;
+  background-color: #e6e6eb;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: center;
 }
 
 .flex-items:nth-child(1) {
-    margin-top: 120px;
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  margin-top: 120px;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(2) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(3) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .flex-items:nth-child(4) {
-    padding: 0 7px;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
+  padding: 0 7px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
 }
 
 .section-item-styling {
-    height: 45px;
-    margin-top: 10px;
-    background: #fafafa;
-    border: 1px solid #d1d1d1;
-    border-radius: 5px;
-    box-shadow: 3px 3px 12px #e8e8e8;
+  height: 45px;
+  margin-top: 10px;
+  background: #fafafa;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  box-shadow: 3px 3px 12px #e8e8e8;
 }
 
 .section-item-styling:hover {
     cursor: pointer;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
     height: 100%;
     text-align: start;

@@ -1,20 +1,19 @@
 <template>
-    <base-site isDark="true">
-        <login />
-    </base-site>
+  <base-site isDark="true">
+    <login />
+  </base-site>
 </template>
 
 <script>
-import BaseSite from '@/components/Nav/BaseSite.vue';
-import Login from '@/components/Login/Login.vue';
+import BaseSite from "@/components/Nav/BaseSite.vue";
+import Login from "@/components/Login/Login.vue";
+
 export default {
-    name: 'LoginPage',
-    setup() {
-        return {
-            BaseSite,
-            Login
-        };
-    }
+  name: "LoginPage",
+  components: {
+    BaseSite,
+    Login
+  }
 };
 </script>
 
