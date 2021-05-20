@@ -107,8 +107,7 @@ export default {
     bottom: 0;
     height: 70px;
     width: 100%;
-    border-top: 1px solid black;
-    background-color: #f8f6f2;
+    background-color: #2c2a29;
 
     #progress-bar {
         position: relative;

@@ -37,13 +37,12 @@ export default {
 <style lang="scss" scoped>
 // Adding div around element to center home-select-component
 .home-select-container {
-    border: 1px solid green;
     width: 100%;
     height: 100%;
     z-index: 2;
     margin: auto;
     background: rgb(249, 254, 244);
-    background: linear-gradient(120deg, rgba(249, 254, 244, 1) 0%, rgb(251, 246, 237) 100%);
+    background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
 }
 
 .home-select {
