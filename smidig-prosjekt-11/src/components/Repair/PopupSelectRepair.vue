@@ -243,10 +243,14 @@ export default {
         // position both product and serial number
         display: grid;
         height: 100%;
-        grid-template-rows: 60% 40%;
+        grid-template-rows: 80% 20%;
 
         .product-section {
             border-bottom: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+
         }
 
         #popup-static-product-style {
@@ -254,6 +258,7 @@ export default {
             width: 15vh;
             height: 15vh;
             margin: auto;
+            border-radius: 10px;
 
             h2 {
                 font-weight: bold;
