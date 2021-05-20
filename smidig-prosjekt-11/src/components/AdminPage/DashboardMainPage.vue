@@ -13,9 +13,6 @@
   
   <l-map style="height: 350px" :zoom="zoom" :center="center">
     <l-geo-json :geojson="geojson" :options-style="styleFunction"></l-geo-json>
-    <l-marker :icon="defaultIcon" :lat-lng="markerLatLng">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
   </l-map>
 </template>
 
@@ -36,11 +33,28 @@ export default {
   methods: {},
   data() {
     return {
+      zoom: 2,
+      center: [22, 15],
       geojson: customGeojson,
+      fillColor: "#000",
       geojsonOptions: {
         // Options that don't rely on Leaflet methods.
       }
     };
+  },
+  computed: {
+    styleFunction() {
+      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+      return () => {
+        return {
+          weight: 1,
+          color: "#ECEFF1",
+          opacity: 1,
+          fillColor: fillColor,
+          fillOpacity: 1
+        };
+      };
+    }
   },
   async beforeMount() {
     // HERE is where to load Leaflet components!
