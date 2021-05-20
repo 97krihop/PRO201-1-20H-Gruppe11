@@ -28,4 +28,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+body{
+  background-color: white;
+}
+</style>
