@@ -22,7 +22,8 @@
 
   <!-- ### Using Leaflet with Vue 3 ### -->
   <!-- https://github.com/vue-leaflet/vue-leaflet -->
-  <l-map style="height: 350px" :zoom="zoom" :center="center">
+  <l-map style="height: 350px; width: 99%" :zoom="zoom" :center="center">
+    
     <l-geo-json
       :geojson="geojson"
       :options="options">
@@ -38,6 +39,26 @@
       <l-popup>I'm a refugee camp!</l-popup>
     </l-marker>
     
+    <l-control :position="'topleft'">
+      <p>General statistics</p>
+      <p>All users</p>
+      <p>7,541,390</p>
+    </l-control>
+    
+    <l-control class="custom-control-watermark" :position="'bottomleft'">
+      <p>"watermark" stats</p>
+    </l-control>    
+    
+    <l-control :position="'bottomright'">
+      <p>Stats on the bottom right side</p>
+    </l-control>
+    
+    <l-control class="custom-control-button" :position="'topright'">
+      <p @click="showAlert">
+        Clickable stats
+      </p>
+    </l-control>
+    
   </l-map>
 </template>
 
@@ -45,7 +66,7 @@
 import TopMetric from "@/components/AdminPage/TopMetrics";
 import customGeojson from "@/assets/data/custom.geo.json";
 import "leaflet/dist/leaflet.css";
-import { LMap, LGeoJson, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
+import { LMap, LGeoJson, LMarker, LPopup, LControl } from "@vue-leaflet/vue-leaflet";
 
 export default {
   name: "DashboardPage",
@@ -55,9 +76,14 @@ export default {
     LMap,
     LGeoJson,
     LMarker,
-    LPopup
+    LPopup,
+    LControl
   },
-  methods: {},
+  methods: {
+    showAlert() {
+      alert("Klikka på stats");
+    }
+  },
   data() {
     return {
       zoom: 2,
@@ -76,7 +102,7 @@ export default {
       },
       coordinates1: [31, 0],
       coordinates2: [37, 30],
-      coordinates3: [31, 36],
+      coordinates3: [31, 36]
     };
   },
   computed: {},
@@ -92,5 +118,20 @@ export default {
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+}
+
+.custom-control-watermark {
+  font-size: 200%;
+  font-weight: bolder;
+  color: #aaa;
+  text-shadow: #555;
+}
+
+.custom-control-button {
+  background: #fff;
+  padding: 0 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 0.1em;
+  cursor: pointer;
 }
 </style>
