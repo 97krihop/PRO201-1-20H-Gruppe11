@@ -59,7 +59,6 @@
                     >
                     <img src="@/assets/Images/Icons/enter.png" alt="Go to next page" id="submit-icon" />
                 </button>
-
             </router-link>
             <!-- Using a getter from store to display the amount of products rendered -->
         </div>
@@ -193,18 +192,23 @@ export default {
             padding: 0.5rem;
             border-radius: 5px;
             display: inline-flex;
+            position: absolute;
             right: -120px;
             top: 10px;
-            position: absolute;
-            background-color: white;
-            border: 2px solid gray;
+            background-color: #9fd18d;
             outline: none;
+            box-shadow: -1px -1px #899599;
+            color: #423048;
 
             &:hover {
-                background-color: #405c6a;
-                color: white;
-                transform: scale(1.05);
-                transition-duration: 73ms;
+                background-color: #c0f6ae;
+            }
+
+            &:active {
+                transform: scale(0.98);
+                transition-duration: 10ms;
+                box-shadow: inset 2px 2px 2px #899599;
+                background-color: #d6ffcb;
             }
         }
     }
