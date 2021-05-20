@@ -2,16 +2,11 @@
     <div v-if="isAdmin === true">
         <base-site>
             <side-bar-menu />
+            <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src="" />
+            <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
+            <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
         </base-site>
-    <div class="grid-container" v-if="isAdmin === true">
-        <base-site />
-        <div>NAVBAR</div>
-
-        <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src=""/>
-        <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
-        <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
-
-        <div>PITCHER</div>
+        <div class="grid-container" v-if="isAdmin === true"></div>
     </div>
 </template>
 
@@ -23,6 +18,7 @@ import { useRouter } from 'vue-router';
 import TopMetric from '@/components/AdminPage/TopMetrics';
 import SideBarMenu from '@/components/AdminPage/SideBarMenu';
 
+// TODO Add icons from svg icon pack when pushed to dev
 export default {
     name: 'adminPage',
     setup() {
