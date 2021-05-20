@@ -93,6 +93,7 @@ export default {
         // border: 1px solid blue;
 
         .serial-number {
+            font-size: 1.2rem;
             background-color: #e2e2e2;
             border-radius: 8px;
             padding: 10px;
