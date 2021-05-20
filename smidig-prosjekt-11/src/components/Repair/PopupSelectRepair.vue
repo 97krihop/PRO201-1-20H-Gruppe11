@@ -21,6 +21,7 @@
                     :v-model="serialNr"
                     placeholder="Example: 1234 5678"
                 />
+                <input type="checkbox" id="emptySerialNumberCheckbox" v-model="hasSerialNumber">
             </div>
         </div>
         <modal-error-message v-if="showModal == true" @close="showModal = false">
@@ -84,6 +85,24 @@ export default {
                 Type: Number,
                 Required: true
             },
+  name: "PopupSelect",
+  props: {
+    pictures: Array
+  },
+  emits: ["clicked"],
+  components: {
+    ModalErrorMessage
+  },
+  data() {
+    return {
+      serialInputIsEmpty: false,
+      modalTextBody: "",
+      showModal: false,
+      hasSerialNumber: true,
+      serialNr: {
+        Type: Number,
+        Required: true
+      },
 
             productImages: [
                 {
@@ -150,72 +169,73 @@ export default {
                 }
             }
 
-            const serialNr = this.$refs.inputSerialNumber.value;
-            if (serialNr == '') {
-                // No serial number provided
-                this.partsChosen = [];
-                this.serialInputIsEmpty = true;
-                this.modalTextBody = 'Please Input Serial Number';
-                this.showModal = true;
-                return;
-            } else if (serialNr.length > 20) {
-                // Serial number too long
-                this.modalTextBody = 'Serial number length must be less than 20';
-                this.showModal = true;
-                return;
-            } else if (isNaN(serialNr)) {
-                // Serial number must be numeric
-                this.modalTextBody = 'Serial number can only contain numbers';
-                this.showModal = true;
-                return;
-            } else if (this.partsChosen.length == 0) {
-                // Please choose part
-                this.modalTextBody = 'Please Select Parts';
-                this.showModal = true;
-                return;
-            }
+      const serialNr = this.$refs.inputSerialNumber.value;
 
-            const stateEntities = this.$store.getters.getEntities;
+      if (serialNr == "" && this.hasSerialNumber) {
+        // No serial number provided
+        this.partsChosen = [];
+        this.serialInputIsEmpty = true;
+        this.modalTextBody = "Please Input Serial Number";
+        this.showModal = true;
+        return;
+      } else if (serialNr.length > 20) {
+        // Serial number too long
+        this.modalTextBody = "Serial number length must be less than 20";
+        this.showModal = true;
+        return;
+      } else if (isNaN(serialNr)) {
+        // Serial number must be numeric
+        this.modalTextBody = "Serial number can only contain numbers";
+        this.showModal = true;
+        return;
+      } else if (this.partsChosen.length == 0) {
+        // Please choose part
+        this.modalTextBody = "Please Select Parts";
+        this.showModal = true;
+        return;
+      }
 
-            // Get first available unique id
-            let newId = 0;
-            const takenIds = [];
-            for (let i = 0; i < stateEntities.length; i++) {
-                takenIds[stateEntities[i].id] = true;
-            }
-            for (let i = 0; i <= stateEntities.length; i++) {
-                if (!takenIds[i]) {
-                    newId = i;
-                    break;
-                }
-            }
+      const stateEntities = this.$store.getters.getEntities;
 
-            //Creates object which later is injected into Vue state
-            const newEntity = {
-                id: newId,
-                entitySerialNr: serialNr,
-                parts: this.partsChosen
-            };
-
-            const exists = stateEntities.findIndex(
-                entity => entity.entitySerialNr === newEntity.entitySerialNr
-            );
-            // Check for serialnumber
-            // Validation for serialnumber should prob be added
-            if (exists == -1) {
-                this.serialInputIsEmpty = true;
-                this.$store.commit('addEntity', newEntity);
-                this.closePopup();
-            } else {
-                this.modalTextBody = 'Serial Number Already Exists';
-                this.showModal = true;
-                this.partsChosen = [];
-            }
-        },
-        closePopup() {
-            this.$emit('clicked');
+      // Get first available unique id
+      let newId = 0;
+      const takenIds = [];
+      for (let i = 0; i < stateEntities.length; i++) {
+        takenIds[stateEntities[i].id] = true;
+      }
+      for (let i = 0; i <= stateEntities.length; i++) {
+        if (!takenIds[i]) {
+          newId = i;
+          break;
         }
+      }
+
+      //Creates object which later is injected into Vue state
+      const newEntity = {
+        id: newId,
+        entitySerialNr: serialNr,
+        parts: this.partsChosen
+      };
+
+      const exists = stateEntities.findIndex(
+        entity => entity.entitySerialNr === newEntity.entitySerialNr
+      );
+      // Check for serialnumber
+      // Validation for serialnumber should prob be added
+      if (exists == -1) {
+        this.serialInputIsEmpty = true;
+        this.$store.commit("addEntity", newEntity);
+        this.closePopup();
+      } else {
+        this.modalTextBody = "Serial Number Already Exists";
+        this.showModal = true;
+        this.partsChosen = [];
+      }
+    },
+    closePopup() {
+      this.$emit("clicked");
     }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -260,16 +280,16 @@ export default {
             margin: auto;
             border-radius: 10px;
 
-            h2 {
-                font-weight: bold;
-                font-size: 17px;
-            }
+      h2 {
+        font-weight: bold;
+        font-size: 17px;
+      }
 
-            img {
-                -webkit-user-drag: none;
-                cursor: default;
-            }
-        }
+      img {
+        -webkit-user-drag: none;
+        cursor: default;
+      }
+    }
 
         .serial-section {
             display: flex;
@@ -282,21 +302,26 @@ export default {
                 color: #38293c;
             }
 
-            .serialInputEmpty {
-                box-shadow: 0px 0px 8px #cc0000;
-            }
+      .serialInputEmpty {
+        box-shadow: 0px 0px 8px #cc0000;
+      }
 
-            input {
-                border: 1.5px solid #423048;
-                border-radius: 5px;
-                background-color: #fffefd;
-                color: #050505;
-                text-align: center;
-                font-weight: bold;
-                font-style: italic;
-            }
-        }
+      input {
+        border: 1.5px solid #423048;
+        border-radius: 5px;
+        background-color: #fffefd;
+        color: #050505;
+        text-align: center;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      #emptySerialNumberCheckbox{
+        width: 2vw;
+        height: 2vh;
+      }
     }
+  }
 
     .part-container {
         display: flex;
@@ -327,7 +352,7 @@ export default {
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            
+
             width: 80%;
             height: 80%;
 
@@ -361,10 +386,10 @@ export default {
         bottom: 20px;
         cursor: pointer;
 
-        h3 {
-            color: #fff;
-        }
+    h3 {
+      color: #fff;
     }
+  }
 
     .close-repair-ic {
         cursor: pointer;
@@ -375,13 +400,13 @@ export default {
 }
 
 @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
-    #container {
-        h1 {
-            font-size: 1em;
-        }
-        img {
-            margin-bottom: 5px;
-        }
+  #container {
+    h1 {
+      font-size: 1em;
+    }
+    img {
+      margin-bottom: 5px;
+    }
 
         #products-container {
             #popup-static-product-style {
@@ -391,23 +416,23 @@ export default {
             }
         }
 
-        #parts {
-            .parts-container {
-                a {
-                    width: 80px;
+    #parts {
+      .parts-container {
+        a {
+          width: 80px;
 
-                    h2 {
-                        font-size: 10px;
-                    }
-                }
-            }
+          h2 {
+            font-size: 10px;
+          }
         }
-
-        #next-btn {
-            width: 65px;
-            height: 30px;
-            font-size: 12px;
-        }
+      }
     }
+
+    #next-btn {
+      width: 65px;
+      height: 30px;
+      font-size: 12px;
+    }
+  }
 }
 </style>

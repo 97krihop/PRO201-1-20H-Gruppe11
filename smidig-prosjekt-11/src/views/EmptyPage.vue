@@ -1,13 +1,10 @@
 <template>
-    <base-site/>
+  <base-site />
 </template>
 <script>
-import BaseSite from '../components/Nav/BaseSite.vue'
+import BaseSite from "../components/Nav/BaseSite.vue";
 export default {
-  components: { BaseSite },
-    
-}
+  components: { BaseSite }
+};
 </script>
-<style lang="">
-    
-</style>
+<style lang=""></style>

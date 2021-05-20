@@ -23,12 +23,12 @@ export default {};
     align-items: center;
     justify-content: space-between;
 
-    label {
-        color: #273422;
-        font-weight: bold;
-        text-align: center;
-        display: inline-block;
-    }
+  label {
+    color: #273422;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+  }
 
     .product-label {
         margin-left: 50px;
@@ -61,6 +61,10 @@ export default {};
         left: -6px;
     }
 
+@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+  .font-standardText {
+    font-size: 12px;
+  }
     .delete-label {
         right: -12px;
     }

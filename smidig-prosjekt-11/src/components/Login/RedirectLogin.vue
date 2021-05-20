@@ -18,12 +18,12 @@ export default {
 
 <style>
 .base-site {
-    text-align: center;
+  text-align: center;
 }
 h1 {
-    margin-top: 16vh;
+  margin-top: 16vh;
 
-    font-size: 45px;
-    color: #405c6a;
+  font-size: 45px;
+  color: #405c6a;
 }
 </style>

@@ -7,7 +7,7 @@
             <span class="serial-number">#{{ this.entitySerialNumber }}</span>
         </div>
 
-        <!-- Loops through the selected parts for this repair, and displays their images -->
+    <!-- Loops through the selected parts for this repair, and displays their images -->
 
         <div class="parts-container">
             <img
@@ -100,14 +100,14 @@ export default {
         }
     }
 
-    input {
-        border: 1.5px solid #423048;
-        border-radius: 5px;
-        background-color: #fffefd;
-        color: #050505;
-        text-align: center;
-        font-weight: bold;
-    }
+  input {
+    border: 1.5px solid #423048;
+    border-radius: 5px;
+    background-color: #fffefd;
+    color: #050505;
+    text-align: center;
+    font-weight: bold;
+  }
 
     .parts-container {
         height: 100%;
@@ -137,17 +137,21 @@ export default {
         }
     }
 
-    button {
-        outline: none;
-    }
 
-    hr {
-        grid-column: 1/-1;
-        grid-row: 2;
-        width: 93%;
-        margin: auto;
-        border-top: 0.5px solid #707070;
-    }
+    /*
+  button {
+    outline: none;
+  }
+
+  hr {
+    grid-column: 1/-1;
+    grid-row: 2;
+    width: 93%;
+    margin: auto;
+    border-top: 0.5px solid #707070;
+  }
+
+     */
 }
 
 @media only screen and (min-device-width: 600px) and (max-width: 960px) {
