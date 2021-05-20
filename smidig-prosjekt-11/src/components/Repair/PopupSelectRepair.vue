@@ -87,8 +87,8 @@ export default {
             productImages: [
                 {
                     partNumber: '1',
-                    partName: 'Solar Panel',
-                    imgName: 'solarPanelCompleteWithCable-removebg-preview',
+                    partName: 'Lamp',
+                    imgName: 'ic-part-lamp',
                     isChecked: false
                 },
                 {

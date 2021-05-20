@@ -37,8 +37,6 @@ export default {
             router.push({ name: 'home' });
         }
         return {
-            // HamburgerIcon,
-            // LoginButton,
             user,
             goHome
         };
