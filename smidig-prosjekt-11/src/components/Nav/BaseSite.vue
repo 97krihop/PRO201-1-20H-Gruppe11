@@ -61,7 +61,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .content-container {
-  height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
+    background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
 }
 
 .white-text {

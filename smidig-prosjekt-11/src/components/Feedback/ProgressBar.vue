@@ -128,8 +128,7 @@ export default {
   bottom: 0;
   height: 70px;
   width: 100%;
-  border-top: 1px solid black;
-  background-color: #f8f6f2;
+  background-color: #2c2a29;
 
   #progress-bar {
     position: relative;
@@ -213,18 +212,23 @@ export default {
       padding: 0.5rem;
       border-radius: 5px;
       display: inline-flex;
+      position: absolute;
       right: -120px;
       top: 10px;
-      position: absolute;
-      background-color: white;
-      border: 2px solid gray;
+      background-color: #9fd18d;
       outline: none;
+      box-shadow: -1px -1px #899599;
+      color: #423048;
 
       &:hover {
-        background-color: #405c6a;
-        color: white;
-        transform: scale(1.05);
-        transition-duration: 73ms;
+        background-color: #c0f6ae;
+      }
+
+      &:active {
+        transform: scale(0.98);
+        transition-duration: 10ms;
+        box-shadow: inset 2px 2px 2px #899599;
+        background-color: #d6ffcb;
       }
     }
   }

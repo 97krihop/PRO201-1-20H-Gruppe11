@@ -4,7 +4,7 @@
 
     <div class="logo-container">
       <router-link class="logo-link" to="/">
-        <img id="logo-img" src="@/assets/Images/brightLogo.png" alt="Bright" />
+        <img id="logo-img" src="@/assets/Images/logo-bright.svg" alt="Bright" />
       </router-link>
     </div>
     <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
@@ -60,14 +60,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .nav-bar {
-  width: 100%;
-  max-width: 100%;
-  height: 80px;
-  background: #405c6a;
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    background: #2c2a29;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .hamburger-button {
