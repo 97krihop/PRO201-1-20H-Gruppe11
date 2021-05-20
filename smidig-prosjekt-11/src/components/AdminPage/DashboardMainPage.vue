@@ -19,17 +19,33 @@
         data-to-display="Battery"
     />
   </div>
-  <l-map style="height: 350px" :zoom="zoom" :center="center">
-    <l-geo-json :geojson="geojson" :options-style="styleFunction"></l-geo-json>
-  </l-map>
 
+  <!-- ### Using Leaflet with Vue 3 ### -->
+  <!-- https://github.com/vue-leaflet/vue-leaflet -->
+  <l-map style="height: 350px" :zoom="zoom" :center="center">
+    <l-geo-json
+      :geojson="geojson"
+      :options="options">
+    </l-geo-json>
+    
+    <l-marker :lat-lng="coordinates1">
+      <l-popup>I'm a refugee camp!</l-popup>
+    </l-marker>    
+    <l-marker :lat-lng="coordinates2">
+      <l-popup>I'm a refugee camp!</l-popup>
+    </l-marker>    
+    <l-marker :lat-lng="coordinates3">
+      <l-popup>I'm a refugee camp!</l-popup>
+    </l-marker>
+    
+  </l-map>
 </template>
 
 <script>
 import TopMetric from "@/components/AdminPage/TopMetrics";
-import customGeojson from "./data/custom.geo.json";
+import customGeojson from "@/assets/data/custom.geo.json";
 import "leaflet/dist/leaflet.css";
-import { LMap, LGeoJson } from "@vue-leaflet/vue-leaflet";
+import { LMap, LGeoJson, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
 
 export default {
   name: "DashboardPage",
@@ -37,43 +53,34 @@ export default {
   components: {
     TopMetric,
     LMap,
-    LGeoJson
+    LGeoJson,
+    LMarker,
+    LPopup
   },
   methods: {},
   data() {
     return {
       zoom: 2,
-      center: [22, 15],
+      center: [22, 50],
       geojson: customGeojson,
-      fillColor: "#000",
-      geojsonOptions: {
-        // Options that don't rely on Leaflet methods.
-      }
+      options: {
+        style: function() {
+          return {
+            weight: 1,
+            color: "#123123",
+            opacity: 1,
+            fillColor: "#b5bbb8",
+            fillOpacity: 1
+          };
+        }
+      },
+      coordinates1: [31, 0],
+      coordinates2: [37, 30],
+      coordinates3: [31, 36],
     };
   },
-  computed: {
-    styleFunction() {
-      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
-      return () => {
-        return {
-          weight: 1,
-          color: "#ECEFF1",
-          opacity: 1,
-          fillColor: fillColor,
-          fillOpacity: 1
-        };
-      };
-    }
-  },
-  async beforeMount() {
-    // HERE is where to load Leaflet components!
-    const { circleMarker } = await import("leaflet/dist/leaflet-src.esm");
-
-    // And now the Leaflet circleMarker function can be used by the options:
-    this.geojsonOptions.pointToLayer = (feature, latLng) =>
-      circleMarker(latLng, { radius: 8 });
-    this.mapIsReady = true;
-  }
+  computed: {},
+  async beforeMount() {}
 };
 </script>
 
