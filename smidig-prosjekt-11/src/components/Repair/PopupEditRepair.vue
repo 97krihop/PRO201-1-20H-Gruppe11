@@ -36,13 +36,15 @@
             </div>
         </div>
 
-        <img
+        <!-- <img
             id="close-repair-btn"
             class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
             src="@/assets/Images/delete-icon.png"
             v-on:click="closePopup"
             alt="close repair tab"
-        />
+        /> -->
+
+        <icon-base class="close-repair-ic" iconName="cross" iconColor="darkred" v-on:click="closePopup" />
 
         <button class="font-standardText bg-logoBar" id="next-btn" @click="submitPartsSelected">
             <h3>Update</h3>
@@ -52,6 +54,8 @@
 
 <script>
 import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
+import IconBase from '../UI/IconBase.vue';
+
 
 export default {
     name: 'PopupEdit',
@@ -66,7 +70,8 @@ export default {
     },
     emits: ['clicked'],
     components: {
-        ModalErrorMessage
+        ModalErrorMessage,
+        IconBase
     },
     data() {
         return {
@@ -246,7 +251,6 @@ export default {
         row-gap: 2vh;
         margin: auto;
 
-        
         .popup-products {
             background-color: #f8f6f2;
             width: 15vh;
@@ -317,6 +321,13 @@ export default {
             transform: scale(1.15);
             transition-duration: 75ms;
         }
+    }
+
+    .close-repair-ic {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
 
     #parts {

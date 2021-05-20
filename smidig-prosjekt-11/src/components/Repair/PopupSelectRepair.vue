@@ -48,9 +48,9 @@
                 </a>
             </div>
         </div>
+        
+        <icon-base class="close-repair-ic" iconName="cross" iconColor="darkred" v-on:click="closeFunction" />
 
-        <!-- Creating a slot for the close button of the project -->
-        <slot />
         <button class="font-standardText bg-logoBar" id="next-btn" @click="submitPartsSelected">
             <h3>Submit</h3>
         </button>
@@ -59,15 +59,20 @@
 
 <script>
 import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
+import IconBase from '../UI/IconBase.vue';
 
 export default {
     name: 'PopupSelect',
     props: {
-        pictures: Array
+        pictures: Array,
+        closeFunction: {
+            Type: Function
+        }
     },
     emits: ['clicked'],
     components: {
-        ModalErrorMessage
+        ModalErrorMessage,
+        IconBase
     },
     data() {
         return {
@@ -351,6 +356,13 @@ export default {
         &:hover {
             background-color: #7eb46b;
         }
+    }
+
+    .close-repair-ic {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
 }
 

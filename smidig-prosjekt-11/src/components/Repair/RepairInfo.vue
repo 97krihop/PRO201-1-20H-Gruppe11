@@ -3,14 +3,7 @@
     <div :class="{ backdrop: showRepair || showEdit }">
         <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
         <div id="parts-popup" v-if="showRepair == true">
-            <popup-select-repair @clicked="closeRepair()">
-                <icon-base
-                    class="close-repair-ic"
-                    iconName="cross"
-                    iconColor="darkred"
-                    v-on:click="closeRepair"
-                />
-            </popup-select-repair>
+            <popup-select-repair :closeFunction="closeRepair"  @clicked="closeRepair()" />
         </div>
 
         <div id="edit-popup" v-if="showEdit">
@@ -30,13 +23,17 @@
                     </repair-entity>
                 </div>
 
-                <img
-                    v-show="showRepair == false"
-                    id="plus-btn"
-                    src="@/assets/Images/Icons/plus-icon.png"
-                    v-on:click="addRepair()"
-                    alt="add new repair"
-                />
+                <div class="plus-icon-container">
+                    <icon-base
+                        v-show="showRepair == false"
+                        id="plus-btn"
+                        iconName="plus"
+                        iconColor="darkblue"
+                        iconWidth="100%"
+                        iconHeight="100%"
+                        v-on:click="addRepair()"
+                    />
+                </div>
             </div>
         </section>
     </div>
@@ -110,17 +107,19 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.plus-icon-container {
+    width: 40px;
+    height: 40px;
+    margin: 2.5vh auto;
+    cursor: pointer;
+}
+
 #plus-btn {
     margin: 2.5vh auto;
     width: 3vw;
     outline: none;
     border-radius: 50%;
     cursor: pointer;
-
-    &:hover {
-        transform: scale(1.05);
-        transition-duration: 75ms;
-    }
 }
 
 #parts-popup {
@@ -167,13 +166,6 @@ export default {
 .icon-container {
     width: 30px;
     height: 30px;
-}
-
-.close-repair-ic {
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
 }
 
 #entity-list-container {

@@ -56,15 +56,14 @@ export default {};
             position: relative;
         }
     }
-    
+
     .edit-label {
         left: -6px;
     }
-    
+
     .delete-label {
         right: -12px;
     }
-    
 }
 
 // @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
