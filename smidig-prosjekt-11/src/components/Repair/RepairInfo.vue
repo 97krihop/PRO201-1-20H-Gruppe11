@@ -28,7 +28,7 @@
                         v-show="showRepair == false"
                         id="plus-btn"
                         iconName="plus"
-                        iconColor="darkblue"
+                        iconColor="#423048"
                         iconWidth="100%"
                         iconHeight="100%"
                         v-on:click="addRepair()"
@@ -108,8 +108,8 @@ export default {
 }
 
 .plus-icon-container {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin: 2.5vh auto;
     cursor: pointer;
 }

@@ -54,7 +54,7 @@
             />
         </div>
 
-        <icon-base class="submit-ic" iconName="arrow-right" iconColor="darkgreen" @click="submitPartsSelected" />
+        <icon-base class="submit-ic" iconName="checkmark" iconColor="darkgreen" @click="submitPartsSelected" iconWidth="40" iconHeight="40" />
     </div>
 </template>
 
@@ -322,15 +322,16 @@ export default {
             display: flex;
             flex-direction: column;
             cursor: pointer;
-
-            width: 90%;
-            height: 90%;
+            
+            width: 80%;
+            height: 80%;
 
             &:hover img {
                 background: #7eb46b;
             }
 
             .part-icon {
+                border-radius: 10px;
                 background-color: #e2e2e2;
                 flex: 1;
                 align-self: center;
@@ -351,8 +352,9 @@ export default {
 
     .submit-ic {
         position: absolute;
-        right: 10px;
-        bottom: 10px;
+        right: 20px;
+        bottom: 20px;
+        cursor: pointer;
 
         h3 {
             color: #fff;

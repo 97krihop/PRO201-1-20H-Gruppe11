@@ -9,7 +9,7 @@
 
         <!-- Loops through the selected parts for this repair, and displays their images -->
 
-        <div id="parts-container">
+        <div class="parts-container">
             <img
                 v-for="part in entityParts"
                 :key="part.partNumber"
@@ -94,7 +94,8 @@ export default {
 
         .serial-number {
             background-color: #e2e2e2;
-            padding: 5px;
+            border-radius: 8px;
+            padding: 10px;
         }
     }
 
@@ -107,20 +108,19 @@ export default {
         font-weight: bold;
     }
 
-    .part-img {
-        height: 50%;
-        // width: 3vw;
-        // margin: auto auto auto 4vw;
-        margin: 10px;
-        // border: 1px solid blue;
-    }
-
-    #parts-container {
+    .parts-container {
         height: 100%;
         width: 40vw;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .part-img {
+        height: 90%;
+        border-radius: 10px;
+        background-color: #e2e2e2;
+        margin-left: 8px;
     }
 
     .edit-delete-icons {
