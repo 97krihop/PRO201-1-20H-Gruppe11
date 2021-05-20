@@ -1,74 +1,74 @@
 <template>
-    <!-- main page to login -->
-    <div id="login-container" class="bg-logoBar">
-        <!-- from to post -->
-        <form @submit.prevent="post">
-            <div>
-                <!-- username input -->
-                <label for="username">Username</label>
-                <input
-                    class="login-input"
-                    v-model="username"
-                    type="text"
-                    placeholder="Enter Username"
-                    name="username"
-                    required
-                />
-            </div>
-            <div>
-                <!-- password input -->
-                <label for="password">Password</label>
-                <input
-                    class="login-input"
-                    v-model="password"
-                    type="password"
-                    placeholder="Enter Password"
-                    name="password"
-                    required
-                />
-            </div>
+  <!-- main page to login -->
+  <div id="login-container" class="bg-logoBar">
+    <!-- from to post -->
+    <form @submit.prevent="post">
+      <div>
+        <!-- username input -->
+        <label for="username">Username</label>
+        <input
+          class="login-input"
+          v-model="username"
+          type="text"
+          placeholder="Enter Username"
+          name="username"
+          required
+        />
+      </div>
+      <div>
+        <!-- password input -->
+        <label for="password">Password</label>
+        <input
+          class="login-input"
+          v-model="password"
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+        />
+      </div>
 
-            <div>
-                <!-- submit button -->
-                <input id="login-submit" type="submit" />
-            </div>
-        </form>
-    </div>
+      <div>
+        <!-- submit button -->
+        <input id="login-submit" type="submit" />
+      </div>
+    </form>
+  </div>
 </template>
 <script>
-import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
-    //composition API
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const username = ref('');
-        const password = ref('');
+  //composition API
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const username = ref("");
+    const password = ref("");
 
-        //computed property from store
-        const user = computed(() => {
-            return store.getters.getUserId;
-        });
-        //is called on form submit
-        function post() {
-            login(username.value);
-            router.push({ name: 'Home' });
-        }
-        // validate and send data to backend
-        function login(userId) {
-            //TODO submit to database and validate data
-            store.commit('login', userId);
-        }
-
-        return {
-            username,
-            password,
-            post,
-            user
-        };
+    //computed property from store
+    const user = computed(() => {
+      return store.getters.getUserId;
+    });
+    //is called on form submit
+    function post() {
+      login(username.value);
+      router.push({ name: "Home" });
     }
+    // validate and send data to backend
+    function login(userId) {
+      //TODO submit to database and validate data
+      store.commit("login", userId);
+    }
+
+    return {
+      username,
+      password,
+      post,
+      user
+    };
+  }
 };
 </script>
 
@@ -85,13 +85,13 @@ export default {
         0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042),
         0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 
-    form {
-        label {
-            font-weight: bold;
-            color: #a8d598;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+  form {
+    label {
+      font-weight: bold;
+      color: #a8d598;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
 
         input {
             width: 100%;
@@ -132,8 +132,8 @@ export default {
 }
 
 @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
-    #login-container {
-        top: 50px;
-    }
+  #login-container {
+    top: 50px;
+  }
 }
 </style>

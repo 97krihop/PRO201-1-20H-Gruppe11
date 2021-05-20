@@ -1,23 +1,23 @@
 <template>
-    <div class="home-button">
-        <a href="#">
-            <div>
-                <p>Home</p>
-                <img src="@/assets/Images/Icons/home-icon.png" alt="Home button" />
-            </div>
-        </a>
-    </div>
+  <div class="home-button">
+    <a href="#">
+      <div>
+        <p>Home</p>
+        <img src="@/assets/Images/Icons/home-icon.png" alt="Home button" />
+      </div>
+    </a>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'HomeButton'
+  name: "HomeButton"
 };
 </script>
 
 <style lang="scss" scoped>
 a {
-    margin: 0;
+  margin: 0;
 
     div {
         display: inline-block;
@@ -29,21 +29,21 @@ a {
         border-radius: 5px;
         box-shadow: -1px -2px #899599;
 
-        p {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 30px;
-            text-align: left;
-            padding: 10px 20px;
-        }
+    p {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 30px;
+      text-align: left;
+      padding: 10px 20px;
+    }
 
-        img {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 15px;
-            width: 16%;
-        }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 15px;
+      width: 16%;
+    }
 
         &:hover {
             background-color: #5f7f8e;
@@ -59,20 +59,20 @@ a {
 }
 
 @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
-    a {
-        div {
-            width: 175px;
-            height: 50px;
+  a {
+    div {
+      width: 175px;
+      height: 50px;
 
-            p {
-                font-size: 25px;
-                padding: 7px 20px;
-            }
+      p {
+        font-size: 25px;
+        padding: 7px 20px;
+      }
 
-            img {
-                top: -4px;
-            }
-        }
+      img {
+        top: -4px;
+      }
     }
+  }
 }
 </style>
