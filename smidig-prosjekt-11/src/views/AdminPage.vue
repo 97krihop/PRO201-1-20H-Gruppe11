@@ -1,6 +1,13 @@
 <template>
-    <div v-if="isAdmin === true">
+    <div class="grid-container" v-if="isAdmin === true">
         <base-site />
+        <div>NAVBAR</div>
+
+        <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src=""/>
+        <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
+        <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
+
+        <div>PITCHER</div>
     </div>
 </template>
 
@@ -9,6 +16,7 @@
 import BaseSite from '@/components/UI/BaseSite.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import TopMetric from '@/components/AdminPage/TopMetrics';
 
 export default {
     name: 'adminPage',
@@ -21,6 +29,7 @@ export default {
         };
     },
     components: {
+        TopMetric,
         BaseSite
     },
     methods: {
@@ -35,10 +44,16 @@ export default {
     },
     data() {
         return {
-            isAdmin: this.retrieveIsAdmin()
+            isAdmin: this.retrieveIsAdmin(),
+            totalRep: 'Total Repairs',
+            totalUnitsRegistered: 'Total Units Registered',
+            mostRepairedPartToday: 'Most Repaired Part Today'
         };
     }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
