@@ -25,11 +25,17 @@
         <!-- Div to hold both edit and repair -->
         <div class="edit-delete-img">
             <button class="edit-delete-buttons" @click="editEntity(this.entity)">
-                <img
+                <!-- <img
                     class="edit-delete-img-width"
                     src="@/assets/Images/edit-icon.png"
                     alt="Edit entity button"
-                />
+                /> -->
+              <!-- <icon-base
+                    class="edit-delete-img-width"
+                    iconName="cross"
+                    iconColor="darkred"
+                    
+                /> -->
             </button>
 
             <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
@@ -50,6 +56,7 @@ export default {
     data() {
         return {};
     },
+    //component: { IconBase },
     props: {
         entityParts: {
             Type: Object
@@ -121,6 +128,7 @@ export default {
         grid-column: 4;
 
         .edit-delete-img-width {
+            border: 1px solid blue;
             width: 20px;
             margin: 5px;
         }
