@@ -3,19 +3,43 @@
         <div class="flex-container">
             <div class="flex-items">
                 <div class="section-item-styling">
-                    <p class="section-item-text">Dashboard</p>
+                    <div>
+                        <p class="section-item-text">Dashboard</p>
+                    </div>
+                    <div class="icon-container">
+                        <icon-base :iconName="'home'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
+                    </div>
                 </div>
             </div>
             <div class="flex-items">
                 <div class="section-item-styling section-selected">
-                    <p class="section-item-text ">Parts Overview</p>
+                    <div>
+                        <p class="section-item-text">Parts Overview</p>
+                    </div>
+                    <div class="icon-container">
+                        <icon-base :iconName="'cogs'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
+                    </div>
                 </div>
             </div>
             <div class="flex-items">
-                <div class="section-item-styling"><p class="section-item-text">Camp Overview</p></div>
+                <div class="section-item-styling">
+                    <div>
+                        <p class="section-item-text">Camp Overview</p>
+                    </div>
+                    <div class="icon-container">
+                        <icon-base :iconName="'earth'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
+                    </div>
+                </div>
             </div>
             <div class="flex-items">
-                <div class="section-item-styling"><p class="section-item-text">User Administration</p></div>
+                <div class="section-item-styling">
+                    <div>
+                        <p class="section-item-text">User Administration</p>
+                    </div>
+                    <div class="icon-container">
+                        <icon-base :iconName="'users'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -25,6 +49,7 @@
 // @ is an alias to /src
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import IconBase from '../UI/IconBase';
 
 export default {
     name: 'SideBarMenu',
@@ -34,7 +59,7 @@ export default {
             router
         };
     },
-    components: {},
+    components: { IconBase },
     methods: {
         retrieveIsAdmin() {
             const result = useStore().getters.getIsAdmin;
@@ -54,10 +79,16 @@ export default {
 </script>
 
 <style scoped>
+.icon-container {
+    position: relative;
+    bottom: 45px;
+    left: 20px;
+    filter: grayscale(100%);
+}
 .container {
     width: 13vw;
     height: 92vh;
-    background-color: #e6e6eb;
+    background-color: #fbf6ed;
 }
 
 .flex-container {
@@ -130,12 +161,12 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .section-item-text {
     height: 100%;
-    text-align: center;
+    text-align: start;
     font-size: 1em;
     font-family: 'Open Sans', sans-serif;
     color: #828b96;
     line-height: 100%;
-    padding: 10px;
+    padding: 14px 14px 14px 60px;
 }
 .section-selected {
     background-color: #a9a9a9;
