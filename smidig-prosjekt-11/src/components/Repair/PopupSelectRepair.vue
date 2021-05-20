@@ -17,7 +17,6 @@
 
       <div id="serialnum-container">
         <h3>SERIAL NUMBER</h3>
-
         <input
           ref="inputSerialNumber"
           v-on:keydown="serialInputIsEmpty = false"
@@ -26,6 +25,7 @@
           :v-model="serialNr"
           placeholder="Example: 1234 5678"
         />
+        <input type="checkbox" id="emptySerialNumberCheckbox" v-model="hasSerialNumber">
       </div>
     </div>
     <!-- PARTS-DIV -->
@@ -81,6 +81,7 @@ export default {
       serialInputIsEmpty: false,
       modalTextBody: "",
       showModal: false,
+      hasSerialNumber: true,
       serialNr: {
         Type: Number,
         Required: true
@@ -159,7 +160,8 @@ export default {
       }
 
       const serialNr = this.$refs.inputSerialNumber.value;
-      if (serialNr == "") {
+
+      if (serialNr == "" && this.hasSerialNumber) {
         // No serial number provided
         this.partsChosen = [];
         this.serialInputIsEmpty = true;
@@ -304,6 +306,11 @@ export default {
         text-align: center;
         font-weight: bold;
         font-style: italic;
+      }
+
+      #emptySerialNumberCheckbox{
+        width: 2vw;
+        height: 2vh;
       }
     }
   }
