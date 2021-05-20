@@ -9,7 +9,7 @@
                     @click="selectSection('Dashboard')"
                 >
                     <div>
-                        <p class="section-item-text">Dashboard</p>
+                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Dashboard' }">Dashboard</p>
                     </div>
                     <div class="icon-container">
                         <icon-base :iconName="'home'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
@@ -23,7 +23,7 @@
                     @click="selectSection('Parts')"
                 >
                     <div>
-                        <p class="section-item-text">Parts Overview</p>
+                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Parts' }">Parts Overview</p>
                     </div>
                     <div class="icon-container">
                         <icon-base :iconName="'cogs'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
@@ -37,7 +37,7 @@
                     @click="selectSection('Camps')"
                 >
                     <div>
-                        <p class="section-item-text">Camp Overview</p>
+                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Camps' }">Camp Overview</p>
                     </div>
                     <div class="icon-container">
                         <icon-base :iconName="'earth'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
@@ -51,7 +51,7 @@
                     @click="selectSection('Users')"
                 >
                     <div>
-                        <p class="section-item-text">User Administration</p>
+                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Users' }">User Administration</p>
                     </div>
                     <div class="icon-container">
                         <icon-base :iconName="'users'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
@@ -192,8 +192,9 @@ export default {
 }
 .section-selected {
     background-color: #a9a9a9;
+  transition: all 0.1s 0s ease, all 0.1s 0s ease;
 }
-.section-selected {
-    color: red;
+.section-selected-text {
+    color: white;
 }
 </style>

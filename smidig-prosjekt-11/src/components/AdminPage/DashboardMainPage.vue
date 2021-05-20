@@ -1,5 +1,5 @@
 <template>
-    <div><h3>Camp Data Page</h3></div>
+    <div></div>
     <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src="" />
     <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
     <top-metric :name-of-data="mostRepairedPartToday" data-to-display="PCB" />
