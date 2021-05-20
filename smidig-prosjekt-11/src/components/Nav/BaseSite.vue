@@ -17,18 +17,18 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import NavBar from './navbar/NavBar.vue';
+import { computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import NavBar from "./navbar/NavBar.vue";
 
 export default {
-    components: {
-        NavBar
+  components: {
+    NavBar
 
-        // Hamburger
-    },
-    name: "LogoBar",
+    // Hamburger
+  },
+  name: "LogoBar",
   setup() {
     const store = useStore();
     const router = useRouter();

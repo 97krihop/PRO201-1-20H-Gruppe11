@@ -1,20 +1,20 @@
 <template>
-    <div>
-        <h3>
-            Camp Data
-        </h3>
-    </div></template
+  <div>
+    <h3>
+      Camp Data
+    </h3>
+  </div></template
 >
 
 <script>
 export default {
-    name: 'CampDataPage',
-    setup() {},
-    components: {},
-    methods: {},
-    data() {
-        return {};
-    }
+  name: "CampDataPage",
+  setup() {},
+  components: {},
+  methods: {},
+  data() {
+    return {};
+  }
 };
 </script>
 

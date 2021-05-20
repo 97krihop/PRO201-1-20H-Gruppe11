@@ -1,117 +1,163 @@
 <template>
-    <div class="container">
-        <div>{{ timestamp }}</div>
-        <div class="flex-container">
-            <div class="flex-items">
-                <div
-                    class="section-item-styling"
-                    :class="{ 'section-selected': selected === 'Dashboard' }"
-                    @click="selectSection('Dashboard')"
-                >
-                    <div>
-                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Dashboard' }">Dashboard</p>
-                    </div>
-                    <div class="icon-container">
-                        <icon-base :iconName="'home'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex-items">
-                <div
-                    class="section-item-styling"
-                    :class="{ 'section-selected': selected === 'Parts' }"
-                    @click="selectSection('Parts')"
-                >
-                    <div>
-                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Parts' }">Parts Overview</p>
-                    </div>
-                    <div class="icon-container">
-                        <icon-base :iconName="'cogs'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex-items">
-                <div
-                    class="section-item-styling"
-                    :class="{ 'section-selected': selected === 'Camps' }"
-                    @click="selectSection('Camps')"
-                >
-                    <div>
-                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Camps' }">Camp Overview</p>
-                    </div>
-                    <div class="icon-container">
-                        <icon-base :iconName="'earth'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex-items">
-                <div
-                    class="section-item-styling"
-                    :class="{ 'section-selected': selected === 'Users' }"
-                    @click="selectSection('Users')"
-                >
-                    <div>
-                        <p class="section-item-text" :class="{ 'section-selected-text': selected === 'Users' }">User Administration</p>
-                    </div>
-                    <div class="icon-container">
-                        <icon-base :iconName="'users'" iconColor="#828B96" iconWidth="30%" iconHeight="30%" />
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div>{{ timestamp }}</div>
+    <div class="flex-container">
+      <div class="flex-items">
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Dashboard' }"
+          @click="selectSection('Dashboard')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Dashboard' }"
+            >
+              Dashboard
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'home'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
         </div>
+      </div>
+      <div class="flex-items">
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Parts' }"
+          @click="selectSection('Parts')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Parts' }"
+            >
+              Parts Overview
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'cogs'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Camps' }"
+          @click="selectSection('Camps')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Camps' }"
+            >
+              Camp Overview
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'earth'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div
+          class="section-item-styling"
+          :class="{ 'section-selected': selected === 'Users' }"
+          @click="selectSection('Users')"
+        >
+          <div>
+            <p
+              class="section-item-text"
+              :class="{ 'section-selected-text': selected === 'Users' }"
+            >
+              User Administration
+            </p>
+          </div>
+          <div class="icon-container">
+            <icon-base
+              :iconName="'users'"
+              iconColor="#828B96"
+              iconWidth="30%"
+              iconHeight="30%"
+            />
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { useRouter } from 'vue-router';
-import IconBase from '../UI/IconBase';
+import { useRouter } from "vue-router";
+import IconBase from "../UI/IconBase";
 
 export default {
-    name: 'SideBarMenu',
-    setup() {
-        const router = useRouter();
-        return {
-            router
-        };
+  name: "SideBarMenu",
+  setup() {
+    const router = useRouter();
+    return {
+      router
+    };
+  },
+  components: { IconBase },
+  created() {
+    setInterval(this.getNow, 1000);
+  },
+  methods: {
+    selectSection(event) {
+      this.selected = event;
+      this.$emit("childToParent", event);
     },
-    components: { IconBase },
-    created() {
-        setInterval(this.getNow, 1000);
-    },
-    methods: {
-        selectSection(event) {
-            this.selected = event;
-            this.$emit('childToParent', event);
-        },
-        getNow() {
-            const today = new Date();
-            const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-            const dateTime = date + ' ' + time;
-            this.timestamp = dateTime;
-        }
-    },
-    data() {
-        return {
-            timestamp: '',
-            selected: 'Dashboard'
-        };
+    getNow() {
+      const today = new Date();
+      const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date + " " + time;
+      this.timestamp = dateTime;
     }
+  },
+  data() {
+    return {
+      timestamp: "",
+      selected: "Dashboard"
+    };
+  }
 };
 </script>
 
 <style scoped>
 .icon-container {
-    position: relative;
-    bottom: 45px;
-    left: 20px;
-    filter: grayscale(100%);
+  position: relative;
+  bottom: 45px;
+  left: 20px;
+  filter: grayscale(100%);
 }
 .container {
-    width: 13vw;
-    height: 92vh;
-    background-color: #fbf6ed;
+  width: 13vw;
+  height: 92vh;
+  background-color: #fbf6ed;
 }
 
 .flex-container {
@@ -177,24 +223,24 @@ export default {
 }
 
 .section-item-styling:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
-    height: 100%;
-    text-align: start;
-    font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
-    color: #828b96;
-    line-height: 100%;
-    padding: 14px 14px 14px 60px;
+  height: 100%;
+  text-align: start;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
+  color: #828b96;
+  line-height: 100%;
+  padding: 14px 14px 14px 60px;
 }
 .section-selected {
-    background-color: #a9a9a9;
+  background-color: #a9a9a9;
   transition: all 0.1s 0s ease, all 0.1s 0s ease;
 }
 .section-selected-text {
-    color: white;
+  color: white;
 }
 </style>
