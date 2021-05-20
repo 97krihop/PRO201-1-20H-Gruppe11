@@ -94,7 +94,7 @@ export default {
 
         .serial-number {
             font-size: 1.2rem;
-            background-color: #e2e2e2;
+            background-color: #dad2cb;
             border-radius: 8px;
             padding: 10px;
         }
@@ -120,7 +120,7 @@ export default {
     .part-img {
         height: 90%;
         border-radius: 10px;
-        background-color: #e2e2e2;
+        background-color: #dad2cb;
         margin-left: 8px;
     }
 
