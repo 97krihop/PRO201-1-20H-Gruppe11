@@ -11,7 +11,6 @@ module.exports = function initialize(passport) {
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       const user = await users.findOne({ username: username });
-      console.log("user : " + user);
       if (!user) {
         console.log("No user with that username");
         return done(null, false, { message: "Incorrect username/password." });
@@ -31,6 +30,8 @@ module.exports = function initialize(passport) {
       }
     })
   );
-  passport.serializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) =>
+    done(null, { ...user, password: undefined })
+  );
   passport.deserializeUser((id, done) => done(null, id));
 };

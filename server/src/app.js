@@ -44,6 +44,8 @@ initializePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+//routes
+app.use("/api", require("./routes/report"));
 app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/test"));
 

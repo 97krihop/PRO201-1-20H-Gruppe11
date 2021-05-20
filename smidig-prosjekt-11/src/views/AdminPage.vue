@@ -1,4 +1,8 @@
 <template>
+    <div v-if="isAdmin === true">
+        <base-site>
+            <side-bar-menu />
+        </base-site>
     <div class="grid-container" v-if="isAdmin === true">
         <base-site />
         <div>NAVBAR</div>
@@ -13,10 +17,11 @@
 
 <script>
 // @ is an alias to /src
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import TopMetric from '@/components/AdminPage/TopMetrics';
+import SideBarMenu from '@/components/AdminPage/SideBarMenu';
 
 export default {
     name: 'adminPage',
@@ -30,6 +35,7 @@ export default {
     },
     components: {
         TopMetric,
+        SideBarMenu,
         BaseSite
     },
     methods: {
@@ -53,7 +59,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

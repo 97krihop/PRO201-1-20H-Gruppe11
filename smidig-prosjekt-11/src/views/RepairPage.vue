@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BaseSite from '@/components/UI/BaseSite.vue';
+import BaseSite from '@/components/Nav/BaseSite.vue';
 import RepairOverview from '@/components/Repair/RepairOverview.vue';
 import RepairInfo from '@/components/Repair/RepairInfo.vue';
 import ProgressBar from '@/components/Feedback/ProgressBar.vue';
