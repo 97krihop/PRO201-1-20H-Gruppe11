@@ -42,7 +42,7 @@ export default {
     z-index: 2;
     margin: auto;
     background: rgb(249, 254, 244);
-    background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
+    background: linear-gradient(160deg, #c4c4c4 0%, #57595d 100%);
 }
 
 .home-select {

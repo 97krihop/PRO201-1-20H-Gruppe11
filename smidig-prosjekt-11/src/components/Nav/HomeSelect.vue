@@ -74,7 +74,7 @@ export default {
         0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 }
 .button {
-    background-color: #9fd18b;
+    background-color: #ececec;
     text-align: center;
     font-size: 1.5em;
     font-weight: bold;
