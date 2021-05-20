@@ -23,28 +23,32 @@
             />
         </div>
         <!-- Div to hold both edit and repair -->
-        <div class="edit-delete-img">
+        <div class="edit-delete-icons">
             <button class="edit-delete-buttons" @click="editEntity(this.entity)">
                 <!-- <img
                     class="edit-delete-img-width"
                     src="@/assets/Images/edit-icon.png"
                     alt="Edit entity button"
                 /> -->
-                <icon-base
-                    class="edit-delete-img-width"
-                    iconName="cross"
-                    iconColor="darkred"
-                    
-                />
+                <div class="edit-delete-img-width">
+                    <icon-base
+                        iconName="pencil"
+                        iconColor="darkblue" 
+                        iconWidth="100%"
+                        iconHeight="100%"
+                    />
+                </div>
             </button>
 
             <button class="edit-delete-buttons" @click="deleteEntity(this.entity)">
-                <img
-                    class="edit-delete-img-width"
-                    id="delete-img"
-                    src="@/assets/Images/delete-icon.png"
-                    alt="Delete button"
-                />
+                <div class="edit-delete-img-width">
+                    <icon-base
+                        iconName="cross"
+                        iconColor="darkred" 
+                        iconWidth="100%"
+                        iconHeight="100%"
+                    />
+                </div>
             </button>
         </div>
         <hr />
@@ -52,11 +56,12 @@
 </template>
 
 <script>
+import IconBase from '../UI/IconBase.vue';
 export default {
     data() {
         return {};
     },
-    component: { IconBase },
+    components: { IconBase },
     props: {
         entityParts: {
             Type: Object
@@ -77,6 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 #product-container {
     width: 100%;
     height: 100px;
@@ -124,12 +130,13 @@ export default {
         grid-template-rows: 100%;
     }
 
-    .edit-delete-img {
+    .edit-delete-icons {
+        border: 1px solid red;
         grid-column: 4;
 
         .edit-delete-img-width {
-            border: 1px solid blue;
             width: 20px;
+            height: 20px;
             margin: 5px;
         }
 
