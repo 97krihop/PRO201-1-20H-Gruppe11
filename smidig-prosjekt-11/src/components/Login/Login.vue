@@ -6,12 +6,20 @@
             <div>
                 <!-- username input -->
                 <label for="username">Username</label>
-                <input v-model="username" type="text" placeholder="Enter Username" name="username" required />
+                <input
+                    class="login-input"
+                    v-model="username"
+                    type="text"
+                    placeholder="Enter Username"
+                    name="username"
+                    required
+                />
             </div>
             <div>
                 <!-- password input -->
                 <label for="password">Password</label>
                 <input
+                    class="login-input"
                     v-model="password"
                     type="password"
                     placeholder="Enter Password"
@@ -72,8 +80,10 @@ export default {
     max-width: 20rem;
     margin: auto;
     padding: 1.25rem;
-    border: 1.5px solid #433149;
     border-radius: 5px;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+        0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 
     form {
         label {
@@ -87,22 +97,35 @@ export default {
             width: 100%;
             padding: 0.5rem;
             margin-bottom: 1.5rem;
-            color: #433149;
+            color: #423048;
             border-color: #433149;
-            border-bottom-width: 2px;
             font-weight: bold;
             outline: none;
+        }
+
+        .login-input {
+            box-shadow: inset -2px -2px #899599;
+            background: #e7e7e7;
         }
     }
 
     #login-submit {
-        background-color: #a8d598;
+        background-color: #9fd18d;
+        color: #423048;
         width: 100%;
         padding: 0.5rem;
         border-radius: 5px;
+        box-shadow: -1px -2px #899599;
 
         &:hover {
-            background-color: rgb(231, 241, 227);
+            background-color: #c0f6ae;
+        }
+
+        &:active {
+            transform: scale(0.98);
+            transition-duration: 10ms;
+            box-shadow: inset -2px -2px 2px #899599;
+            background-color: #d6ffcb;
         }
     }
 }

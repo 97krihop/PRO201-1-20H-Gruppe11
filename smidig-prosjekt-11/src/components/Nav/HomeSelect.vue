@@ -85,16 +85,17 @@ export default {
     height: 6vh;
     margin: 5% 10% auto 5%;
     outline: none;
-    box-shadow: -2px -3px #899599;
+    box-shadow: -1px -2px #899599;
 
     &:hover {
         background-color: #c0f6ae;
     }
 
     &:active {
-        transform: scale(0.99);
+        transform: scale(0.98);
         transition-duration: 10ms;
         box-shadow: inset -2px -2px 2px #899599;
+        background-color: #d6ffcb;
     }
 
     h4 {
