@@ -3,8 +3,12 @@
         <base-site>
             <div class="grid-layout">
                 <side-bar-menu class="side-bar" v-on:childToParent="recievedClickInChildSideMenu" />
-                <camp-data-page />
-                <DashboardPage />
+                <div class="component-section-container">
+                    <dashboard-page v-if="selectedSection === 'Dashboard'" />
+                    <product-data-page v-if="selectedSection === 'Parts'" />
+                    <camp-data-page v-if="selectedSection === 'Camps'" />
+                    <user-administration-page v-if="selectedSection === 'Users'" />
+                </div>
             </div>
         </base-site>
     </div>
@@ -16,7 +20,10 @@ import BaseSite from '@/components/Nav/BaseSite.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import SideBarMenu from '@/components/AdminPage/SideBarMenu';
-import DashboardPage from '../components/AdminPage/DashboardPage';
+import DashboardPage from '@/components/AdminPage/DashboardPage';
+import CampDataPage from '@/components/AdminPage/CampDataPage';
+import ProductDataPage from '../components/AdminPage/ProductDataPage';
+import UserAdministrationPage from '../components/AdminPage/UserAdministrationPage';
 
 export default {
     name: 'adminPage',
@@ -29,6 +36,9 @@ export default {
         };
     },
     components: {
+        UserAdministrationPage,
+        ProductDataPage,
+        CampDataPage,
         SideBarMenu,
         DashboardPage,
         // CampDataPage,

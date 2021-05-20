@@ -1,14 +1,14 @@
 <template>
     <div>
         <h3>
-            Camp Data
+            User Administration Page
         </h3>
     </div></template
 >
 
 <script>
 export default {
-    name: 'CampDataPage',
+    name: 'UserAdministrationPage',
     setup() {},
     components: {},
     methods: {},
