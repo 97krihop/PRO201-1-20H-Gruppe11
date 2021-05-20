@@ -1,8 +1,13 @@
 <template>
     <div class="container">
+        <div>{{ timestamp }}</div>
         <div class="flex-container">
             <div class="flex-items">
-                <div class="section-item-styling">
+                <div
+                    class="section-item-styling"
+                    :class="{ 'section-selected': selected === 'Dashboard' }"
+                    @click="selectSection('Dashboard')"
+                >
                     <div>
                         <p class="section-item-text">Dashboard</p>
                     </div>
@@ -12,7 +17,11 @@
                 </div>
             </div>
             <div class="flex-items">
-                <div class="section-item-styling section-selected">
+                <div
+                    class="section-item-styling"
+                    :class="{ 'section-selected': selected === 'Parts' }"
+                    @click="selectSection('Parts')"
+                >
                     <div>
                         <p class="section-item-text">Parts Overview</p>
                     </div>
@@ -22,7 +31,11 @@
                 </div>
             </div>
             <div class="flex-items">
-                <div class="section-item-styling">
+                <div
+                    class="section-item-styling"
+                    :class="{ 'section-selected': selected === 'Camps' }"
+                    @click="selectSection('Camps')"
+                >
                     <div>
                         <p class="section-item-text">Camp Overview</p>
                     </div>
@@ -32,7 +45,11 @@
                 </div>
             </div>
             <div class="flex-items">
-                <div class="section-item-styling">
+                <div
+                    class="section-item-styling"
+                    :class="{ 'section-selected': selected === 'Users' }"
+                    @click="selectSection('Users')"
+                >
                     <div>
                         <p class="section-item-text">User Administration</p>
                     </div>
@@ -47,7 +64,6 @@
 
 <script>
 // @ is an alias to /src
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import IconBase from '../UI/IconBase';
 
@@ -60,19 +76,26 @@ export default {
         };
     },
     components: { IconBase },
+    created() {
+        setInterval(this.getNow, 1000);
+    },
     methods: {
-        retrieveIsAdmin() {
-            const result = useStore().getters.getIsAdmin;
-            if (result === false) {
-                this.router.push({ name: 'Home' });
-            } else {
-                return true;
-            }
+        selectSection(event) {
+            this.selected = event;
+            this.$emit('childToParent', event);
+        },
+        getNow() {
+            const today = new Date();
+            const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+            const dateTime = date + ' ' + time;
+            this.timestamp = dateTime;
         }
     },
     data() {
         return {
-            isAdmin: this.retrieveIsAdmin()
+            timestamp: '',
+            selected: 'Dashboard'
         };
     }
 };
@@ -154,7 +177,6 @@ export default {
 }
 
 .section-item-styling:hover {
-    background-color: #e7e9eb;
     cursor: pointer;
 }
 
@@ -171,7 +193,7 @@ export default {
 .section-selected {
     background-color: #a9a9a9;
 }
-.section-selected + p {
-    color: black;
+.section-selected {
+    color: red;
 }
 </style>

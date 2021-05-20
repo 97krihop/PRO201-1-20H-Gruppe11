@@ -1,6 +1,12 @@
 <template>
     <div v-if="isAdmin === true">
         <base-site>
+            <side-bar-menu v-on:childToParent="recievedClickInChildSideMenu" />
+            <template>
+                <camp-data-page></camp-data-page>
+            </template>
+            </base-site>
+
             <side-bar-menu />
             <top-metric :name-of-data="totalRep" data-to-display="333123" metric-icon-src="" />
             <top-metric :name-of-data="totalUnitsRegistered" data-to-display="1.000.000" />
@@ -18,7 +24,6 @@ import { useRouter } from 'vue-router';
 import TopMetric from '@/components/AdminPage/TopMetrics';
 import SideBarMenu from '@/components/AdminPage/SideBarMenu';
 
-// TODO Add icons from svg icon pack when pushed to dev
 export default {
     name: 'adminPage',
     setup() {
@@ -32,6 +37,7 @@ export default {
     components: {
         TopMetric,
         SideBarMenu,
+        CampDataPage,
         BaseSite
     },
     methods: {
@@ -42,10 +48,14 @@ export default {
             } else {
                 return true;
             }
+        },
+        recievedClickInChildSideMenu(event) {
+            this.selectedSection = event;
         }
     },
     data() {
         return {
+            selectedSection: '',
             isAdmin: this.retrieveIsAdmin(),
             totalRep: 'Total Repairs',
             totalUnitsRegistered: 'Total Units Registered',
