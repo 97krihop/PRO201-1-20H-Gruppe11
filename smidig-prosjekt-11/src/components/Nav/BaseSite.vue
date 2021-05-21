@@ -25,8 +25,6 @@ import NavBar from "./navbar/NavBar.vue";
 export default {
   components: {
     NavBar
-
-    // Hamburger
   },
   name: "LogoBar",
   setup() {
@@ -39,8 +37,6 @@ export default {
       router.push({ name: "home" });
     }
     return {
-      // HamburgerIcon,
-      // LoginButton,
       user,
       goHome
     };
