@@ -4,16 +4,16 @@
       <!-- Modal takes props form parent component and injects into corresponding slot. This makes custom modal messages -->
       <div class="modal-backdrop">
         <div
-          class="modal"
-          role="dialog"
-          aria-labelledby="modalTitle"
-          aria-describedby="modalDescription"
+            class="modal"
+            role="dialog"
+            aria-labelledby="modalTitle"
+            aria-describedby="modalDescription"
         >
           <header class="modal-header" id="modalTitle">
             <img
-              src="@/assets/Images/alert.png"
-              id="header-image"
-              alt="Alert image"
+                src="@/assets/Images/alert.png"
+                id="header-image"
+                alt="Alert image"
             />
             <slot class="slot-text font-standardText" name="header" />
           </header>
@@ -25,10 +25,18 @@
             <button
                 type="button"
                 class="btn-green font-standardText"
+                @click="commit"
+                aria-label="Close modal"
+            >
+              Yes
+            </button>
+            <button
+                type="button"
+                class="btn-green font-standardText"
                 @click="close"
                 aria-label="Close modal"
             >
-              OK
+              No
             </button>
           </footer>
         </div>
