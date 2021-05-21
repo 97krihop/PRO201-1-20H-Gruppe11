@@ -10,6 +10,7 @@
             placeholder="Enter Username"
             required
           />
+          <span>{{ usernameError }}<br /></span>
         </div>
         <div class="input">
           <label>Password: </label>
@@ -19,6 +20,7 @@
             placeholder="Enter Password"
             required
           />
+          <span>{{ passwordError }} <br /></span>
         </div>
         <div class="input">
           <label>Confirm Password: </label>
@@ -28,6 +30,7 @@
             placeholder="Enter Password"
             required
           />
+          <span>{{ CPError }}<br /></span>
         </div>
         <div class="admin-check">
           <label>Admin: </label>
@@ -37,13 +40,6 @@
           <button id="submit-btn" type="submit" :disabled="isSubmitting">
             Submit
           </button>
-        </div>
-        <div>
-          <span>{{ usernameError }}</span>
-          <br />
-          <span>{{ passwordError }}</span>
-          <br />
-          <span>{{ CPError }}</span>
         </div>
       </div>
     </form>
@@ -60,17 +56,17 @@ export default {
       username(value) {
         return value && value.length >= 6
           ? true
-          : "username needs to be 6 or longer";
+          : "Username needs to be 6 or longer";
       },
       password(value) {
         return value && value.length >= 6
           ? true
-          : "password needs to be 6 or longer";
+          : "Password needs to be 6 or longer";
       },
       confirmPassword(value) {
         return value === password.value
           ? true
-          : "confirmPassword needs to match password";
+          : "Password needs to match password";
       }
     };
     const { handleSubmit, isSubmitting } = useForm({
@@ -163,6 +159,9 @@ export default {
       span {
         width: 100%;
         font-size: 14px;
+        font-weight: bold;
+        color: #cdcdcd;
+        margin: 5px 0 5px 0;
       }
     }
 
