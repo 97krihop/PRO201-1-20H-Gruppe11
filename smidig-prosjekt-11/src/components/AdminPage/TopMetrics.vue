@@ -1,8 +1,12 @@
 <template>
   <div class="metric-container">
-    <img class="metric-icon" :src="metricIconSrc" />
-    <p class="name-of-data">{{ nameOfData }}</p>
-    <p class="data-to-display">{{ dataToDisplay }}</p>
+    <div class="description-container">
+      <img class="metric-icon" :src="metricIconSrc" />
+      <p class="section-item-text">{{ nameOfData }}</p>
+    </div>
+    <div>
+      <p class="data-to-display">{{ dataToDisplay }}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -26,16 +30,21 @@ export default {
   height: 200px;
   width: 250px;
   padding: 30px;
-  margin: 2em;
-  border: 1px solid #050505;
   border-radius: 15px 50px;
 }
-.name-of-data {
-  padding-bottom: 20px;
-  font-size: x-large;
+.description-container {
+  height: 1vh;
+}
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+.section-item-text {
+  text-align: center;
+  font-size: 1.3em;
+  font-family: "Open Sans", sans-serif;
+  color: #828b96;
 }
 .data-to-display {
   color: #4aae9b;
-  font-size: xx-large;
+  font-size: 2em;
+  margin-top: 90px;
 }
 </style>

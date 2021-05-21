@@ -74,9 +74,12 @@ export default {
 
 <style scoped>
 .grid-layout {
-  display: flex;
-  flex-flow: row;
-  align-content: flex-start;
+  display: grid;
+  grid-template-columns: 17% 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: white;
 }
 .side-bar {
   width: auto;

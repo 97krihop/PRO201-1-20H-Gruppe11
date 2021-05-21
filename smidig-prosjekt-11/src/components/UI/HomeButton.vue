@@ -30,7 +30,7 @@ a {
     box-shadow: -1px -2px #504d4c;
 
     p {
-      color: #ececec;
+      color: #ffffff;
       font-weight: bold;
       font-size: 30px;
       text-align: left;

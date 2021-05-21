@@ -36,12 +36,19 @@
       </div>
     </div>
 
-    <img
-      id="close-repair-btn"
-      class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
-      src="@/assets/Images/delete-icon.png"
+    <!-- <img
+            id="close-repair-btn"
+            class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
+            src="@/assets/Images/delete-icon.png"
+            v-on:click="closePopup"
+            alt="close repair tab"
+        /> -->
+
+    <icon-base
+      class="close-repair-ic"
+      iconName="cross"
+      iconColor="darkred"
       v-on:click="closePopup"
-      alt="close repair tab"
     />
 
     <button
@@ -56,6 +63,7 @@
 
 <script>
 import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import IconBase from "../UI/IconBase.vue";
 
 export default {
   name: "PopupEdit",
@@ -70,7 +78,8 @@ export default {
   },
   emits: ["clicked"],
   components: {
-    ModalErrorMessage
+    ModalErrorMessage,
+    IconBase
   },
   data() {
     return {
@@ -87,44 +96,50 @@ export default {
       productImages: [
         {
           partNumber: "1",
-          partName: "Solar Panel",
-          imgName: "solarPanelCompleteWithCable-removebg-preview",
+          partName: "Lamp",
+          imgName: "ic-part-lamp",
           isChecked: false
         },
         {
           partNumber: "2",
-          partName: "Battery",
-          imgName: "battery-removebg-preview",
+          partName: "12V charger",
+          imgName: "ic-part-adapter-charger",
           isChecked: false
         },
         {
           partNumber: "3",
-          partName: "Seal",
-          imgName: "powerSwitchCoverNew-removebg-preview",
+          partName: "Battery",
+          imgName: "ic-part-battery",
           isChecked: false
         },
         {
           partNumber: "4",
-          partName: "USB Connector",
-          imgName: "directUsbPort-removebg-preview",
+          partName: "Power button",
+          imgName: "ic-part-button",
           isChecked: false
         },
         {
           partNumber: "5",
-          partName: "Neck plus light",
-          imgName: "batteryPackLightUnitComplete-removebg-preview",
+          partName: "Light bulb",
+          imgName: "ic-part-lightbulb",
           isChecked: false
         },
         {
           partNumber: "6",
-          partName: "Torx-5",
-          imgName: "batteryBoxTorx5-removebg-preview",
+          partName: "Screen",
+          imgName: "ic-part-screen",
           isChecked: false
         },
         {
           partNumber: "7",
-          partName: "PCBA",
-          imgName: "pcbaRevD2.6-removebg-preview",
+          partName: "Socket charger",
+          imgName: "ic-part-socket-charger",
+          isChecked: false
+        },
+        {
+          partNumber: "8",
+          partName: "Solar panel",
+          imgName: "ic-part-solar-panel",
           isChecked: false
         }
       ],
@@ -323,6 +338,13 @@ export default {
       transform: scale(1.15);
       transition-duration: 75ms;
     }
+  }
+
+  .close-repair-ic {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 
   #parts {
