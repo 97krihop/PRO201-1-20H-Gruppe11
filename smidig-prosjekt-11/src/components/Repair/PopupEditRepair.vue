@@ -20,6 +20,7 @@
             :id="product.partNumber"
             :class="{ partchecked: product.isChecked }"
             :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
+            alt="{{product.partName}}"
           />
           <h2>{{ product.partName }}</h2>
         </div>
@@ -240,7 +241,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: 0px 20px;
+    gap: 0 20px;
     grid-auto-flow: column;
     align-items: center;
     justify-items: center;

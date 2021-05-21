@@ -2,7 +2,7 @@
   <!-- Root element -->
   <div :class="{ backdrop: showRepair || showEdit }">
     <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
-    <div id="parts-popup" v-if="showRepair == true">
+    <div id="parts-popup" v-if="showRepair === true">
       <popup-select-repair @onCloseRepair="closeRepair()" />
     </div>
 
@@ -23,7 +23,11 @@
             @edit-entity="editRepair($event)"
             :entityParts="entity.parts"
             :entityId="entity.id"
-            :entitySerialNumber="entity.entitySerialNr.length >= 1 ? entity.entitySerialNr : 'No Serial Number'"
+            :entitySerialNumber="
+              entity.entitySerialNr.length >= 1
+                ? entity.entitySerialNr
+                : 'No Serial Number'
+            "
           >
           </repair-entity>
         </div>
