@@ -53,6 +53,9 @@ const getters = {
   },
   getNumOfEntities(state) {
     return state.entityArray.length;
+  },
+  getEntityById: state => id => {
+    return state.entityArray.find(entity => entity.id === id);
   }
 };
 

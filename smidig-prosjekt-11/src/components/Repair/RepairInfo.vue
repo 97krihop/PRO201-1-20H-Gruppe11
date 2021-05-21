@@ -10,7 +10,7 @@
       <popup-edit-repair
         ref="editref"
         @clicked="closeEdit()"
-        :serialToEdit="editSerial"
+        :idToEdit="editId"
       >
       </popup-edit-repair>
     </div>
@@ -18,11 +18,12 @@
     <!-- Grid system for submitted models -->
     <section id="entity-list-container" ref="repairsContainer">
       <div>
-        <div v-for="entity in entities" :key="entity.entitySerialNr">
+        <div v-for="entity in entities" :key="entity.id">
           <repair-entity
             @edit-entity="editRepair($event)"
-            :entitySerialNumber="entity.entitySerialNr"
             :entityParts="entity.parts"
+            :entityId="entity.id"
+            :entitySerialNumber="entity.entitySerialNr.length >= 1 ? entity.entitySerialNr : 'No Serial Number'"
           >
           </repair-entity>
         </div>
@@ -55,7 +56,7 @@ export default {
       entities: [],
       showRepair: false,
       showEdit: false,
-      editSerial: "EditSerial"
+      editId: -1
     };
   },
   created() {
@@ -72,8 +73,8 @@ export default {
     IconBase
   },
   methods: {
-    editRepair(serial) {
-      this.editSerial = serial;
+    editRepair(id) {
+      this.editId = id;
 
       //Function to render selected entity parts
       //this.$refs.editref.renderSelects();
@@ -137,6 +138,7 @@ export default {
   width: 65vw;
   height: 60vh;
   border: 1px solid #423048;
+  border-radius: 10px;
 }
 
 #edit-popup {
