@@ -150,21 +150,12 @@ export default {
       height: 23px;
     }
   }
+}
 
-  /*
-  button {
-    outline: none;
-  }
-
-  hr {
-    grid-column: 1/-1;
-    grid-row: 2;
-    width: 93%;
-    margin: auto;
-    border-top: 0.5px solid #707070;
-  }
-
-     */
+hr {
+  border-top: 1px solid #cecbca;
+  width: 95%;
+  margin: auto;
 }
 
 @media only screen and (min-device-width: 600px) and (max-width: 960px) {
