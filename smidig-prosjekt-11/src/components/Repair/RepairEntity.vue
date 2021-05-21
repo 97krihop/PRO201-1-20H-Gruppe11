@@ -7,8 +7,9 @@
     />
     <!-- <div class="product-img-container">
         </div> -->
+
     <div class="serial-container">
-      <span class="serial-number">#{{ this.entitySerialNumber }}</span>
+      <span class="serial-number">{{ this.entitySerialNumber }}</span>
     </div>
 
     <!-- Loops through the selected parts for this repair, and displays their images -->
