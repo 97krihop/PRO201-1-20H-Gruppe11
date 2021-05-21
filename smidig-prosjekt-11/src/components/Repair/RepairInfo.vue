@@ -1,5 +1,4 @@
 <template>
-
   <!-- Root element -->
   <div :class="{ backdrop: showRepair || showEdit }">
     <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->

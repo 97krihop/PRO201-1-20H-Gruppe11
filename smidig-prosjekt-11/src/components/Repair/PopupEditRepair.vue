@@ -1,7 +1,33 @@
 <template>
-  <div id="container">
-    <div id="serialnum-container">
-      <h3>SERIAL NUMBER</h3>
+  <div class="edit-repair-container">
+    <!-- PARTS-DIV -->
+    <div class="part-container">
+      <modal-error-message v-if="showModal == true" @close="showModal = false">
+        <template v-slot:body>{{ modalTextBody }}</template>
+        <!-- Serial Number Already Exists -->
+      </modal-error-message>
+
+      <h1>Parts</h1>
+      <div class="part-grid">
+        <div
+          class="part-grid-item"
+          v-for="product in productImages"
+          :key="product.partNumber"
+          @click="selectPart(product)"
+        >
+          <img
+            class="part-icon"
+            :id="product.partNumber"
+            :class="{ partchecked: product.isChecked }"
+            :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
+          />
+          <h2>{{ product.partName }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="serial-container">
+      <h3>Serial number</h3>
 
       <input
         ref="inputSerialNumber"
@@ -11,38 +37,6 @@
         placeholder="Example: 1234 5678"
       />
     </div>
-    <!-- PARTS-DIV -->
-    <div id="parts">
-      <modal-error-message v-if="showModal == true" @close="showModal = false">
-        <template v-slot:body>{{ modalTextBody }}</template>
-        <!-- Serial Number Already Exists -->
-      </modal-error-message>
-
-      <h1>Parts</h1>
-      <div id="parts-cont-no-change">
-        <a
-          class="popup-products"
-          v-for="product in productImages"
-          :key="product.partNumber"
-          :class="{ checked: product.isChecked }"
-          @click="selectPart(product)"
-        >
-          <img
-            :id="product.partNumber"
-            :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
-          />
-          <h2>{{ product.partName }}</h2>
-        </a>
-      </div>
-    </div>
-
-    <!-- <img
-            id="close-repair-btn"
-            class="self-end cursor-pointer rounded-full transform hover:scale-110 motion-reduce:transform-none"
-            src="@/assets/Images/delete-icon.png"
-            v-on:click="closePopup"
-            alt="close repair tab"
-        /> -->
 
     <icon-base
       class="close-repair-ic"
@@ -51,13 +45,14 @@
       v-on:click="closePopup"
     />
 
-    <button
-      class="font-standardText bg-logoBar"
-      id="next-btn"
+    <icon-base
+      class="submit-ic"
+      iconName="checkmark"
+      iconColor="darkgreen"
       @click="submitPartsSelected"
-    >
-      <h3>Update</h3>
-    </button>
+      iconWidth="40"
+      iconHeight="40"
+    />
   </div>
 </template>
 
@@ -235,76 +230,84 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#container {
+.edit-repair-container {
   width: 100%;
+  height: 100%;
   user-select: none;
   background-color: #f8f6f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   text-align: center;
 
+  .part-container {
+    height: 100%;
+    position: relative;
+    background-color: #f8f6f2;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid red;
+    padding-top: 10px;
+  }
+
   h1 {
-    font-size: 1.5em;
-    margin: 1vh;
-    padding-bottom: 1.5vh;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: #38293c;
+    margin: 0 auto;
+    // border: 1px solid salmon;
   }
 
-  img {
-    width: 8vw;
-    max-width: 100px;
-    height: auto;
-    max-height: 100px;
-    cursor: pointer;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-  }
-
-  #parts-cont-no-change {
-    width: 80%;
+  .part-grid {
+    width: 100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    row-gap: 2vh;
-    margin: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0px 20px;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
 
-    .popup-products {
+    // border: 1px solid blue;
+
+    .part-grid-item {
+      // border: 1px solid green;
       background-color: #f8f6f2;
-      width: 15vh;
-      height: 15vh;
-      position: relative;
+      width: 75%;
+      // height: 80%;
       cursor: pointer;
 
+      display: flex;
+      flex-direction: column;
+
       h2 {
-        cursor: pointer;
         font-weight: bold;
-        font-size: 17px;
-        position: absolute;
-        bottom: 2px;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
+        font-size: 1rem;
       }
 
-      img {
+      .part-icon {
+        border-radius: 10px;
+        background-color: #dad2cb;
+        flex: 1;
+        align-self: center;
         -webkit-user-drag: none;
       }
 
-      &:hover {
+      &:hover img {
+        background-color: #7eb46b;
+      }
+
+      .partchecked {
         background-color: #7eb46b;
       }
     }
-
-    .checked {
-      background-color: #7eb46b;
-    }
   }
 
-  #serialnum-container {
-    position: absolute;
-    left: 40px;
-    bottom: 20px;
+  .serial-container {
+    // border: 1px solid blue;
+    padding: 5px;
 
     h3 {
       font-weight: bold;
@@ -325,21 +328,6 @@ export default {
     }
   }
 
-  #close-repair-btn {
-    height: 50px;
-    width: 50px;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    border-radius: 50%;
-
-    &:hover {
-      transform: scale(1.15);
-      transition-duration: 75ms;
-    }
-  }
-
   .close-repair-ic {
     cursor: pointer;
     position: absolute;
@@ -347,31 +335,11 @@ export default {
     top: 10px;
   }
 
-  #parts {
-    position: relative;
-    grid-column: span 2 / span 2;
-    margin: 30px;
-    background-color: #f8f6f2;
-  }
-
-  #next-btn {
-    width: 85px;
-    height: 45px;
-    font-weight: bold;
+  .submit-ic {
     position: absolute;
-    right: 30px;
-    bottom: 20px;
-    border: 1px solid #423048;
-    border-radius: 2px;
-
-    &:hover {
-      transform: scale(1.05);
-      transition-duration: 75ms;
-    }
-
-    h3 {
-      color: #fff;
-    }
+    right: 20px;
+    bottom: 10px;
+    cursor: pointer;
   }
 }
 
@@ -386,8 +354,8 @@ export default {
       height: 10vh;
     }
 
-    #parts-cont-no-change {
-      .popup-products {
+    .part-grid {
+      .part-grid-item {
         margin: 0;
         width: 13vh;
         height: 13vh;
@@ -398,7 +366,7 @@ export default {
       }
     }
 
-    #serialnum-container {
+    .serial-container {
       h3 {
         font-size: 12px;
       }
@@ -406,17 +374,6 @@ export default {
       input {
         font-size: 11px;
       }
-    }
-
-    #close-repair-btn {
-      height: 35px;
-      width: 35px;
-    }
-
-    #next-btn {
-      width: 55px;
-      height: 30px;
-      font-size: 12px;
     }
   }
 }

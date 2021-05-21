@@ -23,10 +23,10 @@
           <footer class="modal-footer">
             <slot class="slot-text font-standardText" name="footer" />
             <button
-                type="button"
-                class="btn-green font-standardText"
-                @click="close"
-                aria-label="Close modal"
+              type="button"
+              class="btn-green font-standardText"
+              @click="close"
+              aria-label="Close modal"
             >
               OK
             </button>
@@ -40,7 +40,7 @@
 <script>
 export default {
   name: "modal",
-  emits: ["close","commit"],
+  emits: ["close", "commit"],
   methods: {
     close() {
       this.$emit("close");
