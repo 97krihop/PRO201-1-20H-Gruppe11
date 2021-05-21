@@ -1,5 +1,4 @@
 <template>
-  <!-- Component creates two buttons. Is used in home screen for selecting Repair/Elearning if user is logged in -->
   <div id="button-div">
     <router-link
       v-if="isAdmin === true"
@@ -18,7 +17,7 @@
     >
       <h4>Register Repair</h4>
     </router-link>
-
+    <!-- 
     <router-link
       tag="button"
       to="/#"
@@ -27,21 +26,38 @@
     >
       <h4>E-learning</h4>
     </router-link>
+    -->
+    <button
+      class="font-standardText button home-learn-ico-src home-ico-style"
+      @click="showModal = true"
+    >
+      <h4>E-learning</h4>
+    </button>
+    <modal-error-message v-if="showModal === true" @close="showModal = false">
+      <template v-slot:body>E-learning is not implemented yet</template>
+    </modal-error-message>
   </div>
 </template>
 
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import ModalErrorMessage from "../../components/Modals/ModalErrorMessage.vue";
+import { ref } from "vue";
 
 export default {
   name: "Home",
+  components: {
+    ModalErrorMessage
+  },
   setup() {
     const store = useStore();
     const router = useRouter();
+    const showModal = ref(false);
     return {
       store,
-      router
+      router,
+      showModal
     };
   },
   methods: {
@@ -74,6 +90,7 @@ export default {
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 }
+
 .button {
   background-color: #ececec;
   text-align: center;
@@ -103,15 +120,19 @@ export default {
     margin-top: 2%;
   }
 }
+
 .isAdminClass {
   height: 30vh;
 }
+
 .home-repair-ico-src {
   background-image: url("../../assets/Images/Icons/landing_repair.png");
 }
+
 .home-learn-ico-src {
   background-image: url("../../assets/Images/Icons/landing_elearn.png");
 }
+
 .home-ico-style {
   background-repeat: no-repeat;
   background-position: right 10px center;
