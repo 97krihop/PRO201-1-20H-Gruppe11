@@ -121,17 +121,18 @@ export default {
     padding: 0.5rem;
     border-radius: 5px;
     box-shadow: -1px -2px #899599;
+    transition: 150ms;
 
     &:hover {
-      background-color: #c0f6ae;
+      background-color: #4d5050;
+      color: #ececec;
     }
 
     &:active {
       transform: scale(0.98);
       transition-duration: 10ms;
       box-shadow: inset 2px 2px 2px #899599;
-
-      background-color: #d6ffcb;
+      background-color: #6d6d6d;
     }
   }
 }
