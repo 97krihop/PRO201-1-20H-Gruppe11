@@ -27,12 +27,12 @@
       </div>
     </div>
     <!-- Error Message 1 Button-->
-    <modal-error-message v-if="showModal == true" @close="showModal = false">
+    <modal-error-message v-if="showModal === true" @close="showModal = false">
       <template v-slot:body>{{ modalTextBody }}</template>
     </modal-error-message>
     <!-- No Serial Number Message 2 Buttons-->
     <modal-no-serial-number-message
-      v-if="showNoSerialModal == true"
+      v-if="showNoSerialModal === true"
       @commit="(noSerialNumberCommitted = true), submitPartsSelected()"
       @close="showNoSerialModal = false"
     >
@@ -53,6 +53,7 @@
             :class="{ partchecked: product.isChecked }"
             :id="product.partNumber"
             :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
+            alt="{{product.partName}}"
           />
           <h2>{{ product.partName }}</h2>
         </div>
@@ -183,16 +184,16 @@ export default {
         this.modalTextBody = "Serial number can only contain numbers";
         this.showModal = true;
         return;
-      } else if (this.partsChosen.length == 0) {
+      } else if (this.partsChosen.length === 0) {
         // Please choose part
         this.modalTextBody = "Please Select Parts";
         this.showModal = true;
         return;
-      } else if (serialNr === '' && !this.noSerialNumberCommitted) {
+      } else if (serialNr === "" && !this.noSerialNumberCommitted) {
         // No serial number provided
         this.partsChosen = [];
         this.serialInputIsEmpty = true;
-        this.modalTextBody = 'Are you sure you have no serial number?';
+        this.modalTextBody = "Are you sure you have no serial number?";
         this.showNoSerialModal = true;
         this.noSerialNumberCommitted = false;
         return;
@@ -295,7 +296,7 @@ export default {
       }
 
       .serialInputEmpty {
-        box-shadow: 0px 0px 8px #cc0000;
+        box-shadow: 0 0 8px #cc0000;
       }
 
       input {
@@ -337,7 +338,7 @@ export default {
 
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-template-rows: repeat(2, minmax(0, 1fr));
-      gap: 0px 20px;
+      gap: 0 20px;
     }
 
     .part-grid-entity {
