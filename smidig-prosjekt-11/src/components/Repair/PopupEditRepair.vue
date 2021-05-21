@@ -57,88 +57,88 @@
 </template>
 
 <script>
-import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
-import IconBase from '../UI/IconBase.vue';
+import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import IconBase from "../UI/IconBase.vue";
 
 export default {
-  name: 'PopupEdit',
+  name: "PopupEdit",
   props: {
     pictures: {
-      type: Array,
+      type: Array
     },
     serialToEdit: {
       type: String,
-      default: '',
-    },
+      default: ""
+    }
   },
-  emits: ['clicked'],
+  emits: ["clicked"],
   components: {
     ModalErrorMessage,
-    IconBase,
+    IconBase
   },
   data() {
     return {
       id: -1, //fetched in renderSelects()
       serial: -1,
       serialInputIsEmpty: false,
-      selectedEntitySerialNumber: 'noneselected',
-      modalTextBody: '',
+      selectedEntitySerialNumber: "noneselected",
+      modalTextBody: "",
       showModal: false,
       inputSerial: {
         Type: Number,
-        Required: true,
+        Required: true
       },
       productImages: [
         {
-          partNumber: '1',
-          partName: 'Lamp',
-          imgName: 'ic-part-lamp',
-          isChecked: false,
+          partNumber: "1",
+          partName: "Lamp",
+          imgName: "ic-part-lamp",
+          isChecked: false
         },
         {
-          partNumber: '2',
-          partName: '12V charger',
-          imgName: 'ic-part-adapter-charger',
-          isChecked: false,
+          partNumber: "2",
+          partName: "12V charger",
+          imgName: "ic-part-adapter-charger",
+          isChecked: false
         },
         {
-          partNumber: '3',
-          partName: 'Battery',
-          imgName: 'ic-part-battery',
-          isChecked: false,
+          partNumber: "3",
+          partName: "Battery",
+          imgName: "ic-part-battery",
+          isChecked: false
         },
         {
-          partNumber: '4',
-          partName: 'Power button',
-          imgName: 'ic-part-button',
-          isChecked: false,
+          partNumber: "4",
+          partName: "Power button",
+          imgName: "ic-part-button",
+          isChecked: false
         },
         {
-          partNumber: '5',
-          partName: 'Light bulb',
-          imgName: 'ic-part-lightbulb',
-          isChecked: false,
+          partNumber: "5",
+          partName: "Light bulb",
+          imgName: "ic-part-lightbulb",
+          isChecked: false
         },
         {
-          partNumber: '6',
-          partName: 'Screen',
-          imgName: 'ic-part-screen',
-          isChecked: false,
+          partNumber: "6",
+          partName: "Screen",
+          imgName: "ic-part-screen",
+          isChecked: false
         },
         {
-          partNumber: '7',
-          partName: 'Socket charger',
-          imgName: 'ic-part-socket-charger',
-          isChecked: false,
+          partNumber: "7",
+          partName: "Socket charger",
+          imgName: "ic-part-socket-charger",
+          isChecked: false
         },
         {
-          partNumber: '8',
-          partName: 'Solar panel',
-          imgName: 'ic-part-solar-panel',
-          isChecked: false,
-        },
+          partNumber: "8",
+          partName: "Solar panel",
+          imgName: "ic-part-solar-panel",
+          isChecked: false
+        }
       ],
-      partsChosen: [],
+      partsChosen: []
     };
   },
   methods: {
@@ -156,26 +156,26 @@ export default {
       }
 
       const serialNr = this.$refs.inputSerialNumber.value;
-      if (serialNr == '') {
+      if (serialNr == "") {
         // No serial number provided
         this.partsChosen = [];
         this.serialInputIsEmpty = true;
-        this.modalTextBody = 'Please input serial number';
+        this.modalTextBody = "Please input serial number";
         this.showModal = true;
         return;
       } else if (serialNr.length > 20) {
         // Serial number too long
-        this.modalTextBody = 'Serial number length must be less than 20';
+        this.modalTextBody = "Serial number length must be less than 20";
         this.showModal = true;
         return;
       } else if (isNaN(serialNr)) {
         // Serial number must be numeric
-        this.modalTextBody = 'Serial number can only contain numbers';
+        this.modalTextBody = "Serial number can only contain numbers";
         this.showModal = true;
         return;
       } else if (this.partsChosen.length == 0) {
         // Please choose part
-        this.modalTextBody = 'Please choose part';
+        this.modalTextBody = "Please choose part";
         this.showModal = true;
         return;
       }
@@ -183,7 +183,7 @@ export default {
       const editedEntity = {
         id: this.id,
         entitySerialNr: serialNr,
-        parts: this.partsChosen,
+        parts: this.partsChosen
       };
 
       const stateEntities = this.$store.getters.getEntities;
@@ -199,17 +199,17 @@ export default {
 
       if (exists == -1) {
         this.serialInputIsEmpty = true;
-        this.$store.commit('editEntity', editedEntity);
+        this.$store.commit("editEntity", editedEntity);
         this.closePopup();
       } else {
         //Serial nr doesnt exist
-        this.modalTextBody = 'Serial number already submitted';
+        this.modalTextBody = "Serial number already submitted";
         this.showModal = true;
         this.partsChosen = [];
       }
     },
     closePopup() {
-      this.$emit('clicked');
+      this.$emit("clicked");
     },
     renderSelects() {
       const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
@@ -218,15 +218,15 @@ export default {
       this.serial = this.serialToEdit;
       const currentEntityParts = entity.parts;
 
-      currentEntityParts.forEach((part) => {
+      currentEntityParts.forEach(part => {
         this.productImages[part.partNumber - 1].isChecked = true;
       });
-    },
+    }
   },
   mounted() {
     // THis may run again while exited which may cause problems
     this.renderSelects();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -278,7 +278,7 @@ export default {
       width: 75%;
       // height: 80%;
       cursor: pointer;
-      
+
       display: flex;
       flex-direction: column;
 

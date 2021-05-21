@@ -31,7 +31,11 @@
       <template v-slot:body>{{ modalTextBody }}</template>
     </modal-error-message>
     <!-- No Serial Number Message 2 Buttons-->
-    <modal-no-serial-number-message v-if="showNoSerialModal == true" @commit="noSerialNumberCommitted = true, submitPartsSelected()" @close="showNoSerialModal = false">
+    <modal-no-serial-number-message
+      v-if="showNoSerialModal == true"
+      @commit="(noSerialNumberCommitted = true), submitPartsSelected()"
+      @close="showNoSerialModal = false"
+    >
       <template v-slot:body>{{ modalTextBody }}</template>
     </modal-no-serial-number-message>
     <!-- PARTS-DIV -->
@@ -73,10 +77,9 @@
 </template>
 
 <script>
-import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
-import ModalNoSerialNumberMessage from '@/components/Modals/ModalNoSerialNumberMessage.vue';
-import IconBase from '../UI/IconBase.vue';
-
+import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import ModalNoSerialNumberMessage from "@/components/Modals/ModalNoSerialNumberMessage.vue";
+import IconBase from "../UI/IconBase.vue";
 
 export default {
   name: "PopupSelect",
@@ -87,7 +90,7 @@ export default {
   components: {
     ModalErrorMessage,
     ModalNoSerialNumberMessage,
-    IconBase,
+    IconBase
   },
   data() {
     return {
@@ -170,12 +173,11 @@ export default {
 
       let serialNr = this.$refs.inputSerialNumber.value;
 
-
-      if (serialNr === '' && !this.noSerialNumberCommitted) {
+      if (serialNr === "" && !this.noSerialNumberCommitted) {
         // No serial number provided
         this.partsChosen = [];
         this.serialInputIsEmpty = true;
-        this.modalTextBody = 'Are you sure you have no serial number?';
+        this.modalTextBody = "Are you sure you have no serial number?";
         this.showNoSerialModal = true;
         this.noSerialNumberCommitted = false;
         return;
@@ -212,7 +214,7 @@ export default {
       }
 
       //serialNr = (serialNr === '') ? serialNr : "No Serial Number";
-      if(serialNr === ""){
+      if (serialNr === "") {
         serialNr = "No Serial Number";
       }
 
@@ -224,7 +226,7 @@ export default {
       };
 
       this.serialInputIsEmpty = true;
-      this.$store.commit('addEntity', newEntity);
+      this.$store.commit("addEntity", newEntity);
       this.closePopup();
     },
     closePopup() {
