@@ -2,7 +2,7 @@
   <div class="edit-repair-container">
     <!-- PARTS-DIV -->
     <div class="part-container">
-      <modal-error-message v-if="showModal == true" @close="showModal = false">
+      <modal-error-message v-if="showModal === true" @close="showModal = false">
         <template v-slot:body>{{ modalTextBody }}</template>
         <!-- Serial Number Already Exists -->
       </modal-error-message>
@@ -33,7 +33,7 @@
         ref="inputSerialNumber"
         v-on:keydown="serialInputIsEmpty = false"
         v-bind:class="{ serialInputEmpty: serialInputIsEmpty }"
-        :value="serialToEdit"
+        :value="serial"
         placeholder="Example: 1234 5678"
       />
     </div>
@@ -66,9 +66,8 @@ export default {
     pictures: {
       type: Array
     },
-    serialToEdit: {
-      type: String,
-      default: ""
+    idToEdit: {
+      type: Number
     }
   },
   emits: ["clicked"],
@@ -144,7 +143,6 @@ export default {
   methods: {
     selectPart(product) {
       product.isChecked = !product.isChecked;
-      //console.log('selectPart(), serialToEdit: ' + this.serialToEdit);
     },
     submitPartsSelected() {
       // Adding the marked parts to the partsChosen-array
@@ -155,25 +153,19 @@ export default {
         }
       }
 
-      const serialNr = this.$refs.inputSerialNumber.value;
-      if (serialNr == "") {
-        // No serial number provided
-        this.partsChosen = [];
-        this.serialInputIsEmpty = true;
-        this.modalTextBody = "Please input serial number";
-        this.showModal = true;
-        return;
-      } else if (serialNr.length > 20) {
+      let serialNr = this.$refs.inputSerialNumber.value.trim();
+
+      if (serialNr.length > 20) {
         // Serial number too long
         this.modalTextBody = "Serial number length must be less than 20";
         this.showModal = true;
         return;
-      } else if (isNaN(serialNr)) {
+      } else if (isNaN(serialNr) || serialNr === " ") {
         // Serial number must be numeric
         this.modalTextBody = "Serial number can only contain numbers";
         this.showModal = true;
         return;
-      } else if (this.partsChosen.length == 0) {
+      } else if (this.partsChosen.length === 0) {
         // Please choose part
         this.modalTextBody = "Please choose part";
         this.showModal = true;
@@ -186,36 +178,18 @@ export default {
         parts: this.partsChosen
       };
 
-      const stateEntities = this.$store.getters.getEntities;
-      let exists = -1;
-      for (let i = 0; i < stateEntities.length; i++) {
-        if (
-          stateEntities[i].id !== this.id &&
-          stateEntities[i].entitySerialNr === serialNr
-        ) {
-          exists = 1;
-        }
-      }
-
-      if (exists == -1) {
-        this.serialInputIsEmpty = true;
-        this.$store.commit("editEntity", editedEntity);
-        this.closePopup();
-      } else {
-        //Serial nr doesnt exist
-        this.modalTextBody = "Serial number already submitted";
-        this.showModal = true;
-        this.partsChosen = [];
-      }
+      this.serialInputIsEmpty = true;
+      this.$store.commit("editEntity", editedEntity);
+      this.closePopup();
     },
     closePopup() {
       this.$emit("clicked");
     },
     renderSelects() {
-      const entity = this.$store.getters.getEntityBySerial(this.serialToEdit);
+      const entity = this.$store.getters.getEntityById(this.idToEdit);
       // Get id in order to pass it to entityData.js later when submitting
       this.id = entity.id;
-      this.serial = this.serialToEdit;
+      this.serial = entity.entitySerialNr;
       const currentEntityParts = entity.parts;
 
       currentEntityParts.forEach(part => {
@@ -238,7 +212,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  border-radius: 10px;
   text-align: center;
 
   .part-container {
@@ -249,6 +223,7 @@ export default {
     flex-direction: column;
     // border: 1px solid red;
     padding-top: 10px;
+    border-radius: 10px;
   }
 
   h1 {
