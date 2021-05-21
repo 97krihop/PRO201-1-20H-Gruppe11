@@ -54,11 +54,13 @@
 
       <!-- Button to go back to previous page -->
       <router-link :to="'/' + prevBtn">
-        <img
+        <icon-base
           class="progress-bar-buttons"
           id="back-btn"
-          src="@/assets/Images/Icons/forward-back-icon.png"
-          alt="Go to previous page"
+          :iconName="'arrow-left'"
+          iconColor="#7eb46b"
+          iconWidth="100%"
+          iconHeight="100%"
         />
       </router-link>
 
@@ -87,8 +89,10 @@
 </template>
 
 <script>
+import IconBase from "@/components/UI/IconBase";
 export default {
   name: "Progress bar",
+  components: { IconBase },
   data() {
     return {
       isSuccessfulReport: false,
