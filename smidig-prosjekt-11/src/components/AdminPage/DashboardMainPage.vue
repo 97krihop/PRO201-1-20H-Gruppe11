@@ -22,39 +22,41 @@
 
   <!-- ### Using Leaflet with Vue 3 ### -->
   <!-- https://github.com/vue-leaflet/vue-leaflet -->
-  <l-map style="height: 350px; width: 99%" :zoom="zoom" :center="center">
-    <l-geo-json :geojson="geojson" :options="options"> </l-geo-json>
+  <section class="map-container">
+    <l-map style="height: 65vh; width: 99%" :zoom="zoom" :center="center">
+      <l-geo-json :geojson="geojson" :options="options"> </l-geo-json>
 
-    <l-marker :lat-lng="coordinates1">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
-    <l-marker :lat-lng="coordinates2">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
-    <l-marker :lat-lng="coordinates3">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
+      <l-marker :lat-lng="coordinates1">
+        <l-popup>I'm a refugee camp!</l-popup>
+      </l-marker>
+      <l-marker :lat-lng="coordinates2">
+        <l-popup>I'm a refugee camp!</l-popup>
+      </l-marker>
+      <l-marker :lat-lng="coordinates3">
+        <l-popup>I'm a refugee camp!</l-popup>
+      </l-marker>
 
-    <l-control :position="'topleft'">
-      <p>General statistics</p>
-      <p>All users</p>
-      <p>7,541,390</p>
-    </l-control>
+      <l-control :position="'topleft'">
+        <p>General statistics</p>
+        <p>All users</p>
+        <p>7,541,390</p>
+      </l-control>
 
-    <l-control class="custom-control-watermark" :position="'bottomleft'">
-      <p>"watermark" stats</p>
-    </l-control>
+      <l-control class="custom-control-watermark" :position="'bottomleft'">
+        <p>"watermark" stats</p>
+      </l-control>
 
-    <l-control :position="'bottomright'">
-      <p>Stats on the bottom right side</p>
-    </l-control>
+      <l-control :position="'bottomright'">
+        <p>Stats on the bottom right side</p>
+      </l-control>
 
-    <l-control class="custom-control-button" :position="'topright'">
-      <p @click="showAlert">
-        Clickable stats
-      </p>
-    </l-control>
-  </l-map>
+      <l-control class="custom-control-button" :position="'topright'">
+        <p @click="showAlert">
+          Clickable stats
+        </p>
+      </l-control>
+    </l-map>
+  </section>
 </template>
 
 <script>
@@ -112,6 +114,11 @@ export default {
 </script>
 
 <style scoped>
+.map-container {
+  position: relative;
+  width: 80vw;
+  margin: auto;
+}
 .top-metrics-container {
   background-color: white;
   display: grid;
