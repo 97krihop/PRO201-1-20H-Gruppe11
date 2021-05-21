@@ -12,14 +12,18 @@
           :data="doughnutChart.data"
           @before-render="beforeRenderLogic"
         ></vue3-chart-js>
+      </div>
+
+      <div
+        v-for="entry in countryColors"
+        :key="entry.countryName"
+        class="country-list-item"
+      >
+        <p class="inline-elements">{{ entry.countryName }}</p>
         <div
-          v-for="entry in countryColors"
-          :key="entry.countryName"
-          class="country-list-item"
-          :style="{ color: entry.color }"
-        >
-          {{ entry.countryName + " " + entry.amount }}
-        </div>
+          class="country-color-box"
+          :style="{ backgroundColor: entry.color }"
+        ></div>
       </div>
     </div>
   </div>
@@ -35,8 +39,14 @@ export default {
       data: {
         datasets: [
           {
-            backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-            data: [40, 20, 80, 10]
+            backgroundColor: [
+              "#41B883",
+              "#E46651",
+              "#00D8FF",
+              "#DD1B16",
+              "#DF1C19"
+            ],
+            data: [40, 20, 80, 10, 7]
           }
         ]
       }
@@ -54,7 +64,8 @@ export default {
         { countryName: "Jemen", color: "#41B883", amount: 40 },
         { countryName: "Venezuela", color: "#E46651", amount: 20 },
         { countryName: "Afghanistan", color: "#00D8FF", amount: 80 },
-        { countryName: "Colombia", color: "#DD1B16", amount: 10 }
+        { countryName: "Colombia", color: "#DD1B16", amount: 10 },
+        { countryName: "Norge", color: "#41B883", amount: 7 }
       ]
     };
   },
@@ -63,31 +74,32 @@ export default {
 </script>
 
 <style scoped>
+.country-color-box {
+  height: 5px;
+  width: 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
 .header-text {
   text-align: center;
+  display: inline;
 }
+
 .country-list-item {
   margin-top: 20px;
-  text-align: start;
+  text-align: center;
 }
 .pie-chart-countries {
   margin: auto;
   height: 100px;
   width: 100px;
 }
-.country-list-flex-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 0px;
-}
 .main-information-topleft-container {
   background-color: #ffffff;
   height: 40vh;
   width: 20vh;
-  font-size: 1.5em;
+  text-align: center;
+  font-size: 1em;
   padding-top: 5px;
   font-family: "Open Sans", sans-serif;
   color: black;
@@ -101,8 +113,8 @@ export default {
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: 30% repeat(20, 20px);
   grid-column-gap: 10px;
-  grid-row-gap: 0px;
+  grid-row-gap: 5px;
 }
 </style>
