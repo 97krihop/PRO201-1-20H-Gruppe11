@@ -1,8 +1,7 @@
 <template>
   <div class="main-information-topleft-container">
     <div class="header-text">
-      <p>Units Globally</p>
-      <h>7.541.390</h>
+      <p>Most Repaired Part</p>
     </div>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
@@ -32,21 +31,15 @@
 <script>
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
 export default {
-  name: "CountryBarChartComponent",
+  name: "RepairPartBarChartComponent",
   setup() {
     const doughnutChart = {
       type: "doughnut",
       data: {
         datasets: [
           {
-            backgroundColor: [
-              "#41B883",
-              "#E46651",
-              "#00D8FF",
-              "#DD1B16",
-              "#DF1C19"
-            ],
-            data: [40, 20, 80, 10, 7]
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+            data: [40, 20, 80, 10]
           }
         ]
       }
@@ -61,11 +54,10 @@ export default {
   data() {
     return {
       countryColors: [
-        { countryName: "Jemen", color: "#41B883", amount: 40 },
-        { countryName: "Venezuela", color: "#E46651", amount: 20 },
-        { countryName: "Afghanistan", color: "#00D8FF", amount: 80 },
-        { countryName: "Colombia", color: "#DD1B16", amount: 10 },
-        { countryName: "Norge", color: "#41B883", amount: 7 }
+        { countryName: "PCB", color: "#41B883", amount: 40 },
+        { countryName: "Battery", color: "#E46651", amount: 20 },
+        { countryName: "Lamp", color: "#00D8FF", amount: 80 },
+        { countryName: "Connector", color: "#DD1B16", amount: 10 }
       ]
     };
   },
@@ -96,7 +88,7 @@ export default {
 }
 .main-information-topleft-container {
   background-color: #ffffff;
-  height: 40vh;
+  height: 30vh;
   width: 20vh;
   text-align: center;
   font-size: 1em;

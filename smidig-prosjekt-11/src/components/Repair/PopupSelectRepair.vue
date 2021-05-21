@@ -172,7 +172,7 @@ export default {
         }
       }
 
-      let serialNr = this.$refs.inputSerialNumber.value;
+      const serialNr = this.$refs.inputSerialNumber.value.trim();
 
       if (serialNr.length > 20) {
         // Serial number too long
@@ -214,11 +214,6 @@ export default {
         }
       }
 
-      //serialNr = (serialNr === '') ? serialNr : "No Serial Number";
-      if (serialNr === "") {
-        serialNr = "No Serial Number";
-      }
-
       //Creates object which later is injected into Vue state
       const newEntity = {
         id: newId,
@@ -245,6 +240,7 @@ export default {
   background-color: #f8f6f2;
   display: grid;
   grid-template-columns: auto 70%;
+  border-radius: 10px;
 
   h1 {
     font-size: 1.5em;
@@ -327,6 +323,7 @@ export default {
     align-items: center;
     background-color: #f8f6f2;
     padding: 10px;
+    border-radius: 10px;
     // border: 1px solid blue;
 
     .part-grid {

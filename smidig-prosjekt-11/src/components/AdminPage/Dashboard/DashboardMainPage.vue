@@ -36,7 +36,7 @@
         <l-popup>I'm a refugee camp!</l-popup>
       </l-marker>
 
-      <l-control :position="'topleft'">
+      <l-control :position="'topleft'" :style="{ display: inline }">
         <country-bar-chart-component />
       </l-control>
 
@@ -45,7 +45,7 @@
       </l-control>
 
       <l-control :position="'bottomright'">
-        <p>Stats on the bottom right side</p>
+        <repair-part-bar-chart-component />
       </l-control>
 
       <l-control class="custom-control-button" :position="'topright'">
@@ -69,11 +69,13 @@ import {
   LControl
 } from "@vue-leaflet/vue-leaflet";
 import CountryBarChartComponent from "./Components/CountryBarChartComponent";
+import RepairPartBarChartComponent from "@/components/AdminPage/Dashboard/Components/RepairedPartBarChartComponent";
 
 export default {
   name: "DashboardPage",
   setup() {},
   components: {
+    RepairPartBarChartComponent,
     CountryBarChartComponent,
     TopMetric,
     LMap,

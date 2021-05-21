@@ -70,14 +70,17 @@ export default {
     },
     entitySerialNumber: {
       Type: String
+    },
+    entityId: {
+      Type: Number
     }
   },
   methods: {
     editEntity: function() {
-      this.$emit("edit-entity", this.entitySerialNumber);
+      this.$emit("edit-entity", this.entityId);
     },
     deleteEntity: function() {
-      this.$store.commit("deleteEntity", this.entitySerialNumber);
+      this.$store.commit("deleteEntity", this.entityId);
     }
   }
 };
@@ -125,6 +128,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
   }
 
   .part-img {
