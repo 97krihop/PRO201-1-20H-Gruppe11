@@ -1,64 +1,59 @@
 <template>
   <div class="top-metrics-container">
     <top-metric
-        :name-of-data="'Total Repaired Units'"
-        data-to-display="333.123"
-        metric-icon-src=""
+      :name-of-data="'Total Repaired Units'"
+      data-to-display="333.123"
+      metric-icon-src=""
     />
     <top-metric
-        :name-of-data="'Total Units Registered'"
-        data-to-display="1.000.000"
+      :name-of-data="'Total Units Registered'"
+      data-to-display="1.000.000"
     />
     <top-metric
-        :name-of-data="'Most Repaired Part Today'"
-        data-to-display="PCB"
+      :name-of-data="'Most Repaired Part Today'"
+      data-to-display="PCB"
     />
 
     <top-metric
-        :name-of-data="'Most Repaired Part Monthly'"
-        data-to-display="Battery"
+      :name-of-data="'Most Repaired Part Monthly'"
+      data-to-display="Battery"
     />
   </div>
 
   <!-- ### Using Leaflet with Vue 3 ### -->
   <!-- https://github.com/vue-leaflet/vue-leaflet -->
   <l-map style="height: 350px; width: 99%" :zoom="zoom" :center="center">
-    
-    <l-geo-json
-      :geojson="geojson"
-      :options="options">
-    </l-geo-json>
-    
+    <l-geo-json :geojson="geojson" :options="options"> </l-geo-json>
+
     <l-marker :lat-lng="coordinates1">
       <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>    
+    </l-marker>
     <l-marker :lat-lng="coordinates2">
       <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>    
+    </l-marker>
     <l-marker :lat-lng="coordinates3">
       <l-popup>I'm a refugee camp!</l-popup>
     </l-marker>
-    
+
     <l-control :position="'topleft'">
       <p>General statistics</p>
       <p>All users</p>
       <p>7,541,390</p>
     </l-control>
-    
+
     <l-control class="custom-control-watermark" :position="'bottomleft'">
       <p>"watermark" stats</p>
-    </l-control>    
-    
+    </l-control>
+
     <l-control :position="'bottomright'">
       <p>Stats on the bottom right side</p>
     </l-control>
-    
+
     <l-control class="custom-control-button" :position="'topright'">
       <p @click="showAlert">
         Clickable stats
       </p>
     </l-control>
-    
   </l-map>
 </template>
 
@@ -66,7 +61,13 @@
 import TopMetric from "@/components/AdminPage/TopMetrics";
 import customGeojson from "@/assets/data/custom.geo.json";
 import "leaflet/dist/leaflet.css";
-import { LMap, LGeoJson, LMarker, LPopup, LControl } from "@vue-leaflet/vue-leaflet";
+import {
+  LMap,
+  LGeoJson,
+  LMarker,
+  LPopup,
+  LControl
+} from "@vue-leaflet/vue-leaflet";
 
 export default {
   name: "DashboardPage",

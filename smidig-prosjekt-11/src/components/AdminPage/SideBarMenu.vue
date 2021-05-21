@@ -119,7 +119,7 @@ export default {
     selectSection(event) {
       this.selected = event;
       this.$emit("childToParent", event);
-    },
+    }
   },
   data() {
     return {
@@ -143,7 +143,7 @@ export default {
 
 .flex-container {
   height: 91.2vh;
-  background-color: #E9E6E0;
+  background-color: #e9e6e0;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
