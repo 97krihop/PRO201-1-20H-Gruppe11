@@ -1,6 +1,9 @@
 <template>
   <div class="main-information-topleft-container">
-    <p><br />7.541.390 Units</p>
+    <div class="header-text">
+      <p>Units Globally</p>
+      <h>7.541.390</h>
+    </div>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
         <vue3-chart-js
@@ -60,6 +63,9 @@ export default {
 </script>
 
 <style scoped>
+.header-text {
+  text-align: center;
+}
 .country-list-item {
   margin-top: 20px;
   text-align: start;
@@ -69,7 +75,16 @@ export default {
   height: 100px;
   width: 100px;
 }
+.country-list-flex-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+}
 .main-information-topleft-container {
+  background-color: #ffffff;
   height: 40vh;
   width: 20vh;
   font-size: 1.5em;
