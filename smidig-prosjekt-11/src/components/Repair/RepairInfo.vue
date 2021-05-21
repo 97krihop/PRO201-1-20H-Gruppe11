@@ -1,15 +1,19 @@
 <template>
-    <!-- Root element -->
-    <div :class="{ backdrop: showRepair || showEdit }">
-        <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
-        <div id="parts-popup" v-if="showRepair == true">
-            <popup-select-repair  @onCloseRepair="closeRepair()" />
-        </div>
+  <!-- Root element -->
+  <div :class="{ backdrop: showRepair || showEdit }">
+    <!-- https://forum.vuejs.org/t/popup-how-to-hide-a-popup-by-clicking-outside-of-the-popup-window/59693 -- Mulighet for å trykke utenfor popup for å lukke? -->
+    <div id="parts-popup" v-if="showRepair == true">
+      <popup-select-repair @onCloseRepair="closeRepair()" />
+    </div>
 
-        <div id="edit-popup" v-if="showEdit">
-            <popup-edit-repair ref="editref" @clicked="closeEdit()" :serialToEdit="editSerial">
-            </popup-edit-repair>
-        </div>
+    <div id="edit-popup" v-if="showEdit">
+      <popup-edit-repair
+        ref="editref"
+        @clicked="closeEdit()"
+        :serialToEdit="editSerial"
+      >
+      </popup-edit-repair>
+    </div>
 
     <!-- Grid system for submitted models -->
     <section id="entity-list-container" ref="repairsContainer">
@@ -23,20 +27,20 @@
           </repair-entity>
         </div>
 
-                <div class="plus-icon-container">
-                    <icon-base
-                        v-show="showRepair === false"
-                        id="plus-btn"
-                        iconName="plus"
-                        iconColor="#423048"
-                        iconWidth="100%"
-                        iconHeight="100%"
-                        v-on:click="addRepair()"
-                    />
-                </div>
-            </div>
-        </section>
-    </div>
+        <div class="plus-icon-container">
+          <icon-base
+            v-show="showRepair === false"
+            id="plus-btn"
+            iconName="plus"
+            iconColor="#423048"
+            iconWidth="100%"
+            iconHeight="100%"
+            v-on:click="addRepair()"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -108,18 +112,18 @@ export default {
 }
 
 .plus-icon-container {
-    width: 50px;
-    height: 50px;
-    margin: 2.5vh auto;
-    cursor: pointer;
+  width: 50px;
+  height: 50px;
+  margin: 2.5vh auto;
+  cursor: pointer;
 }
 
 #plus-btn {
-    margin: 2.5vh auto;
-    width: 3vw;
-    outline: none;
-    border-radius: 50%;
-    cursor: pointer;
+  margin: 2.5vh auto;
+  width: 3vw;
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #parts-popup {

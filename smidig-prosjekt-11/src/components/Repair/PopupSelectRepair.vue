@@ -70,81 +70,81 @@
 </template>
 
 <script>
-import ModalErrorMessage from '@/components/Modals/ModalErrorMessage.vue';
-import IconBase from '../UI/IconBase.vue';
+import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import IconBase from "../UI/IconBase.vue";
 
 export default {
-  name: 'PopupSelect',
+  name: "PopupSelect",
   props: {
-    pictures: Array,
+    pictures: Array
   },
-  emits: ['onClose', 'onCloseRepair'],
+  emits: ["onClose", "onCloseRepair"],
   components: {
     ModalErrorMessage,
-    IconBase,
+    IconBase
   },
   data() {
     return {
       serialInputIsEmpty: false,
-      modalTextBody: '',
+      modalTextBody: "",
       showModal: false,
       hasSerialNumber: true,
       serialNr: {
         Type: Number,
-        Required: true,
+        Required: true
       },
 
       productImages: [
         {
-          partNumber: '1',
-          partName: 'Lamp',
-          imgName: 'ic-part-lamp',
-          isChecked: false,
+          partNumber: "1",
+          partName: "Lamp",
+          imgName: "ic-part-lamp",
+          isChecked: false
         },
         {
-          partNumber: '2',
-          partName: '12V charger',
-          imgName: 'ic-part-adapter-charger',
-          isChecked: false,
+          partNumber: "2",
+          partName: "12V charger",
+          imgName: "ic-part-adapter-charger",
+          isChecked: false
         },
         {
-          partNumber: '3',
-          partName: 'Battery',
-          imgName: 'ic-part-battery',
-          isChecked: false,
+          partNumber: "3",
+          partName: "Battery",
+          imgName: "ic-part-battery",
+          isChecked: false
         },
         {
-          partNumber: '4',
-          partName: 'Power button',
-          imgName: 'ic-part-button',
-          isChecked: false,
+          partNumber: "4",
+          partName: "Power button",
+          imgName: "ic-part-button",
+          isChecked: false
         },
         {
-          partNumber: '5',
-          partName: 'Light bulb',
-          imgName: 'ic-part-lightbulb',
-          isChecked: false,
+          partNumber: "5",
+          partName: "Light bulb",
+          imgName: "ic-part-lightbulb",
+          isChecked: false
         },
         {
-          partNumber: '6',
-          partName: 'Screen',
-          imgName: 'ic-part-screen',
-          isChecked: false,
+          partNumber: "6",
+          partName: "Screen",
+          imgName: "ic-part-screen",
+          isChecked: false
         },
         {
-          partNumber: '7',
-          partName: 'Socket charger',
-          imgName: 'ic-part-socket-charger',
-          isChecked: false,
+          partNumber: "7",
+          partName: "Socket charger",
+          imgName: "ic-part-socket-charger",
+          isChecked: false
         },
         {
-          partNumber: '8',
-          partName: 'Solar panel',
-          imgName: 'ic-part-solar-panel',
-          isChecked: false,
-        },
+          partNumber: "8",
+          partName: "Solar panel",
+          imgName: "ic-part-solar-panel",
+          isChecked: false
+        }
       ],
-      partsChosen: [],
+      partsChosen: []
     };
   },
   methods: {
@@ -164,26 +164,26 @@ export default {
 
       const serialNr = this.$refs.inputSerialNumber.value;
 
-      if (serialNr == '' && this.hasSerialNumber) {
+      if (serialNr == "" && this.hasSerialNumber) {
         // No serial number provided
         this.partsChosen = [];
         this.serialInputIsEmpty = true;
-        this.modalTextBody = 'Please Input Serial Number';
+        this.modalTextBody = "Please Input Serial Number";
         this.showModal = true;
         return;
       } else if (serialNr.length > 20) {
         // Serial number too long
-        this.modalTextBody = 'Serial number length must be less than 20';
+        this.modalTextBody = "Serial number length must be less than 20";
         this.showModal = true;
         return;
       } else if (isNaN(serialNr)) {
         // Serial number must be numeric
-        this.modalTextBody = 'Serial number can only contain numbers';
+        this.modalTextBody = "Serial number can only contain numbers";
         this.showModal = true;
         return;
       } else if (this.partsChosen.length == 0) {
         // Please choose part
-        this.modalTextBody = 'Please Select Parts';
+        this.modalTextBody = "Please Select Parts";
         this.showModal = true;
         return;
       }
@@ -207,28 +207,28 @@ export default {
       const newEntity = {
         id: newId,
         entitySerialNr: serialNr,
-        parts: this.partsChosen,
+        parts: this.partsChosen
       };
 
       const exists = stateEntities.findIndex(
-        (entity) => entity.entitySerialNr === newEntity.entitySerialNr
+        entity => entity.entitySerialNr === newEntity.entitySerialNr
       );
       // Check for serialnumber
       // Validation for serialnumber should prob be added
       if (exists === -1) {
         this.serialInputIsEmpty = true;
-        this.$store.commit('addEntity', newEntity);
+        this.$store.commit("addEntity", newEntity);
         this.closePopup();
       } else {
-        this.modalTextBody = 'Serial Number Already Exists';
+        this.modalTextBody = "Serial Number Already Exists";
         this.showModal = true;
         this.partsChosen = [];
       }
     },
     closePopup() {
-      this.$emit('onCloseRepair');
-    },
-  },
+      this.$emit("onCloseRepair");
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
