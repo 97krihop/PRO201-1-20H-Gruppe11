@@ -23,36 +23,36 @@ import { useRouter } from "vue-router";
 import NavBar from "./navbar/NavBar.vue";
 
 export default {
-    components: {
-        NavBar
-    },
-    name: 'LogoBar',
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const user = computed(() => {
-            return store.getters.getUserId;
-        });
-        function goHome() {
-            router.push({ name: 'home' });
-        }
-        return {
-            user,
-            goHome
-        };
-    },
-    data() {
-        return {
-            sideBarVisible: false
-        };
-    },
-    methods: {
-        toggleSidebar() {
-            const sideBarBool = this.sideBarVisible;
-            this.sideBarVisible = !sideBarBool;
-            this.$refs.hamburger.updateloginValues();
-        }
+  components: {
+    NavBar
+  },
+  name: "LogoBar",
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const user = computed(() => {
+      return store.getters.getUserId;
+    });
+    function goHome() {
+      router.push({ name: "home" });
     }
+    return {
+      user,
+      goHome
+    };
+  },
+  data() {
+    return {
+      sideBarVisible: false
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      const sideBarBool = this.sideBarVisible;
+      this.sideBarVisible = !sideBarBool;
+      this.$refs.hamburger.updateloginValues();
+    }
+  }
 };
 </script>
 
