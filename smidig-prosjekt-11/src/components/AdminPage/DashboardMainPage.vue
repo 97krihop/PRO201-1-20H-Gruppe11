@@ -26,13 +26,27 @@
     <l-geo-json :geojson="geojson" :options="options"> </l-geo-json>
 
     <l-marker :lat-lng="coordinates1">
-      <l-popup>I'm a refugee camp!</l-popup>
+      <l-icon :icon-anchor="staticAnchor" className="camp-label">
+        <p class="camp-title">Camp 3</p>
+        <div class="headline">{{ customText }}</div>
+        <img src="./layers.png" />
+      </l-icon>
     </l-marker>
     <l-marker :lat-lng="coordinates2">
-      <l-popup>I'm a refugee camp!</l-popup>
+      <l-icon :icon-anchor="staticAnchor" className="camp-label">
+        <p class="camp-title">Boot camp</p>
+        <div class="headline">{{ customText }}</div>
+        <img src="./layers.png" />
+      </l-icon>
     </l-marker>
+
+    <!-- https://vue2-leaflet.netlify.app/examples/custom-icons.html -->
     <l-marker :lat-lng="coordinates3">
-      <l-popup>I'm a refugee camp!</l-popup>
+      <l-icon :icon-anchor="staticAnchor" className="camp-label">
+        <p class="camp-title">Camp kulinaris</p>
+        <div class="headline">{{ customText }}</div>
+        <img src="./layers.png" />
+      </l-icon>
     </l-marker>
 
     <l-control :position="'topleft'">
@@ -65,9 +79,10 @@ import {
   LMap,
   LGeoJson,
   LMarker,
-  LPopup,
-  LControl
+  LControl,
+  LIcon
 } from "@vue-leaflet/vue-leaflet";
+import { icon } from "leaflet";
 
 export default {
   name: "DashboardPage",
@@ -77,8 +92,8 @@ export default {
     LMap,
     LGeoJson,
     LMarker,
-    LPopup,
-    LControl
+    LControl,
+    LIcon
   },
   methods: {
     showAlert() {
@@ -103,7 +118,15 @@ export default {
       },
       coordinates1: [31, 0],
       coordinates2: [37, 30],
-      coordinates3: [31, 36]
+      coordinates3: [61, 36],
+      icon: icon({
+        //iconUrl: "@/assets/images/primary-random.png",
+        //iconSize: [32, 37],
+        //iconAnchor: [16, 37]
+      }),
+      staticAnchor: [16, 37],
+      customText: "3,745",
+      iconSize: 64
     };
   },
   computed: {},
@@ -111,7 +134,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .top-metrics-container {
   background-color: white;
   display: grid;
@@ -134,5 +157,22 @@ export default {
   border: 1px solid #aaa;
   border-radius: 0.1em;
   cursor: pointer;
+}
+
+.camp-title {
+  color: grey;
+}
+
+.camp-label {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 0 20px 20px 20px;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
 }
 </style>
