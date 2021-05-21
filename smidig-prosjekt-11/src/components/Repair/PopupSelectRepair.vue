@@ -24,13 +24,20 @@
           :v-model="serialNr"
           placeholder="Example: 1234 5678"
         />
-        <!-- <input type="checkbox" id="emptySerialNumberCheckbox" v-model="hasSerialNumber"> -->
       </div>
     </div>
-    <modal-error-message v-if="showModal == true" @close="showModal = false">
+    <!-- Error Message 1 Button-->
+    <modal-error-message v-if="showModal === true" @close="showModal = false">
       <template v-slot:body>{{ modalTextBody }}</template>
-      <!-- Serial Number Already Exists -->
     </modal-error-message>
+    <!-- No Serial Number Message 2 Buttons-->
+    <modal-no-serial-number-message
+      v-if="showNoSerialModal === true"
+      @commit="(noSerialNumberCommitted = true), submitPartsSelected()"
+      @close="showNoSerialModal = false"
+    >
+      <template v-slot:body>{{ modalTextBody }}</template>
+    </modal-no-serial-number-message>
     <!-- PARTS-DIV -->
     <div class="part-container">
       <h1 @click="logStatement()">Parts</h1>
@@ -46,6 +53,7 @@
             :class="{ partchecked: product.isChecked }"
             :id="product.partNumber"
             :src="require('@/assets/Images/Parts/' + product.imgName + '.png')"
+            alt="{{product.partName}}"
           />
           <h2>{{ product.partName }}</h2>
         </div>
@@ -71,6 +79,7 @@
 
 <script>
 import ModalErrorMessage from "@/components/Modals/ModalErrorMessage.vue";
+import ModalNoSerialNumberMessage from "@/components/Modals/ModalNoSerialNumberMessage.vue";
 import IconBase from "../UI/IconBase.vue";
 
 export default {
@@ -81,6 +90,7 @@ export default {
   emits: ["onClose", "onCloseRepair"],
   components: {
     ModalErrorMessage,
+    ModalNoSerialNumberMessage,
     IconBase
   },
   data() {
@@ -88,12 +98,12 @@ export default {
       serialInputIsEmpty: false,
       modalTextBody: "",
       showModal: false,
-      hasSerialNumber: true,
+      showNoSerialModal: false,
+      noSerialNumberCommitted: false,
       serialNr: {
         Type: Number,
         Required: true
       },
-
       productImages: [
         {
           partNumber: "1",
@@ -162,16 +172,9 @@ export default {
         }
       }
 
-      const serialNr = this.$refs.inputSerialNumber.value;
+      let serialNr = this.$refs.inputSerialNumber.value;
 
-      if (serialNr == "" && this.hasSerialNumber) {
-        // No serial number provided
-        this.partsChosen = [];
-        this.serialInputIsEmpty = true;
-        this.modalTextBody = "Please Input Serial Number";
-        this.showModal = true;
-        return;
-      } else if (serialNr.length > 20) {
+      if (serialNr.length > 20) {
         // Serial number too long
         this.modalTextBody = "Serial number length must be less than 20";
         this.showModal = true;
@@ -181,10 +184,18 @@ export default {
         this.modalTextBody = "Serial number can only contain numbers";
         this.showModal = true;
         return;
-      } else if (this.partsChosen.length == 0) {
+      } else if (this.partsChosen.length === 0) {
         // Please choose part
         this.modalTextBody = "Please Select Parts";
         this.showModal = true;
+        return;
+      } else if (serialNr === "" && !this.noSerialNumberCommitted) {
+        // No serial number provided
+        this.partsChosen = [];
+        this.serialInputIsEmpty = true;
+        this.modalTextBody = "Are you sure you have no serial number?";
+        this.showNoSerialModal = true;
+        this.noSerialNumberCommitted = false;
         return;
       }
 
@@ -203,6 +214,11 @@ export default {
         }
       }
 
+      //serialNr = (serialNr === '') ? serialNr : "No Serial Number";
+      if (serialNr === "") {
+        serialNr = "No Serial Number";
+      }
+
       //Creates object which later is injected into Vue state
       const newEntity = {
         id: newId,
@@ -210,20 +226,9 @@ export default {
         parts: this.partsChosen
       };
 
-      const exists = stateEntities.findIndex(
-        entity => entity.entitySerialNr === newEntity.entitySerialNr
-      );
-      // Check for serialnumber
-      // Validation for serialnumber should prob be added
-      if (exists === -1) {
-        this.serialInputIsEmpty = true;
-        this.$store.commit("addEntity", newEntity);
-        this.closePopup();
-      } else {
-        this.modalTextBody = "Serial Number Already Exists";
-        this.showModal = true;
-        this.partsChosen = [];
-      }
+      this.serialInputIsEmpty = true;
+      this.$store.commit("addEntity", newEntity);
+      this.closePopup();
     },
     closePopup() {
       this.$emit("onCloseRepair");
@@ -295,7 +300,7 @@ export default {
       }
 
       .serialInputEmpty {
-        box-shadow: 0px 0px 8px #cc0000;
+        box-shadow: 0 0 8px #cc0000;
       }
 
       input {
@@ -336,7 +341,7 @@ export default {
 
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-template-rows: repeat(2, minmax(0, 1fr));
-      gap: 0px 20px;
+      gap: 0 20px;
     }
 
     .part-grid-entity {
