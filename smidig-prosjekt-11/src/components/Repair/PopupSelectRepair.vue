@@ -171,15 +171,7 @@ export default {
       let serialNr = this.$refs.inputSerialNumber.value;
 
 
-      if (serialNr === '' && !this.noSerialNumberCommitted) {
-        // No serial number provided
-        this.partsChosen = [];
-        this.serialInputIsEmpty = true;
-        this.modalTextBody = 'Are you sure you have no serial number?';
-        this.showNoSerialModal = true;
-        this.noSerialNumberCommitted = false;
-        return;
-      } else if (serialNr.length > 20) {
+      if (serialNr.length > 20) {
         // Serial number too long
         this.modalTextBody = "Serial number length must be less than 20";
         this.showModal = true;
@@ -193,6 +185,14 @@ export default {
         // Please choose part
         this.modalTextBody = "Please Select Parts";
         this.showModal = true;
+        return;
+      } else if (serialNr === '' && !this.noSerialNumberCommitted) {
+        // No serial number provided
+        this.partsChosen = [];
+        this.serialInputIsEmpty = true;
+        this.modalTextBody = 'Are you sure you have no serial number?';
+        this.showNoSerialModal = true;
+        this.noSerialNumberCommitted = false;
         return;
       }
 
