@@ -170,7 +170,6 @@ input {
       height: 23px;
     }
   }
-}
 
   .part-img {
     margin: 3px;
@@ -198,7 +197,7 @@ input {
       height: 18px;
     }
   }
-}
+
 // @media only screen and (min-device-width: 600px) and (max-width: 960px) {
 // #product-container {
 //   .product-image-sunbell {
