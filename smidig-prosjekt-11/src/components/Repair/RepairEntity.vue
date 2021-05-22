@@ -54,11 +54,11 @@
       </button>
     </div>
   </div>
-  <hr />
+  <hr id="seperator" />
 </template>
 
 <script>
-import IconBase from "../UI/IconBase.vue";
+import IconBase from '../UI/IconBase.vue';
 export default {
   data() {
     return {};
@@ -66,20 +66,20 @@ export default {
   components: { IconBase },
   props: {
     entityParts: {
-      Type: Object
+      Type: Object,
     },
     entitySerialNumber: {
-      Type: String
-    }
+      Type: String,
+    },
   },
   methods: {
     editEntity: function() {
-      this.$emit("edit-entity", this.entitySerialNumber);
+      this.$emit('edit-entity', this.entitySerialNumber);
     },
     deleteEntity: function() {
-      this.$store.commit("deleteEntity", this.entitySerialNumber);
-    }
-  }
+      this.$store.commit('deleteEntity', this.entitySerialNumber);
+    },
+  },
 };
 </script>
 
@@ -91,99 +91,145 @@ export default {
   text-align: center;
   display: flex;
   justify-content: space-between;
+}
+.product-img {
+  margin-left: 50px;
+  height: 80%;
+  // border: 1px solid black;
+}
 
+.serial-container {
+  width: 250px;
+  // border: 1px solid blue;
+  // border: 1px solid blue;
+
+  .serial-number {
+    font-size: 1.2rem;
+    background-color: #dad2cb;
+    border-radius: 8px;
+    padding: 10px;
+  }
+}
+
+input {
+  border: 1.5px solid #423048;
+  border-radius: 5px;
+  background-color: #fffefd;
+  color: #050505;
+  text-align: center;
+  font-weight: bold;
+}
+
+.parts-container {
+  height: 100%;
+  width: 40vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.part-img {
+  height: 90%;
+  border-radius: 10px;
+  background-color: #dad2cb;
+  margin-left: 8px;
+}
+
+.edit-delete-icons {
+  // border: 1px solid black;
+  margin-right: 50px;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+
+  .edit-delete-ic-container {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media screen and (min-device-width: 400px) and (max-width: 1500px) {
   .product-img {
-    margin-left: 50px;
-    height: 80%;
-    // border: 1px solid black;
+    margin-left: 10px;
+  }
+  .parts-container {
+    align-items: center;
+    justify-items: center;
+    width: 200px;
+    // border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .part-img {
+    margin: 3px;
   }
 
   .serial-container {
-    width: 250px;
+    width: 150px;
+    // border: 1px solid blue;
     // border: 1px solid blue;
 
     .serial-number {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       background-color: #dad2cb;
       border-radius: 8px;
       padding: 10px;
     }
   }
 
-  input {
-    border: 1.5px solid #423048;
-    border-radius: 5px;
-    background-color: #fffefd;
-    color: #050505;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .parts-container {
-    height: 100%;
-    width: 40vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .part-img {
-    height: 90%;
-    border-radius: 10px;
-    background-color: #dad2cb;
-    margin-left: 8px;
-  }
-
   .edit-delete-icons {
-    // border: 1px solid black;
-    margin-right: 50px;
-    width: 100px;
-    display: flex;
-    justify-content: space-between;
+    margin-right: 20px;
+    width: 50px;
 
     .edit-delete-ic-container {
-      width: 23px;
-      height: 23px;
+      width: 18px;
+      height: 18px;
     }
   }
-
-  /*
-  button {
-    outline: none;
-  }
-
-  hr {
-    grid-column: 1/-1;
-    grid-row: 2;
-    width: 93%;
-    margin: auto;
-    border-top: 0.5px solid #707070;
-  }
-
-     */
 }
+// @media only screen and (min-device-width: 600px) and (max-width: 960px) {
+// #product-container {
+//   .product-image-sunbell {
+//       margi
 
-@media only screen and (min-device-width: 600px) and (max-width: 960px) {
-  #product-container {
-    height: 80px;
-    // .product-image-sunbell {
-    //     width: 45px;
-    // }
+//   }
 
-    // #product-serial-number {
-    //     font-size: 12px;
-    //     width: 25vh;
-    // }
+// #product-serial-number {
+//     font-size: 12px;
+//     width: 25vh;
+// }
 
-    .edit-delete-icons {
-      margin-right: 10px;
-      width: 50px;
+// .parts-container {
+//   width: 20vw;
+//   display: grid;
+//   align-items: center;
+//   justify-content: center;
+//   grid-template-columns: repeat(4, minmax(0, 1fr));
+//   grid-template-rows: repeat(2, minmax(0, 1fr));
+// }
 
-      .edit-delete-ic-container {
-        width: 15px;
-        height: 15px;
-      }
-    }
-  }
+// .part-img {
+//   height: 90%;
+//   border-radius: 10px;
+//   background-color: #dad2cb;
+//   margin-left: 3px;
+// }
+
+// .edit-delete-icons {
+//   margin-right: 10px;
+//   width: 50px;
+
+//   .edit-delete-ic-container {
+//     width: 15px;
+//     height: 15px;
+//   }
+// }
+// }
+
+#seperator {
+  margin: auto;
+  border-top: 1px solid #cfc8c2;
 }
 </style>
