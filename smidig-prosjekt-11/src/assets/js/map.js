@@ -30,37 +30,28 @@ export function createMap(centerX, centerY, zoomLevel) {
     fillOpacity: 1
   };
 
-  // Camp label styling
-  const imgStyle =
-    "float: left;" +
-    "padding-top: 2px";
-
-  const pStyle = "color: grey";
-
-  const headlineStyle = "";
-
   L.geoJSON(geojsonPath, {
     style: geojsonStyle
   }).addTo(map);
 
   var campLabelIcon1 = L.divIcon({
     className: "camp-label",
-    html: '<img style="' + imgStyle + '" src="' + layersPath + '" />' +
-          '<p style="' + pStyle + '">Camp 1</p>' +
-          '<div style="' + headlineStyle + '">723</div>'
+    html: '<img src="' + layersPath + '" />' +
+          '<p>Camp 1</p>' +
+          '<div>723</div>'
           
   });
   var campLabelIcon2 = L.divIcon({
     className: "camp-label",
-    html: '<img style="' + imgStyle + '" src="' + layersPath + '" />' +
-          '<p style="' + pStyle + '">Camp 2</p>' +
-          '<div style="' + headlineStyle + '">1,374</div>'
+    html: '<img src="' + layersPath + '" />' +
+          '<p>Camp 2</p>' +
+          '<div>1,374</div>'
   });
   var campLabelIcon3 = L.divIcon({
     className: "camp-label",
-    html: '<img style="' + imgStyle + '" src="' + layersPath + '" />' +
-          '<p style="color:grey">Camp 3</p>' +
-          '<div style="' + headlineStyle + '">15</div>'
+    html: '<img src="' + layersPath + '" />' +
+          '<p>Camp 3</p>' +
+          '<div>15</div>'
   });
 
   var m1 = new L.marker([20, 20], { icon: campLabelIcon1 });

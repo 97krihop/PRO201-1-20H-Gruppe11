@@ -28,6 +28,7 @@
 
 <script>
 import TopMetric from "@/components/AdminPage/TopMetrics";
+import "@/assets/css/map.css";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
@@ -49,9 +50,10 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(function() {
+    createMap(23, 20, 2);
+    /*this.$nextTick(function() {
       createMap(23, 20, 2);
-    });
+    });*/
   },
   data() {
     return {};
@@ -75,18 +77,5 @@ export default {
   grid-template-rows: 1fr;
   grid-column-gap: 0;
   grid-row-gap: 0;
-}
-
-.camp-label {
-  background-color: black;
-  color: white;
-  padding: 10px;
-  border: 1px solid #333;
-  border-radius: 0 20px 20px 20px;
-  box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 100px !important;
-  height: auto !important;
-  margin: 0 auto;
 }
 </style>
