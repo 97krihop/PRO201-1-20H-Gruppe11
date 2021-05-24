@@ -1,15 +1,14 @@
 <template>
   <div>
     <h3>Product Data Page</h3>
-    <TopMetrics name-of-data="Lamp" data-to-display="1000" />
-    <TopMetrics name-of-data="Battery" data-to-display="1000" />
-    <TopMetrics name-of-data="Light bulb" data-to-display="1000" />
-    <TopMetrics name-of-data="Socket Charger" data-to-display="1000" />
-    <TopMetrics name-of-data="12V charger" data-to-display="1000" />
-    <TopMetrics name-of-data="Power Button" data-to-display="1000" />
-    <TopMetrics name-of-data="Screen" data-to-display="1000" />
-    <TopMetrics name-of-data="Solar panel" data-to-display="1000" />
-
+    <div v-for="product in productImages" :key="product.partNumber">
+      <TopMetrics
+        :name-of-data="product.partName"
+        data-to-display="1000"
+        :metric-icon-src="product.imgName"
+        display-image="{{true}}"
+      />
+    </div>
     <br />
     <h3>History</h3>
   </div>
@@ -19,7 +18,6 @@
 import TopMetrics from "@/components/AdminPage/TopMetrics";
 export default {
   name: "ProductDataPage",
-  setup() {},
   components: { TopMetrics },
   methods: {},
   data() {
