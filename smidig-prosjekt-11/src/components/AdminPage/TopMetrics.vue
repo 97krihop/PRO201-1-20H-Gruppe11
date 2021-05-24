@@ -9,8 +9,6 @@
         alt="{{partName}}"
       />
       <p class="section-item-text">{{ nameOfData }}</p>
-    </div>
-    <div>
       <p class="data-to-display">{{ dataToDisplay }}</p>
     </div>
   </div>
@@ -53,7 +51,7 @@ export default {
 .data-to-display {
   color: #4aae9b;
   font-size: 2em;
-  margin-top: 70px;
+  padding-top: 20px;
 }
 
 img {

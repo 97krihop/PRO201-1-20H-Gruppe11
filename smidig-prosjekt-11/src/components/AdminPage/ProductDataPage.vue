@@ -133,8 +133,7 @@ export default {
 <style lang="scss" scoped>
 .part-grid {
   background-color: white;
-  width: 80%;
-  min-width: 1200px;
+  width: 75%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1.5fr;
@@ -150,12 +149,7 @@ export default {
     -webkit-box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
     box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
     border-radius: 15px;
-    padding: 10px;
-
-    .metric-container {
-      .description-container {
-      }
-    }
+    padding: 15px;
   }
 }
 
