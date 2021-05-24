@@ -111,6 +111,8 @@ export default {
 .map {
   height: 350px;
   width: 99%;
+  background-color: #fff;
+  border: 1px solid lightgrey;
 }
 
 .top-metrics-container {
