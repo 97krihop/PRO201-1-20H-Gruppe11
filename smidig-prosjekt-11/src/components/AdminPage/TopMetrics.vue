@@ -1,10 +1,14 @@
 <template>
   <div class="metric-container">
     <div class="description-container">
-      <img class="metric-icon" :src="metricIconSrc" />
+      <img
+        v-if="displayImage"
+        class="part-icon"
+        :id="{ partNumber }"
+        :src="require('@/assets/Images/Parts/' + metricIconSrc + '.png')"
+        alt="{{partName}}"
+      />
       <p class="section-item-text">{{ nameOfData }}</p>
-    </div>
-    <div>
       <p class="data-to-display">{{ dataToDisplay }}</p>
     </div>
   </div>
@@ -12,10 +16,16 @@
 <script>
 export default {
   name: "TopMetrics",
+  components: {},
   props: {
     nameOfData: String,
     dataToDisplay: String,
-    metricIconSrc: String
+    metricIconSrc: String,
+    partNumber: String,
+    displayImage: {
+      type: Boolean,
+      default: false
+    }
   },
   setup() {},
   data() {
@@ -26,18 +36,14 @@ export default {
 
 <style scoped>
 .metric-container {
-  text-align: center;
-  height: 200px;
-  width: 250px;
-  padding: 30px;
-  border-radius: 15px 50px;
+  height: 100%;
+  width: 100%;
 }
 .description-container {
   height: 1vh;
 }
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
-  text-align: center;
   font-size: 1.3em;
   font-family: "Open Sans", sans-serif;
   color: #828b96;
@@ -45,6 +51,11 @@ export default {
 .data-to-display {
   color: #4aae9b;
   font-size: 2em;
-  margin-top: 90px;
+  padding-top: 20px;
+}
+
+img {
+  width: 50px;
+  height: 50px;
 }
 </style>

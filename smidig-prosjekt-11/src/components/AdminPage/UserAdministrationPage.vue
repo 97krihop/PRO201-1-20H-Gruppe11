@@ -112,7 +112,7 @@ export default {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 100%;
+  max-width: 100%;
   height: 100%;
 
   .wrapper {
@@ -161,7 +161,7 @@ export default {
         font-size: 14px;
         font-weight: bold;
         color: #cdcdcd;
-        margin: 5px 0 5px 0;
+        margin: 5px 0;
       }
     }
 
