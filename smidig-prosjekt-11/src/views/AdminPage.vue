@@ -73,10 +73,11 @@ export default {
 </script>
 
 <style scoped>
+.component-section-container {
+}
 .grid-layout {
   display: grid;
   grid-template-columns: 17% 1fr;
-  grid-template-rows: 1fr;
   grid-column-gap: 0;
   grid-row-gap: 0;
   background-color: white;

@@ -1,8 +1,8 @@
 <template>
   <div class="main-information-topleft-container">
     <div class="header-text">
-      <p>Units Globally</p>
-      <h>7.541.390</h>
+      <p>Registered Units Global</p>
+      <p class="header-text-number">1.000.000</p>
     </div>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
@@ -10,7 +10,6 @@
           :id="doughnutChart.id"
           :type="doughnutChart.type"
           :data="doughnutChart.data"
-          @before-render="beforeRenderLogic"
         ></vue3-chart-js>
       </div>
 
@@ -80,13 +79,28 @@ export default {
   border-radius: 5px;
   display: inline-block;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 .header-text {
   text-align: center;
   display: inline;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2em;
 }
 
+.header-text-number {
+  color: #4aae9b;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  padding-top: 10px;
+}
+.section-item-text {
+  color: #828b96;
+}
 .country-list-item {
-  margin-top: 20px;
+  padding-top: 20px;
   text-align: center;
 }
 .pie-chart-countries {
@@ -96,7 +110,7 @@ export default {
 }
 .main-information-topleft-container {
   background-color: #ffffff;
-  height: 40vh;
+  height: 30vh;
   width: 20vh;
   text-align: center;
   font-size: 1em;
