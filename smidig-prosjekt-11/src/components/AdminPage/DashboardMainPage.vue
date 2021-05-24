@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="top-metrics-container">
     <top-metric
@@ -156,3 +157,4 @@ export default {
   margin: 0 !important;
 }
 </style>
+-->
