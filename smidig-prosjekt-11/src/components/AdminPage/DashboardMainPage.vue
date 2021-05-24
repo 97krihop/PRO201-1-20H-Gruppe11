@@ -20,65 +20,25 @@
     />
   </div>
 
-  <!-- ### Using Leaflet with Vue 3 ### -->
-  <!-- https://github.com/vue-leaflet/vue-leaflet -->
-  <l-map style="height: 350px; width: 99%" :zoom="zoom" :center="center">
-    <l-geo-json :geojson="geojson" :options="options"> </l-geo-json>
+  <div id="mapid" class="map"></div>
 
-    <l-marker :lat-lng="coordinates1">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
-    <l-marker :lat-lng="coordinates2">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
-    <l-marker :lat-lng="coordinates3">
-      <l-popup>I'm a refugee camp!</l-popup>
-    </l-marker>
-
-    <l-control :position="'topleft'">
-      <p>General statistics</p>
-      <p>All users</p>
-      <p>7,541,390</p>
-    </l-control>
-
-    <l-control class="custom-control-watermark" :position="'bottomleft'">
-      <p>"watermark" stats</p>
-    </l-control>
-
-    <l-control :position="'bottomright'">
-      <p>Stats on the bottom right side</p>
-    </l-control>
-
-    <l-control class="custom-control-button" :position="'topright'">
-      <p @click="showAlert">
-        Clickable stats
-      </p>
-    </l-control>
-  </l-map>
 </template>
 
 <script>
 import TopMetric from "@/components/AdminPage/TopMetrics";
 import customGeojson from "@/assets/data/custom.geo.json";
 import "leaflet/dist/leaflet.css";
-import {
-  LMap,
-  LGeoJson,
-  LMarker,
-  LPopup,
-  LControl
-} from "@vue-leaflet/vue-leaflet";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet/dist/leaflet.js";
+import "leaflet.markercluster/dist/leaflet.markercluster.js";
+import layersImage from "@/assets/Images/layers.png";
 
 export default {
   name: "DashboardPage",
   setup() {},
   components: {
-    TopMetric,
-    LMap,
-    LGeoJson,
-    LMarker,
-    LPopup,
-    LControl
+    TopMetric
   },
   methods: {
     showAlert() {
@@ -86,32 +46,73 @@ export default {
     }
   },
   data() {
-    return {
-      zoom: 2,
-      center: [22, 50],
-      geojson: customGeojson,
-      options: {
-        style: function() {
-          return {
-            weight: 1,
-            color: "#123123",
-            opacity: 1,
-            fillColor: "#b5bbb8",
-            fillOpacity: 1
-          };
-        }
-      },
-      coordinates1: [31, 0],
-      coordinates2: [37, 30],
-      coordinates3: [31, 36]
-    };
+    return {};
   },
-  computed: {},
-  async beforeMount() {}
+  mounted() {
+    this.$nextTick(function() {
+      const L = window.L; // uppress 'L' is not defined error
+      
+      // Fix wrongly referenced image locations in Leaflet bundle
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+        iconUrl: require("leaflet/dist/images/marker-icon.png"),
+        shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+      });
+      
+      var map = L.map("mapid", {
+        center: [23, 20],
+        zoom: 2,
+        maxZoom: 20
+      });
+
+      const geojsonStyle = {
+        color: "#123123",
+        weight: 1,
+        opacity: 1,
+        fillColor: "#b5bbb8",
+        fillOpacity: 1
+      };
+      
+      L.geoJSON(customGeojson, {
+        style: geojsonStyle
+      }).addTo(map);
+      
+      console.log(__dirname + '/layers.png');
+      
+      var campLabelIcon1 = L.divIcon({
+        iconSize: null,
+        html: '<div class="camp-label"><p class="camp-title">Camp 1</p><div class="headline">723</div><img src="' + layersImage + '" /></div>'
+      });      
+      var campLabelIcon2 = L.divIcon({
+        iconSize: null,
+        html: '<div class="camp-label"><p class="camp-title">Camp 2</p><div class="headline">1,374</div><img src="' + layersImage + '" /></div>'
+      });      
+      var campLabelIcon3 = L.divIcon({
+        iconSize: null,
+        html: '<div class="camp-label"><p class="camp-title">Camp 3</p><div class="headline">15</div><img src="' + layersImage + '" /></div>'
+      });
+      
+      var m1 = new L.marker([20, 20], {icon: campLabelIcon1});
+      var m2 = new L.marker([15, 20], {icon: campLabelIcon2});
+      var m3 = new L.marker([25, 15], {icon: campLabelIcon3});
+
+      var markers = L.markerClusterGroup();
+      markers.addLayer(m1);
+      markers.addLayer(m2);
+      markers.addLayer(m3);
+      map.addLayer(markers);
+    });
+  }
 };
 </script>
 
-<style scoped>
+<style>
+.map {
+  height: 350px;
+  width: 99%;
+}
+
 .top-metrics-container {
   background-color: white;
   display: grid;
@@ -134,5 +135,22 @@ export default {
   border: 1px solid #aaa;
   border-radius: 0.1em;
   cursor: pointer;
+}
+
+.camp-title {
+  color: grey;
+}
+
+.camp-label {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 0 20px 20px 20px;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
 }
 </style>
