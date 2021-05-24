@@ -3,7 +3,6 @@
     <top-metric
       :name-of-data="'Total Repaired Units'"
       data-to-display="333.123"
-      metric-icon-src=""
     />
     <top-metric
       :name-of-data="'Total Units Registered'"

@@ -1,7 +1,14 @@
 <template>
   <div class="metric-container">
     <div class="description-container">
-      <img class="metric-icon" :src="metricIconSrc" />
+      <img
+        v-if="displayImage"
+        class="part-icon"
+        :id="{ partNumber }"
+        :src="require('@/assets/Images/Parts/' + metricIconSrc + '.png')"
+        alt="{{partName}}"
+      />
+      <!--      <img class="metric-icon" :src="metricIconSrc" />-->
       <p class="section-item-text">{{ nameOfData }}</p>
     </div>
     <div>
@@ -12,10 +19,16 @@
 <script>
 export default {
   name: "TopMetrics",
+  components: {},
   props: {
     nameOfData: String,
     dataToDisplay: String,
-    metricIconSrc: String
+    metricIconSrc: String,
+    partNumber: String,
+    displayImage: {
+      type: Boolean,
+      default: false
+    }
   },
   setup() {},
   data() {
