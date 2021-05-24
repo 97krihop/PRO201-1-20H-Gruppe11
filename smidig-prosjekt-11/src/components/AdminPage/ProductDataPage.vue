@@ -131,21 +131,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h3 {
+  font-size: 30px;
+  margin: 30px 0;
+
+  text-align: center;
+  font-weight: bold;
+  color: #2c2a29;
+}
+
 .part-grid {
-  background-color: white;
-  width: 75%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1.5fr;
-  grid-column-gap: 0;
-  grid-row-gap: 50px;
-  justify-items: center;
-  align-items: center;
-  margin: auto auto 10vh;
+  display: flex;
+  width: 60%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin: auto auto 1vh;
 
   .part-cards {
-    width: 200px;
+    width: 210px;
     height: 175px;
+    transform: scale(0.75);
     -webkit-box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
     box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
     border-radius: 15px;
@@ -154,8 +161,8 @@ export default {
 }
 
 .country-list-flex-container {
-  width: 30vw;
-  height: 20vh;
+  width: 40vw;
+  height: 30vh;
   margin: auto;
 }
 
