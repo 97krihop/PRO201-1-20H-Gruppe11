@@ -1,13 +1,19 @@
 <template>
   <div>
     <h3>Product Data Page</h3>
-    <div v-for="product in productImages" :key="product.partNumber">
-      <TopMetrics
-        :name-of-data="product.partName"
-        data-to-display="1000"
-        :metric-icon-src="product.imgName"
-        display-image="{{true}}"
-      />
+    <div class="part-grid">
+      <div
+        v-for="product in productImages"
+        :key="product.partNumber"
+        class="part-cards"
+      >
+        <TopMetrics
+          :name-of-data="product.partName"
+          data-to-display="1000"
+          :metric-icon-src="product.imgName"
+          display-image="{{true}}"
+        />
+      </div>
     </div>
     <br />
     <h3>History</h3>
@@ -69,4 +75,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.part-grid {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+
+  .part-cards {
+  }
+}
+</style>

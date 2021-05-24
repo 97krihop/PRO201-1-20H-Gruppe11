@@ -60,4 +60,9 @@ export default {
   font-size: 2em;
   margin-top: 90px;
 }
+
+img {
+  width: 50px;
+  height: 50px;
+}
 </style>
