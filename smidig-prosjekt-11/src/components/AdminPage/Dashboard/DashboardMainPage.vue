@@ -20,7 +20,7 @@
     />
   </div>
 
-  <div id="mapid" class="map">
+  <div id="mapid" class="map-container">
     <repair-part-bar-chart-component />
     <country-bar-chart-component />
   </div>
@@ -84,26 +84,26 @@ export default {
       console.log(__dirname + "/layers.png");
 
       var campLabelIcon1 = L.divIcon({
-        iconSize: null,
-        html:
-          '<div class="camp-label"><p class="camp-title">Camp 1</p><div class="headline">723</div><img src="' +
-          layersImage +
-          '" /></div>'
+        className: "camp-label",
+        html: '<img src="' + layersImage + '" />' +
+              '<p class="camp-title">Camp 1</p>' +
+              '<div class="headline">723</div>'
+              
       });
+
       var campLabelIcon2 = L.divIcon({
-        iconSize: null,
-        html:
-          '<div class="camp-label"><p class="camp-title">Camp 2</p><div class="headline">1,374</div><img src="' +
-          layersImage +
-          '" /></div>'
+        className: "camp-label",
+        html: '<img src="' + layersImage + '" />' +
+              '<p class="camp-title">Camp 2</p>' +
+              '<div class="headline">1,374</div>'
       });
       var campLabelIcon3 = L.divIcon({
-        iconSize: null,
-        html:
-          '<div class="camp-label"><p class="camp-title">Camp 3</p><div class="headline">15</div><img src="' +
-          layersImage +
-          '" /></div>'
+        className: "camp-label",
+        html: '<img src="' + layersImage + '" />' +
+              '<p class="camp-title">Camp 3</p>' +
+              '<div class="headline">15</div>'
       });
+
 
       var m1 = new L.marker([20, 20], { icon: campLabelIcon1 });
       var m2 = new L.marker([15, 20], { icon: campLabelIcon2 });
@@ -142,17 +142,15 @@ export default {
 };
 </script>
 
-<style scoped>
-.map {
-  background-color: #fff;
-  border: 1px solid lightgrey;
-}
-
+<style>
 .map-container {
   position: relative;
   width: 80vw;
   margin: auto;
+  background-color: #fff;
+  border: 1px solid lightgrey;
 }
+
 .top-metrics-container {
   background-color: white;
   display: grid;
@@ -160,5 +158,29 @@ export default {
   grid-template-rows: 1fr;
   grid-column-gap: 0;
   grid-row-gap: 0;
+}
+
+.camp-title {
+  color: grey;
+}
+
+.headline {}
+
+.camp-label {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 0 20px 20px 20px;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100px !important;
+  height: auto !important;
+  margin: 0 auto;
+}
+
+.camp-label img {
+  float: left;
+  padding-top: 2px;
 }
 </style>
