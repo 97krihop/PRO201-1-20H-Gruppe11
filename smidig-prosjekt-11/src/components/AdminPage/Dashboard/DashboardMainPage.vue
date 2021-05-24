@@ -143,6 +143,11 @@ export default {
 </script>
 
 <style scoped>
+.map {
+  background-color: #fff;
+  border: 1px solid lightgrey;
+}
+
 .map-container {
   position: relative;
   width: 80vw;
