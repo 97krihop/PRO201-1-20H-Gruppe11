@@ -1,22 +1,29 @@
 <template>
   <div class="top-metrics-container">
-    <top-metric
-      :name-of-data="'Total Repaired Units'"
-      data-to-display="333.123"
-    />
-    <top-metric
-      :name-of-data="'Total Units Registered'"
-      data-to-display="1.000.000"
-    />
-    <top-metric
-      :name-of-data="'Most Repaired Part Today'"
-      data-to-display="PCB"
-    />
-
-    <top-metric
-      :name-of-data="'Most Repaired Part Monthly'"
-      data-to-display="Battery"
-    />
+    <div class="top-metrics-container-inner">
+      <top-metric
+        :name-of-data="'Total Repaired Units'"
+        data-to-display="333.123"
+      />
+    </div>
+    <div class="top-metrics-container-inner">
+      <top-metric
+        :name-of-data="'Total Units Registered'"
+        data-to-display="1.000.000"
+      />
+    </div>
+    <div class="top-metrics-container-inner">
+      <top-metric
+        :name-of-data="'Most Repaired Part Today'"
+        data-to-display="PCB"
+      />
+    </div>
+    <div class="top-metrics-container-inner">
+      <top-metric
+        :name-of-data="'Most Repaired Part Monthly'"
+        data-to-display="Battery"
+      />
+    </div>
   </div>
 
   <!-- ### Using Leaflet with Vue 3 ### -->
@@ -127,6 +134,13 @@ export default {
   grid-template-rows: 1fr;
   grid-column-gap: 0;
   grid-row-gap: 0;
+}
+
+.top-metrics-container {
+  width: 1fr;
+  height: 200px;
+  padding: 30px;
+  text-align: center;
 }
 
 .custom-control-watermark {

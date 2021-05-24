@@ -15,22 +15,19 @@
         />
       </div>
     </div>
-    <br />
-    <h3>History</h3>
   </div>
   <div class="country-list-flex-container">
     <div class="pie-chart-countries">
       <vue3-chart-js
-          :id="barChart.id"
-          :type="barChart.type"
-          :data="barChart.data"
+        :id="barChart.id"
+        :type="barChart.type"
+        :data="barChart.data"
       ></vue3-chart-js>
     </div>
   </div>
 </template>
 
 <script>
-
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
 import TopMetrics from "@/components/AdminPage/TopMetrics";
 
@@ -41,10 +38,23 @@ export default {
       id: "bar",
       type: "bar",
       data: {
-        labels: ["January", "February", "March", "April", "May","June", "July", "August", "September", "October", "November", "December"],
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
         datasets: [
           {
-            label: 'Lamp Item',
+            label: "Lamp Item",
             data: [40, 20, 80, 10, 7, 20, 32, 44, 55, 23, 45, 23],
             backgroundColor: "#41B883",
             borderColor: "#41B883"
@@ -57,7 +67,7 @@ export default {
       barChart: barChart
     };
   },
-  components: { Vue3ChartJs, TopMetrics},
+  components: { Vue3ChartJs, TopMetrics },
   methods: {},
   /*data() {  // Hente data fra backend
     return {
@@ -123,18 +133,39 @@ export default {
 <style lang="scss" scoped>
 .part-grid {
   background-color: white;
+  width: 80%;
+  min-width: 1200px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: 1.5fr;
   grid-column-gap: 0;
-  grid-row-gap: 0;
+  grid-row-gap: 50px;
+  justify-items: center;
+  align-items: center;
+  margin: auto auto 10vh;
 
   .part-cards {
+    width: 200px;
+    height: 175px;
+    -webkit-box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
+    box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
+    border-radius: 15px;
+    padding: 10px;
+
+    .metric-container {
+      .description-container {
+      }
+    }
   }
 }
 
-.country-list-flex-container{
-  width: 40vw;
-  height: 40vh;
+.country-list-flex-container {
+  width: 30vw;
+  height: 20vh;
+  margin: auto;
+}
+
+.part-icon-metric {
+  width: 250px;
 }
 </style>

@@ -8,7 +8,6 @@
         :src="require('@/assets/Images/Parts/' + metricIconSrc + '.png')"
         alt="{{partName}}"
       />
-      <!--      <img class="metric-icon" :src="metricIconSrc" />-->
       <p class="section-item-text">{{ nameOfData }}</p>
     </div>
     <div>
@@ -39,18 +38,14 @@ export default {
 
 <style scoped>
 .metric-container {
-  text-align: center;
-  height: 200px;
-  width: 250px;
-  padding: 30px;
-  border-radius: 15px 50px;
+  height: 100%;
+  width: 100%;
 }
 .description-container {
   height: 1vh;
 }
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .section-item-text {
-  text-align: center;
   font-size: 1.3em;
   font-family: "Open Sans", sans-serif;
   color: #828b96;
@@ -58,7 +53,7 @@ export default {
 .data-to-display {
   color: #4aae9b;
   font-size: 2em;
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 img {
