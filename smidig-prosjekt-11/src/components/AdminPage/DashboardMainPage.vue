@@ -51,7 +51,7 @@ export default {
   mounted() {
     this.$nextTick(function() {
       const L = window.L; // uppress 'L' is not defined error
-      
+
       // Fix wrongly referenced image locations in Leaflet bundle
       delete L.Icon.Default.prototype._getIconUrl;
       L.Icon.Default.mergeOptions({
@@ -59,7 +59,7 @@ export default {
         iconUrl: require("leaflet/dist/images/marker-icon.png"),
         shadowUrl: require("leaflet/dist/images/marker-shadow.png")
       });
-      
+
       var map = L.map("mapid", {
         center: [23, 20],
         zoom: 2,
@@ -73,26 +73,26 @@ export default {
         fillColor: "#b5bbb8",
         fillOpacity: 1
       };
-      
+
       L.geoJSON(customGeojson, {
         style: geojsonStyle
       }).addTo(map);
-      
+
       console.log(__dirname + '/layers.png');
-      
+
       var campLabelIcon1 = L.divIcon({
         iconSize: null,
         html: '<div class="camp-label"><p class="camp-title">Camp 1</p><div class="headline">723</div><img src="' + layersImage + '" /></div>'
-      });      
+      });
       var campLabelIcon2 = L.divIcon({
         iconSize: null,
         html: '<div class="camp-label"><p class="camp-title">Camp 2</p><div class="headline">1,374</div><img src="' + layersImage + '" /></div>'
-      });      
+      });
       var campLabelIcon3 = L.divIcon({
         iconSize: null,
         html: '<div class="camp-label"><p class="camp-title">Camp 3</p><div class="headline">15</div><img src="' + layersImage + '" /></div>'
       });
-      
+
       var m1 = new L.marker([20, 20], {icon: campLabelIcon1});
       var m2 = new L.marker([15, 20], {icon: campLabelIcon2});
       var m3 = new L.marker([25, 15], {icon: campLabelIcon3});
