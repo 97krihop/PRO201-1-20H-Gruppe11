@@ -9,10 +9,8 @@
           :id="doughnutChart.id"
           :type="doughnutChart.type"
           :data="doughnutChart.data"
-          @before-render="beforeRenderLogic"
         ></vue3-chart-js>
       </div>
-
       <div
         v-for="entry in countryColors"
         :key="entry.countryName"
@@ -75,6 +73,16 @@ export default {
 .header-text {
   text-align: center;
   display: inline;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2em;
+}
+
+.header-text-number {
+  color: #4aae9b;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  padding-top: 10px;
 }
 
 .country-list-item {
