@@ -29,7 +29,7 @@
     </h3>
     <div class="part-grid">
       <div
-        v-for="product in productList"
+        v-for="product in products"
         :key="product.partNumber"
         class="part-cards"
       >
@@ -135,7 +135,7 @@ export default {
       //console.log("test");
       for(let i = 0; i < this.products.length; i++){
         console.log(product.campRepairs[i]);
-        this.productList[i].totalRepairs = product.campRepairs[i];
+        this.products[i].totalRepairs = product.campRepairs[i];
       }
       this.showSearchResults = false;
     }
@@ -147,57 +147,7 @@ export default {
   },
   data() {
     return {
-      showSearchResults: false,
-      productList: [
-        {
-          partNumber: "1",
-          partName: "Lamp",
-          imgName: "ic-part-lamp",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "2",
-          partName: "12V charger",
-          imgName: "ic-part-adapter-charger",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "3",
-          partName: "Battery",
-          imgName: "ic-part-battery",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "4",
-          partName: "Power button",
-          imgName: "ic-part-button",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "5",
-          partName: "Light bulb",
-          imgName: "ic-part-lightbulb",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "6",
-          partName: "Screen",
-          imgName: "ic-part-screen",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "7",
-          partName: "Socket charger",
-          imgName: "ic-part-socket-charger",
-          totalRepairs: "0"
-        },
-        {
-          partNumber: "8",
-          partName: "Solar panel",
-          imgName: "ic-part-solar-panel",
-          totalRepairs: "0"
-        }
-      ]
+      showSearchResults: false
     };
   }
 };
