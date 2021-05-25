@@ -1,17 +1,23 @@
 <template>
   <div class="logout-base">
     <base-site>
-      <div id="logout-container">
+      <div class="header-container">
         <h1>You are now logged out</h1>
-        <home-button class="home-b"></home-button>
-      </div>
+        <home-select-button
+          iconName="home"
+          buttonTitle="Home"
+          routerLinkDest=""
+          iconColor="#ececec"
+        />
+        </div>
     </base-site>
   </div>
 </template>
 
 <script>
 import BaseSite from "@/components/Nav/BaseSite.vue";
-import HomeButton from "@/components/UI/HomeButton.vue";
+import HomeSelectButton from '../components/Nav/HomeSelectButton.vue';
+
 
 export default {
   name: "LogoutPage",
@@ -20,36 +26,33 @@ export default {
   },
   components: {
     BaseSite,
-    HomeButton
+    HomeSelectButton
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.logout-base {
-  text-align: center;
-}
-
-#logout-container {
-  position: relative;
-  top: 200px;
+.header-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+//   justify-content: flex;
+  align-items: center;
 
   h1 {
-    font-size: 40px;
+    font-size: 2rem;
+    margin-top: 200px;
+    margin-bottom: 40px;
+    width: 80%;
+    text-align: center;
     color: #2c2a29;
   }
-  .home-b {
-    margin-top: 4vh;
-  }
-}
 
-@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
-  #logout-container {
-    top: 100px;
-
-    h1 {
-      font-size: 30px;
-    }
+  .home-select-button {
+    background: #2c2a29;
+    color: #ececec;
+    width: auto;
   }
 }
 </style>

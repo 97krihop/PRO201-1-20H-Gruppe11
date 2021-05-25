@@ -11,14 +11,14 @@
       <h4>Admin</h4>
     </router-link> -->
 
-    <home-select-button v-for="(val, index) in buttonValues"
+    <home-select-button
+      v-for="(val, index) in buttonValues"
       :key="index"
       :iconName="val.icon"
       :buttonTitle="val.title"
       :routerLinkDest="val.destination"
     />
 
-    
     <modal-error-message v-if="showModal === true" @close="showModal = false">
       <template v-slot:body>E-learning is not implemented yet</template>
     </modal-error-message>
@@ -26,17 +26,17 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import ModalErrorMessage from '../../components/Modals/ModalErrorMessage.vue';
-import { ref } from 'vue';
-import HomeSelectButton from './HomeSelectButton';
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import ModalErrorMessage from "../../components/Modals/ModalErrorMessage.vue";
+import { ref } from "vue";
+import HomeSelectButton from "./HomeSelectButton";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     ModalErrorMessage,
-    HomeSelectButton,
+    HomeSelectButton
   },
   setup() {
     const store = useStore();
@@ -45,41 +45,41 @@ export default {
     return {
       store,
       router,
-      showModal,
+      showModal
     };
   },
   methods: {
     retrieveIsAdmin() {
       const result = useStore().getters.getIsAdmin;
       if (result === false) {
-        this.router.push({ name: 'Home' });
+        this.router.push({ name: "Home" });
       } else {
         return true;
       }
-    },
+    }
   },
   data() {
     return {
       isAdmin: this.retrieveIsAdmin(),
-      buttonValues: [ 
+      buttonValues: [
         {
           icon: "wrench",
           title: "Register repairs",
-          destination: "repair"  
+          destination: "repair"
         },
         {
           icon: "education",
           title: "E-Learning",
-          destination: "notimplemented"  
+          destination: "notimplemented"
         },
         {
           icon: "equalizer",
           title: "Admin",
-          destination: "admin"  
+          destination: "admin"
         }
-        ],
+      ]
     };
-  },
+  }
 };
 </script>
 

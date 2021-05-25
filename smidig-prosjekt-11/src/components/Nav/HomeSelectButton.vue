@@ -16,28 +16,28 @@
   </router-link>
 </template>
 <script>
-import IconBase from '../../components/UI/IconBase.vue';
+import IconBase from "../../components/UI/IconBase.vue";
 
 export default {
-  name: 'HomeSelectButton',
+  name: "HomeSelectButton",
   components: {
-    IconBase,
+    IconBase
   },
   props: {
     buttonTitle: {
-      Type: String,
+      Type: String
     },
     iconName: {
-      Type: String,
+      Type: String
     },
     iconColor: {
       Type: String,
       default: "#2c2a29"
     },
     routerLinkDest: {
-      Type: String,
-    },
-  },
+      Type: String
+    }
+  }
 };
 </script>
 
