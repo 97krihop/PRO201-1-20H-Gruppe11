@@ -104,6 +104,8 @@ for(let i = 0; i<100 ; i++){
 }
 
 
+
+module.exports = body;
 //TODO sometime there are no serialnumber
 
 
