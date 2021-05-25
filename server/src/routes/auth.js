@@ -1,17 +1,12 @@
 const express = require("express");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const monk = require("monk");
 const Joi = require("joi");
 
 const router = express.Router();
 
-const db = monk(process.env.MONGO_URI);
-db.then(() => {
-  console.log("connection success");
-}).catch((e) => {
-  console.error("Error !", e);
-});
+const db = require("../db/mongo")
+
 const users = db.get("users");
 
 const schema = Joi.object({

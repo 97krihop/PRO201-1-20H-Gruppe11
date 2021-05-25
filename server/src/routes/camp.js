@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const monk = require("monk");
 const Joi = require("joi");
 
-const db = monk(process.env.MONGO_URI);
-db.then(() => {
-  console.log("connection success");
-}).catch((e) => {
-  console.error("Error !", e);
-});
+const db = require("../db/mongo")
 
 const camp = db.get("camp");
 

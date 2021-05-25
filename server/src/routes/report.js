@@ -1,14 +1,8 @@
 const express = require("express");
-const monk = require("monk");
 const Joi = require("joi");
 
 const router = express.Router();
-const db = monk(process.env.MONGO_URI);
-db.then(() => {
-  console.log("connection success");
-}).catch((e) => {
-  console.error("Error !", e);
-});
+const db = require("../db/mongo")
 
 const report = db.get("report");
 
@@ -28,12 +22,12 @@ const schema = Joi.array().items(
       .required(),
   })
 );
-router.get("/report", async (req, res) => {
+router.get("/", async (req, res) => {
   const data = await report.find({});
   res.json(data);
 });
 
-router.post("/report", async (req, res) => {
+router.post("/", async (req, res) => {
   if (!req.user) return res.status(401).send();
 
   //body example
