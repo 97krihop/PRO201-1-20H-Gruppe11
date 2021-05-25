@@ -17,11 +17,15 @@ const schema = Joi.array().items(
     serialNumber: Joi.string().alphanum().required(),
     productName: Joi.string().alphanum().min(1).required(),
     createdAt: Joi.date().default(Date.now),
-    location: Joi.string().required(),
-    parts: Joi.array().items({
-      partNumber: Joi.string().alphanum().min(1).required(),
-      partName: Joi.string().alphanum().min(1).required(),
-    }),
+    campName: Joi.string().alphanum().required(),
+    parts: Joi.array()
+      .items({
+        partNumber: Joi.string().alphanum().min(1).required(),
+        partName: Joi.string().alphanum().min(1).required(),
+      })
+      .min(1)
+      .max(9)
+      .required(),
   })
 );
 
@@ -33,7 +37,7 @@ router.post("/report", async (req, res) => {
 	{
 		"serialNumber": "12345",
 		"partName": "SunBell",
-    "location": "Oslo,Norway",
+    "campName": "oslo, norway",
 		"parts": [
 			{
 				"partNumber": "1",
@@ -44,7 +48,7 @@ router.post("/report", async (req, res) => {
 ]*/
 
   try {
-    value = await schema.validateAsync(req.body);
+    const value = await schema.validateAsync(req.body);
     const data = value.map((x) => {
       return { ...x, username: req.user.username };
     });
