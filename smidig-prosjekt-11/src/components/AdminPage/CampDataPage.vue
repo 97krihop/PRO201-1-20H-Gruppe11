@@ -13,14 +13,14 @@
         <div>
           <div>{{ product.id }}</div>
           <div>
-            {{ product.campRepairs[0] }}
+            {{ product.location }}
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="mapid" class="map-container"></div>
+  <div v-bind:style="[showSearchResults ? {'height': '250px'} : {'height': '70%'}]" id="mapid" class="map-container"></div>
 
   <h3>
     Camp Data
@@ -102,15 +102,40 @@ export default {
         totalRepairs: "0"
       }
     ];
+    
     const campData = [
       {
-        id: "Camp 1",
-        campRepairs: [12, 40, 53, 213, 20, 32, 5, 21, 12, 32, 54, 23]
-      },{
-        id: "Camp 2",
-        campRepairs: [21, 4, 35, 23, 2, 42, 35, 41, 32, 14, 65, 82]
+        id: "Hagadera Refugee Camp",
+        location: "Kenya",
+        geoloc: [40.5230712890625, 0.17028783523693297],
+        campRepairs: [12, 40, 53, 0, 210, 32, 5, 21, 12, 0, 54, 23]
+      },
+      {
+        id: "Kakuma Refugee Camp",
+        location: "Kenya",
+        geoloc: [34.80743408203125, 3.760115447396889],
+        campRepairs: [21, 5, 3, 243, 2, 42, 35, 41, 32, 14, 65, 15]
+      },
+      {
+        id: "",
+        location: "Tanzania",
+        geoloc: [31.02813720703125, -6.287998672327658],
+        campRepairs: [13, 0, 35, 2223, 2, 442, 345, 41, 32, 14, 0, 12]
+      },
+      {
+        id: "",
+        location: "Ethiopia",
+        geoloc: [34.00543212890625, 7.681051391626661],
+        campRepairs: [40, 344, 35, 23, 2, 242, 34, 41, 32, 14, 65, 0]
+      },
+      {
+        id: "",
+        location: "South Sudan",
+        geoloc: [30.047607421875, 10.244654445228324],
+        campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
       }
     ];
+    
     const searchQuery = ref("");
     const searchedProducts = computed(() => {
       return campData.filter((product) => {
@@ -120,7 +145,8 @@ export default {
         );
       });
     });
-    return {searchedProducts, searchQuery, products};
+    
+    return {searchedProducts, searchQuery, products, campData};
   },
   components: {
     TopMetrics
@@ -129,7 +155,7 @@ export default {
     showResult(product){
       //console.log("test");
       for(let i = 0; i < this.products.length; i++){
-        console.log(product.campRepairs[i]);
+        //console.log(product.campRepairs[i]);
         this.products[i].totalRepairs = product.campRepairs[i];
       }
       this.showSearchSuggestions = false;
@@ -137,14 +163,14 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(function() {
-      createMap(23, 20, 5, false);
-    });
+    createMap(23, 20, 2, true, this.campData, this.products);
+    //this.$nextTick(function() {
+    //});
   },
   data() {
     return {
       showSearchSuggestions: false,
-      showSearchResults: false
+      showSearchResults: false,
     };
   }
 };
@@ -174,8 +200,8 @@ export default {
 
 .map-container {
   position: relative;
-  width: 80vw;
-  height: 250px;
+  width: 60vw;
+  height: 70%;
   margin: auto;
   background-color: #fff;
   border: 1px solid lightgrey;
