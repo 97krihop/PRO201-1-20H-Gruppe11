@@ -15,7 +15,7 @@ const report = db.get("report");
 const schema = Joi.array().items(
   Joi.object({
     serialNumber: Joi.string().alphanum().required(),
-    partName: Joi.string().alphanum().min(1).required(),
+    productName: Joi.string().alphanum().min(1).required(),
     createdAt: Joi.date().default(Date.now),
     location: Joi.string().required(),
     parts: Joi.array().items({
