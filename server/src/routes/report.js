@@ -36,7 +36,7 @@ router.post("/report", async (req, res) => {
   /*[
 	{
 		"serialNumber": "12345",
-		"partName": "SunBell",
+		"productName": "SunBell",
     "campName": "oslo, norway",
 		"parts": [
 			{
