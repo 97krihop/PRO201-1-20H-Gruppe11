@@ -13,7 +13,7 @@ db.then(() => {
 const camp = db.get("camp");
 
 const schema = Joi.object({
-  name: Joi.string().alphanum().required(),
+  name: Joi.string().required(),
   type: Joi.string().alphanum().required(),
   coordinates: Joi.array().items(Joi.number()).length(2).required(),
 });
@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
 
   /*
   {
-	  "name":"osloNorway",
+	  "name":"oslo",
 	  "type":"asdf",
 	  "coordinates":[
 		  1.222333,
@@ -82,6 +82,7 @@ router.post("/", async (req, res) => {
   try {
     const value = await schema.validateAsync(req.body);
     const camps = await camp.findOne({ name: value.name });
+
     if (camps)
       return res.status(400).json({ error: "already a camp with that name" });
     try {
