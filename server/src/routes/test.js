@@ -10,6 +10,7 @@ db.then(() => {
   console.error("Error !", e);
 });
 const user = db.get("users");
+const report = db.get("report");
 
 router.get("/user", async (req, res) => {
   // if (!req.user) return res.status(401).send();
@@ -20,6 +21,12 @@ router.get("/user", async (req, res) => {
 router.post("/user", async (req, res) => {
   const data = req.body;
   user.insert(data);
+  res.status(204).send();
+});
+
+router.post("/reports/test", async (req, res) => {
+  const data = require("../testDataReport")();
+  await report.insert(data);
   res.status(204).send();
 });
 

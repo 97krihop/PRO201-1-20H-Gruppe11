@@ -28,6 +28,10 @@ const schema = Joi.array().items(
       .required(),
   })
 );
+router.get("/report", async (req, res) => {
+  const data = await report.find({});
+  res.json(data);
+});
 
 router.post("/report", async (req, res) => {
   if (!req.user) return res.status(401).send();
