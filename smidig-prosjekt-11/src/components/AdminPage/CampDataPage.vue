@@ -1,14 +1,18 @@
 <template>
   <div id="search-container">
-    <input type="text" placeholder="Search..." v-model="searchQuery"
-    @focus="showSearchSuggestions = true"/>
+    <input
+      type="text"
+      placeholder="Search..."
+      v-model="searchQuery"
+      @focus="showSearchSuggestions = true"
+    />
 
     <div class="search-suggestions" v-if="showSearchSuggestions">
       <div
-          v-for="product in searchedProducts"
-          :key="product.id"
-          v-on:click="showResult(product)"
-          style="margin: 0"
+        v-for="product in searchedProducts"
+        :key="product.id"
+        v-on:click="showResult(product)"
+        style="margin: 0"
       >
         <div>
           <div>{{ product.id }}</div>
@@ -47,12 +51,12 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { createMap } from "@/assets/js/map.js";
 import TopMetrics from "@/components/AdminPage/TopMetrics";
-import { computed, ref} from "vue";
+import { computed, ref } from "vue";
 export default {
   name: "CampDataPage",
 
   setup() {
-    const products =[
+    const products = [
       {
         partNumber: "1",
         partName: "Lamp",
@@ -106,29 +110,30 @@ export default {
       {
         id: "Camp 1",
         campRepairs: [12, 40, 53, 213, 20, 32, 5, 21, 12, 32, 54, 23]
-      },{
+      },
+      {
         id: "Camp 2",
         campRepairs: [21, 4, 35, 23, 2, 42, 35, 41, 32, 14, 65, 82]
       }
     ];
     const searchQuery = ref("");
     const searchedProducts = computed(() => {
-      return campData.filter((product) => {
-        return (product.id
-                .toLowerCase()
-                .indexOf(searchQuery.value.toLowerCase()) !== -1
+      return campData.filter(product => {
+        return (
+          product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
+          -1
         );
       });
     });
-    return {searchedProducts, searchQuery, products};
+    return { searchedProducts, searchQuery, products };
   },
   components: {
     TopMetrics
   },
   methods: {
-    showResult(product){
+    showResult(product) {
       //console.log("test");
-      for(let i = 0; i < this.products.length; i++){
+      for (let i = 0; i < this.products.length; i++) {
         console.log(product.campRepairs[i]);
         this.products[i].totalRepairs = product.campRepairs[i];
       }
@@ -150,30 +155,48 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #search-container {
   display: flex;
   flex-wrap: wrap; /* Optional. only if you want the items to wrap */
   justify-content: center; /* For horizontal alignment */
-  //align-items: center; /* For vertical alignment */
-  padding: 5px;
-}
+  padding: 20px 0;
+  width: 600px;
+  margin: auto;
 
-#search-container input {
-  width: 350px;
-  border: 1px solid lightgrey;
-}
+  input {
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    background: #fff;
+    outline: none;
+    -webkit-box-shadow: 3px 3px 3px 2px rgba(90, 89, 89, 0.31);
+    box-shadow: 3px 3px 15px 2px rgba(90, 89, 89, 0.31);
+    border-radius: 10px 10px 0 0;
+  }
 
-.search-suggestions {
-  flex: none;
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid lightgrey;
-  z-index: 1000;
+  .search-suggestions {
+    flex: none;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 500px;
+    height: 100px;
+    overflow-y: scroll;
+    padding: 10px;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 3px 2px rgba(90, 89, 89, 0.31);
+    box-shadow: 3px 3px 15px 2px rgba(90, 89, 89, 0.31);
+    border-radius: 0 0 10px 10px;
+    z-index: 1000;
+  }
 }
 
 .map-container {
-  position: relative;
+  position: absolute;
+  top: 20%;
+  right: 1.5%;
   width: 80vw;
   height: 250px;
   margin: auto;
@@ -183,12 +206,16 @@ export default {
 
 .part-grid {
   display: flex;
-  width: 60%;
+  width: 55%;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
   justify-content: center;
-  margin: auto auto 1vh;}
+  margin: auto auto 1vh;
+  position: absolute;
+  top: 50%;
+  left: 27%;
+}
 
 .part-cards {
   width: 210px;
@@ -199,5 +226,4 @@ export default {
   border-radius: 15px;
   padding: 15px;
 }
-
 </style>
