@@ -28,10 +28,10 @@
 
   <div id="mapid" class="map-container">
     <div class="metric-chart-container">
-      <repair-part-bar-chart-component />
-      <country-bar-chart-component />
-      <repair-part-bar-chart-component />
-      <repair-part-bar-chart-component />
+      <repair-part-bar-chart-component style="z-index: 1000" />
+      <country-bar-chart-component style="z-index: 1000" />
+      <repair-part-bar-chart-component style="z-index: 1000" />
+      <repair-part-bar-chart-component style="z-index: 1000" />
     </div>
   </div>
 </template>
