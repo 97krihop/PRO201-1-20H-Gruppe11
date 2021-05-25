@@ -3,13 +3,13 @@
     tag="button"
     :to="'/' + this.routerLinkDest"
     type="button"
-    class="font-standardText button"
+    class="font-standardText home-select-button"
   >
     <div class="icon-container">
       <icon-base
         iconHeight="100%"
         :iconName="this.iconName"
-        iconColor="#2c2a29"
+        :iconColor="this.iconColor"
       />
     </div>
     <h4>{{ this.buttonTitle }}</h4>
@@ -30,6 +30,10 @@ export default {
     iconName: {
       Type: String,
     },
+    iconColor: {
+      Type: String,
+      default: "#2c2a29"
+    },
     routerLinkDest: {
       Type: String,
     },
@@ -38,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss">
-.button {
+.home-select-button {
   background-color: #ececec;
   font-size: 1.5em;
   font-weight: bold;
@@ -52,15 +56,15 @@ export default {
   display: flex;
   align-items: center;
   padding: 0 15px;
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 
-    h4 {
-        flex: 1;
-        // text-align: center;
-    }
+  h4 {
+    flex: 1;
+    // text-align: center;
+  }
 
   .icon-container {
-      margin-right: 15px;
+    margin-right: 15px;
     height: 70%;
     align-self: center;
   }
@@ -77,6 +81,5 @@ export default {
     box-shadow: inset 2px 2px 1px #4d5050;
     background-color: #6d6d6d;
   }
-  
 }
 </style>
