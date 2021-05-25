@@ -1,7 +1,7 @@
 import "leaflet/dist/leaflet.js";
 import "leaflet.markercluster/dist/leaflet.markercluster.js";
 
-export function createMap(centerX, centerY, zoomLevel) {
+export function createMap(centerX, centerY, zoomLevel, showZoomControl) {
   const L = window.L; // suppress 'L' is not defined error
 
   // Fix to wrongly referenced image locations in Leaflet bundle
@@ -18,6 +18,7 @@ export function createMap(centerX, centerY, zoomLevel) {
   var map = L.map("mapid", {
     center: [centerX, centerY],
     zoom: zoomLevel,
+    zoomControl: showZoomControl,
     maxZoom: 10
   });
 

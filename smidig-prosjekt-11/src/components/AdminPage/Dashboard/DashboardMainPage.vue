@@ -60,7 +60,7 @@ export default {
     }
   },
   mounted() {
-    createMap(23, 20, 2);
+    createMap(23, 20, 2, true);
     /*this.$nextTick(function() {
       createMap(23, 20, 2);
     });*/

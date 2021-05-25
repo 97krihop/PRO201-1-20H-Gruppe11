@@ -1,49 +1,44 @@
 <template>
-  <div>
-    <div id="mapid" class="map-container"></div>
-    <div class="ui cards" style="margin: 10px">
-      <div class="ui icon input" style="width: 100%">
-        <input type="text" placeholder="Search..." v-model="searchQuery"
-        @focus="showSearchResults = true"/>
-        <i class="search icon"></i>
-      </div>
-      <div v-if="showSearchResults">
-        <div
-            class="card ui fluid"
-            v-for="product in searchedProducts"
-            :key="product.id"
-            v-on:click="showResult(product)"
-            style="margin: 0"
-        >
-          <div class="content">
-            <div class="header">{{ product.id }}</div>
-            <div class="meta">
-              {{ product.campRepairs[0] }}
-            </div>
+  <div id="search-container">
+    <input type="text" placeholder="Search..." v-model="searchQuery"
+    @focus="showSearchSuggestions = true"/>
+
+    <div class="search-suggestions" v-if="showSearchSuggestions">
+      <div
+          v-for="product in searchedProducts"
+          :key="product.id"
+          v-on:click="showResult(product)"
+          style="margin: 0"
+      >
+        <div>
+          <div>{{ product.id }}</div>
+          <div>
+            {{ product.campRepairs[0] }}
           </div>
         </div>
       </div>
     </div>
-    <h3>
-      Camp Data
-    </h3>
-    <div class="part-grid">
-      <div
-        v-for="product in products"
-        :key="product.partNumber"
-        class="part-cards"
-      >
-        <TopMetrics
-          :name-of-data="product.partName"
-          :data-to-display="product.totalRepairs"
-          :metric-icon-src="product.imgName"
-          display-image="{{true}}"
-        />
-      </div>
-    </div>
   </div>
 
+  <div id="mapid" class="map-container"></div>
 
+  <h3>
+    Camp Data
+  </h3>
+  <div v-if="showSearchResults" class="part-grid">
+    <div
+      v-for="product in products"
+      :key="product.partNumber"
+      class="part-cards"
+    >
+      <TopMetrics
+        :name-of-data="product.partName"
+        :data-to-display="product.totalRepairs"
+        :metric-icon-src="product.imgName"
+        display-image="{{true}}"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -137,16 +132,18 @@ export default {
         console.log(product.campRepairs[i]);
         this.products[i].totalRepairs = product.campRepairs[i];
       }
-      this.showSearchResults = false;
+      this.showSearchSuggestions = false;
+      this.showSearchResults = true;
     }
   },
   mounted() {
     this.$nextTick(function() {
-      createMap(23, 20, 5);
+      createMap(23, 20, 5, false);
     });
   },
   data() {
     return {
+      showSearchSuggestions: false,
       showSearchResults: false
     };
   }
@@ -154,23 +151,34 @@ export default {
 </script>
 
 <style scoped>
+#search-container {
+  display: flex;
+  flex-wrap: wrap; /* Optional. only if you want the items to wrap */
+  justify-content: center; /* For horizontal alignment */
+  //align-items: center; /* For vertical alignment */
+  padding: 5px;
+}
+
+#search-container input {
+  width: 350px;
+  border: 1px solid lightgrey;
+}
+
+.search-suggestions {
+  flex: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid lightgrey;
+  z-index: 1000;
+}
+
 .map-container {
   position: relative;
-  width: 350px;
+  width: 80vw;
   height: 250px;
   margin: auto;
   background-color: #fff;
   border: 1px solid lightgrey;
-}
-
-.ui{
-  background: #c7c5c5;
-  width: 25vw;
-  border-radius: 5px;
-}
-.input{
-  background: white;
-  width: 200px;
 }
 
 .part-grid {
