@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const db = require("../db/mongo")
+const db = require("../db/mongo");
 
 const user = db.get("users");
 const report = db.get("report");

@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 const router = express.Router();
 
-const db = require("../db/mongo")
+const db = require("../db/mongo");
 
 const users = db.get("users");
 

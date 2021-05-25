@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
 
-const db = require("../db/mongo")
+const db = require("../db/mongo");
 
 const camp = db.get("camp");
 
