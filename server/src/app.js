@@ -49,6 +49,7 @@ app.use("/api", require("./routes/auth"));
 app.use("/api/report", require("./routes/report"));
 app.use("/api/camp", require("./routes/camp"));
 app.use("/api", require("./routes/test"));
+app.use("/api/statistics", require("./routes/statistics"));
 
 app.get("/", (req, res) => {
   res.json({ name: "test" });
