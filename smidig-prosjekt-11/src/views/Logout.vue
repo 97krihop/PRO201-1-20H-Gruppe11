@@ -9,15 +9,14 @@
           routerLinkDest=""
           iconColor="#ececec"
         />
-        </div>
+      </div>
     </base-site>
   </div>
 </template>
 
 <script>
 import BaseSite from "@/components/Nav/BaseSite.vue";
-import HomeSelectButton from '../components/Nav/HomeSelectButton.vue';
-
+import HomeSelectButton from "../components/Nav/HomeSelectButton.vue";
 
 export default {
   name: "LogoutPage",
@@ -37,7 +36,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-//   justify-content: flex;
+  //   justify-content: flex;
   align-items: center;
 
   h1 {

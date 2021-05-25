@@ -15,7 +15,7 @@
         :icon="it.iconName"
         :linkDestination="it.link"
       />
-      
+
       <nav-link
         :textValue="loginItem.itemTitle"
         :icon="loginItem.iconName"
@@ -51,28 +51,28 @@ export default {
     };
   },
   computed: {
-    loginItem: function () {
+    loginItem: function() {
       const userId = this.$store.getters.getUserId;
-      
-      if(!userId) {
+
+      if (!userId) {
         return {
           itemTitle: "Log in",
           iconName: "enter",
           link: "login",
           alt: "Login icon"
-        }
+        };
       } else {
-         return {
+        return {
           itemTitle: "Log out",
           iconName: "exit",
           link: "logout",
           alt: "Logout icon"
-        }
+        };
       }
     },
-    isLoggedIn: function () {
+    isLoggedIn: function() {
       const userId = this.$store.getters.getUserId;
-      if(!userId) {
+      if (!userId) {
         return false;
       } else {
         return true;
@@ -85,8 +85,7 @@ export default {
       this.menuIsOpen = !temp;
     }
   }
-}
-
+};
 </script>
 <style lang="scss" scoped>
 .nav-bar {

@@ -1,7 +1,14 @@
 import "leaflet/dist/leaflet.js";
 import "leaflet.markercluster/dist/leaflet.markercluster.js";
 
-export function createMap(centerX, centerY, zoomLevel, showZoomControl, campData, products) {
+export function createMap(
+  centerX,
+  centerY,
+  zoomLevel,
+  showZoomControl,
+  campData,
+  products
+) {
   const L = window.L; // suppress 'L' is not defined error
 
   console.log(products);
@@ -46,13 +53,21 @@ export function createMap(centerX, centerY, zoomLevel, showZoomControl, campData
     var campLabelIcon = L.divIcon({
       className: "camp-label",
       html:
-        '<div>' +
-        '<img src="' + layersPath + '" />' + "<p>" + campData[i].id + "</p>" + "<div>" + campData[i].location + "</div>" +
-        '</div>'
+        "<div>" +
+        '<img src="' +
+        layersPath +
+        '" />' +
+        "<p>" +
+        campData[i].id +
+        "</p>" +
+        "<div>" +
+        campData[i].location +
+        "</div>" +
+        "</div>"
     });
-    
+
     var m = new L.marker(campData[i].geoloc, { icon: campLabelIcon });
-    
+
     markers.addLayer(m);
   }
 

@@ -24,7 +24,11 @@
     </div>
   </div>
 
-  <div v-bind:style="[showSearchResults ? {'height': '250px'} : {'height': '70%'}]" id="mapid" class="map-container"></div>
+  <div
+    v-bind:style="[showSearchResults ? { height: '250px' } : { height: '70%' }]"
+    id="mapid"
+    class="map-container"
+  ></div>
 
   <h3>
     Camp Data
@@ -150,7 +154,7 @@ export default {
       });
     });
 
-    return {searchedProducts, searchQuery, products, campData};
+    return { searchedProducts, searchQuery, products, campData };
   },
   components: {
     TopMetrics
@@ -158,7 +162,7 @@ export default {
   methods: {
     showResult(product) {
       //console.log("test");
-      for(let i = 0; i < this.products.length; i++){
+      for (let i = 0; i < this.products.length; i++) {
         //console.log(product.campRepairs[i]);
         this.products[i].totalRepairs = product.campRepairs[i];
       }
@@ -171,15 +175,10 @@ export default {
     //this.$nextTick(function() {
     //});
   },
-  mounted() {
-    this.$nextTick(function() {
-      createMap(23, 20, 5);
-    });
-  },
   data() {
     return {
       showSearchSuggestions: false,
-      showSearchResults: false,
+      showSearchResults: false
     };
   }
 };

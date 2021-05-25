@@ -92,13 +92,14 @@ export default {
         campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
       }
     ];
-    const products =[
+    const products = [
       {
         partNumber: "1",
         partName: "Lamp",
         imgName: "ic-part-lamp",
         totalRepairs: "0"
-    }];
+      }
+    ];
     createMap(23, 20, 2, true, campData, products);
     /*this.$nextTick(function() {
       createMap(23, 20, 2);

@@ -16,12 +16,12 @@
   </div>
 </template>
 <script>
-import BaseSite from '../components/Nav/BaseSite.vue';
-import HomeSelectButton from '../components/Nav/HomeSelectButton.vue';
+import BaseSite from "../components/Nav/BaseSite.vue";
+import HomeSelectButton from "../components/Nav/HomeSelectButton.vue";
 
 export default {
-  name: 'NotImplementedPage',
-  components: { BaseSite, HomeSelectButton },
+  name: "NotImplementedPage",
+  components: { BaseSite, HomeSelectButton }
 };
 </script>
 <style lang="scss" scoped>
@@ -30,7 +30,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-//   justify-content: flex;
+  //   justify-content: flex;
   align-items: center;
 
   h1 {
