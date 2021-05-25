@@ -48,6 +48,7 @@ app.use(passport.session());
 app.use("/api", require("./routes/report"));
 app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/test"));
+app.use("/api/camp", require("./routes/camp"));
 
 app.get("/", (req, res) => {
   res.json({ name: "test" });
