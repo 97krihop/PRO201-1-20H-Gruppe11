@@ -57,6 +57,56 @@ export default {
   name: "CampDataPage",
 
   setup() {
+    const products =[
+      {
+        partNumber: "1",
+        partName: "Lamp",
+        imgName: "ic-part-lamp",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "2",
+        partName: "12V charger",
+        imgName: "ic-part-adapter-charger",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "3",
+        partName: "Battery",
+        imgName: "ic-part-battery",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "4",
+        partName: "Power button",
+        imgName: "ic-part-button",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "5",
+        partName: "Light bulb",
+        imgName: "ic-part-lightbulb",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "6",
+        partName: "Screen",
+        imgName: "ic-part-screen",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "7",
+        partName: "Socket charger",
+        imgName: "ic-part-socket-charger",
+        totalRepairs: "0"
+      },
+      {
+        partNumber: "8",
+        partName: "Solar panel",
+        imgName: "ic-part-solar-panel",
+        totalRepairs: "0"
+      }
+    ];
     const campData = [
       {
         id: "Camp 1",
@@ -75,7 +125,7 @@ export default {
         );
       });
     });
-    return {searchedProducts, searchQuery};
+    return {searchedProducts, searchQuery, products};
   },
   components: {
     TopMetrics
@@ -162,22 +212,14 @@ export default {
   background-color: #fff;
   border: 1px solid lightgrey;
 }
-.searchbar{
-  position: relative;
-  margin: auto;
-}
-
-.product-image{
-  width: 5vw;
-  height: 5vh;
-}
 
 .ui{
-  background: grey;
+  background: #c7c5c5;
   width: 25vw;
+  border-radius: 5px;
 }
 .input{
-  background: green;
+  background: white;
   width: 200px;
 }
 
