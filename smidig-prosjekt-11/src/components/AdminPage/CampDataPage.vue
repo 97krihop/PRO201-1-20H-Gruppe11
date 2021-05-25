@@ -4,17 +4,15 @@
       Camp Data
     </h3>
   </div>
-  
-  <div id="mapid" class="map-container">
-  </div>
-  </template
->
+
+  <div id="mapid" class="map-container"></div>
+</template>
 
 <script>
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
-import {createMap} from "@/assets/js/map.js";
+import { createMap } from "@/assets/js/map.js";
 
 export default {
   name: "CampDataPage",

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import IconBase from '../UI/IconBase.vue';
+import IconBase from "../UI/IconBase.vue";
 export default {
   data() {
     return {};
@@ -123,14 +123,14 @@ input {
   font-weight: bold;
 }
 
-  .parts-container {
-    height: 100%;
-    width: 40vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-  }
+.parts-container {
+  height: 100%;
+  width: 40vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
 
 .part-img {
   height: 90%;
@@ -165,38 +165,38 @@ input {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
   }
-    .edit-delete-ic-container {
-      width: 23px;
-      height: 23px;
-    }
+  .edit-delete-ic-container {
+    width: 23px;
+    height: 23px;
   }
+}
 
-  .part-img {
-    margin: 3px;
+.part-img {
+  margin: 3px;
+}
+
+.serial-container {
+  width: 150px;
+  // border: 1px solid blue;
+  // border: 1px solid blue;
+
+  .serial-number {
+    font-size: 0.8rem;
+    background-color: #dad2cb;
+    border-radius: 8px;
+    padding: 10px;
   }
+}
 
-  .serial-container {
-    width: 150px;
-    // border: 1px solid blue;
-    // border: 1px solid blue;
+.edit-delete-icons {
+  margin-right: 20px;
+  width: 50px;
 
-    .serial-number {
-      font-size: 0.8rem;
-      background-color: #dad2cb;
-      border-radius: 8px;
-      padding: 10px;
-    }
+  .edit-delete-ic-container {
+    width: 18px;
+    height: 18px;
   }
-
-  .edit-delete-icons {
-    margin-right: 20px;
-    width: 50px;
-
-    .edit-delete-ic-container {
-      width: 18px;
-      height: 18px;
-    }
-  }
+}
 
 // @media only screen and (min-device-width: 600px) and (max-width: 960px) {
 // #product-container {

@@ -44,7 +44,7 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import CountryBarChartComponent from "./Components/CountryBarChartComponent";
 import RepairPartBarChartComponent from "@/components/AdminPage/Dashboard/Components/RepairedPartBarChartComponent";
-import {createMap} from "@/assets/js/map.js";
+import { createMap } from "@/assets/js/map.js";
 
 export default {
   name: "DashboardPage",
@@ -64,7 +64,6 @@ export default {
     /*this.$nextTick(function() {
       createMap(23, 20, 2);
     });*/
-
   },
   data() {
     return {};

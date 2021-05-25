@@ -36,22 +36,17 @@ export function createMap(centerX, centerY, zoomLevel) {
 
   var campLabelIcon1 = L.divIcon({
     className: "camp-label",
-    html: '<img src="' + layersPath + '" />' +
-          '<p>Camp 1</p>' +
-          '<div>723</div>'
-          
+    html:
+      '<img src="' + layersPath + '" />' + "<p>Camp 1</p>" + "<div>723</div>"
   });
   var campLabelIcon2 = L.divIcon({
     className: "camp-label",
-    html: '<img src="' + layersPath + '" />' +
-          '<p>Camp 2</p>' +
-          '<div>1,374</div>'
+    html:
+      '<img src="' + layersPath + '" />' + "<p>Camp 2</p>" + "<div>1,374</div>"
   });
   var campLabelIcon3 = L.divIcon({
     className: "camp-label",
-    html: '<img src="' + layersPath + '" />' +
-          '<p>Camp 3</p>' +
-          '<div>15</div>'
+    html: '<img src="' + layersPath + '" />' + "<p>Camp 3</p>" + "<div>15</div>"
   });
 
   var m1 = new L.marker([20, 20], { icon: campLabelIcon1 });
