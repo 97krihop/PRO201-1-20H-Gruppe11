@@ -106,7 +106,7 @@ export default {
         totalRepairs: "0"
       }
     ];
-    
+
     const campData = [
       {
         id: "Hagadera Refugee Camp",
@@ -139,7 +139,7 @@ export default {
         campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
       }
     ];
-    
+
     const searchQuery = ref("");
     const searchedProducts = computed(() => {
       return campData.filter(product => {
@@ -170,6 +170,11 @@ export default {
     createMap(23, 20, 2, true, this.campData, this.products);
     //this.$nextTick(function() {
     //});
+  },
+  mounted() {
+    this.$nextTick(function() {
+      createMap(23, 20, 5);
+    });
   },
   data() {
     return {
