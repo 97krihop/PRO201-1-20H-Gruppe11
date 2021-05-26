@@ -37,7 +37,8 @@ router.post("/login", (req, res, next) => {
 });
 
 //Registration route -- Saves user in user storage after hashing password. -- Error handling and a bit of input validation/sanitation is done in frontend.
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
+  if (!req.user || !req.user.admin) return next();
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   let value;
   try {
