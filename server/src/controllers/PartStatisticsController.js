@@ -1,14 +1,13 @@
-const express = require("express");
-const router = express.Router();
-
 const db = require("../db/mongo");
 const reports = db.get("report");
 
-const getPartCount = async (param) => {
-  return reports.count({ parts: [{ partName: "Lamp" }] });
-  {
-    parts: [{ partNumber: "7" }];
-  }
+const getPartCountByPartName = async (param) => {
+  return reports.count({parts: {$elemMatch: {partName : param}}});
+
+};
+const getPartCountByPartNumber = async (param) => {
+  return reports.count({parts: {$elemMatch: {partNumber : param}}});
+
 };
 
-module.exports = { getPartCount };
+module.exports = { getPartCountByPartName ,getPartCountByPartNumber};
