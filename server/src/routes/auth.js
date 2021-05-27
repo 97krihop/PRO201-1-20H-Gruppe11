@@ -64,7 +64,7 @@ router.post("/register", async (req, res) => {
 router.get("/logout", (req, res) => {
   req.logout();
   //TODO Update redirect route
-  res.status(200).send();
+  res.sendStatus(200);
 });
 
 router.get("/admin", async (req, res) => {

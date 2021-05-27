@@ -2,7 +2,7 @@
   <!-- main page to login -->
   <div id="login-container">
     <!-- from to post -->
-    <form @submit.prevent="post">
+    <form @submit.prevent="submitLogin({username: username, password: password})">
       <div>
         <!-- username input -->
         <label for="username">Username</label>
@@ -36,40 +36,49 @@
   </div>
 </template>
 <script>
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+// import { ref, computed } from 'vue';
+// import { useStore } from 'vuex';
+// import { useRouter } from 'vue-router';
 export default {
-  //composition API
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-    const username = ref("");
-    const password = ref("");
-
-    //computed property from store
-    const user = computed(() => {
-      return store.getters.getUserId;
-    });
-    //is called on form submit
-    function post() {
-      login(username.value);
-      router.push({ name: "Home" });
-    }
-    // validate and send data to backend
-    function login(userId) {
-      //TODO submit to database and validate data
-      store.commit("login", userId);
-    }
-
+  data() {
     return {
-      username,
-      password,
-      post,
-      user
+      username: '',
+      password: '',
     };
-  }
-};
+  },
+  emits: ["submitLogin"],
+  methods: {
+    submitLogin(user) {
+      this.$emit("submitLogin", user)
+    }
+  },
+
+  //composition API
+  // setup() {
+  //   const store = useStore();
+  //   const router = useRouter();
+
+  //   //computed property from store
+  //   const user = computed(() => {
+  //     return store.getters.getUserId;
+  //   });
+    //is called on form submit
+    // function post() {
+    //   login(username.value);
+    //   router.push({ name: 'Home' });
+    // }
+    // validate and send data to backend
+  //   function login(userId) {
+  //     //TODO submit to database and validate data
+  //     store.commit('login', userId);
+  //   }
+
+  //   return {
+  //     post,
+  //     user,
+  //   };
+  // },
+}
 </script>
 
 <style lang="scss" scoped>
