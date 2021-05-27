@@ -27,9 +27,11 @@
           required
         />
       </div>
+      <div v-if="showError"  class="login-error-container">Invalid username or password</div>
 
       <div>
         <!-- submit button -->
+        
         <input id="login-submit" type="submit" />
       </div>
     </form>
@@ -37,7 +39,6 @@
 </template>
 <script>
 // import { ref, computed } from 'vue';
-// import { useStore } from 'vuex';
 // import { useRouter } from 'vue-router';
 export default {
   data() {
@@ -52,6 +53,12 @@ export default {
       this.$emit("submitLogin", user)
     }
   },
+  props: {
+    showError: {
+      type: Boolean,
+      defualt: false
+    }
+  }
 
   //composition API
   // setup() {
@@ -143,6 +150,11 @@ export default {
       box-shadow: inset 2px 2px 2px #899599;
       background-color: #6d6d6d;
     }
+  }
+  
+  .login-error-container {
+    color: darkred;
+    margin-bottom: 15px;
   }
 }
 

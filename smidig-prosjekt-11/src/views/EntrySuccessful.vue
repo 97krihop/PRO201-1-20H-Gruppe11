@@ -22,7 +22,7 @@ export default {
   name: "entrySuccessful",
   setup() {
     const store = useStore();
-    const user = store.getters.getUserId;
+    const user = store.getters.getUsername;
     return {
       user
     };

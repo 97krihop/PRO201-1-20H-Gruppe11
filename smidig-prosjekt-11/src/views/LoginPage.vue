@@ -1,13 +1,12 @@
 <template>
   <base-site isDark="true">
-    <login @submitLogin="postLogin($event)" />
+    <login @submitLogin="postLogin($event)" :showError="showLoginError" />
   </base-site>
 </template>
 
 <script>
 import BaseSite from '@/components/Nav/BaseSite.vue';
 import Login from '@/components/Login/Login.vue';
-import { useStore } from 'vuex';
 
 const axios = require('axios');
 
@@ -17,6 +16,7 @@ export default {
     return {
       username: '',
       password: '',
+      showLoginError: false,
     };
   },
   components: {
@@ -29,16 +29,20 @@ export default {
         // TODO: Create login exception
       }
 
-      axios.post('http://localhost:3000/api/login', user)
-      .then(response => {
-        console.log("response", response)
-        
-        const store = useStore();
-        store.commit('login', response.data);
+      axios
+        .post('http://localhost:3000/api/login', user)
+        .then((response) => {
+          this.$store.commit('login', response.data);
+          this.$router.replace({ name: 'Home' })
         })
-      .catch(error => console.log(error))
+        .catch((error) => {
+          console.log('error', error);
+          this.showLoginError = true;
+        });
     },
   },
+  // setup() {
+  // },
 };
 </script>
 
