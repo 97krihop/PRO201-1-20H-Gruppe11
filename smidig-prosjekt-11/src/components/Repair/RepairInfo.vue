@@ -37,7 +37,8 @@
             v-show="showRepair === false"
             id="plus-btn"
             iconName="plus"
-            iconColor="#423048"
+            iconColor="#2C2A29"
+            icon-hover-color="#787370"
             iconWidth="100%"
             iconHeight="100%"
             v-on:click="addRepair()"
@@ -184,7 +185,12 @@ export default {
   overflow-y: scroll;
 }
 
-@media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+@media only screen and (min-device-width: 600px) and (max-width: 1280px) and (orientation: landscape) {
+  #parts-popup {
+    width: 75vw;
+    height: 55vh;
+  }
+
   #close-repair-btn {
     height: 15px;
     width: 15px;
