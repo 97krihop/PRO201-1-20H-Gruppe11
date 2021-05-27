@@ -2,8 +2,9 @@ const monk = require("monk");
 const bcrypt = require("bcrypt");
 
 const db = monk(process.env.MONGO_URI);
-db.then(() => {
+db.then(async () => {
   console.log("connection success");
+  await addAdmin();
 }).catch((e) => {
   console.error("Error !", e);
 });
@@ -20,6 +21,5 @@ const addAdmin = async () => {
     });
   }
 };
-addAdmin();
 
 module.exports = db;
