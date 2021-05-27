@@ -23,7 +23,7 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    if (store.getters.getUserId == null) router.push({ name: "LoginPage" });
+    if (store.getters.getUsername == null) router.push({ name: "LoginPage" });
   },
   components: {
     BaseSite,

@@ -60,7 +60,7 @@ export default {
 
   //   //computed property from store
   //   const user = computed(() => {
-  //     return store.getters.getUserId;
+  //     return store.getters.getUsername;
   //   });
     //is called on form submit
     // function post() {

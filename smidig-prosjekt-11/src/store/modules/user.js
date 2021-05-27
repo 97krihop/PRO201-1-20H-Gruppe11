@@ -1,18 +1,22 @@
 const state = {
-  userId: null,
-  isAdmin: true
+  isAdmin: false,
+  campName: null,
+  username: null
 };
 
 const mutations = {
   logout(state) {
     state.userId = null;
   },
-  login(state, userId) {
-    state.userId = userId;
+  login(state, userData) {
+    const { admin, campName, username } = userData;
+    state.isAdmin = admin;
+    state.campName = campName;
+    state.username = username;
   }
 };
 const getters = {
-  getUserId: state => state.userId,
+  getUsername: state => state.username,
   getIsAdmin: state => state.isAdmin
 };
 

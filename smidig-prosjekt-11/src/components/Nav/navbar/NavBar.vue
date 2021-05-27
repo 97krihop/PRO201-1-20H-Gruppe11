@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     loginItem: function() {
-      const userId = this.$store.getters.getUserId;
+      const userId = this.$store.getters.getUsername;
 
       if (!userId) {
         return {
@@ -71,7 +71,7 @@ export default {
       }
     },
     isLoggedIn: function() {
-      const userId = this.$store.getters.getUserId;
+      const userId = this.$store.getters.getUsername;
       if (!userId) {
         return false;
       } else {
