@@ -5,6 +5,7 @@ const { login, addAdmin } = require("./helperFunction");
 
 beforeEach(async () => {
   await addAdmin(db);
+  console.log("added admin")
 });
 afterAll(async () => {
   await db.close();

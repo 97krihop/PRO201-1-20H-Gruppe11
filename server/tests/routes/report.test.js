@@ -61,10 +61,10 @@ describe("test report endpoint", () => {
           parts: [
             {
               partNumber: "1",
-              partName: "PCB"
-            }
-          ]
-        }
+              partName: "PCB",
+            },
+          ],
+        },
       ])
       .set("Content-Type", "application/json");
     expect(res1.statusCode).toEqual(200);
