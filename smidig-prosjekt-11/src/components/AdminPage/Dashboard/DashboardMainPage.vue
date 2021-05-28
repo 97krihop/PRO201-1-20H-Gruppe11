@@ -28,8 +28,10 @@
 
   <div id="mapid" class="map-container">
     <div class="metric-chart-container">
-      <country-bar-chart-component style="z-index:1000; position:absolute; bottom:0" />
-      <repair-part-bar-chart-component style="z-index:1000" />
+      <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
+      <country-bar-chart-component style="z-index: 1000" />
+      <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
+      <repair-part-bar-chart-component style="z-index: 1000" />
     </div>
   </div>
 </template>
@@ -98,7 +100,7 @@ export default {
         totalRepairs: "0"
       }
     ];
-    createMap(23, 20, 3, true, campData, products);
+    createMap(23, 20, 2, true, campData, products);
     /*this.$nextTick(function() {
       createMap(23, 20, 2);
     });*/

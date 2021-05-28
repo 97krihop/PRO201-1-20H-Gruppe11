@@ -32,15 +32,18 @@ export default {};
 
   .product-label {
     margin-left: 50px;
+    // border: 1px solid black;
     width: 83px;
   }
 
   .serial-label {
     width: 250px;
+    // border: 1px solid blue;
   }
 
   .part-label {
     width: 40vw;
+    // border: 1px solid blue;
   }
 
   .edit-delete-container {
@@ -48,31 +51,29 @@ export default {};
     display: flex;
     justify-content: space-between;
     width: 100px;
+    // border: 1px solid blue;
     label {
       position: relative;
     }
   }
 
   .edit-label {
-    left: -20px;
+    left: -6px;
   }
 
   @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
     .font-standardText {
       font-size: 12px;
     }
-
-    .edit-label {
-      left: 5px;
-    }
-
     .delete-label {
       right: -12px;
     }
-
-    .edit-delete-container {
-      margin-right: 40px;
-    }
   }
 }
+
+// @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+//     .font-standardText {
+//         font-size: 12px;
+//     }
+// }
 </style>
