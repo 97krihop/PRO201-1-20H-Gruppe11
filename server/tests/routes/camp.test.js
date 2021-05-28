@@ -69,7 +69,7 @@ describe("test camp endpoint", () => {
     const res = await agent
       .post("/api/camp")
       .send({
-        name: "oslo",
+        name: "oslo1",
         type: "something",
         coordinates: [1.222333, 13.12312],
       })
@@ -79,7 +79,7 @@ describe("test camp endpoint", () => {
     const res2 = await agent
       .post("/api/camp")
       .send({
-        name: "oslo",
+        name: "oslo1",
         type: "something",
         coordinates: [1.222333, 13.12312],
       })
