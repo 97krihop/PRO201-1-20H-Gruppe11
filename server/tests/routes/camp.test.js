@@ -24,6 +24,7 @@ describe("test camp endpoint", () => {
     const res = await agent.get("/api/camp");
     expect(res.statusCode).toEqual(200);
     expect(res.body.length).toEqual(4);
+
     const res1 = await agent.get("/api/camp/Katumba");
     expect(res1.statusCode).toEqual(200);
     expect(res1.body.name).toEqual("Katumba");
@@ -37,8 +38,7 @@ describe("test camp endpoint", () => {
 
   it("should fail on schema to add a camp", async () => {
     const agent = request.agent(app, null);
-    const resLogin = await login(agent);
-    expect(resLogin.statusCode).toEqual(200);
+    await login(agent);
 
     const res = await agent
       .post("/api/camp")
@@ -49,8 +49,8 @@ describe("test camp endpoint", () => {
 
   it("should succeed to add a camp", async () => {
     const agent = request.agent(app, null);
-    const resLogin = await login(agent);
-    expect(resLogin.statusCode).toEqual(200);
+    await login(agent);
+
 
     const res = await agent
       .post("/api/camp")
@@ -64,8 +64,8 @@ describe("test camp endpoint", () => {
   });
   it("should fail to add a camp with same name", async () => {
     const agent = request.agent(app, null);
-    const resLogin = await login(agent);
-    expect(resLogin.statusCode).toEqual(200);
+    await login(agent);
+
 
     const res = await agent
       .post("/api/camp")

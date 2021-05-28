@@ -24,8 +24,7 @@ describe("test report endpoint", () => {
   it("should all reports", async () => {
     const agent = request.agent(app, null);
 
-    const res = await login(agent);
-    expect(res.statusCode).toEqual(200);
+    await login(agent);
 
     const res1 = await agent.get("/api/report");
     expect(res1.statusCode).toEqual(200);
@@ -35,8 +34,7 @@ describe("test report endpoint", () => {
   it("should fail to add report schema", async () => {
     const agent = request.agent(app, null);
 
-    const res = await login(agent);
-    expect(res.statusCode).toEqual(200);
+    await login(agent);
 
     const res1 = await agent
       .post("/api/report")
@@ -48,8 +46,7 @@ describe("test report endpoint", () => {
   it("should succeed to add report", async () => {
     const agent = request.agent(app, null);
 
-    const res = await login(agent);
-    expect(res.statusCode).toEqual(200);
+    await login(agent);
 
     const res1 = await agent
       .post("/api/report")
