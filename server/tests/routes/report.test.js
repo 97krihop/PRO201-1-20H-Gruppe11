@@ -7,7 +7,6 @@ beforeEach(async () => {
   await addAdmin(db);
 });
 
-
 describe("test report endpoint", () => {
   it("should fail to add a report", async () => {
     const agent = request.agent(app, null);

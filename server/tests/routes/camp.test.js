@@ -7,7 +7,6 @@ beforeEach(async () => {
   await addAdmin(db);
 });
 
-
 describe("test camp endpoint", () => {
   it("should list all camps", async () => {
     const agent = request.agent(app, null);
@@ -48,7 +47,6 @@ describe("test camp endpoint", () => {
     const agent = request.agent(app, null);
     await login(agent);
 
-
     const res = await agent
       .post("/api/camp")
       .send({
@@ -62,7 +60,6 @@ describe("test camp endpoint", () => {
   it("should fail to add a camp with same name", async () => {
     const agent = request.agent(app, null);
     await login(agent);
-
 
     const res = await agent
       .post("/api/camp")

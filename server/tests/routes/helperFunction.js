@@ -1,12 +1,14 @@
 const bcrypt = require("bcrypt");
 const login = async (agent) => {
-  return await agent
+  const res = await agent
     .post("/api/login")
     .send({
       username: "test",
       password: "admin",
     })
     .set("Content-Type", "application/json");
+  expect(res.statusCode).toEqual(200);
+  return res;
 };
 
 const addAdmin = async (db) => {
@@ -18,7 +20,6 @@ const addAdmin = async (db) => {
     admin: true,
     campName: "Bright",
   });
-  console.log(await user.find({}))
 };
 
 module.exports = { login, addAdmin };
