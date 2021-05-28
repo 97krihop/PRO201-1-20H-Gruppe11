@@ -11,7 +11,6 @@
           <product-data-page v-if="selectedSection === 'Parts'" />
           <camp-data-page v-if="selectedSection === 'Camps'" />
           <user-administration-page v-if="selectedSection === 'Users'" />
-          <camp-administration-page v-if="selectedSection === 'CampsAdmin'" />
         </div>
       </div>
     </base-site>
@@ -28,7 +27,6 @@ import DashboardPage from "@/components/AdminPage/Dashboard/DashboardMainPage.vu
 import CampDataPage from "@/components/AdminPage/CampDataPage";
 import ProductDataPage from "../components/AdminPage/ProductDataPage";
 import UserAdministrationPage from "../components/AdminPage/UserAdministrationPage";
-import CampAdministrationPage from "@/components/AdminPage/CampAdministrationPage";
 
 export default {
   name: "adminPage",
@@ -41,7 +39,6 @@ export default {
     };
   },
   components: {
-    CampAdministrationPage,
     UserAdministrationPage,
     ProductDataPage,
     CampDataPage,

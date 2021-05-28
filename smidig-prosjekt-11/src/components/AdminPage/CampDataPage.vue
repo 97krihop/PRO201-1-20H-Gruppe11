@@ -5,7 +5,6 @@
       placeholder="Search..."
       v-model="searchQuery"
       @focus="showSearchSuggestions = true"
-      v-on:blur="delayedHide"
     />
 
     <div class="search-suggestions" v-if="showSearchSuggestions">
@@ -126,19 +125,19 @@ export default {
         campRepairs: [21, 5, 3, 243, 2, 42, 35, 41, 32, 14, 65, 15]
       },
       {
-        id: "Katumba Refugee Camp",
+        id: "",
         location: "Tanzania",
         geoloc: [31.02813720703125, -6.287998672327658],
         campRepairs: [13, 0, 35, 2223, 2, 442, 345, 41, 32, 14, 0, 12]
       },
       {
-        id: "Pugnido Refugee Camp",
+        id: "",
         location: "Ethiopia",
         geoloc: [34.00543212890625, 7.681051391626661],
         campRepairs: [40, 344, 35, 23, 2, 242, 34, 41, 32, 14, 65, 0]
       },
       {
-        id: "Yida Refugee Camp",
+        id: "",
         location: "South Sudan",
         geoloc: [30.047607421875, 10.244654445228324],
         campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
@@ -147,12 +146,9 @@ export default {
 
     const searchQuery = ref("");
     const searchedProducts = computed(() => {
-      console.log("campData.filter()");
       return campData.filter(product => {
         return (
           product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-          -1 || 
-          product.location.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
           -1
         );
       });
@@ -164,33 +160,25 @@ export default {
     TopMetrics
   },
   methods: {
-    updateData() {
-      this.$forceUpdate();
-    },
-    delayedHide() {
-      var that = this;
-      setTimeout(function() { that.showSearchSuggestions = false; }, 200);
-    },
     showResult(product) {
-      console.log(product);
+      //console.log("test");
       for (let i = 0; i < this.products.length; i++) {
-        console.log(product.campRepairs[i]);
+        //console.log(product.campRepairs[i]);
         this.products[i].totalRepairs = product.campRepairs[i];
       }
+      this.showSearchSuggestions = false;
       this.showSearchResults = true;
     }
   },
   mounted() {
-    createMap(23, 20, 2, true, this.campData, this.products, this.updateData);
-    console.log(this.products[0].totalRepairs);
-    //this.test();
+    createMap(23, 20, 2, true, this.campData, this.products);
     //this.$nextTick(function() {
     //});
   },
   data() {
     return {
       showSearchSuggestions: false,
-      showSearchResults: true
+      showSearchResults: false
     };
   }
 };

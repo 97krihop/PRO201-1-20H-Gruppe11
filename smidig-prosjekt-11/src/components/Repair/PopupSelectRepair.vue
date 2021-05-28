@@ -58,29 +58,24 @@
           <h2>{{ product.partName }}</h2>
         </div>
       </div>
-      <div class="close-container-ic">
-        <icon-base
-          class="close-repair-ic"
-          iconName="cross"
-          iconColor="#C93333"
-          icon-hover-color="#A80000"
-          iconWidth="100%"
-          iconHeight="100%"
-          v-on:click="closePopup"
-        />
-      </div>
-    </div>
-    <div class="submit-container-ic">
       <icon-base
-        class="submit-ic"
-        iconName="checkmark"
-        iconColor="#7EB46B"
-        icon-hover-color="#006400"
-        @click="submitPartsSelected"
-        iconWidth="100%"
-        iconHeight="100%"
+        class="close-repair-ic"
+        iconName="cross"
+        iconColor="#C93333"
+        icon-hover-color="#A80000"
+        v-on:click="closePopup"
       />
     </div>
+
+    <icon-base
+      class="submit-ic"
+      iconName="checkmark"
+      iconColor="#7EB46B"
+      icon-hover-color="#006400"
+      @click="submitPartsSelected"
+      iconWidth="40"
+      iconHeight="40"
+    />
   </div>
 </template>
 
@@ -251,6 +246,8 @@ export default {
 
   h1 {
     font-size: 1.5em;
+    // margin: 3vh;
+    // padding-bottom: 2vh;
     font-weight: bold;
     margin: 0;
     color: #38293c;
@@ -312,7 +309,11 @@ export default {
         text-align: center;
         font-weight: bold;
         font-style: italic;
-        outline: none;
+      }
+
+      #emptySerialNumberCheckbox {
+        width: 2vw;
+        height: 2vh;
       }
     }
   }
@@ -320,12 +321,15 @@ export default {
   .part-container {
     display: flex;
     flex-direction: column;
+
     align-items: center;
     background-color: #f8f6f2;
     padding: 10px;
     border-radius: 10px;
+    // border: 1px solid blue;
 
     .part-grid {
+      // border: 1px solid red;
       height: 80%;
       width: 100%;
       margin: 10px 0 10px 0;
@@ -340,6 +344,7 @@ export default {
     }
 
     .part-grid-entity {
+      // border: 1px solid black;
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -371,102 +376,59 @@ export default {
     }
   }
 
-  .submit-container-ic {
-    width: 40px;
-    height: 40px;
+  .submit-ic {
     position: absolute;
     right: 20px;
-    bottom: 10px;
+    bottom: 20px;
+    cursor: pointer;
 
-    .submit-ic {
-      cursor: pointer;
-    }
+    // h3 {
+    //   color: #fff;
+    // }
   }
 
-  .close-container-ic {
-    width: 40px;
-    height: 40px;
+  .close-repair-ic {
+    cursor: pointer;
     position: absolute;
     right: 10px;
     top: 10px;
-
-    .close-repair-ic {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-    }
   }
 }
 
-@media only screen and (min-device-width: 600px) and (max-width: 1280px) and (orientation: landscape) {
-  #popup-container {
-    height: 54vh;
+// @media only screen and (min-device-width: 600px) and (max-device-width: 1280px) and (orientation: landscape) {
+//   #container {
+//     h1 {
+//       font-size: 1em;
+//     }
+//     img {
+//       margin-bottom: 5px;
+//     }
 
-    h1 {
-      font-size: 1.2rem;
-    }
+//     #products-container {
+//       #popup-static-product-style {
+//         h2 {
+//           font-size: 12px;
+//         }
+//       }
+//     }
 
-    .product-container {
-      width: 30vh;
-      grid-template-rows: 70% 30%;
+//     #parts {
+//       .parts-container {
+//         a {
+//           width: 80px;
 
-      .product-section {
-        width: 30vh;
-      }
+//           h2 {
+//             font-size: 10px;
+//           }
+//         }
+//       }
+//     }
 
-      #popup-static-product-style {
-        h2 {
-          font-size: 14px;
-        }
-      }
-
-      .serial-section {
-        h1 {
-          font-size: 14px;
-        }
-
-        input {
-          width: 85%;
-          font-size: 10px;
-        }
-      }
-    }
-
-    .part-container {
-      margin: auto;
-      width: 65vh;
-      height: 50vh;
-
-      .part-grid {
-        gap: 0 5px;
-      }
-
-      .part-grid-entity {
-        h2 {
-          font-size: 0.6rem;
-        }
-      }
-    }
-
-    .submit-container-ic {
-      width: 25px;
-      height: 25px;
-
-      .submit-ic {
-        width: 25px;
-        height: 25px;
-      }
-    }
-
-    .close-container-ic {
-      width: 20px;
-      height: 20px;
-
-      .close-repair-ic {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-}
+//     #next-btn {
+//       width: 65px;
+//       height: 30px;
+//       font-size: 12px;
+//     }
+//   }
+// }
 </style>
