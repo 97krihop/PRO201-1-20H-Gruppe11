@@ -18,6 +18,7 @@ const addAdmin = async (db) => {
     admin: true,
     campName: "Bright",
   });
+  console.log(await user.find({}))
 };
 
 module.exports = { login, addAdmin };

@@ -6,9 +6,7 @@ const { login, addAdmin } = require("./helperFunction");
 beforeEach(async () => {
   await addAdmin(db);
 });
-afterAll(async () => {
-  await db.close();
-});
+
 
 describe("test report endpoint", () => {
   it("should fail to add a report", async () => {

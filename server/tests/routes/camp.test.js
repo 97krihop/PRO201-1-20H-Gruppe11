@@ -5,11 +5,8 @@ const { login, addAdmin } = require("./helperFunction");
 
 beforeEach(async () => {
   await addAdmin(db);
-  console.log("added admin")
 });
-afterAll(async () => {
-  await db.close();
-});
+
 
 describe("test camp endpoint", () => {
   it("should list all camps", async () => {
