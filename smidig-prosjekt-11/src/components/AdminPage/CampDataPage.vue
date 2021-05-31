@@ -237,9 +237,17 @@ export default {
   }
 }
 
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 46%;
+  left: 55%;
+}
+
 .map-container {
   position: absolute;
-  top: 20%;
+  top: 17%;
   right: 1.5%;
   width: 80vw;
   height: 250px;
@@ -258,7 +266,7 @@ export default {
   margin: auto auto 1vh;
   position: absolute;
   top: 50%;
-  left: 27%;
+  left: 30%;
 }
 
 .part-cards {

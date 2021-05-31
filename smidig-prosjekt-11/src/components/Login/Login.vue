@@ -29,14 +29,10 @@
           required
         />
       </div>
-      <div v-if="showError" class="login-error-container">
-        Invalid username or password
-      </div>
 
       <div>
         <!-- submit button -->
-
-        <input id="login-submit" type="submit" />
+        <input id="login-submit" type="submit" value="Log in"/>
       </div>
     </form>
   </div>
