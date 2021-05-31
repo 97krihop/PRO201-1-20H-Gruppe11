@@ -48,8 +48,7 @@ export function createMap(
   for (let i = 0; i < campData.length; i++) {
     var campLabelIcon = L.divIcon({
       className: "camp-label",
-      html:
-        `<div>
+      html: `<div>
         <img src="
         ${layersPath}
         " />
@@ -64,7 +63,7 @@ export function createMap(
 
     var m = new L.marker(campData[i].geoloc, { icon: campLabelIcon });
 
-    m.addEventListener("click", function(){
+    m.addEventListener("click", function() {
       console.log("clicked on camp " + campData[i].id);
       for (let j = 0; j < products.length; j++) {
         products[j].totalRepairs = j;

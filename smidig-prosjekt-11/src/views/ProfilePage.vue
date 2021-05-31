@@ -58,7 +58,7 @@ import ModalChangePassword from "@/components/Modals/ModalChangePassword";
 export default {
   data() {
     return {
-      user: this.$store.getters.getUserId,
+      user: this.$store.getters.getUserInfo,
       ListOfRepairs: [],
       showModal: false
     };

@@ -23,7 +23,11 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    if (store.getters.getUsername == null) router.push({ name: "LoginPage" });
+    const userInfo = store.getters.getUserInfo;
+    console.log("userInfo", userInfo);
+    if (!userInfo) {
+      router.replace({ name: "NotImplemented" });
+    }
   },
   components: {
     BaseSite,

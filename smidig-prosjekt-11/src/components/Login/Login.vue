@@ -2,7 +2,9 @@
   <!-- main page to login -->
   <div id="login-container">
     <!-- from to post -->
-    <form @submit.prevent="submitLogin({username: username, password: password})">
+    <form
+      @submit.prevent="emitLogin({ username: username, password: password })"
+    >
       <div>
         <!-- username input -->
         <label for="username">Username</label>
@@ -27,11 +29,13 @@
           required
         />
       </div>
-      <div v-if="showError"  class="login-error-container">Invalid username or password</div>
+      <div v-if="showError" class="login-error-container">
+        Invalid username or password
+      </div>
 
       <div>
         <!-- submit button -->
-        
+
         <input id="login-submit" type="submit" />
       </div>
     </form>
@@ -43,14 +47,14 @@
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: ""
     };
   },
   emits: ["submitLogin"],
   methods: {
-    submitLogin(user) {
-      this.$emit("submitLogin", user)
+    emitLogin(loginValues) {
+      this.$emit("submitLogin", loginValues);
     }
   },
   props: {
@@ -69,12 +73,12 @@ export default {
   //   const user = computed(() => {
   //     return store.getters.getUsername;
   //   });
-    //is called on form submit
-    // function post() {
-    //   login(username.value);
-    //   router.push({ name: 'Home' });
-    // }
-    // validate and send data to backend
+  //is called on form submit
+  // function post() {
+  //   login(username.value);
+  //   router.push({ name: 'Home' });
+  // }
+  // validate and send data to backend
   //   function login(userId) {
   //     //TODO submit to database and validate data
   //     store.commit('login', userId);
@@ -85,7 +89,7 @@ export default {
   //     user,
   //   };
   // },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -151,7 +155,7 @@ export default {
       background-color: #6d6d6d;
     }
   }
-  
+
   .login-error-container {
     color: darkred;
     margin-bottom: 15px;

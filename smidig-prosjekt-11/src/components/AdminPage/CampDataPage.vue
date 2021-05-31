@@ -151,9 +151,10 @@ export default {
       return campData.filter(product => {
         return (
           product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-          -1 || 
-          product.location.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-          -1
+            -1 ||
+          product.location
+            .toLowerCase()
+            .indexOf(searchQuery.value.toLowerCase()) !== -1
         );
       });
     });
@@ -169,7 +170,9 @@ export default {
     },
     delayedHide() {
       var that = this;
-      setTimeout(function() { that.showSearchSuggestions = false; }, 200);
+      setTimeout(function() {
+        that.showSearchSuggestions = false;
+      }, 200);
     },
     showResult(product) {
       console.log(product);

@@ -1,5 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
+// import { useStore } from 'vuex';
+import store from '../store';
+
+
+
 
 const routes = [
   {
@@ -41,7 +46,7 @@ const routes = [
   },
   {
     path: "/notimplemented",
-    name: "Not implemented",
+    name: "NotImplemented",
     component: () => import("../views/NotImplementedPage.vue")
   }
 ];
@@ -49,6 +54,12 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+});
+
+
+router.beforeResolve((to, from, next) => {
+  if (to.name !== 'LoginPage' && !store.getters.getUserInfo) next({ name: 'LoginPage' });
+  else next();
 });
 
 export default router;

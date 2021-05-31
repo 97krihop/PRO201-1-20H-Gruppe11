@@ -31,7 +31,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const user = computed(() => {
-      return store.getters.getUsername;
+      return store.getters.getUserInfo;
     });
     function goHome() {
       router.push({ name: "home" });

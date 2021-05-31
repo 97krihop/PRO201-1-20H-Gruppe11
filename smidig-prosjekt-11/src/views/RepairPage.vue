@@ -25,7 +25,7 @@ import NavBar from "@/components/Nav/navbar/NavBar";
 export default {
   data() {
     return {
-      user: this.$store.getters.getUsername,
+      user: this.$store.getters.getUserInfo,
       ListOfRepairs: []
     };
   },
