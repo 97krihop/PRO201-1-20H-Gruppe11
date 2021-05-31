@@ -56,7 +56,6 @@ const router = createRouter({
   routes
 });
 
-
 router.beforeResolve((to, from, next) => {
   if (to.name !== 'LoginPage' && !store.getters.getUserInfo) next({ name: 'LoginPage' });
   else next();
