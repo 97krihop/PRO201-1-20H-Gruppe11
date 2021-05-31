@@ -10,7 +10,7 @@ export function createMap(
   products,
   updateData,
   replaceMapWithResults,
-  setCampIndex
+  setSelectedCampName
 ) {
   const L = window.L; // suppress 'L' is not defined error
 
@@ -74,7 +74,7 @@ export function createMap(
         products[j].totalRepairs = j;
       }
       updateData();
-      setCampIndex(i);
+      setSelectedCampName(campData[i].id);
       replaceMapWithResults();
       map.setView([23, 20], 2);      
     });
