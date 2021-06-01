@@ -1,3 +1,5 @@
+import { post } from "axios";
+
 const state = {
   entityArray: [],
   status: null
@@ -63,41 +65,36 @@ const actions = {
   postRepairs: async function({ commit, state }) {
     commit("startPost");
     try {
-      await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({
+      await post(
+        "http://localhost:3000/api/login",
+        {
           username: "bright",
           password: "admin1234"
-        }),
-        headers: {
-          ...this.headers,
-          "Content-Type": "application/json"
-        }
-      });
+        },
+        { withCredentials: true }
+      );
       const temp = [...state.entityArray];
-      const data = temp.map(e => {
-        return {
-          serialNumber:
-            e.entitySerialNr.length > 0 ? e.entitySerialNr : "noSerial",
-          parts: e.parts.map(x => {
-            return { ...x, isChecked: undefined };
-          }),
-          productName: "Sunbell"
-        };
-      });
-      const res = await fetch("http://localhost:3000/api/report", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(data),
-        headers: {
-          ...this.headers,
-          "Content-Type": "application/json"
+      const res = await post(
+        "http://localhost:3000/api/report",
+        temp.map(e => {
+          return {
+            serialNumber:
+              e.entitySerialNr.length > 0 ? e.entitySerialNr : "noSerial",
+            parts: e.parts.map(x => {
+              return { ...x, isChecked: undefined, imgName: undefined };
+            }),
+            productName: "Sunbell"
+          };
+        }),
+        {
+          withCredentials: true
         }
-      });
+      );
       commit(res.status === 200 ? "successPost" : "errorPost");
+      return res.status === 200;
     } catch (e) {
       commit("errorPost");
+      return false;
     }
   }
 };

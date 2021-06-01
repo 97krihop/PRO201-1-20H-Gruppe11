@@ -24,7 +24,6 @@ const schema = Joi.array().items(
           .min(1)
           .required(),
         partName: Joi.string()
-          .alphanum()
           .min(1)
           .required()
       })
