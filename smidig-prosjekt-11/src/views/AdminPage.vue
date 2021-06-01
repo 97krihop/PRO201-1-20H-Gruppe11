@@ -90,7 +90,6 @@ export default {
 </script>
 
 <style scoped>
-
 .grid-layout {
   display: grid;
   grid-template-columns: 17% 1fr;

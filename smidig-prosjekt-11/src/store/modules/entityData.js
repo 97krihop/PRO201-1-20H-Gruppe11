@@ -9,9 +9,7 @@ const mutations = {
   deleteEntity(state, payload) {
     //Deletes entity based on entity position in entityArray
     const entityArray = state.entityArray;
-    let indexPos = entityArray.findIndex(
-      entity => entity.id === payload
-    );
+    let indexPos = entityArray.findIndex(entity => entity.id === payload);
     state.entityArray.splice(indexPos, 1);
   },
   deleteAllEntity(state) {
