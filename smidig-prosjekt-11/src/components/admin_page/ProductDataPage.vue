@@ -20,6 +20,8 @@
         <TopMetrics
           :name-of-data="allParts.name"
           :data-to-display="getSumAllParts()"
+          :metric-icon-src="allParts.imgName"
+          display-image="{{true}}"
         />
       </div>
 
@@ -205,6 +207,7 @@ export default {
     return {
       allParts: {
         name: "All parts",
+        imgName: "sunbell",
         isChecked: true
       },
       productImages: [
