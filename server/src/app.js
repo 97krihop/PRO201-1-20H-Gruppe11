@@ -15,20 +15,20 @@ const initializePassport = require("./config/passport");
 const sessionParser = session({
   secret: process.env.SESSION_SECRET || "secret",
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: false
 });
 
 const rateSpeedLimit = rateSpeedLimiter({
   delayAfter: 50, // slow down limit (in reqs)
   windowMs: 1 * 60 * 1000, // time where limit applies
-  delayMs: 2500, // slow down time
+  delayMs: 2500 // slow down time
 });
 
 const whitelist = ["http://localhost:8080", "http://example2.com"];
-const corsOptionsDelegate = function (req, callback) {
+const corsOptionsDelegate = function(req, callback) {
   const corsOptions =
     whitelist.indexOf(req.header("Origin")) !== -1
-      ? { origin: true }
+      ? { origin: true, credentials: true }
       : { origin: false };
   callback(null, corsOptions);
 };

@@ -8,18 +8,29 @@ const report = db.get("report");
 
 const schema = Joi.array().items(
   Joi.object({
-    serialNumber: Joi.string().alphanum().required(),
-    productName: Joi.string().alphanum().min(1).required(),
+    serialNumber: Joi.string()
+      .alphanum()
+      .default(""),
+    productName: Joi.string()
+      .alphanum()
+      .min(1)
+      .required(),
     createdAt: Joi.date().default(new Date()),
-    campName: Joi.string().alphanum().required(),
+    campName: Joi.string().alphanum(),
     parts: Joi.array()
       .items({
-        partNumber: Joi.string().alphanum().min(1).required(),
-        partName: Joi.string().alphanum().min(1).required(),
+        partNumber: Joi.string()
+          .alphanum()
+          .min(1)
+          .required(),
+        partName: Joi.string()
+          .alphanum()
+          .min(1)
+          .required()
       })
       .min(1)
       .max(9)
-      .required(),
+      .required()
   })
 );
 router.get("/", async (req, res) => {
@@ -29,6 +40,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.user);
   if (!req.user) return res.status(401).send();
 
   //body example
@@ -47,9 +59,10 @@ router.post("/", async (req, res) => {
 ]*/
 
   try {
-    const value = await schema.validateAsync(req.body);
-    const data = value.map((x) => {
-      return { ...x, username: req.user.username };
+    let value = await schema.validateAsync(req.body);
+
+    const data = value.map(x => {
+      return { ...x, username: req.user.username, campName: req.user.campName };
     });
     try {
       await report.insert(data);

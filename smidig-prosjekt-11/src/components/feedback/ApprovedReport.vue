@@ -1,6 +1,7 @@
 <template>
   <div id="approved-report-container">
-    <h1>ENTRY SUCCESSFUL</h1>
+    <h1 v-if="success === true">ENTRY SUCCESSFUL</h1>
+    <h1 v-else>ENTRY Fail</h1>
     <img
       src="@/assets/images/icons/report-success-icon.png"
       alt="Report succesfully sent"
@@ -16,11 +17,11 @@ export default {
   name: "Home",
   setup() {
     const store = useStore();
-
+    const success = store.getters.getPostStatus;
     onMounted(async () => {
-      store.commit("deleteAllEntity", "");
+      await store.dispatch("postRepairs");
     });
-    return {};
+    return { success };
   }
 };
 </script>
