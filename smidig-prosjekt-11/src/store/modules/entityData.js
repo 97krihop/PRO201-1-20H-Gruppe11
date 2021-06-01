@@ -1,8 +1,7 @@
 import { post } from "axios";
 
 const state = {
-  entityArray: [],
-  status: null
+  entityArray: []
 };
 
 const mutations = {
@@ -33,16 +32,6 @@ const mutations = {
       console.log(
         "unable to locate existing records with matching id, changes will not be saved"
       );
-  },
-  startPost(state) {
-    state.status = null;
-  },
-  successPost(state) {
-    state.status = true;
-    state.entityArray = [];
-  },
-  errorPost(state) {
-    state.status = false;
   }
 };
 
@@ -55,15 +44,11 @@ const getters = {
   },
   getEntityById: state => id => {
     return state.entityArray.find(entity => entity.id === id);
-  },
-  getPostStatus: state => {
-    return state.status;
   }
 };
 
 const actions = {
-  postRepairs: async function({ commit, state }) {
-    commit("startPost");
+  postRepairs: async function({ state }) {
     try {
       await post(
         "http://localhost:3000/api/login",
@@ -90,10 +75,8 @@ const actions = {
           withCredentials: true
         }
       );
-      commit(res.status === 200 ? "successPost" : "errorPost");
       return res.status === 200;
     } catch (e) {
-      commit("errorPost");
       return false;
     }
   }
