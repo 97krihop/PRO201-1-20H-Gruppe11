@@ -139,6 +139,9 @@ export default {
     };
   },
   components: { IconBase },
+  props: {
+    routeFromParent: String
+  },
   methods: {
     selectSection(event) {
       this.selected = event;
@@ -148,7 +151,7 @@ export default {
   data() {
     return {
       timestamp: "",
-      selected: "Dashboard"
+      selected: this.routeFromParent
     };
   }
 };

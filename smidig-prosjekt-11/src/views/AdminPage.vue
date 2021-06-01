@@ -4,12 +4,13 @@
       <div class="grid-layout">
         <side-bar-menu
           class="side-bar"
+          :routeFromParent="routedInParent"
           v-on:childToParent="recievedClickInChildSideMenu"
         />
         <div class="component-section-container">
           <dashboard-page
             v-if="selectedSection === 'Dashboard'"
-            @childToParent = 'onDashboardMapClick'
+            @childToParent="onDashboardMapClick"
           />
           <product-data-page v-if="selectedSection === 'Parts'" />
           <camp-data-page
@@ -69,14 +70,16 @@ export default {
       this.selectedSection = event;
     },
     onDashboardMapClick(param) {
-      this.routedCampName = param
-      this.selectedSection = 'Camps'
-      // passe prop to camp overview
+      this.routedInParent = "Camps";
+      this.selectedSection = "Camps";
+      this.campOverviewCampName = param;
+
     }
   },
   data() {
     return {
       selectedSection: "Dashboard",
+      routedInParent: "Dashboard",
       isAdmin: this.retrieveIsAdmin(),
       totalRep: "Total Repairs",
       totalUnitsRegistered: "Total Units Registered",
