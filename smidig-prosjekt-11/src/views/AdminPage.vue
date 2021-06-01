@@ -27,15 +27,15 @@
 
 <script>
 // @ is an alias to /src
-import BaseSite from "@/components/Nav/BaseSite.vue";
+import BaseSite from "@/components/nav/BaseSite.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import SideBarMenu from "@/components/AdminPage/SideBarMenu";
-import DashboardPage from "@/components/AdminPage/Dashboard/DashboardMainPage.vue";
-import CampDataPage from "@/components/AdminPage/CampDataPage";
-import ProductDataPage from "../components/AdminPage/ProductDataPage";
-import UserAdministrationPage from "../components/AdminPage/UserAdministrationPage";
-import CampAdministrationPage from "@/components/AdminPage/CampAdministrationPage";
+import SideBarMenu from "@/components/admin_page/SideBarMenu";
+import DashboardPage from "@/components/admin_page/dashboard/DashboardMainPage.vue";
+import CampDataPage from "@/components/admin_page/CampDataPage";
+import ProductDataPage from "../components/admin_page/ProductDataPage";
+import UserAdministrationPage from "../components/admin_page/UserAdministrationPage";
+import CampAdministrationPage from "@/components/admin_page/CampAdministrationPage";
 
 export default {
   name: "adminPage",
@@ -101,6 +101,6 @@ export default {
   background-color: white;
 }
 .side-bar {
-  width: auto;
+  width: 275px;
 }
 </style>
