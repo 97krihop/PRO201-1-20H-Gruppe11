@@ -1,6 +1,7 @@
 <template>
   <!-- main page to login -->
   <div id="login-container">
+    <div v-if="messageExists" class="login-error-container">{{ formMessage }}</div>
     <!-- from to post -->
     <form
       @submit.prevent="emitLogin({ username: username, password: password })"
@@ -29,7 +30,6 @@
           required
         />
       </div>
-
       <div>
         <!-- submit button -->
         <input id="login-submit" type="submit" value="Log in" />
@@ -38,8 +38,6 @@
   </div>
 </template>
 <script>
-// import { ref, computed } from 'vue';
-// import { useRouter } from 'vue-router';
 export default {
   data() {
     return {
@@ -54,37 +52,16 @@ export default {
     }
   },
   props: {
-    showError: {
-      type: Boolean,
-      defualt: false
+    formMessage: {
+      type: String,
+      defualt: ""
+    }
+  },
+  computed: {
+    messageExists() {
+      return this.formMessage !== "";
     }
   }
-
-  //composition API
-  // setup() {
-  //   const store = useStore();
-  //   const router = useRouter();
-
-  //   //computed property from store
-  //   const user = computed(() => {
-  //     return store.getters.getUsername;
-  //   });
-  //is called on form submit
-  // function post() {
-  //   login(username.value);
-  //   router.push({ name: 'Home' });
-  // }
-  // validate and send data to backend
-  //   function login(userId) {
-  //     //TODO submit to database and validate data
-  //     store.commit('login', userId);
-  //   }
-
-  //   return {
-  //     post,
-  //     user,
-  //   };
-  // },
 };
 </script>
 
@@ -153,8 +130,12 @@ export default {
   }
 
   .login-error-container {
-    color: darkred;
+    color: rgb(165, 1, 1);
+    border: 1px solid blue;
     margin-bottom: 15px;
+    margin-top: 0px;
+    font-weight: 700;
+    text-align: center;
   }
 }
 

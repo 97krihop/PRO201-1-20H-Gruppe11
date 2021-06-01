@@ -1,6 +1,6 @@
 <template>
   <base-site isDark="true">
-    <login @submitLogin="postLogin($event)" :showError="showLoginError" />
+    <login @submitLogin="postLogin($event)" :formMessage="formMessage" />
   </base-site>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     return {
       username: "",
       password: "",
-      showLoginError: false
+      formMessage: ""
     };
   },
   components: {
@@ -25,7 +25,19 @@ export default {
     postLogin(loginValues) {
       this.$store
         .dispatch("authenticate", loginValues)
-        .then(this.$router.push("/"));
+        .then(res => { 
+          console.log("resfromcomponent", res);
+          this.$router.push("/")
+          })
+          .catch(error => {
+              switch(error.response.status) {
+                case 401:
+                   this.formMessage = "Invalid username/password"
+                   break;
+                case 501:
+                  this.formMessage = "Internal server error"
+              }
+          })
     }
   }
 };

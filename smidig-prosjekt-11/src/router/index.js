@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-// import store from '../store';
+import store from '../store';
 
 const routes = [
   {
@@ -50,20 +50,13 @@ const router = createRouter({
   routes
 });
 
-// router.beforeEach((to, from, next) => {
-//   const userInfo = store.getters.getUserInfo;
-//   console.log(userInfo);
-//   if (to.path !== '/login' && !userInfo) {
-//     next('/login');
-//   } else {
-//     next();
-//   }
-// });
-
-// function userInfoExists() {
-//   const userInfo = store.getters.getUserInfo;
-//   if(userInfo) return true;
-//   else return false;
-// }
+router.beforeEach((to, from, next) => {
+  const userInfo = store.getters.getUserInfo;
+  if (to.path !== '/login' && !userInfo) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router;

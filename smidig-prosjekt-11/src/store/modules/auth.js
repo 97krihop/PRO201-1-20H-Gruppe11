@@ -27,17 +27,6 @@ const mutations = {
 const actions = {
   async authenticate({ commit }, user) {
     commit("authRequest");
-    // await axios({
-    //   method: 'post',
-    //   url: 'http://localhost:3000/api/login',
-    //   data: user
-    // }).then(res => {
-    //   const ud = { admin: res.data.admin, campName: res.data.campName, username: res.data.username };
-    //   console.log(ud);
-    //   commit("authSuccess", ud);
-    //   router.push('/');
-    // })
-
     return new Promise((resolve, reject) => {
       axios
         .post("http://localhost:3000/api/login", user)
@@ -47,7 +36,6 @@ const actions = {
           resolve(res);
         })
         .catch(error => {
-          console.log(error);
           commit("authError");
           reject(error);
         });
@@ -64,7 +52,7 @@ const actions = {
         .catch(error => {
           reject(error);
         });
-      // resolve();
+      resolve();
     });
   }
 };
