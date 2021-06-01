@@ -12,7 +12,10 @@
             @childToParent = 'onDashboardMapClick'
           />
           <product-data-page v-if="selectedSection === 'Parts'" />
-          <camp-data-page v-if="selectedSection === 'Camps'" />
+          <camp-data-page
+            v-if="selectedSection === 'Camps'"
+            v-bind:routedCampName="routedCampName"
+          />
           <user-administration-page v-if="selectedSection === 'Users'" />
           <camp-administration-page v-if="selectedSection === 'CampsAdmin'" />
         </div>
@@ -66,9 +69,8 @@ export default {
       this.selectedSection = event;
     },
     onDashboardMapClick(param) {
-      alert(param);
+      this.routedCampName = param
       this.selectedSection = 'Camps'
-      this.campOverviewCampName = param
       // passe prop to camp overview
     }
   },
@@ -79,7 +81,7 @@ export default {
       totalRep: "Total Repairs",
       totalUnitsRegistered: "Total Units Registered",
       mostRepairedPartToday: "Most Repaired Part Today",
-      campOverviewCampName: ""
+      campNameToRoute: ""
     };
   }
 };

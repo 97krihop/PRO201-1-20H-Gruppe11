@@ -31,6 +31,7 @@
     class="map-container"
   ></div>
 
+
   <div v-if="mapIsHidden" class="showMapBtn">
     <button v-on:click="replaceResultsWithMap">Show map</button>
   </div>
@@ -70,7 +71,7 @@ import { computed, ref } from "vue";
 import DescriptionText from "./DescriptionText";
 export default {
   name: "CampDataPage",
-
+  
   setup() {
     const products = [
       {
@@ -216,8 +217,17 @@ export default {
       this.products,
       this.updateData,
       this.replaceMapWithResults,
-      this.setSelectedCampName
+      this.setSelectedCampName,
+      null
     );
+    if (this.routedCampName) {
+      this.setSelectedCampName(this.routedCampName);
+      this.replaceMapWithResults();
+      for (let i = 0; i < this.products.length; i++) {
+        this.products[i].totalRepairs = i;
+      }
+      this.updateData();
+    }
   },
   data() {
     return {
@@ -226,6 +236,11 @@ export default {
       mapIsHidden: false,
       selectedCampName: ""
     };
+  },
+  props: {
+    routedCampName: {
+      type: String
+    }
   }
 };
 </script>

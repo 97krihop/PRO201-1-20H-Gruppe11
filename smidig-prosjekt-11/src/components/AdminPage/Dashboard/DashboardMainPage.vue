@@ -80,7 +80,6 @@ export default {
       alert("Klikka på stats");
     },
     childMapClick(param) {
-      //alert("Klikka på " + param);
       this.$emit("childToParent", param);
     }
   },

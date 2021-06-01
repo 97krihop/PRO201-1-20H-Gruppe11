@@ -72,7 +72,7 @@ export function createMap(
     // Create click listener for Camp Overview map
     if (updateData) {
       m.addEventListener("click", function(){
-        console.log("clicked on camp " + campData[i].id);
+        //console.log("clicked on camp " + campData[i].id);
         for (let j = 0; j < products.length; j++) {
           products[j].totalRepairs = j;
         }
@@ -86,8 +86,6 @@ export function createMap(
     // Create click listener for Dashboard map
     else {
       m.addEventListener("click", function(){
-        console.log("clicked on camp " + campData[i].id);
-        //this.$emit("childToParent", campData[i].id);
         childMapClick(campData[i].id);        
       });
     }
