@@ -26,45 +26,46 @@
   </div>
 </template>
 <script>
-import HamburgerButton from './HamburgerButton.vue';
-import NavLink from './NavLink.vue';
+import HamburgerButton from "./HamburgerButton.vue";
+import NavLink from "./NavLink.vue";
 export default {
   components: { HamburgerButton, NavLink },
-  name: 'NavBar',
+  name: "NavBar",
   data() {
     return {
       menuItems: [
         {
-          itemTitle: 'Profile',
-          iconName: 'user',
-          link: 'notimplemented',
-          alt: 'User icon',
+          itemTitle: "Profile",
+          iconName: "user",
+          link: "notimplemented",
+          alt: "User icon"
         },
         {
-          itemTitle: 'Certifications',
-          iconName: 'profile',
-          link: 'notimplemented',
-          alt: 'Certifications icon',
-        },
-        {
-          itemTitle: 'Log out',
-          iconName: 'exit',
-          link: 'logout',
-          alt: 'Logout icon',
-        },
+          itemTitle: "Certifications",
+          iconName: "profile",
+          link: "notimplemented",
+          alt: "Certifications icon"
+        }
+        // ,
+        // {
+        //   itemTitle: 'Log out',
+        //   iconName: 'exit',
+        //   link: 'logout',
+        //   alt: 'Logout icon',
+        // },
       ],
-      menuIsOpen: false,
+      menuIsOpen: false
     };
   },
   computed: {
-    isLoggedIn: function() {
-      const userId = this.$store.getters.getUserInfo;
-      if (!userId) {
+    isLoggedIn() {
+      const userData = this.$store.getters.getUserData;
+      if (!userData) {
         return false;
       } else {
         return true;
       }
-    },
+    }
   },
   methods: {
     toggleMenu() {
@@ -72,11 +73,11 @@ export default {
       this.menuIsOpen = !temp;
     },
     logOut() {
-      this.$store.dispatch('logout').then(() => {
-        this.$router.push({ name: 'Home' });
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push({ name: "Home" });
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

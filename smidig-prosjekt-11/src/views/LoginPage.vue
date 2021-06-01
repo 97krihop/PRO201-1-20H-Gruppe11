@@ -5,30 +5,29 @@
 </template>
 
 <script>
-import BaseSite from '@/components/Nav/BaseSite.vue';
-import Login from '@/components/Login/Login.vue';
+import BaseSite from "@/components/Nav/BaseSite.vue";
+import Login from "@/components/Login/Login.vue";
 
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   data() {
     return {
-      username: '',
-      password: '',
-      showLoginError: false,
+      username: "",
+      password: "",
+      showLoginError: false
     };
   },
   components: {
     BaseSite,
-    Login,
+    Login
   },
   methods: {
     postLogin(loginValues) {
-      this.$store.dispatch('authenticate', loginValues).then((p) => {
-        console.log('before warning', p);
-        this.$router.push('/');
-      });
-    },
-  },
+      this.$store
+        .dispatch("authenticate", loginValues)
+        .then(this.$router.push("/"));
+    }
+  }
 };
 </script>
 

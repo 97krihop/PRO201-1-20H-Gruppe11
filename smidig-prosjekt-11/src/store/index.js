@@ -8,12 +8,12 @@ export default createStore({
   modules: {
     user,
     entityData,
-    auth,
+    auth
   },
   plugins: [
-    createPersistedState({ 
+    createPersistedState({
       paths: ["entityData", "user"],
       key: "bright"
-     }),
-  ],
+    })
+  ]
 });

@@ -25,7 +25,8 @@ export default {
       type: String
     },
     linkDestination: {
-      type: String
+      type: String,
+      default: "/"
     },
     icon: {
       type: String
