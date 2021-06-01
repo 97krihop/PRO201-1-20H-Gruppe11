@@ -1,22 +1,6 @@
 const db = require("../db/mongo");
 const reports = db.get("report");
 
-const getPartCountByPartName = async (param) => {
-  return await reports.count({ "parts.partName": param });
-};
-
-const getPartCountByPartNumber = async (param) => {
-  return await reports.count({ "parts.partNumber": param });
-};
-
-const getPartsByPartName = async (param) => {
-  return await reports.find({ "parts.partName": param });
-};
-
-const getPartsByPartNumber = async (param) => {
-  return await reports.find({ "parts.partNumber": param });
-};
-
 const getPartsByCamp = async (param) => {
   return await reports.find({ campName: param });
 };
@@ -34,7 +18,7 @@ const getPartsCountArray = async () => {
   ];
   const res = [];
   for (const name of names) {
-    const data = await getPartCountByPartName(name);
+    const data = await reports.count({ "parts.partName": name });
     res.push({ name, count: data });
   }
   return res;
@@ -62,7 +46,7 @@ const getRepairsCountByMonth = async () => {
 };
 
 const getRepsByNamePerMonth = async (name) => {
-  const data = await getPartsByPartName(name);
+  const data = await reports.find({ "parts.partName": name });
   let year = null;
   const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   data
@@ -77,10 +61,6 @@ const getRepsByNamePerMonth = async (name) => {
 };
 
 module.exports = {
-  getPartCountByPartName,
-  getPartCountByPartNumber,
-  getPartsByPartName,
-  getPartsByPartNumber,
   getRepairsCountByMonth,
   getPartsCountArray,
   getRepsByNamePerMonth,
