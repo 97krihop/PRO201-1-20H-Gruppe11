@@ -7,88 +7,76 @@
         <img id="logo-img" src="@/assets/Images/logo-bright.svg" alt="Bright" />
       </router-link>
     </div>
-    <ul class="nav-menu" v-bind:class="{ active: menuIsOpen }">
+    <ul
+      class="nav-menu"
+      v-bind:class="{ active: menuIsOpen }"
+      v-if="isLoggedIn"
+    >
       <nav-link
-        :textValue="'Profile'"
-        :icon="'user'"
-        :linkDestination="'profile'"
+        v-for="(item, index) in menuItems"
+        :key="index"
+        :textValue="item.itemTitle"
+        :icon="item.iconName"
+        :linkDestination="item.link"
       />
 
-      <nav-link
-        :textValue="'Certification'"
-        :icon="'profile'"
-        :linkDestination="'notimplemented'"
-      />
-
-      <nav-link
-        :textValue="loginItem.itemTitle"
-        :icon="loginItem.iconName"
-        :linkDestination="loginItem.link"
-      />
+      <nav-link textValue="Log out" icon="exit" @click="logOut" />
     </ul>
     <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
   </div>
 </template>
 <script>
-import HamburgerButton from "./HamburgerButton.vue";
-import NavLink from "./NavLink.vue";
+import HamburgerButton from './HamburgerButton.vue';
+import NavLink from './NavLink.vue';
 export default {
   components: { HamburgerButton, NavLink },
-  name: "NavBar",
+  name: 'NavBar',
   data() {
     return {
       menuItems: [
         {
-          itemTitle: "Profile",
-          iconName: "user",
-          link: "notimplemented",
-          alt: "User icon"
+          itemTitle: 'Profile',
+          iconName: 'user',
+          link: 'notimplemented',
+          alt: 'User icon',
         },
         {
-          itemTitle: "Certifications",
-          iconName: "profile",
-          link: "notimplemented",
-          alt: "Certifications icon"
-        }
+          itemTitle: 'Certifications',
+          iconName: 'profile',
+          link: 'notimplemented',
+          alt: 'Certifications icon',
+        },
+        {
+          itemTitle: 'Log out',
+          iconName: 'exit',
+          link: 'logout',
+          alt: 'Logout icon',
+        },
       ],
-      menuIsOpen: false
+      menuIsOpen: false,
     };
   },
   computed: {
-    loginItem: function() {
-      const userId = this.$store.getters.getUsername;
-
-      if (!userId) {
-        return {
-          itemTitle: "Log in",
-          iconName: "enter",
-          link: "login",
-          alt: "Login icon"
-        };
-      } else {
-        return {
-          itemTitle: "Log out",
-          iconName: "exit",
-          link: "logout",
-          alt: "Logout icon"
-        };
-      }
-    },
     isLoggedIn: function() {
-      const userId = this.$store.getters.getUsername;
+      const userId = this.$store.getters.getUserInfo;
       if (!userId) {
         return false;
       } else {
         return true;
       }
-    }
+    },
   },
   methods: {
     toggleMenu() {
       const temp = this.menuIsOpen;
       this.menuIsOpen = !temp;
-    }
-  }
+    },
+    logOut() {
+      this.$store.dispatch('logout').then(() => {
+        this.$router.push({ name: 'Home' });
+      });
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
