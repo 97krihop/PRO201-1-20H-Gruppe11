@@ -4,13 +4,21 @@
       <div class="grid-layout">
         <side-bar-menu
           class="side-bar"
+          :routeFromParent="routedInParent"
           v-on:childToParent="recievedClickInChildSideMenu"
         />
         <div class="component-section-container">
-          <dashboard-page v-if="selectedSection === 'Dashboard'" />
+          <dashboard-page
+            v-if="selectedSection === 'Dashboard'"
+            @childToParent="onDashboardMapClick"
+          />
           <product-data-page v-if="selectedSection === 'Parts'" />
-          <camp-data-page v-if="selectedSection === 'Camps'" />
+          <camp-data-page
+            v-if="selectedSection === 'Camps'"
+            v-bind:routedCampName="campNameToRoute"
+          />
           <user-administration-page v-if="selectedSection === 'Users'" />
+          <camp-administration-page v-if="selectedSection === 'CampsAdmin'" />
         </div>
       </div>
     </base-site>
@@ -19,14 +27,15 @@
 
 <script>
 // @ is an alias to /src
-import BaseSite from "@/components/Nav/BaseSite.vue";
+import BaseSite from "@/components/nav/BaseSite.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import SideBarMenu from "@/components/AdminPage/SideBarMenu";
-import DashboardPage from "@/components/AdminPage/Dashboard/DashboardMainPage.vue";
-import CampDataPage from "@/components/AdminPage/CampDataPage";
-import ProductDataPage from "../components/AdminPage/ProductDataPage";
-import UserAdministrationPage from "../components/AdminPage/UserAdministrationPage";
+import SideBarMenu from "@/components/admin_page/SideBarMenu";
+import DashboardPage from "@/components/admin_page/dashboard/DashboardMainPage.vue";
+import CampDataPage from "@/components/admin_page/CampDataPage";
+import ProductDataPage from "../components/admin_page/ProductDataPage";
+import UserAdministrationPage from "../components/admin_page/UserAdministrationPage";
+import CampAdministrationPage from "@/components/admin_page/CampAdministrationPage";
 
 export default {
   name: "adminPage",
@@ -39,6 +48,7 @@ export default {
     };
   },
   components: {
+    CampAdministrationPage,
     UserAdministrationPage,
     ProductDataPage,
     CampDataPage,
@@ -58,23 +68,28 @@ export default {
     },
     recievedClickInChildSideMenu(event) {
       this.selectedSection = event;
+    },
+    onDashboardMapClick(param) {
+      this.routedInParent = "Camps";
+      this.selectedSection = "Camps";
+      this.campNameToRoute = param;
     }
   },
   data() {
     return {
       selectedSection: "Dashboard",
+      routedInParent: "Dashboard",
       isAdmin: this.retrieveIsAdmin(),
       totalRep: "Total Repairs",
       totalUnitsRegistered: "Total Units Registered",
-      mostRepairedPartToday: "Most Repaired Part Today"
+      mostRepairedPartToday: "Most Repaired Part Today",
+      campNameToRoute: ""
     };
   }
 };
 </script>
 
 <style scoped>
-.component-section-container {
-}
 .grid-layout {
   display: grid;
   grid-template-columns: 17% 1fr;
@@ -83,6 +98,6 @@ export default {
   background-color: white;
 }
 .side-bar {
-  width: auto;
+  width: 275px;
 }
 </style>
