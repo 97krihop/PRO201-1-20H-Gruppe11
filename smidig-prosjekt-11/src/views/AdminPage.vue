@@ -104,6 +104,7 @@ export default {
 
 .component-section-container {
   width: calc(100vw - 280px);
+  height: calc(100vh - 80px);
   position: absolute;
   right: 0;
   top: 80px;

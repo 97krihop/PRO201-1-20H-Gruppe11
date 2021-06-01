@@ -294,8 +294,8 @@ export default {
 
 .showMapBtn {
   position: absolute;
-  top: 22%;
-  left: 54%;
+  top: 15%;
+  left: 45%;
   text-align: center;
   width: 150px;
   height: 40px;
@@ -328,15 +328,14 @@ h3 {
   font-weight: bold;
   position: absolute;
   top: 36%;
-  left: 48%;
+  left: 39%;
 }
 
 .map-container {
   position: absolute;
   top: 17%;
-  right: 1.5%;
+  right: 3%;
   width: 80vw;
-  height: 250px;
   margin: 20px auto auto auto;
   background-color: #fff;
   border: 1px solid lightgrey;
@@ -352,7 +351,7 @@ h3 {
   margin: auto auto 1vh;
   position: absolute;
   top: 40%;
-  left: 30%;
+  left: 23%;
 }
 
 .part-cards {
