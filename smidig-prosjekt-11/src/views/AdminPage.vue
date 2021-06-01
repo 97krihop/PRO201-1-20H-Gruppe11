@@ -90,7 +90,6 @@ export default {
 </script>
 
 <style scoped>
-
 .grid-layout {
   display: grid;
   grid-template-columns: 17% 1fr;
@@ -98,7 +97,15 @@ export default {
   grid-row-gap: 0;
   background-color: white;
 }
+
 .side-bar {
   width: 275px;
+}
+
+.component-section-container {
+  width: calc(100vw - 280px);
+  position: absolute;
+  right: 0;
+  top: 80px;
 }
 </style>

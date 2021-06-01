@@ -169,7 +169,7 @@ export default {
   padding-left: 20px;
 }
 
-.top-metrics-container {
+.top-metrics-container-inner {
   width: 1fr;
   height: 200px;
   padding: 30px;

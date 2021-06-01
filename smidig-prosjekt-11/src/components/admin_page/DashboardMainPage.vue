@@ -1,5 +1,4 @@
 <template>
-  <div></div>
   <top-metric
     :name-of-data="totalRep"
     data-to-display="333123"
