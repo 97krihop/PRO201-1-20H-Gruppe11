@@ -16,8 +16,8 @@
   </div>
 </template>
 <script>
-import BaseSite from "../components/Nav/BaseSite.vue";
-import HomeSelectButton from "../components/Nav/HomeSelectButton.vue";
+import BaseSite from "../components/nav/BaseSite.vue";
+import HomeSelectButton from "../components/nav/HomeSelectButton.vue";
 
 export default {
   name: "NotImplementedPage",
@@ -30,7 +30,6 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  //   justify-content: flex;
   align-items: center;
 
   h1 {
@@ -45,7 +44,21 @@ export default {
   .home-select-button {
     background: #2c2a29;
     color: #ececec;
-    width: auto;
+    width: 200px;
+    margin: 50px auto;
+    box-shadow: -1px -2px #585654;
+    transition: 150ms;
+
+    &:hover {
+      background-color: #000000;
+      transform: scale(1.01);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: inset 2px 2px 2px #2a2b2b;
+      background-color: #4b4b4b;
+    }
   }
 }
 </style>

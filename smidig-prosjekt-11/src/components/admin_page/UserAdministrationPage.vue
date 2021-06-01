@@ -1,89 +1,81 @@
 <template>
-  <div class="repair" v-if="user">
-    <div>
-      <nav-bar />
-    </div>
-    <div class="container">
-      <form @submit="submitClicked">
-        <div class="wrapper">
-          <div class="input" id="username-wrapper">
-            <label>Username: </label>
-            <p class="username-text">Testuser</p>
-          </div>
-          <div class="input">
-            <label>New Password: </label>
-            <input
-              v-model="password"
-              type="password"
-              placeholder="Enter Password"
-              required
-            />
-            <span>{{ passwordError }} <br /></span>
-          </div>
-          <div class="input">
-            <label>Confirm New Password: </label>
-            <input
-              v-model="confirmPassword"
-              type="password"
-              placeholder="Enter Password"
-              required
-            />
-            <span>{{ CPError }}<br /></span>
-          </div>
-          <div>
-            <button id="submit-btn" type="submit" :disabled="isSubmitting">
-              Submit
-            </button>
-          </div>
+  <div class="container">
+    <h1>Add new User</h1>
+    <form @submit="onSubmit">
+      <div class="wrapper">
+        <div class="input">
+          <label>Username: </label>
+          <input
+            v-model="username"
+            type="text"
+            placeholder="Enter Username"
+            required
+          />
+          <span>{{ usernameError }}<br /></span>
         </div>
-      </form>
-    </div>
-    <modal-change-password
-      v-if="showModal === true"
-      @close="closeModal"
-      @commit="onSubmit"
-    >
-      <template v-slot:body>Confirm password change?</template>
-    </modal-change-password>
+        <div class="input">
+          <label>Password: </label>
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Enter Password"
+            required
+          />
+          <span>{{ passwordError }} <br /></span>
+        </div>
+        <div class="input">
+          <label>Confirm Password: </label>
+          <input
+            v-model="confirmPassword"
+            type="password"
+            placeholder="Enter Password"
+            required
+          />
+          <span>{{ CPError }}<br /></span>
+        </div>
+        <div class="input">
+          <label>User Camp: </label>
+          <select v-model="campName" required>
+            <option v-for="camp in camps" :key="camp.name">{{
+              camp.name
+            }}</option>
+          </select>
+        </div>
+        <div class="admin-check">
+          <label>Admin: </label>
+          <input v-model="admin" type="checkbox" />
+        </div>
+        <div>
+          <button id="submit-btn" type="submit" :disabled="isSubmitting">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-  <redirect-login v-else />
 </template>
 
 <script>
-import RedirectLogin from "@/components/login/RedirectLogin.vue";
-import NavBar from "@/components/nav/navbar/NavBar";
 import { useField, useForm } from "vee-validate";
-import ModalChangePassword from "@/components/modals/ModalChangePassword";
 
 export default {
+  name: "UserAdministrationPage",
   data() {
     return {
-      user: this.$store.getters.getUserInfo,
-      ListOfRepairs: [],
-      showModal: false
+      camps: []
     };
   },
   async created() {
-    //const response = await fetch("http://localhost:3000/api/camp");
-    //this.username = await response.json();
-  },
-  name: "Repair",
-  components: {
-    ModalChangePassword,
-    NavBar,
-    RedirectLogin
-  },
-  methods: {
-    submitClicked: function() {
-      this.showModal = true;
-      //this.onSubmit(event);
-    },
-    closeModal: function() {
-      this.showModal = false;
-    }
+    const response = await fetch("http://localhost:3000/api/camp");
+    this.camps = await response.json();
   },
   setup() {
     const schema = {
+      username(value) {
+        return value && value.length >= 6
+          ? true
+          : "Username needs to be 6 or longer";
+      },
       password(value) {
         return value && value.length >= 6
           ? true
@@ -114,6 +106,9 @@ export default {
     const { errorMessage: CPError, value: confirmPassword } = useField(
       "confirmPassword"
     );
+    const { value: campName } = useField("campName");
+
+    const { value: admin } = useField("admin");
 
     return {
       username,
@@ -123,28 +118,33 @@ export default {
       confirmPassword,
       CPError,
       isSubmitting,
-      onSubmit
+      onSubmit,
+      campName,
+      admin
     };
   }
 };
 </script>
+
 <style lang="scss" scoped>
-#repair-gradient {
-  background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
-}
-#username-wrapper {
-  padding-bottom: 40px;
-}
 .container {
-  margin-top: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
   max-width: 100%;
   height: 100%;
 
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  h1 {
+    margin-top: 7vh;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: "Open Sans", sans-serif;
+    color: #828b96;
+  }
   .wrapper {
     background: #2c2a29;
     padding: 2rem;
@@ -158,10 +158,6 @@ export default {
       0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
       0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 
-    .username-text {
-      color: white;
-      font-size: 1.5em;
-    }
     .input {
       margin-bottom: 1vh;
       width: 400px;
@@ -238,6 +234,15 @@ export default {
       }
     }
   }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #828b96;
 }
 
 button {

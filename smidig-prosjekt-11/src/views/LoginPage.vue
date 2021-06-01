@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import BaseSite from "@/components/Nav/BaseSite.vue";
-import Login from "@/components/Login/Login.vue";
+import BaseSite from "@/components/nav/BaseSite.vue";
+import Login from "@/components/login/Login.vue";
 
 export default {
   name: "LoginPage",

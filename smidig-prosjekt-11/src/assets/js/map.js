@@ -8,7 +8,10 @@ export function createMap(
   showZoomControl,
   campData,
   products,
-  updateData
+  updateData,
+  replaceMapWithResults,
+  setSelectedCampName,
+  childMapClick
 ) {
   const L = window.L; // suppress 'L' is not defined error
 
@@ -20,7 +23,7 @@ export function createMap(
     shadowUrl: require("leaflet/dist/images/marker-shadow.png")
   });
 
-  const layersPath = require("../Images/layers.png");
+  const layersPath = require("../images/layers.png");
   const geojsonPath = require("../data/custom.geo.json");
 
   var map = L.map("mapid", {
@@ -65,14 +68,26 @@ export function createMap(
 
     var m = new L.marker(campData[i].geoloc, { icon: campLabelIcon });
 
-    m.addEventListener("click", function() {
-      console.log("clicked on camp " + campData[i].id);
-      for (let j = 0; j < products.length; j++) {
-        products[j].totalRepairs = j;
-      }
-      map.setView(campData[i].geoloc, 6);
-      updateData();
-    });
+    // Create click listener for Camp Overview map
+    if (updateData) {
+      m.addEventListener("click", function() {
+        //console.log("clicked on camp " + campData[i].id);
+        for (let j = 0; j < products.length; j++) {
+          products[j].totalRepairs = j;
+        }
+        updateData();
+        setSelectedCampName(campData[i].id);
+        replaceMapWithResults();
+        map.setView([23, 20], 2);
+      });
+    }
+
+    // Create click listener for Dashboard map
+    else {
+      m.addEventListener("click", function() {
+        childMapClick(campData[i].id);
+      });
+    }
 
     markers.addLayer(m);
   }

@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import RepairOverview from "@/components/Repair/RepairOverview.vue";
-import RepairInfo from "@/components/Repair/RepairInfo.vue";
-import ProgressBar from "@/components/Feedback/ProgressBar.vue";
-import RedirectLogin from "@/components/Login/RedirectLogin.vue";
-import NavBar from "@/components/Nav/navbar/NavBar";
+import RepairOverview from "@/components/repair/RepairOverview.vue";
+import RepairInfo from "@/components/repair/RepairInfo.vue";
+import ProgressBar from "@/components/feedback/ProgressBar.vue";
+import RedirectLogin from "@/components/login/RedirectLogin.vue";
+import NavBar from "@/components/nav/navbar/NavBar";
 
 export default {
   data() {
