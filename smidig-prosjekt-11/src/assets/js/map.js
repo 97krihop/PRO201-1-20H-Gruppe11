@@ -10,7 +10,8 @@ export function createMap(
   products,
   updateData,
   replaceMapWithResults,
-  setSelectedCampName
+  setSelectedCampName,
+  childMapClick
 ) {
   const L = window.L; // suppress 'L' is not defined error
 
@@ -67,17 +68,29 @@ export function createMap(
     });
 
     var m = new L.marker(campData[i].geoloc, { icon: campLabelIcon });
-
-    m.addEventListener("click", function(){
-      console.log("clicked on camp " + campData[i].id);
-      for (let j = 0; j < products.length; j++) {
-        products[j].totalRepairs = j;
-      }
-      updateData();
-      setSelectedCampName(campData[i].id);
-      replaceMapWithResults();
-      map.setView([23, 20], 2);      
-    });
+    
+    // Create click listener for Camp Overview map
+    if (updateData) {
+      m.addEventListener("click", function(){
+        console.log("clicked on camp " + campData[i].id);
+        for (let j = 0; j < products.length; j++) {
+          products[j].totalRepairs = j;
+        }
+        updateData();
+        setSelectedCampName(campData[i].id);
+        replaceMapWithResults();
+        map.setView([23, 20], 2);      
+      });
+    }
+    
+    // Create click listener for Dashboard map
+    else {
+      m.addEventListener("click", function(){
+        console.log("clicked on camp " + campData[i].id);
+        //this.$emit("childToParent", campData[i].id);
+        childMapClick(campData[i].id);        
+      });
+    }
 
     markers.addLayer(m);
   }

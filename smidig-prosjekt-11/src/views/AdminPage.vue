@@ -7,7 +7,10 @@
           v-on:childToParent="recievedClickInChildSideMenu"
         />
         <div class="component-section-container">
-          <dashboard-page v-if="selectedSection === 'Dashboard'" />
+          <dashboard-page
+            v-if="selectedSection === 'Dashboard'"
+            @childToParent = 'onDashboardMapClick'
+          />
           <product-data-page v-if="selectedSection === 'Parts'" />
           <camp-data-page v-if="selectedSection === 'Camps'" />
           <user-administration-page v-if="selectedSection === 'Users'" />
@@ -61,6 +64,12 @@ export default {
     },
     recievedClickInChildSideMenu(event) {
       this.selectedSection = event;
+    },
+    onDashboardMapClick(param) {
+      alert(param);
+      this.selectedSection = 'Camps'
+      this.campOverviewCampName = param
+      // passe prop to camp overview
     }
   },
   data() {
@@ -69,7 +78,8 @@ export default {
       isAdmin: this.retrieveIsAdmin(),
       totalRep: "Total Repairs",
       totalUnitsRegistered: "Total Units Registered",
-      mostRepairedPartToday: "Most Repaired Part Today"
+      mostRepairedPartToday: "Most Repaired Part Today",
+      campOverviewCampName: ""
     };
   }
 };
