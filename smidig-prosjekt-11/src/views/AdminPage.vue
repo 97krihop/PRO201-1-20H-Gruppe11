@@ -73,7 +73,6 @@ export default {
       this.routedInParent = "Camps";
       this.selectedSection = "Camps";
       this.campOverviewCampName = param;
-
     }
   },
   data() {

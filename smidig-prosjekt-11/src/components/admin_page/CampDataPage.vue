@@ -31,7 +31,6 @@
     class="map-container"
   ></div>
 
-
   <div v-if="mapIsHidden" class="showMapBtn">
     <button v-on:click="replaceResultsWithMap">Show map</button>
   </div>
@@ -39,9 +38,7 @@
   <div v-if="showSearchResults">
     <h3>
       Camp Data
-      {{
-        selectedCampName != "" ? " for " + selectedCampName : ""
-      }}
+      {{ selectedCampName != "" ? " for " + selectedCampName : "" }}
     </h3>
   </div>
 
@@ -71,7 +68,7 @@ import { computed, ref } from "vue";
 import DescriptionText from "./DescriptionText";
 export default {
   name: "CampDataPage",
-  
+
   setup() {
     const products = [
       {

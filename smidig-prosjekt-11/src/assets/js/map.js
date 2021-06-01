@@ -32,8 +32,8 @@ export function createMap(
     zoomControl: showZoomControl,
     maxZoom: 10
   });
-  
-  map.zoomControl.setPosition('topright');
+
+  map.zoomControl.setPosition("topright");
 
   // GeoJson styling
   const geojsonStyle = {
@@ -53,8 +53,7 @@ export function createMap(
   for (let i = 0; i < campData.length; i++) {
     var campLabelIcon = L.divIcon({
       className: "camp-label",
-      html:
-        `<div>
+      html: `<div>
         <img src="
         ${layersPath}
         " />
@@ -68,10 +67,10 @@ export function createMap(
     });
 
     var m = new L.marker(campData[i].geoloc, { icon: campLabelIcon });
-    
+
     // Create click listener for Camp Overview map
     if (updateData) {
-      m.addEventListener("click", function(){
+      m.addEventListener("click", function() {
         //console.log("clicked on camp " + campData[i].id);
         for (let j = 0; j < products.length; j++) {
           products[j].totalRepairs = j;
@@ -79,14 +78,14 @@ export function createMap(
         updateData();
         setSelectedCampName(campData[i].id);
         replaceMapWithResults();
-        map.setView([23, 20], 2);      
+        map.setView([23, 20], 2);
       });
     }
-    
+
     // Create click listener for Dashboard map
     else {
-      m.addEventListener("click", function(){
-        childMapClick(campData[i].id);        
+      m.addEventListener("click", function() {
+        childMapClick(campData[i].id);
       });
     }
 
