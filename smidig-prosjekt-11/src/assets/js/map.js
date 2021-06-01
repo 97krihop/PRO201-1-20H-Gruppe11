@@ -74,7 +74,7 @@ export function createMap(
         for (let j = 0; j < products.length; j++) {
           products[j].totalRepairs = campData[i].campRepairs[j];
         }
-        
+
         updateData();
         setSelectedCampName(campData[i].id);
         replaceMapWithResults();

@@ -21,8 +21,6 @@ export default {
     let success = ref();
     onMounted(async () => {
       success.value = await store.dispatch("postRepairs");
-
-
     });
     return { success };
   }
