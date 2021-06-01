@@ -142,7 +142,8 @@ input {
 }
 
 .edit-delete-icons {
-  margin-right: 65px;
+  // border: 1px solid black;
+  margin-right: 50px;
   width: 100px;
   display: flex;
   justify-content: space-between;
@@ -153,7 +154,7 @@ input {
   }
 }
 
-@media screen and (min-device-width: 400px) and (max-width: 1280px) {
+@media screen and (min-device-width: 400px) and (max-width: 1500px) {
   .product-img {
     margin-left: 10px;
   }
@@ -161,6 +162,7 @@ input {
     align-items: center;
     justify-items: center;
     width: 200px;
+    // border: 1px solid red;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -169,32 +171,73 @@ input {
     width: 23px;
     height: 23px;
   }
+}
 
-  .part-img {
-    margin: 3px;
-  }
+.part-img {
+  margin: 3px;
+}
 
-  .serial-container {
-    width: 150px;
+.serial-container {
+  width: 150px;
+  // border: 1px solid blue;
+  // border: 1px solid blue;
 
-    .serial-number {
-      font-size: 0.8rem;
-      background-color: #dad2cb;
-      border-radius: 8px;
-      padding: 10px;
-    }
-  }
-
-  .edit-delete-icons {
-    margin-right: 40px;
-    width: 90px;
-
-    .edit-delete-ic-container {
-      width: 18px;
-      height: 18px;
-    }
+  .serial-number {
+    font-size: 0.8rem;
+    background-color: #dad2cb;
+    border-radius: 8px;
+    padding: 10px;
   }
 }
+
+.edit-delete-icons {
+  margin-right: 20px;
+  width: 50px;
+
+  .edit-delete-ic-container {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// @media only screen and (min-device-width: 600px) and (max-width: 960px) {
+// #product-container {
+//   .product-image-sunbell {
+//       margi
+
+//   }
+
+// #product-serial-number {
+//     font-size: 12px;
+//     width: 25vh;
+// }
+
+// .parts-container {
+//   width: 20vw;
+//   display: grid;
+//   align-items: center;
+//   justify-content: center;
+//   grid-template-columns: repeat(4, minmax(0, 1fr));
+//   grid-template-rows: repeat(2, minmax(0, 1fr));
+// }
+
+// .part-img {
+//   height: 90%;
+//   border-radius: 10px;
+//   background-color: #dad2cb;
+//   margin-left: 3px;
+// }
+
+// .edit-delete-icons {
+//   margin-right: 10px;
+//   width: 50px;
+
+//   .edit-delete-ic-container {
+//     width: 15px;
+//     height: 15px;
+//   }
+// }
+// }
 
 #seperator {
   margin: auto;

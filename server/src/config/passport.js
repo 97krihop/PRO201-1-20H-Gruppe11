@@ -2,7 +2,8 @@ const LocalStrategy = require("passport-local").Strategy;
 //Bcrypt - Hashing
 const bcrypt = require("bcrypt");
 
-const db = require("../db/mongo");
+const monk = require("monk");
+const db = monk(process.env.MONGO_URI);
 const users = db.get("users");
 
 module.exports = function initialize(passport) {

@@ -15,7 +15,7 @@ const schema = Joi.object({
 
 router.get("/", async (req, res) => {
   // get all camps
-  let camps = await camp.find({});
+  const camps = await camp.find({});
   if (camps.length === 0) {
     await camp.insert([
       {
@@ -39,16 +39,14 @@ router.get("/", async (req, res) => {
         coordinates: [30.047607421875, 10.244654445228324],
       },
     ]);
-    camps = await camp.find({});
   }
-
   res.json(camps);
 });
 router.get("/:name", async (req, res) => {
   // get one camp
   const { name } = req.params;
   const camps = await camp.findOne({ name: name });
-  res.json(camps ? camps : {});
+  res.json(camps);
 });
 
 router.post("/", async (req, res) => {
