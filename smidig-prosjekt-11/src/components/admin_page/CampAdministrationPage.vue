@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Add new Camp</h1>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit(); showToast();">
       <div class="wrapper">
         <div class="input">
           <label>Camp name: </label>
@@ -62,6 +62,13 @@ import { post } from "axios";
 
 export default {
   name: "CampAdministrationPage",
+  methods: {
+    showToast: function() {
+      this.$toast.success(`Camp created`, {
+        position: "bottom"
+      });
+    }
+  },
   setup() {
     const name = ref("");
     const Country = ref("");
