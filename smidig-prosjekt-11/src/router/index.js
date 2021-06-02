@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 
+
 const routes = [
   {
     path: "/",
@@ -39,7 +40,7 @@ const routes = [
   },
   {
     path: "/notimplemented",
-    name: "Not implemented",
+    name: "NotImplemented",
     component: () => import("../views/NotImplementedPage.vue")
   }
 ];
@@ -48,5 +49,21 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 });
+
+// UNCOMMENT TO ENFORCE NAVIGATION GUARDS:
+
+// import store from '../store';
+
+
+// router.beforeEach((to, from, next) => {
+//   const userData = store.getters.getUserData;
+//   if (to.path !== '/login' && !userData) {
+//     next('/login');
+//   } else if (to.path === "/login" && userData) {
+//     next(false);
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
