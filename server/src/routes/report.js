@@ -29,7 +29,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.user);
   if (!req.user) return res.status(401).send();
 
   //body example

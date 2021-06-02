@@ -129,7 +129,7 @@ export default {
           // Success message display
         })
         .catch(error => {
-          console.log("errorcatch", error);
+          console.error("errorcatch", error);
           resetForm();
           switch (error.response.status) {
             case 400:

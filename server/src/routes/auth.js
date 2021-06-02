@@ -39,8 +39,8 @@ const registerSchema = Joi.object({
 router.post("/register", async (req, res, next) => {
   if (!req.user || !req.user.admin) {
     console.log("register not authenticated");
-    return next()
-  };
+    return next();
+  }
   console.log(req.body);
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   let value;

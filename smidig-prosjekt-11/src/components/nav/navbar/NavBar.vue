@@ -20,7 +20,12 @@
         :linkDestination="item.link"
       />
 
-      <nav-link textValue="Log out" icon="exit" @click="logOut" linkDestination="login" />
+      <nav-link
+        textValue="Log out"
+        icon="exit"
+        @click="logOut"
+        linkDestination="login"
+      />
     </ul>
     <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
   </div>

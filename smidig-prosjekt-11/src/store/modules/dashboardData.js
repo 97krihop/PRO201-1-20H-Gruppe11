@@ -21,7 +21,6 @@ const getters = {
 
 const actions = {
   fetchAllRepairs: async function({ commit }) {
-
     try {
       await post(
         "http://localhost:3000/api/login",

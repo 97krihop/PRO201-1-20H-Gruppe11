@@ -1,4 +1,4 @@
-const productName = `SunBell`;
+const productName = `Sunbell`;
 
 //Camp name
 
@@ -39,8 +39,10 @@ const partsList = [
     partName: "Solar panel",
   },
 ];
-function randomDate(start, end) {
-  return new Date(+start + Math.random() * (end - start));
+function randomDate() {
+  const date = new Date();
+  date.setMonth(Math.floor(Math.random() * 5));
+  return date;
 }
 
 const fn = () => {
@@ -51,7 +53,7 @@ const fn = () => {
     for (let j = 0; j < randomNumber; j++) {
       parts.push(partsList[Math.floor(Math.random() * partsList.length)]);
     }
-    const date = randomDate("01-01-2021", "06-03-2021");
+    const date = randomDate();
     let report = {
       serialNumber: "j" + Math.floor(Math.random() * 1000).toString(),
       productName,

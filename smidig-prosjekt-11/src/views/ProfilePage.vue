@@ -136,9 +136,11 @@ export default {
 #repair-gradient {
   background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
 }
+
 #username-wrapper {
   // padding-bottom: 40px;
 }
+
 .container {
   margin-top: 60px;
   display: flex;
@@ -166,6 +168,7 @@ export default {
       color: white;
       font-size: 1.5em;
     }
+
     .input {
       margin-bottom: 1vh;
       width: 400px;
