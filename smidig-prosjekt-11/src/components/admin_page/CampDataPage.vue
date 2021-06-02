@@ -267,7 +267,10 @@ export default {
 
 <style lang="scss" scoped>
 .description-text-element {
-  margin-top: 20px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 75px;
 }
 
 #search-container {
