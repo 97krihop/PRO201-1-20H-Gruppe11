@@ -20,14 +20,15 @@
         :linkDestination="item.link"
       />
 
-      <nav-link textValue="Log out" icon="exit" @click="logOut" />
+      <nav-link textValue="Log out" icon="exit" @click="logOut" linkDestination="login" />
     </ul>
     <!-- <h1 class="user-header">{{ user || 'Not logged in' }}</h1> -->
   </div>
 </template>
 <script>
-import HamburgerButton from "./HamburgerButton.vue";
-import NavLink from "./NavLink.vue";
+import HamburgerButton from "@/components/nav/navbar/HamburgerButton.vue";
+import NavLink from "@/components/nav/navbar/NavLink.vue";
+
 export default {
   components: { HamburgerButton, NavLink },
   name: "NavBar",
@@ -67,7 +68,7 @@ export default {
     },
     logOut() {
       this.$store.dispatch("logout").then(() => {
-        this.$router.push({ name: "Home" });
+        this.$router.replace("/login");
       });
     }
   }
