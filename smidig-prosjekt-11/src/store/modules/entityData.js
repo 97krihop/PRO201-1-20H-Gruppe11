@@ -55,7 +55,7 @@ const actions = {
         "http://localhost:3000/api/login",
         {
           username: "bright",
-          password: "admin1234"
+          password: "admin"
         },
         { withCredentials: true }
       );
