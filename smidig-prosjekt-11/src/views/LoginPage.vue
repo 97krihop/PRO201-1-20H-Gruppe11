@@ -1,6 +1,10 @@
 <template>
   <base-site isDark="true">
-    <login @submitLogin="postLogin($event)" :formMessage="formMessage" ref="login" />
+    <login
+      @submitLogin="postLogin($event)"
+      :formMessage="formMessage"
+      ref="login"
+    />
   </base-site>
 </template>
 
@@ -24,19 +28,19 @@ export default {
       this.formMessage = "";
       this.$store
         .dispatch("authenticate", loginValues)
-        .then(() => { 
+        .then(() => {
           this.$router.replace("/");
-          })
-          .catch(error => {
-              this.$refs.login.removePassword();
-              switch(error.response.status) {
-                case 401:
-                   this.formMessage = "Invalid username/password"
-                   break;
-                case 501:
-                  this.formMessage = "Internal server error"
-              }
-          })
+        })
+        .catch(error => {
+          this.$refs.login.removePassword();
+          switch (error.response.status) {
+            case 401:
+              this.formMessage = "Invalid username/password";
+              break;
+            case 501:
+              this.formMessage = "Internal server error";
+          }
+        });
     }
   }
 };

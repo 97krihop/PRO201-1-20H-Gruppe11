@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 
-
 const routes = [
   {
     path: "/",
@@ -53,7 +52,6 @@ const router = createRouter({
 // UNCOMMENT TO ENFORCE NAVIGATION GUARDS:
 
 // import store from '../store';
-
 
 // router.beforeEach((to, from, next) => {
 //   const userData = store.getters.getUserData;

@@ -4,7 +4,7 @@
       :to="'/' + linkDestination"
       class="nav-menu-item"
       @mouseover="hovering = true"
-      @mouseout="hovering = false"  
+      @mouseout="hovering = false"
     >
       <div class="icon-container">
         <icon-base
@@ -21,13 +21,13 @@
   </div>
 </template>
 <script>
-import IconBase from '@/components/ui/IconBase.vue';
+import IconBase from "@/components/ui/IconBase.vue";
 export default {
-  name: 'NavLink',
+  name: "NavLink",
   components: { IconBase },
   data() {
     return {
-      hovering: false,
+      hovering: false
     };
   },
   computed: {
@@ -41,19 +41,19 @@ export default {
   },
   props: {
     textValue: {
-      type: String,
+      type: String
     },
     linkDestination: {
       type: String,
-      default: '/',
+      default: "/"
     },
     icon: {
-      type: String,
+      type: String
     },
     altText: {
-      type: String,
-    },
-  },
+      type: String
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

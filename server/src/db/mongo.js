@@ -12,14 +12,14 @@ db.then(async () => {
 const addAdmin = async () => {
   const user = db.get("users");
   const data = await user.find({});
-  console.log(data.length)
+  console.log(data.length);
   if (data.length === 0) {
     const password = await bcrypt.hash("admin", 10);
     user.insert({
       username: "bright",
       password: password,
       admin: true,
-      campName: "Bright"
+      campName: "Bright",
     });
   }
 };

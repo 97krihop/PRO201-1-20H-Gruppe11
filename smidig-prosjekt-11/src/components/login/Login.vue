@@ -1,7 +1,9 @@
 <template>
   <!-- main page to login -->
   <div id="login-container">
-    <div v-if="messageExists" class="login-error-container">{{ formMessage }}</div>
+    <div v-if="messageExists" class="login-error-container">
+      {{ formMessage }}
+    </div>
     <!-- from to post -->
     <form
       @submit.prevent="emitLogin({ username: username, password: password })"
