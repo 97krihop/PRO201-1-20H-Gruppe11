@@ -13,7 +13,26 @@ const getters = {
   getProductData: state => state.data
 };
 const actions = {
+  fetchAllParts: async context => {
+    console.log("fetchProductData()");
+    await post(
+      "http://localhost:3000/api/login",
+      {
+        username: "bright",
+        password: "admin"
+      },
+      { withCredentials: true }
+    );
+    const res = await get(
+      "http://localhost:3000/api/parts",
+      {
+        withCredentials: true
+      }
+    );
+    if (res.status === 200) context.commit("setData", res.data);
+  },
   fetchProductData: async context => {
+    console.log("fetchProductData()");
     await post(
       "http://localhost:3000/api/login",
       {
@@ -29,12 +48,29 @@ const actions = {
       }
     );
     if (res.status === 200) context.commit("setData", res.data);
+  },
+  fetchProductDataSingle: async (context, elemId) => {
+    console.log("fetchProductDataSingle("+elemId+")");
+    await post(
+      "http://localhost:3000/api/login",
+      {
+        username: "bright",
+        password: "admin"
+      },
+      { withCredentials: true }
+    );
+    const res = await get(
+      `http://localhost:3000/api/statistics/Repairs-by-month/${elemId}`,
+      {
+        withCredentials: true
+      }
+    );
+    if (res.status === 200) context.commit("setData", res.data);
   }
 };
 
 export default {
   state,
-
   mutations,
   getters,
   actions
