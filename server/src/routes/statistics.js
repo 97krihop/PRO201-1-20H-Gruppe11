@@ -5,7 +5,7 @@ const {
   getPartsCountArray,
   getRepsByNamePerMonth,
   getPartsByCamp,
-  getPartsCountByCamp
+  getPartsCountByCamp,
 } = require("../controllers/PartStatisticsController");
 const db = require("../db/mongo");
 
