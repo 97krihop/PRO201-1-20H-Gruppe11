@@ -16,6 +16,8 @@
           <camp-data-page
             v-if="selectedSection === 'Camps'"
             v-bind:routedCampName="campNameToRoute"
+            :resetCamp="resetCamp"
+            :editRoute="editRoute"
           />
           <user-administration-page v-if="selectedSection === 'Users'" />
           <camp-administration-page v-if="selectedSection === 'CampsAdmin'" />
@@ -58,8 +60,15 @@ export default {
     BaseSite
   },
   methods: {
+    resetCamp() {
+      this.campNameToRoute = "";
+    },
+    editRoute() {
+      this.routedInParent = "Camps";
+      this.selectedSection = "Camps";
+    },
     retrieveIsAdmin() {
-      const result = useStore().getters.getIsAdmin;
+      const result = this.store.getters.getIsAdmin;
       if (result === false) {
         this.router.push({ name: "Home" });
       } else {

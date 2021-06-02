@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <h1>Add new Camp</h1>
-    <form @submit.prevent="submit(); showToast();">
+    <form
+      @submit.prevent="
+        submit();
+        showToast();
+      "
+    >
       <div class="wrapper">
         <div class="input">
           <label>Camp name: </label>
@@ -30,7 +35,10 @@
             required
           />
           <span>
-            <i>Input Coordinate Format: &emsp; 0.00,0.00 (latitude, longitude)</i><br />
+            <i
+              >Input Coordinate Format: &emsp; 0.00,0.00 (latitude,
+              longitude)</i
+            ><br />
             <a href="http://geojson.io/">Map Tool Link</a>
           </span>
           <span v-if="error !== null">

@@ -69,6 +69,12 @@ import { useStore } from "vuex";
 export default {
   name: "CampDataPage",
   props: {
+    resetCamp: {
+      type: Function
+    },
+    editRoute: {
+      type: Function
+    },
     routedCampName: {
       type: String
     }
@@ -179,6 +185,8 @@ export default {
             campData.value[campIndex].campRepairs[i];
         }
         updateData();
+        props?.editRoute("Camps");
+        props?.resetCamp();
       }
     });
     const updateData = () => {
