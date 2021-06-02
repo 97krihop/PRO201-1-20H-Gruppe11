@@ -29,7 +29,12 @@
             placeholder="Enter Coordinates"
             required
           />
-          <span><i>Input Coordinate Format: &emsp; 0.00,0.00</i><br><a href="http://geojson.io/">Map Tool Link</a></span>
+          <span
+            ><i>Input Coordinate Format: &emsp; 0.00,0.00</i><br /><a
+              href="http://geojson.io/"
+              >Map Tool Link</a
+            ></span
+          >
         </div>
         <div class="input">
           <label>Sunbells: </label>

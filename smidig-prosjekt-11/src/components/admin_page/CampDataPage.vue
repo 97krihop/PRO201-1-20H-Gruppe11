@@ -221,7 +221,7 @@ export default {
     if (this.routedCampName) {
       this.setSelectedCampName(this.routedCampName);
       this.replaceMapWithResults();
-      
+
       // Get index of selected camp by comparing name
       var campIndex = 0;
       for (let i = 0; i < this.campData.length; i++) {
@@ -230,7 +230,7 @@ export default {
           break;
         }
       }
-      
+
       for (let i = 0; i < this.products.length; i++) {
         this.products[i].totalRepairs = this.campData[campIndex].campRepairs[i];
       }
