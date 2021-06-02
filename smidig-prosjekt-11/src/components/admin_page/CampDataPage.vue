@@ -7,11 +7,6 @@
       @focus="showSearchSuggestions = true"
       v-on:blur="delayedHide"
     />
-    <description-text
-      class="description-text-element"
-      description-text="Select a camp to display corresponding data"
-    ></description-text>
-
     <div class="search-suggestions" v-if="showSearchSuggestions">
       <div
         v-for="product in searchedProducts"
@@ -25,7 +20,10 @@
       </div>
     </div>
   </div>
-
+  <description-text
+    class="description-text-element"
+    description-text="Select a camp to display corresponding data"
+  ></description-text>
   <div
     v-bind:style="[mapIsHidden ? { display: 'none' } : { height: '70%' }]"
     id="mapid"
@@ -38,8 +36,7 @@
 
   <div v-if="showSearchResults">
     <h3>
-      Camp Data
-      {{ selectedCampName != "" ? " for " + selectedCampName : "" }}
+      Camp Data {{ selectedCampName !== "" ? " for " + selectedCampName : "" }}
     </h3>
   </div>
 
@@ -51,7 +48,7 @@
     >
       <TopMetrics
         :name-of-data="product.partName"
-        :data-to-display="product.totalRepairs"
+        :data-to-display="product.totalRepairs.toString()"
         :metric-icon-src="product.imgName"
         display-image="{{true}}"
       />
@@ -65,201 +62,205 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { createMap } from "@/assets/js/map.js";
 import TopMetrics from "@/components/admin_page/TopMetrics";
-import { onMounted, computed, ref } from "vue";
+import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import DescriptionText from "./DescriptionText";
 import { useStore } from "vuex";
+
 export default {
   name: "CampDataPage",
-  setup() {
+  props: {
+    routedCampName: {
+      type: String
+    }
+  },
+  setup(props) {
     const store = useStore();
-    const data = ref(null);
-    const products = [{
+    const { ctx: _this } = getCurrentInstance();
+    const showSearchSuggestions = ref(false);
+    const showSearchResults = ref(false);
+    const mapIsHidden = ref(false);
+    const searchQuery = ref("");
+    const selectedCampName = ref();
+    const products = ref([
+      {
         partNumber: "1",
         partName: "Lamp",
         imgName: "ic-part-lamp",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "2",
         partName: "12V charger",
         imgName: "ic-part-adapter-charger",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "3",
         partName: "Battery",
         imgName: "ic-part-battery",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "4",
         partName: "Power button",
         imgName: "ic-part-button",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "5",
         partName: "Light bulb",
         imgName: "ic-part-lightbulb",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "6",
         partName: "Screen",
         imgName: "ic-part-screen",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "7",
         partName: "Socket charger",
         imgName: "ic-part-socket-charger",
         totalRepairs: "0"
-      },{
+      },
+      {
         partNumber: "8",
         partName: "Solar panel",
         imgName: "ic-part-solar-panel",
         totalRepairs: "0"
-      }];
-    /*const oldCampData = [{
+      }
+    ]);
+
+    const campData = ref([
+      {
         id: "Hagadera Refugee Camp",
         location: "Kenya",
         geoloc: [40.5230712890625, 0.17028783523693297],
         campRepairs: [12, 40, 53, 0, 210, 32, 5, 21, 12, 0, 54, 23]
-      },{
+      },
+      {
         id: "Kakuma Refugee Camp",
         location: "Kenya",
         geoloc: [34.80743408203125, 3.760115447396889],
         campRepairs: [21, 5, 3, 243, 2, 42, 35, 41, 32, 14, 65, 15]
-      },{
+      },
+      {
         id: "Katumba Refugee Camp",
         location: "Tanzania",
         geoloc: [31.02813720703125, -6.287998672327658],
         campRepairs: [13, 0, 35, 2223, 2, 442, 345, 41, 32, 14, 0, 12]
-      },{
+      },
+      {
         id: "Pugnido Refugee Camp",
         location: "Ethiopia",
         geoloc: [34.00543212890625, 7.681051391626661],
         campRepairs: [40, 344, 35, 23, 2, 242, 34, 41, 32, 14, 65, 0]
-      },{
+      },
+      {
         id: "Yida Refugee Camp",
         location: "South Sudan",
         geoloc: [30.047607421875, 10.244654445228324],
         campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
-      }];*/
-    const campData = [];
-    var selectedCampName = "";
-    var showSearchResults = false;
-    var mapIsHidden = ref( false );
-
-    onMounted(async () => {
-      await store.dispatch("fetchAllCamps");
-      data.value = store.getters.getProductData;
-      
-      const camps = JSON.parse(JSON.stringify(data.value));
-      
-      for (let i = 0; i < camps.length; i++) {
-        const camp = camps[i];
-        
-        addCamp(camp.name, "N/A", camp.coordinates);
       }
-      
-      createMap(
-        23,
-        20,
-        2,
-        true,
-        campData,
-        products,
-        updateData,
-        replaceMapWithResults,
-        setSelectedCampName,
-        null
-      );
-    });
+    ]);
 
-    function addCamp(campName, countryName, coordinates) {
-      campData.push({
-        id: campName,
-        location: countryName,
-        geoloc: coordinates,
-        campRepairs: [0,0,0,0,0,0,0,0,0,0,0,0]
-      });
-    };
-    
-    function updateData() {
-      //this.$forceUpdate();
-    };
-    function replaceMapWithResults() {
-      showSearchResults = false;
-      mapIsHidden.value = true;
-    };
-    function setSelectedCampName(name) {
-      selectedCampName = name;
-    };
-    
-    const searchQuery = ref("");
-    const searchedProducts = computed(() => {
-      console.log("campData.filter()");
-      return campData.filter(product => {
-        return (
+    const searchedProducts = computed(() =>
+      campData.value.filter(
+        product =>
           product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
             -1 ||
           product.location
             .toLowerCase()
             .indexOf(searchQuery.value.toLowerCase()) !== -1
-        );
-      });
-    });
+      )
+    );
 
-    return { searchedProducts, searchQuery, products, campData, selectedCampName, setSelectedCampName, showSearchResults, mapIsHidden };
+    onMounted(async () => {
+      createMap(
+        23,
+        20,
+        2,
+        true,
+        campData.value,
+        products.value,
+        updateData,
+        replaceMapWithResults,
+        setSelectedCampName,
+        null
+      );
+      if (props.routedCampName) {
+        setSelectedCampName(props.routedCampName);
+        replaceMapWithResults();
+
+        // Get index of selected camp by comparing name
+        let campIndex = 0;
+        for (let i = 0; i < campData.value.length; i++) {
+          if (campData.value[i].id === props.routedCampName) {
+            campIndex = i;
+            break;
+          }
+        }
+
+        for (let i = 0; i < products.value.length; i++) {
+          products.value[i].totalRepairs = campData[campIndex].campRepairs[i];
+        }
+        updateData();
+      }
+    });
+    const updateData = () => {
+      _this.$forceUpdate();
+    };
+
+    function delayedHide() {
+      setTimeout(() => {
+        showSearchSuggestions.value = false;
+      }, 200);
+    }
+
+    function replaceMapWithResults() {
+      mapIsHidden.value = true;
+      showSearchResults.value = true;
+    }
+
+    function replaceResultsWithMap() {
+      mapIsHidden.value = false;
+      showSearchResults.value = false;
+    }
+
+    function setSelectedCampName(name) {
+      selectedCampName.value = name;
+    }
+
+    function showResult(product) {
+      console.log(product);
+      for (let i = 0; i < products.value.length; i++) {
+        products.value[i].totalRepairs = product.campRepairs[i];
+      }
+      selectedCampName.value = product.id;
+      replaceMapWithResults();
+    }
+
+    return {
+      store,
+      searchedProducts,
+      searchQuery,
+      products,
+      campData,
+      selectedCampName,
+      showSearchSuggestions,
+      showSearchResults,
+      mapIsHidden,
+      delayedHide,
+      replaceMapWithResults,
+      replaceResultsWithMap,
+      setSelectedCampName,
+      showResult
+    };
   },
   components: {
     DescriptionText,
     TopMetrics
-  },
-  methods: {
-    delayedHide() {
-      var that = this;
-      setTimeout(function() {
-        that.showSearchSuggestions = false;
-      }, 200);
-    },
-    showResult(product) {
-      for (let i = 0; i < this.products.length; i++) {
-        console.log(product.campRepairs[i]);
-        this.products[i].totalRepairs = product.campRepairs[i];
-      }
-      this.selectedCampName = product.id;
-      this.replaceMapWithResults();
-    },
-    replaceResultsWithMap() {
-      this.mapIsHidden.value = false;
-      this.showSearchResults = false;
-    }
-  },
-  mounted() {
-    if (this.routedCampName) {
-      this.setSelectedCampName(this.routedCampName);
-      this.replaceMapWithResults();
-
-      // Get index of selected camp by comparing name
-      var campIndex = 0;
-      for (let i = 0; i < this.campData.length; i++) {
-        if (this.campData[i].id === this.routedCampName) {
-          campIndex = i;
-          break;
-        }
-      }
-
-      for (let i = 0; i < this.products.length; i++) {
-        this.products[i].totalRepairs = this.campData[campIndex].campRepairs[i];
-      }
-      this.updateData();
-    }
-  },
-  data() {
-    return {
-      showSearchSuggestions: false
-    };
-  },
-  props: {
-    routedCampName: {
-      type: String
-    }
   }
 };
 </script>
@@ -268,6 +269,7 @@ export default {
 .description-text-element {
   margin-top: 20px;
 }
+
 #search-container {
   display: flex;
   flex-wrap: wrap; /* Optional. only if you want the items to wrap */
@@ -336,6 +338,7 @@ export default {
     box-shadow: inset 2px 2px 2px #899599;
     background-color: #dedede;
   }
+
   button {
     width: 150px;
     height: 40px;
