@@ -83,7 +83,7 @@ export default {
       this.showModal = false;
     },
     showToast: function() {
-      this.$toast.info(`Password changed`, {
+      this.$toast.success(`Password changed`, {
         position: "bottom"
       });
     }
