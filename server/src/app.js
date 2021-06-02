@@ -4,6 +4,7 @@ const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
 const rateSpeedLimiter = require("express-slow-down");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 
@@ -12,14 +13,22 @@ const passport = require("passport");
 const initializePassport = require("./config/passport");
 
 const sessionParser = session({
+  name: "bright.sid",
   secret: process.env.SESSION_SECRET || "secret",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL,
+    dbName: "bright",
+    crypto: {
+      secret: process.env.MONGO_SECRET || "squirrel"
+    }
+  })
 });
 
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sessionParser.cookie.secure = true // serve secure cookies
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionParser.cookie.secure = true; // serve secure cookies
 }
 
 const rateSpeedLimit = rateSpeedLimiter({
@@ -27,7 +36,6 @@ const rateSpeedLimit = rateSpeedLimiter({
   windowMs: 1 * 60 * 1000, // time where limit applies
   delayMs: 2500 // slow down time
 });
-
 
 //use middleware
 app.use(bodyParser.json());
@@ -48,6 +56,7 @@ app.use(passport.session());
 //routes
 app.use("/api", require("./routes/auth"));
 app.use("/api/report", require("./routes/report"));
+app.use("/api/", require("./routes/parts"));
 app.use("/api/camp", require("./routes/camp"));
 app.use("/api/test", require("./routes/temp"));
 app.use("/api/statistics", require("./routes/statistics"));
