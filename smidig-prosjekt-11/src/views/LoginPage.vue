@@ -24,9 +24,8 @@ export default {
       this.formMessage = "";
       this.$store
         .dispatch("authenticate", loginValues)
-        .then(res => { 
-          console.log("resfromcomponent", res);
-          this.$router.push("/")
+        .then(() => { 
+          this.$router.replace("/");
           })
           .catch(error => {
               this.$refs.login.removePassword();

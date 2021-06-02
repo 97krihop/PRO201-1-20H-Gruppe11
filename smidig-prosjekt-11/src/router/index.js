@@ -51,8 +51,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const userInfo = store.getters.getUserInfo;
-  if (to.path !== '/login' && !userInfo) {
+  const userData = store.getters.getUserData;
+  if (to.path !== '/login' && !userData) {
     next('/login');
   } else {
     next();

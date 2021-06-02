@@ -14,26 +14,14 @@
 </template>
 
 <script>
-import BaseSite from "../components/nav/BaseSite.vue";
-import HomeSelect from "../components/nav/HomeSelect.vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import BaseSite from "@/components/nav/BaseSite.vue";
+import HomeSelect from "@/components/nav/HomeSelect.vue";
 
 export default {
   data() {
     return {};
   },
   name: "Home",
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-
-    const userInfo = store.getters.getUserInfo;
-    console.log("userInfo", userInfo);
-    if (!userInfo) {
-      router.replace({ name: "NotImplemented" });
-    }
-  },
   components: {
     BaseSite,
     HomeSelect

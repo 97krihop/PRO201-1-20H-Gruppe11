@@ -7,8 +7,12 @@
       <form @submit="submitClicked">
         <div class="wrapper">
           <div class="input" id="username-wrapper">
-            <label>Username: </label>
-            <p class="username-text">Testuser</p>
+            <label>User: </label>
+            <p class="value-text">{{ user.username }}</p>
+          </div>
+          <div class="input" id="location-wrapper">
+            <label>Location: </label>
+            <p class="value-text">{{ user.campName }}</p>
           </div>
           <div class="input">
             <label>New Password: </label>
@@ -50,28 +54,24 @@
 </template>
 
 <script>
-import RedirectLogin from "@/components/login/RedirectLogin.vue";
-import NavBar from "@/components/nav/navbar/NavBar";
-import { useField, useForm } from "vee-validate";
-import ModalChangePassword from "@/components/modals/ModalChangePassword";
+import RedirectLogin from '@/components/login/RedirectLogin.vue';
+import NavBar from '@/components/nav/navbar/NavBar';
+import { useField, useForm } from 'vee-validate';
+import ModalChangePassword from '@/components/modals/ModalChangePassword';
 
 export default {
   data() {
     return {
-      user: this.$store.getters.getUserInfo,
+      user: this.$store.getters.getUserData,
       ListOfRepairs: [],
-      showModal: false
+      showModal: false,
     };
   },
-  async created() {
-    //const response = await fetch("http://localhost:3000/api/camp");
-    //this.username = await response.json();
-  },
-  name: "Repair",
+  name: 'Repair',
   components: {
     ModalChangePassword,
     NavBar,
-    RedirectLogin
+    RedirectLogin,
   },
   methods: {
     submitClicked: function() {
@@ -80,23 +80,23 @@ export default {
     },
     closeModal: function() {
       this.showModal = false;
-    }
+    },
   },
   setup() {
     const schema = {
       password(value) {
         return value && value.length >= 6
           ? true
-          : "Password needs to be 6 or longer";
+          : 'Password needs to be 6 or longer';
       },
       confirmPassword(value) {
         return value === password.value
           ? true
-          : "Password needs to match password";
-      }
+          : 'Password needs to match password';
+      },
     };
     const { handleSubmit, isSubmitting } = useForm({
-      validationSchema: schema
+      validationSchema: schema,
     });
 
     const onSubmit = handleSubmit((values, { resetForm }) => {
@@ -106,13 +106,13 @@ export default {
       resetForm();
     });
     const { errorMessage: usernameError, value: username } = useField(
-      "username"
+      'username'
     );
     const { errorMessage: passwordError, value: password } = useField(
-      "password"
+      'password'
     );
     const { errorMessage: CPError, value: confirmPassword } = useField(
-      "confirmPassword"
+      'confirmPassword'
     );
 
     return {
@@ -123,9 +123,9 @@ export default {
       confirmPassword,
       CPError,
       isSubmitting,
-      onSubmit
+      onSubmit,
     };
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -133,7 +133,8 @@ export default {
   background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
 }
 #username-wrapper {
-  padding-bottom: 40px;
+  
+  // padding-bottom: 40px;
 }
 .container {
   margin-top: 60px;
@@ -158,7 +159,7 @@ export default {
       0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
       0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 
-    .username-text {
+    .value-text {
       color: white;
       font-size: 1.5em;
     }
@@ -211,6 +212,10 @@ export default {
       input {
         margin-left: 10px;
       }
+    }
+    
+    #location-wrapper {
+      margin-bottom: 30px;
     }
 
     #submit-btn {
