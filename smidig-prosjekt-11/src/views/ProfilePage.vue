@@ -45,7 +45,10 @@
     <modal-change-password
       v-if="showModal === true"
       @close="closeModal"
-      @commit="onSubmit"
+      @commit="
+        onSubmit();
+        showToast();
+      "
     >
       <template v-slot:body>Confirm password change?</template>
     </modal-change-password>
@@ -72,12 +75,17 @@ export default {
   },
   methods: {
     submitClicked: function() {
-      if(this.password.length >= 6 && this.confirmPassword === this.password){
+      if (this.password.length >= 6 && this.confirmPassword === this.password) {
         this.showModal = true;
       }
     },
     closeModal: function() {
       this.showModal = false;
+    },
+    showToast: function() {
+      this.$toast.info(`Password changed`, {
+        position: "bottom"
+      });
     }
   },
   setup() {
@@ -88,9 +96,7 @@ export default {
           : "Password needs to be 6 or longer";
       },
       confirmPassword(value) {
-        return value === password.value
-          ? true
-          : "Password must match";
+        return value === password.value ? true : "Password must match";
       }
     };
     const { handleSubmit, isSubmitting } = useForm({
