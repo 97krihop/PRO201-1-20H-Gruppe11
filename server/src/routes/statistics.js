@@ -5,11 +5,12 @@ const {
   getPartsCountArray,
   getRepsByNamePerMonth,
   getPartsByCamp,
-  getPartsCountByCamp,
+  getPartsCountByCamp
 } = require("../controllers/PartStatisticsController");
 const db = require("../db/mongo");
 
 const report = db.get("report");
+const camp = db.get("camp");
 
 router.get("/totalRepairs", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
@@ -21,6 +22,17 @@ router.get("/repairs-by-camp/:name", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
   const { name } = req.params;
   const data = await getPartsByCamp(name);
+  res.json(data);
+});
+router.get("/repairs-by-camp", async (req, res, next) => {
+  if (!req.user || !req.user.admin) return next();
+  const camps = await camp.find({});
+  const resul = camps
+    .map(async x => await getPartsByCamp(x.name))
+    .map(y => y.count);
+  const data = camps.map((x, i) => {
+    return { ...x, campRepairs: resul[i] };
+  });
   res.json(data);
 });
 router.get("/parts-by-camp/:name", async (req, res, next) => {

@@ -50,15 +50,6 @@ const getters = {
 const actions = {
   postRepairs: async function({ commit, state }) {
     try {
-      //TODO: need to remove the login after we have login page implemented
-      await post(
-        "http://localhost:3000/api/login",
-        {
-          username: "bright",
-          password: "admin"
-        },
-        { withCredentials: true }
-      );
       const res = await post(
         "http://localhost:3000/api/report",
         [...state.entityArray].map(e => {
