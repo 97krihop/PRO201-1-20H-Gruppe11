@@ -5,7 +5,7 @@ const {
   getPartsCountArray,
   getRepsByNamePerMonth,
   getPartsByCamp,
-  getPartsCountByCamp,
+  getPartsCountByCamp
 } = require("../controllers/PartStatisticsController");
 const db = require("../db/mongo");
 
@@ -26,13 +26,40 @@ router.get("/repairs-by-camp/:name", async (req, res, next) => {
 });
 router.get("/repairs-by-camp", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
-  const camps = await camp.find({});
+  let camps = await camp.find({});
+  if (camps.length === 0) {
+    await camp.insert([
+      {
+        name: "Pugnido",
+        Country: "ethiopia",
+
+        coordinates: [ 7.681051391626661,34.00543212890625]
+      },
+      {
+        name: "Katumba",
+        Country: "Tanzania",
+
+        coordinates: [ -6.287998672327658,31.02813720703125]
+      },
+      {
+        name: "Hagadera",
+        Country: "Kenya",
+        coordinates: [0.17028783523693297,40.5230712890625]
+      },
+      {
+        name: "Yida",
+        Country: "South Sudan",
+        coordinates: [ 10.244654445228324,30.047607421875]
+      }
+    ]);
+    camps = await camp.find({});
+  }
   const result = Promise.all(
-    camps.map(async (x) => await getPartsCountByCamp(x.name))
+    camps.map(async x => await getPartsCountByCamp(x.name))
   );
   const arr = await result;
   const data = camps.map((x, i) => {
-    return { ...x, campRepairs: arr.map((y) => y.map((z) => z.count))[i] };
+    return { ...x, campRepairs: arr.map(y => y.map(z => z.count))[i] };
   });
   res.json(data);
 });
