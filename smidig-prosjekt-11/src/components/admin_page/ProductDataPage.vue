@@ -1,6 +1,6 @@
 <template>
   <div class="parts-data-container">
-    <h3>Part Statistics</h3>
+    <h3>Repaired Parts Statistics</h3>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
         <vue3-chart-js ref="chartRef" v-bind="{ ...barChart }"></vue3-chart-js>
