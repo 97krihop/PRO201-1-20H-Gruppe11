@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
-import user from "./modules/user";
+import auth from "./modules/auth";
 import entityData from "./modules/entityData";
 import progressbarBtn from "./modules/progressbarBtn";
 import dashboardData from "./modules/dashboardData";
@@ -11,10 +11,15 @@ export default createStore({
   modules: {
     campData,
     productData,
-    user,
     entityData,
     progressbarBtn,
+    auth,
     dashboardData
   },
-  plugins: [createPersistedState()]
+  plugins: [
+    createPersistedState({
+      paths: ["entityData", "progressbarBtn","dashboardData","campData","productData"],
+      key: "bright"
+    })
+  ]
 });
