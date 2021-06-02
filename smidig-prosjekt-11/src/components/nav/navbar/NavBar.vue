@@ -46,13 +46,6 @@ export default {
           link: "notimplemented",
           alt: "Certifications icon"
         }
-        // ,
-        // {
-        //   itemTitle: 'Log out',
-        //   iconName: 'exit',
-        //   link: 'logout',
-        //   alt: 'Logout icon',
-        // },
       ],
       menuIsOpen: false
     };
