@@ -2,13 +2,7 @@ const productName = `SunBell`;
 
 //Camp name
 
-const campName = [
-  "Yida",
-  "Pugnido",
-  "Katumba",
-  "Kakuma",
-  "Hagadera",
-];
+const campName = ["Yida", "Pugnido", "Katumba", "Kakuma", "Hagadera"];
 //Partname
 
 const partsList = [
@@ -57,7 +51,7 @@ const fn = () => {
     for (let j = 0; j < randomNumber; j++) {
       parts.push(partsList[Math.floor(Math.random() * partsList.length)]);
     }
-    const date = randomDate("01-01-2021","06-03-2021")
+    const date = randomDate("01-01-2021", "06-03-2021");
     let report = {
       serialNumber: "j" + Math.floor(Math.random() * 1000).toString(),
       productName,

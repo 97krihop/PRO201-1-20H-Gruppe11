@@ -139,7 +139,7 @@ export default {
       campData.value.filter(
         product =>
           product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-          -1 ||
+            -1 ||
           product.location
             .toLowerCase()
             .indexOf(searchQuery.value.toLowerCase()) !== -1

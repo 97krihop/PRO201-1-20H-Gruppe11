@@ -6,13 +6,11 @@ const db = require("../db/mongo");
 
 const report = db.get("report");
 
-
 router.get("/test", async (req, res) => {
   const data = require("../testDataReport")();
-  console.log(data)
+  console.log(data);
   await report.insert(data);
   res.status(204).send();
 });
-
 
 module.exports = router;
