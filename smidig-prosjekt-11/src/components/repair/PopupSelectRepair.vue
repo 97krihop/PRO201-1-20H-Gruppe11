@@ -40,7 +40,7 @@
     </modal-no-serial-number-message>
     <!-- PARTS-DIV -->
     <div class="part-container">
-      <h1 @click="logStatement()">Parts</h1>
+      <h1>Parts</h1>
       <div id="parts-cont-no-change" class="part-grid">
         <div
           class="part-grid-entity"
@@ -165,9 +165,6 @@ export default {
     };
   },
   methods: {
-    logStatement() {
-      console.log(this.productImages[0].partName);
-    },
     selectPart(product) {
       product.isChecked = !product.isChecked; // Flips the boolean value, true->false, false->true
     },

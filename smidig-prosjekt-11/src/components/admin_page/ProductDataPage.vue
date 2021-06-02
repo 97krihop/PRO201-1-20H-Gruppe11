@@ -195,20 +195,14 @@ export default {
     // Retrieves data and populates the dataBank array
     onMounted(async () => {
       await store.dispatch("fetchAllParts");
-      data.value = store.getters.getProductData;
+      data.value = await store.getters.getProductData;
 
-      const repairedProducts = JSON.parse(JSON.stringify(data.value));
+      for (let i = 0; i < data.value.length; i++) {
+        if (data.value[i].productName === "Sunbell") {
+          const monthNumber = new Date(data.value[i].createdAt).getMonth();
 
-      for (let i = 0; i < repairedProducts.length; i++) {
-        const product = repairedProducts[i];
-
-        if (product.productName === "Sunbell") {
-          const monthNumber = new Date(product.createdAt).getMonth();
-
-          for (let j = 0; j < product.parts.length; j++) {
-            const part = product.parts[j];
-
-            addPart(part.partNumber, monthNumber);
+          for (let j = 0; j < data.value[i].parts.length; j++) {
+            addPart(data.value[i].parts[j].partNumber, monthNumber);
           }
         }
       }

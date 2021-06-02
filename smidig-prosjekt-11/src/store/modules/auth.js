@@ -9,30 +9,30 @@ const state = {
 const mutations = {
   // Authentication mutations
   authRequest(state) {
-    state.authStatus = 'loading';
+    state.authStatus = "loading";
   },
   authSuccess(state, userData) {
     state.userData = userData;
-    state.authStatus = 'success';
+    state.authStatus = "success";
   },
   authError(state) {
-    state.authStatus = 'error';
+    state.authStatus = "error";
     state.userData = null;
   },
   authLogout(state) {
-    state.authStatus = '';
+    state.authStatus = "";
     state.userData = null;
   },
   // Register mutations
   regRequest(state) {
-    state.regStatus = 'loading';
+    state.regStatus = "loading";
   },
   regSuccess(state) {
-    state.regStatus = 'success';
+    state.regStatus = "success";
   },
   regError(state) {
-    state.regStatus = 'error';
-  },
+    state.regStatus = "error";
+  }
 };
 
 const actions = {
@@ -40,7 +40,9 @@ const actions = {
     commit("authRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/login", user, { withCredentials: true })
+        .post("http://localhost:3000/api/login", user, {
+          withCredentials: true
+        })
         .then(res => {
           commit("authSuccess", res.data);
           resolve(res);
@@ -66,18 +68,18 @@ const actions = {
     });
   },
   createUser({ commit }, userValues) {
-    
-    console.log('userValsVuex', userValues);
-    commit('regRequest');
+    commit("regRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post('http://localhost:3000/api/register', userValues, { withCredentials: true })
-        .then((res) => {
-          commit('regSuccess');
+        .post("http://localhost:3000/api/register", userValues, {
+          withCredentials: true
+        })
+        .then(res => {
+          commit("regSuccess");
           resolve(res);
         })
-        .catch((error) => {
-          commit('regError');
+        .catch(error => {
+          commit("regError");
           reject(error);
         });
       resolve();

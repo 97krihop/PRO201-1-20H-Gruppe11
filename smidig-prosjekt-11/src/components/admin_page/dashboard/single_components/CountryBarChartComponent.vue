@@ -87,7 +87,6 @@ export default {
           });
           colorIndex++;
         } else {
-          console.log(colorIndex);
           const campNameIndex = campList.findIndex(
             el => el.camp === entity.campName
           );
@@ -98,8 +97,6 @@ export default {
           };
         }
       }
-      console.log(campList);
-
       this.campList = campList;
     }
   },
