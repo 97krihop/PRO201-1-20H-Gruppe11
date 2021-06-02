@@ -15,7 +15,7 @@
     <div class="top-metrics-container-inner">
       <top-metric
         :name-of-data="'Most Repaired Part Today'"
-        data-to-display="PCB"
+        data-to-display="Lamp"
       />
     </div>
     <div class="top-metrics-container-inner">

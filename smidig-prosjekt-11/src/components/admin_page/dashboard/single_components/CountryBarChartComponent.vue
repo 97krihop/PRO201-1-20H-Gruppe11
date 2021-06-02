@@ -42,6 +42,13 @@ export default {
     return {
       data: [],
       campList: [],
+      colorArray: [
+        "'#41B883'",
+        "'#E46651'",
+        "'#00D8FF'",
+        "'#DD1B16'",
+        "'#41B883'"
+      ],
       countryColors: [
         { countryName: "Jemen", color: "#41B883", amount: 40 },
         { countryName: "Venezuela", color: "#E46651", amount: 20 },
@@ -83,18 +90,27 @@ export default {
       const campList = [];
 
       for (let entity of this.data) {
+        let colorIndex = 0;
         if (!campList.find(el => el.camp === entity.campName)) {
-          campList.push({ camp: entity.campName, amount: 1 });
+          campList.push({
+            camp: entity.campName,
+            color: this.colorArray[colorIndex],
+            amount: 1
+          });
+          colorIndex + 1;
         } else {
           const campNameIndex = campList.findIndex(
             el => el.camp === entity.campName
           );
           campList[campNameIndex] = {
             camp: entity.campName,
+            color: entity.color,
             amount: campList[campNameIndex].amount + 1
           };
         }
       }
+      console.log(campList);
+
       this.campList = campList;
     }
   },
