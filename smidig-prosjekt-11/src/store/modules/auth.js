@@ -1,26 +1,38 @@
 import axios from "axios";
 
 const state = {
-  status: "",
+  authStatus: "",
+  regStatus: "",
   userData: null
 };
 
 const mutations = {
+  // Authentication mutations
   authRequest(state) {
-    state.status = "loading";
+    state.authStatus = 'loading';
   },
   authSuccess(state, userData) {
     state.userData = userData;
-    state.status = "success";
+    state.authStatus = 'success';
   },
   authError(state) {
-    state.status = "error";
+    state.authStatus = 'error';
     state.userData = null;
   },
   authLogout(state) {
-    state.status = "";
+    state.authStatus = '';
     state.userData = null;
-  }
+  },
+  // Register mutations
+  regRequest(state) {
+    state.regStatus = 'loading';
+  },
+  regSuccess(state) {
+    state.regStatus = 'success';
+  },
+  regError(state) {
+    state.regStatus = 'error';
+  },
 };
 
 const actions = {
@@ -28,7 +40,7 @@ const actions = {
     commit("authRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/login", user)
+        .post("http://localhost:3000/api/login", user, { withCredentials: true })
         .then(res => {
           commit("authSuccess", res.data);
           resolve(res);
@@ -48,6 +60,24 @@ const actions = {
           resolve(res);
         })
         .catch(error => {
+          reject(error);
+        });
+      resolve();
+    });
+  },
+  createUser({ commit }, userValues) {
+    
+    console.log('userValsVuex', userValues);
+    commit('regRequest');
+    return new Promise((resolve, reject) => {
+      axios
+        .post('http://localhost:3000/api/register', userValues, { withCredentials: true })
+        .then((res) => {
+          commit('regSuccess');
+          resolve(res);
+        })
+        .catch((error) => {
+          commit('regError');
           reject(error);
         });
       resolve();

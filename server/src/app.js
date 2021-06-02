@@ -17,13 +17,13 @@ const sessionParser = session({
   secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URL,
-    dbName: "bright",
-    crypto: {
-      secret: process.env.MONGO_SECRET || "squirrel",
-    },
-  }),
+  // store: MongoStore.create({
+  //   mongoUrl: process.env.MONGO_URL,
+  //   dbName: "bright",
+  //   crypto: {
+  //     secret: process.env.MONGO_SECRET || "squirrel",
+  //   },
+  // }),
 });
 
 if (app.get("env") === "production") {
