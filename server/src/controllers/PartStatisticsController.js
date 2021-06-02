@@ -1,8 +1,30 @@
 const db = require("../db/mongo");
 const reports = db.get("report");
 
-const getPartsByCamp = async (param) => {
+const getPartsByCamp = async param => {
   return await reports.find({ campName: param });
+};
+
+const getPartsCountByCamp = async param => {
+  const names = [
+    "Lamp",
+    "12V charger",
+    "Battery",
+    "Power button",
+    "Light bulb",
+    "Screen",
+    "Socket charger",
+    "Solar panel"
+  ];
+  const res = [];
+  for await (const name of names) {
+    const data = await reports.count({
+      campName: param,
+      "parts.partName": name
+    });
+    res.push({ name, count: data });
+  }
+  return res;
 };
 
 const getPartsCountArray = async () => {
@@ -14,7 +36,7 @@ const getPartsCountArray = async () => {
     "Light bulb",
     "Screen",
     "Socket charger",
-    "Solar panel",
+    "Solar panel"
   ];
   const res = [];
   for (const name of names) {
@@ -29,23 +51,23 @@ const getRepairsCountByMonth = async () => {
     {
       $group: {
         _id: { $substr: ["$createdAt", 2, 5] },
-        count: { $sum: 1 },
-      },
-    },
+        count: { $sum: 1 }
+      }
+    }
   ]);
   let year = null;
   const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   data
     .sort((e1, e2) => (e1._id < e2._id ? 1 : -1))
-    .filter((e) => {
+    .filter(e => {
       if (year === null) year = e._id.slice(0, 2);
       return e._id.slice(0, 2) === year;
     })
-    .forEach((e) => (arr[parseInt(e._id.slice(3)) - 1] = e.count));
+    .forEach(e => (arr[parseInt(e._id.slice(3)) - 1] = e.count));
   return arr;
 };
 
-const getRepsByNamePerMonth = async (name) => {
+const getRepsByNamePerMonth = async name => {
   const data = await reports.find({ "parts.partName": name });
   let year = null;
   const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -55,8 +77,8 @@ const getRepsByNamePerMonth = async (name) => {
       if (year === null) year = createdAt.getFullYear();
       return createdAt.getFullYear() === year;
     })
-    .map((e) => e.createdAt.getMonth())
-    .forEach((e) => arr[e]++);
+    .map(e => e.createdAt.getMonth())
+    .forEach(e => arr[e]++);
   return arr;
 };
 
@@ -65,4 +87,5 @@ module.exports = {
   getPartsCountArray,
   getRepsByNamePerMonth,
   getPartsByCamp,
+  getPartsCountByCamp
 };
