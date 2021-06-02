@@ -1,7 +1,7 @@
 <template>
   <div class="parts-data-container">
     <h3>Part Statistics</h3>
-
+    <p>{{ data }}</p>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
         <vue3-chart-js ref="chartRef" v-bind="{ ...barChart }"></vue3-chart-js>
@@ -49,13 +49,21 @@
 <script>
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
 import TopMetrics from "@/components/admin_page/TopMetrics";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import DescriptionText from "./DescriptionText";
+import { useStore } from "vuex";
 
 export default {
   name: "ProductDataPage",
   setup() {
     const chartRef = ref(null);
+    const store = useStore();
+    const data = ref(null);
+
+    onMounted(async () => {
+      await store.dispatch("fetchProductData");
+      data.value = store.getters.getProductData;
+    });
 
     const dataBank = [
       {
@@ -168,6 +176,7 @@ export default {
     };
 
     return {
+      data,
       barChart,
       chartRef,
       dataBank,
