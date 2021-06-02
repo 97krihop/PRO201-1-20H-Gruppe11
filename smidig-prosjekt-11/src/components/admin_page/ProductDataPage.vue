@@ -6,7 +6,7 @@
         <vue3-chart-js ref="chartRef" v-bind="{ ...barChart }"></vue3-chart-js>
       </div>
       <description-text
-        description-text="Previous 12 Month Data History"
+        description-text="Items repaired this year"
       ></description-text>
     </div>
 
@@ -244,6 +244,8 @@ export default {
         product.isChecked = true;
       }
       chartRef.value.update();
+      
+      console.log(this.$refs.canvas);
     }
 
     function updateChartWithAllParts() {
