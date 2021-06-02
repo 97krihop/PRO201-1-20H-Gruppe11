@@ -244,8 +244,6 @@ export default {
         product.isChecked = true;
       }
       chartRef.value.update();
-      
-      console.log(this.$refs.canvas);
     }
 
     function updateChartWithAllParts() {
