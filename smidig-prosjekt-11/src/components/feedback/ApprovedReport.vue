@@ -18,7 +18,7 @@ export default {
   name: "Home",
   setup() {
     const store = useStore();
-    let success = ref();
+    let success = ref(null);
     onMounted(async () => {
       success.value = await store.dispatch("postRepairs");
     });

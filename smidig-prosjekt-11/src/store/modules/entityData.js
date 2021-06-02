@@ -48,8 +48,9 @@ const getters = {
 };
 
 const actions = {
-  postRepairs: async function({ state }) {
+  postRepairs: async function({ commit, state }) {
     try {
+      //TODO: need to remove the login after we have login page implemented
       await post(
         "http://localhost:3000/api/login",
         {
@@ -58,10 +59,9 @@ const actions = {
         },
         { withCredentials: true }
       );
-      const temp = [...state.entityArray];
       const res = await post(
         "http://localhost:3000/api/report",
-        temp.map(e => {
+        [...state.entityArray].map(e => {
           return {
             serialNumber:
               e.entitySerialNr.length > 0 ? e.entitySerialNr : "noSerial",
@@ -75,6 +75,7 @@ const actions = {
           withCredentials: true
         }
       );
+      if (res.status === 200) commit("deleteAllEntity");
       return res.status === 200;
     } catch (e) {
       return false;
