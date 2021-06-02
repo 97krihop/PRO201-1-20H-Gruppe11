@@ -41,7 +41,7 @@ const partsList = [
 ];
 function randomDate() {
   const date = new Date();
-  date.setMonth(Math.floor(Math.random() * 5))
+  date.setMonth(Math.floor(Math.random() * 5));
   return date;
 }
 
