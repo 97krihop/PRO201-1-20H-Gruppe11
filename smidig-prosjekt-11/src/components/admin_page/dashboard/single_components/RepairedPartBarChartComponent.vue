@@ -57,8 +57,8 @@ export default {
   data() {
     return {
       countryColors: [
-        { countryName: "Lamp", color: "#00D8FF", amount: 80 },
-        { countryName: "Battery", color: "#41B883", amount: 20 },
+        { countryName: "Battery", color: "#00D8FF", amount: 80 },
+        { countryName: "Lamp", color: "#41B883", amount: 20 },
         { countryName: "PCB", color: "#E46651", amount: 40 },
         { countryName: "Connector", color: "#DD1B16", amount: 10 }
       ]
