@@ -88,6 +88,7 @@ router.patch("/edit", async (req, res) => {
 //Invoking logout() will remove the req.user property and clear the login session (if any).
 router.get("/logout", (req, res) => {
   req.logout();
+  req.session.destroy()
   res.status(200).send();
 });
 
