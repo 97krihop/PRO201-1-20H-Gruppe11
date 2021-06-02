@@ -1,6 +1,6 @@
 <template>
   <base-site isDark="true">
-    <login @submitLogin="postLogin($event)" :formMessage="formMessage" />
+    <login @submitLogin="postLogin($event)" :formMessage="formMessage" ref="login" />
   </base-site>
 </template>
 
@@ -12,8 +12,6 @@ export default {
   name: "LoginPage",
   data() {
     return {
-      username: "",
-      password: "",
       formMessage: ""
     };
   },
@@ -23,6 +21,7 @@ export default {
   },
   methods: {
     postLogin(loginValues) {
+      this.formMessage = "";
       this.$store
         .dispatch("authenticate", loginValues)
         .then(res => { 
@@ -30,6 +29,7 @@ export default {
           this.$router.push("/")
           })
           .catch(error => {
+              this.$refs.login.removePassword();
               switch(error.response.status) {
                 case 401:
                    this.formMessage = "Invalid username/password"

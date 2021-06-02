@@ -49,6 +49,13 @@ export default {
   methods: {
     emitLogin(loginValues) {
       this.$emit("submitLogin", loginValues);
+    },
+    removePassword() {
+      this.password = "";
+    },
+    removeValues() {
+      this.password = "";
+      this.username = "";
     }
   },
   props: {
@@ -131,7 +138,6 @@ export default {
 
   .login-error-container {
     color: rgb(165, 1, 1);
-    border: 1px solid blue;
     margin-bottom: 15px;
     margin-top: 0px;
     font-weight: 700;

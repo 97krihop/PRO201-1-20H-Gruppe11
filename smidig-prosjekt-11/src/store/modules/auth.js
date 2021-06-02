@@ -1,5 +1,4 @@
 import axios from "axios";
-// import router from '../../router';
 
 const state = {
   status: "",
@@ -32,7 +31,6 @@ const actions = {
         .post("http://localhost:3000/api/login", user)
         .then(res => {
           commit("authSuccess", res.data);
-          // router.push("/");
           resolve(res);
         })
         .catch(error => {
