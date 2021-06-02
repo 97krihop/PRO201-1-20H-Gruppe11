@@ -50,7 +50,7 @@
         :name-of-data="product.partName"
         :data-to-display="product.totalRepairs.toString()"
         :metric-icon-src="product.imgName"
-        display-image="{{true}}"
+        :display-image="true"
       />
     </div>
   </div>
@@ -74,6 +74,7 @@ export default {
     }
   },
   setup(props) {
+    const bol = true;
     const store = useStore();
     const { ctx: _this } = getCurrentInstance();
     const showSearchSuggestions = ref(false);
@@ -138,7 +139,7 @@ export default {
       campData.value.filter(
         product =>
           product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-            -1 ||
+          -1 ||
           product.location
             .toLowerCase()
             .indexOf(searchQuery.value.toLowerCase()) !== -1
@@ -160,10 +161,10 @@ export default {
         setSelectedCampName,
         null
       );
+
       if (props.routedCampName) {
         setSelectedCampName(props.routedCampName);
         replaceMapWithResults();
-
         // Get index of selected camp by comparing name
         let campIndex = 0;
         for (let i = 0; i < campData.value.length; i++) {
@@ -174,7 +175,8 @@ export default {
         }
 
         for (let i = 0; i < products.value.length; i++) {
-          products.value[i].totalRepairs = campData[campIndex].campRepairs[i];
+          products.value[i].totalRepairs =
+            campData.value[campIndex].campRepairs[i];
         }
         updateData();
       }
@@ -204,7 +206,6 @@ export default {
     }
 
     function showResult(product) {
-      console.log(product);
       for (let i = 0; i < products.value.length; i++) {
         products.value[i].totalRepairs = product.campRepairs[i];
       }
@@ -213,6 +214,7 @@ export default {
     }
 
     return {
+      bol,
       store,
       searchedProducts,
       searchQuery,

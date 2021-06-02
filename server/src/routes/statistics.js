@@ -27,11 +27,12 @@ router.get("/repairs-by-camp/:name", async (req, res, next) => {
 router.get("/repairs-by-camp", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
   const camps = await camp.find({});
-  const resul = camps
-    .map(async x => await getPartsByCamp(x.name))
-    .map(y => y.count);
+  const result = Promise.all(
+    camps.map(async x => await getPartsCountByCamp(x.name))
+  );
+  const arr = await result;
   const data = camps.map((x, i) => {
-    return { ...x, campRepairs: resul[i] };
+    return { ...x, campRepairs: arr.map(y => y.map(z => z.count))[i] };
   });
   res.json(data);
 });

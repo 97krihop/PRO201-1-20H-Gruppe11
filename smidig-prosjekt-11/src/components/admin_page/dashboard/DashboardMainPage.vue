@@ -55,12 +55,13 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import CountryBarChartComponent from "./single_components/CountryBarChartComponent";
-import RepairPartBarChartComponent from "@/components/admin_page/dashboard/single_components/RepairedPartBarChartComponent";
+import RepairPartBarChartComponent
+  from "@/components/admin_page/dashboard/single_components/RepairedPartBarChartComponent";
 import { createMap } from "@/assets/js/map.js";
 import DescriptionText from "../DescriptionText";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { onMounted } from "vue";
+import { getCurrentInstance, onMounted, ref } from "vue";
 
 export default {
   name: "DashboardPage",
@@ -68,10 +69,38 @@ export default {
     const router = useRouter();
     const store = useStore();
     const retrievedData = [];
+    const { ctx: _this } = getCurrentInstance();
+    const campData = ref([]);
+    const products = [
+      {
+        partNumber: "1",
+        partName: "Lamp",
+        imgName: "ic-part-lamp",
+        totalRepairs: "0"
+      }
+    ];
 
-    onMounted(() => {
-      store.dispatch("fetchAllRepairs");
-      //this.retrievedData = store.getters.getAllRepairs;
+    onMounted(async () => {
+      await store.dispatch("fetchAllRepairs");
+      await store.dispatch("fetchCampData");
+      campData.value = await store.getters.getCampData;
+
+      createMap(
+        23,
+        20,
+        2,
+        true,
+        campData.value,
+        products,
+        null,
+        null,
+        null,
+        childMapClick
+      );
+
+      function childMapClick(param) {
+        _this.$emit("childToParent", param);
+      }
     });
 
     return {
@@ -94,67 +123,7 @@ export default {
   methods: {
     showAlert() {
       alert("Klikka på stats");
-    },
-    childMapClick(param) {
-      this.$emit("childToParent", param);
     }
-  },
-  mounted() {
-    const campData = [
-      {
-        id: "Hagadera Refugee Camp",
-        location: "Kenya",
-        geoloc: [40.5230712890625, 0.17028783523693297],
-        campRepairs: [12, 40, 53, 0, 210, 32, 5, 21, 12, 0, 54, 23]
-      },
-      {
-        id: "Kakuma Refugee Camp",
-        location: "Kenya",
-        geoloc: [34.80743408203125, 3.760115447396889],
-        campRepairs: [21, 5, 3, 243, 2, 42, 35, 41, 32, 14, 65, 15]
-      },
-      {
-        id: "Katumba Refugee Camp",
-        location: "Tanzania",
-        geoloc: [31.02813720703125, -6.287998672327658],
-        campRepairs: [13, 0, 35, 2223, 2, 442, 345, 41, 32, 14, 0, 12]
-      },
-      {
-        id: "Pugnido Refugee Camp",
-        location: "Ethiopia",
-        geoloc: [34.00543212890625, 7.681051391626661],
-        campRepairs: [40, 344, 35, 23, 2, 242, 34, 41, 32, 14, 65, 0]
-      },
-      {
-        id: "Yida Refugee Camp",
-        location: "South Sudan",
-        geoloc: [30.047607421875, 10.244654445228324],
-        campRepairs: [6, 14, 325, 11, 22, 42, 12, 4, 32, 14, 3, 82]
-      }
-    ];
-    const products = [
-      {
-        partNumber: "1",
-        partName: "Lamp",
-        imgName: "ic-part-lamp",
-        totalRepairs: "0"
-      }
-    ];
-    createMap(
-      23,
-      20,
-      2,
-      true,
-      campData,
-      products,
-      null,
-      null,
-      null,
-      this.childMapClick
-    );
-    /*this.$nextTick(function() {
-      createMap(23, 20, 2);
-    });*/
   }
 };
 </script>

@@ -35,17 +35,9 @@ const actions = {
           id: x.name,
           location: x.Country,
           geoloc: x.coordinates,
-          campRepairs: x.coordinates
+          campRepairs: x.campRepairs
         };
       });
-      /*
-                return {
-                  id: x.name,
-                  location: x.Country,
-                  geoloc: x.coordinates,
-                  campRepairs: data
-                };*/
-
       commit("setCampData", data);
     } catch (e) {
       console.error(e);
@@ -55,7 +47,6 @@ const actions = {
 
 export default {
   state,
-
   mutations,
   getters,
   actions
