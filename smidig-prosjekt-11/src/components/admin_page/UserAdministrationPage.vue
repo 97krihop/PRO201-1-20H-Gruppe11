@@ -56,59 +56,85 @@
 </template>
 
 <script>
-import { useField, useForm } from "vee-validate";
+import { useField, useForm } from 'vee-validate';
+import { useStore } from 'vuex';
 
 export default {
-  name: "UserAdministrationPage",
+  name: 'UserAdministrationPage',
   data() {
     return {
-      camps: []
+      camps: [],
     };
   },
   async created() {
-    const response = await fetch("http://localhost:3000/api/camp");
+    const response = await fetch('http://localhost:3000/api/camp');
     this.camps = await response.json();
   },
   setup() {
+    const store = useStore();
+
     const schema = {
       username(value) {
         return value && value.length >= 6
           ? true
-          : "Username needs to be 6 or longer";
+          : 'Username needs to be 6 or longer';
       },
       password(value) {
         return value && value.length >= 6
           ? true
-          : "Password needs to be 6 or longer";
+          : 'Password needs to be 6 or longer';
       },
       confirmPassword(value) {
         return value === password.value
           ? true
-          : "Password needs to match password";
-      }
+          : 'Password needs to match password';
+      },
     };
+
     const { handleSubmit, isSubmitting } = useForm({
-      validationSchema: schema
+      validationSchema: schema,
     });
 
     const onSubmit = handleSubmit((values, { resetForm }) => {
-      console.log(values); // send data to API
-
-      // reset the form and the field values to their initial values
-      resetForm();
+      delete values.confirmPassword;
+      
+      store
+        .dispatch('createUser', values)
+        .then(res => {
+          // reset the form and the field values to their initial values
+          resetForm();
+          console.log(res);
+          
+          // Success message display
+        })
+        .catch((error) => {
+          console.log("errorcatch", error);
+          resetForm()
+          switch (error.response.status) {
+            case 400:
+              this.formMessage = 'Invalid username/password';
+              break;
+            case 409:
+              this.formMessage = 'Username already exists';
+              break;
+            case 500:
+              this.formMessage = 'Internal server error';
+          }
+        });
     });
+
     const { errorMessage: usernameError, value: username } = useField(
-      "username"
+      'username'
     );
     const { errorMessage: passwordError, value: password } = useField(
-      "password"
+      'password'
     );
     const { errorMessage: CPError, value: confirmPassword } = useField(
-      "confirmPassword"
+      'confirmPassword'
     );
-    const { value: campName } = useField("campName");
+    const { value: campName } = useField('campName');
 
-    const { value: admin } = useField("admin");
+    const { value: admin } = useField('admin');
 
     return {
       username,
@@ -117,12 +143,12 @@ export default {
       passwordError,
       confirmPassword,
       CPError,
-      isSubmitting,
       onSubmit,
+      isSubmitting,
       campName,
-      admin
+      admin,
     };
-  }
+  },
 };
 </script>
 
@@ -136,13 +162,13 @@ export default {
   max-width: 100%;
   height: 100%;
 
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
   h1 {
     margin-top: 7vh;
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 20px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: #828b96;
   }
   .wrapper {
@@ -236,12 +262,12 @@ export default {
   }
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 h1 {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 20px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #828b96;
 }
 

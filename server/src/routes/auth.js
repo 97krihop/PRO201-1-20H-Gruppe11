@@ -37,7 +37,11 @@ const registerSchema = Joi.object({
 });
 //Registration route -- Saves user in user storage after hashing password. -- Error handling and a bit of input validation/sanitation is done in frontend.
 router.post("/register", async (req, res, next) => {
-  if (!req.user || !req.user.admin) return next();
+  if (!req.user || !req.user.admin) {
+    console.log("register not authenticated");
+    return next()
+  };
+  console.log(req.body);
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   let value;
   try {
