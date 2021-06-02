@@ -15,14 +15,12 @@ const mutations = {
 
 const getters = {
   getAllRepairs(state) {
-    console.log("in getter");
     return state.allRepairs;
   }
 };
 
 const actions = {
   fetchAllRepairs: async function({ commit }) {
-    console.log("Called in dashDay");
 
     try {
       await post(

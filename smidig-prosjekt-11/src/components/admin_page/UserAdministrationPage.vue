@@ -50,6 +50,7 @@
             Submit
           </button>
         </div>
+    <!-- <div class="form-message" v-if="formMessageExists">{{ formMessage }}</div> -->
       </div>
     </form>
   </div>
@@ -64,8 +65,14 @@ export default {
   data() {
     return {
       camps: [],
+      // formMessage: ""
     };
   },
+  // computed: {
+  //   formMessageExists() {
+  //     return this.formMessage !== "";
+  //   }
+  // },
   async created() {
     const response = await fetch('http://localhost:3000/api/camp');
     this.camps = await response.json();
@@ -100,10 +107,10 @@ export default {
       
       store
         .dispatch('createUser', values)
-        .then(res => {
+        .then(() => {
           // reset the form and the field values to their initial values
           resetForm();
-          console.log(res);
+          //this.formMessage = "New user created";
           
           // Success message display
         })
@@ -112,13 +119,13 @@ export default {
           resetForm()
           switch (error.response.status) {
             case 400:
-              this.formMessage = 'Invalid username/password';
+              //this.formMessage = 'Invalid username/password';
               break;
             case 409:
-              this.formMessage = 'Username already exists';
+              //this.formMessage = 'Username already exists';
               break;
             case 500:
-              this.formMessage = 'Internal server error';
+              //this.formMessage = 'Internal server error';
           }
         });
     });
@@ -161,6 +168,12 @@ export default {
   flex-wrap: wrap;
   max-width: 100%;
   height: 100%;
+
+  .form-message {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+  }
 
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
   h1 {
