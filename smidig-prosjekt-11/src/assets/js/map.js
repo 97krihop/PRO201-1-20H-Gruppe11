@@ -71,10 +71,10 @@ export function createMap(
     // Create click listener for Camp Overview map
     if (updateData) {
       m.addEventListener("click", function() {
-        //console.log("clicked on camp " + campData[i].id);
         for (let j = 0; j < products.length; j++) {
-          products[j].totalRepairs = j;
+          products[j].totalRepairs = campData[i].campRepairs[j];
         }
+
         updateData();
         setSelectedCampName(campData[i].id);
         replaceMapWithResults();
