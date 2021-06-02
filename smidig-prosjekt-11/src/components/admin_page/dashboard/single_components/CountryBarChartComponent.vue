@@ -14,11 +14,11 @@
       </div>
 
       <div
-        v-for="entry in countryColors"
-        :key="entry.countryName"
+        v-for="entry in campList"
+        :key="entry.camp"
         class="country-list-item"
       >
-        <p class="inline-elements">{{ entry.countryName }}</p>
+        <p class="inline-elements">{{ entry.camp }}</p>
         <div
           class="country-color-box"
           :style="{ backgroundColor: entry.color }"
@@ -42,20 +42,7 @@ export default {
     return {
       data: [],
       campList: [],
-      colorArray: [
-        "'#41B883'",
-        "'#E46651'",
-        "'#00D8FF'",
-        "'#DD1B16'",
-        "'#41B883'"
-      ],
-      countryColors: [
-        { countryName: "Jemen", color: "#41B883", amount: 40 },
-        { countryName: "Venezuela", color: "#E46651", amount: 20 },
-        { countryName: "Afghanistan", color: "#00D8FF", amount: 80 },
-        { countryName: "Colombia", color: "#DD1B16", amount: 10 },
-        { countryName: "Norge", color: "#41B883", amount: 7 }
-      ]
+      colorArray: ["#41B883", "#E46651", "#00D8FF", "#DD1B16", "#41B883"]
     };
   },
   setup() {
@@ -88,23 +75,25 @@ export default {
     updateRepairData: function() {
       this.data = this.store.getters.getAllRepairs;
       const campList = [];
+      let colorIndex = 0;
+      let colorArray = this.colorArray;
 
       for (let entity of this.data) {
-        let colorIndex = 0;
         if (!campList.find(el => el.camp === entity.campName)) {
           campList.push({
             camp: entity.campName,
-            color: this.colorArray[colorIndex],
+            color: colorArray[colorIndex],
             amount: 1
           });
-          colorIndex + 1;
+          colorIndex++;
         } else {
+          console.log(colorIndex);
           const campNameIndex = campList.findIndex(
             el => el.camp === entity.campName
           );
           campList[campNameIndex] = {
-            camp: entity.campName,
-            color: entity.color,
+            camp: campList[campNameIndex].camp,
+            color: campList[campNameIndex].color,
             amount: campList[campNameIndex].amount + 1
           };
         }
@@ -160,6 +149,7 @@ export default {
   width: 100px;
 }
 .main-information-topleft-container {
+  overflow-y: scroll;
   background-color: #ffffff;
   height: 30vh;
   width: 20vh;

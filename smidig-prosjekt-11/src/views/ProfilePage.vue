@@ -72,8 +72,9 @@ export default {
   },
   methods: {
     submitClicked: function() {
-      this.showModal = true;
-      //this.onSubmit(event);
+      if(this.password.length >= 6 && this.confirmPassword === this.password){
+        this.showModal = true;
+      }
     },
     closeModal: function() {
       this.showModal = false;
@@ -89,7 +90,7 @@ export default {
       confirmPassword(value) {
         return value === password.value
           ? true
-          : "Password needs to match password";
+          : "Password must match";
       }
     };
     const { handleSubmit, isSubmitting } = useForm({
