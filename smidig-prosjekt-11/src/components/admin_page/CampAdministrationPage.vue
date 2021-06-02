@@ -30,7 +30,7 @@
             required
           />
           <span>
-            <i>Input Coordinate Format: &emsp; 0.00,0.00</i><br />
+            <i>Input Coordinate Format: &emsp; 0.00,0.00 (latitude, longitude)</i><br />
             <a href="http://geojson.io/">Map Tool Link</a>
           </span>
           <span v-if="error !== null">
