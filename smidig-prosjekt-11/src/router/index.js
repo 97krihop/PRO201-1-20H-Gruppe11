@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import store from '../store';
+
 
 const routes = [
   {
@@ -50,15 +50,20 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  const userData = store.getters.getUserData;
-  if (to.path !== '/login' && !userData) {
-    next('/login');
-  } else if (to.path === "/login" && userData) {
-    next(false);
-  } else {
-    next();
-  }
-});
+// UNCOMMENT TO ENFORCE NAVIGATION GUARDS:
+
+// import store from '../store';
+
+
+// router.beforeEach((to, from, next) => {
+//   const userData = store.getters.getUserData;
+//   if (to.path !== '/login' && !userData) {
+//     next('/login');
+//   } else if (to.path === "/login" && userData) {
+//     next(false);
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
