@@ -9,7 +9,7 @@
     <div class="top-metrics-container-inner">
       <top-metric
         :name-of-data="'Total Units Registered'"
-        data-to-display="1.000.000"
+        data-to-display="30.920"
       />
     </div>
     <div class="top-metrics-container-inner">
@@ -32,13 +32,13 @@
       <country-bar-chart-component
         :cardTitle="'Repaired Units Total'"
         :amount="data.length.toString()"
-        :data="data"
+        :repairData="data"
         style="z-index: 1000"
       />
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
       <repair-part-bar-chart-component
         :cardTitle="'Most Repaired Monthly'"
-        :data="data"
+        :repairData="data"
         style="z-index: 1000"
       />
     </div>

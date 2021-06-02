@@ -2,7 +2,7 @@
   <div class="main-information-topleft-container">
     <div class="header-text">
       <p>{{ cardTitle }}</p>
-      <p class="header-text-number">{{ amount }}</p>
+      <p class="header-text-number">{{ data.length }}</p>
     </div>
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
@@ -30,13 +30,30 @@
 
 <script>
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
+import { useStore } from "vuex";
 export default {
   name: "CountryBarChartComponent",
   props: {
     cardTitle: String,
-    amount: Number
+    amount: String,
+    repairData: Array
+  },
+  data() {
+    return {
+      data: [],
+      campList: [],
+      countryColors: [
+        { countryName: "Jemen", color: "#41B883", amount: 40 },
+        { countryName: "Venezuela", color: "#E46651", amount: 20 },
+        { countryName: "Afghanistan", color: "#00D8FF", amount: 80 },
+        { countryName: "Colombia", color: "#DD1B16", amount: 10 },
+        { countryName: "Norge", color: "#41B883", amount: 7 }
+      ]
+    };
   },
   setup() {
+    const store = useStore();
+
     const doughnutChart = {
       type: "doughnut",
       data: {
@@ -56,22 +73,36 @@ export default {
     };
 
     return {
-      doughnutChart
+      doughnutChart,
+      store
     };
+  },
+  methods: {
+    updateRepairData: function() {
+      this.data = this.store.getters.getAllRepairs;
+      const campList = [];
+
+      for (let entity of this.data) {
+        if (!campList.find(el => el.camp === entity.campName)) {
+          campList.push({ camp: entity.campName, amount: 1 });
+        } else {
+          const campNameIndex = campList.findIndex(
+            el => el.camp === entity.campName
+          );
+          campList[campNameIndex] = {
+            camp: entity.campName,
+            amount: campList[campNameIndex].amount + 1
+          };
+        }
+      }
+      this.campList = campList;
+    }
   },
   components: { Vue3ChartJs },
-  methods: {},
-  data() {
-    return {
-      countryColors: [
-        { countryName: "Jemen", color: "#41B883", amount: 40 },
-        { countryName: "Venezuela", color: "#E46651", amount: 20 },
-        { countryName: "Afghanistan", color: "#00D8FF", amount: 80 },
-        { countryName: "Colombia", color: "#DD1B16", amount: 10 },
-        { countryName: "Norge", color: "#41B883", amount: 7 }
-      ]
-    };
+  mounted() {
+    this.updateRepairData();
   },
+
   computed: {}
 };
 </script>

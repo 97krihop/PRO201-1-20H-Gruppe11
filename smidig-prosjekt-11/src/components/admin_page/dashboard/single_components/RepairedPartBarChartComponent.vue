@@ -32,7 +32,8 @@ export default {
   name: "RepairPartBarChartComponent",
   props: {
     cardTitle: String,
-    amount: Number
+    amount: String,
+    repairData: Array
   },
   setup() {
     const doughnutChart = {
