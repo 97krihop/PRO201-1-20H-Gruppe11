@@ -23,12 +23,9 @@ const actions = {
       },
       { withCredentials: true }
     );
-    const res = await get(
-      "http://localhost:3000/api/parts",
-      {
-        withCredentials: true
-      }
-    );
+    const res = await get("http://localhost:3000/api/parts", {
+      withCredentials: true
+    });
     if (res.status === 200) context.commit("setData", res.data);
   },
   fetchAllCamps: async context => {
@@ -41,14 +38,11 @@ const actions = {
       },
       { withCredentials: true }
     );
-    const res = await get(
-      "http://localhost:3000/api/camp",
-      {
-        withCredentials: true
-      }
-    );
+    const res = await get("http://localhost:3000/api/camp", {
+      withCredentials: true
+    });
     if (res.status === 200) context.commit("setData", res.data);
-  },
+  }
   /*fetchProductData: async context => {
     console.log("fetchProductData()");
     await post(

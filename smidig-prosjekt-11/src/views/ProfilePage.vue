@@ -53,22 +53,22 @@
 </template>
 
 <script>
-import NavBar from '@/components/nav/navbar/NavBar';
-import { useField, useForm } from 'vee-validate';
-import ModalChangePassword from '@/components/modals/ModalChangePassword';
+import NavBar from "@/components/nav/navbar/NavBar";
+import { useField, useForm } from "vee-validate";
+import ModalChangePassword from "@/components/modals/ModalChangePassword";
 
 export default {
   data() {
     return {
       user: this.$store.getters.getUserData,
       ListOfRepairs: [],
-      showModal: false,
+      showModal: false
     };
   },
-  name: 'Repair',
+  name: "Repair",
   components: {
     ModalChangePassword,
-    NavBar,
+    NavBar
   },
   methods: {
     submitClicked: function() {
@@ -77,23 +77,23 @@ export default {
     },
     closeModal: function() {
       this.showModal = false;
-    },
+    }
   },
   setup() {
     const schema = {
       password(value) {
         return value && value.length >= 6
           ? true
-          : 'Password needs to be 6 or longer';
+          : "Password needs to be 6 or longer";
       },
       confirmPassword(value) {
         return value === password.value
           ? true
-          : 'Password needs to match password';
-      },
+          : "Password needs to match password";
+      }
     };
     const { handleSubmit, isSubmitting } = useForm({
-      validationSchema: schema,
+      validationSchema: schema
     });
 
     const onSubmit = handleSubmit((values, { resetForm }) => {
@@ -103,13 +103,13 @@ export default {
       resetForm();
     });
     const { errorMessage: usernameError, value: username } = useField(
-      'username'
+      "username"
     );
     const { errorMessage: passwordError, value: password } = useField(
-      'password'
+      "password"
     );
     const { errorMessage: CPError, value: confirmPassword } = useField(
-      'confirmPassword'
+      "confirmPassword"
     );
 
     return {
@@ -120,9 +120,9 @@ export default {
       confirmPassword,
       CPError,
       isSubmitting,
-      onSubmit,
+      onSubmit
     };
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -130,7 +130,6 @@ export default {
   background: linear-gradient(160deg, #fbf6ed 0%, #cdcbcbff 100%);
 }
 #username-wrapper {
-  
   // padding-bottom: 40px;
 }
 .container {
@@ -210,7 +209,7 @@ export default {
         margin-left: 10px;
       }
     }
-    
+
     #location-wrapper {
       margin-bottom: 30px;
     }

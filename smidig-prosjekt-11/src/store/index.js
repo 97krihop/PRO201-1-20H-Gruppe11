@@ -18,7 +18,13 @@ export default createStore({
   },
   plugins: [
     createPersistedState({
-      paths: ["entityData", "progressbarBtn","dashboardData","campData","productData"],
+      paths: [
+        "entityData",
+        "progressbarBtn",
+        "dashboardData",
+        "campData",
+        "productData"
+      ],
       key: "bright"
     })
   ]

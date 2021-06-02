@@ -24,12 +24,12 @@ export default {
   },
   setup() {
     const store = useStore();
-    
+
     store.commit("authSuccess", {
       username: "static_user",
       campName: "Oslo",
       isAdmin: true
-    })
+    });
   },
   name: "Home",
   components: {

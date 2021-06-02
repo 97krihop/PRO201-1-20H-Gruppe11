@@ -58,85 +58,103 @@ export default {
     const chartRef = ref(null);
     const store = useStore();
     const data = ref(null);
-    const allParts = ref( {
+    const allParts = ref({
       name: "All parts",
       imgName: "sunbell",
       isChecked: true
     });
-    const productImages = ref( [{
+    const productImages = ref([
+      {
         partNumber: "1",
         partName: "Lamp",
         imgName: "ic-part-lamp",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "2",
         partName: "12V charger",
         imgName: "ic-part-adapter-charger",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "3",
         partName: "Battery",
         imgName: "ic-part-battery",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "4",
         partName: "Power button",
         imgName: "ic-part-button",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "5",
         partName: "Light bulb",
         imgName: "ic-part-lightbulb",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "6",
         partName: "Screen",
         imgName: "ic-part-screen",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "7",
         partName: "Socket charger",
         imgName: "ic-part-socket-charger",
         isChecked: false
-      },{
+      },
+      {
         partNumber: "8",
         partName: "Solar panel",
         imgName: "ic-part-solar-panel",
         isChecked: false
-      }]);
-    const dataBank = ref( [{
+      }
+    ]);
+    const dataBank = ref([
+      {
         label: "Lamp item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "12V charger item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Battery item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Power button item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Light bulb item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Screen item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Socket charger item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-      },{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
         label: "Solar panel item",
         backgroundColor: "#f87979",
-        data: [0,0,0,0,0,0,0,0,0,0,0,0]
-    }] );
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
+    ]);
     const barChart = {
       type: "bar",
       options: {
@@ -178,32 +196,32 @@ export default {
     onMounted(async () => {
       await store.dispatch("fetchAllParts");
       data.value = store.getters.getProductData;
-      
+
       const repairedProducts = JSON.parse(JSON.stringify(data.value));
-      
+
       for (let i = 0; i < repairedProducts.length; i++) {
-        const product = repairedProducts[i]
-        
+        const product = repairedProducts[i];
+
         if (product.productName === "Sunbell") {
-          const monthNumber = (new Date(product.createdAt)).getMonth();
-          
+          const monthNumber = new Date(product.createdAt).getMonth();
+
           for (let j = 0; j < product.parts.length; j++) {
             const part = product.parts[j];
-          
+
             addPart(part.partNumber, monthNumber);
           }
         }
       }
       updateChartWithAllParts();
     });
-    
+
     watchEffect(() => chartRef.value?.update());
-    
+
     // Adds a single repaired part to the dataBank array
     function addPart(partNumber, monthNumber) {
       dataBank.value[partNumber - 1].data[monthNumber]++;
-    };
-    
+    }
+
     // Updates the chart when an element is clicked
     async function updateData(product) {
       // Remove all checks
@@ -226,15 +244,17 @@ export default {
         product.isChecked = true;
       }
       chartRef.value.update();
-    };
-    
+    }
+
     function updateChartWithAllParts() {
-      barChart.data.datasets = [{
-        label: "All items",
-        backgroundColor: "#f87979",
-        data: getSumPartsArray()
-      }];
-    };
+      barChart.data.datasets = [
+        {
+          label: "All items",
+          backgroundColor: "#f87979",
+          data: getSumPartsArray()
+        }
+      ];
+    }
 
     function sumPartsOfType(productIndex) {
       var sum = 0;
@@ -242,8 +262,8 @@ export default {
         sum += dataBank.value[productIndex - 1].data[i];
       }
       return sum;
-    };
-    
+    }
+
     function getSumAllParts() {
       var sum = 0;
       for (let i = 0; i < dataBank.value[0].data.length; i++) {
@@ -252,7 +272,7 @@ export default {
         }
       }
       return sum;
-    };
+    }
 
     function getSumPartsArray() {
       var sumParts = [];
@@ -280,11 +300,9 @@ export default {
     };
   },
   components: { DescriptionText, Vue3ChartJs, TopMetrics },
-  methods: {
-  },
+  methods: {},
   data() {
-    return {
-    };
+    return {};
   },
   computed: {}
 };

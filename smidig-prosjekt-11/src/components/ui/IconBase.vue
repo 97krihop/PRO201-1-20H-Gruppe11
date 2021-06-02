@@ -8,7 +8,7 @@
   >
     <!-- <use :xlink:href="`../../assets/images/icons/sprite.svg#icon-${iconName}`"></use> -->
     <use
-    id="svg-use"
+      id="svg-use"
       :xlink:href="
         require('../../assets/images/icons/sprite.svg') + '#icon-' + iconName
       "
