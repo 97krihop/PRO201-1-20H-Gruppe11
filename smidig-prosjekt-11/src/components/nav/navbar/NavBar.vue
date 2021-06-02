@@ -37,7 +37,7 @@ export default {
         {
           itemTitle: "Profile",
           iconName: "user",
-          link: "notimplemented",
+          link: "profile",
           alt: "User icon"
         },
         {

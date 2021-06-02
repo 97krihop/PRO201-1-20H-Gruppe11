@@ -1,5 +1,5 @@
 <template>
-  <div class="repair" v-if="user">
+  <div class="repair">
     <div>
       <nav-bar />
     </div>
@@ -50,11 +50,9 @@
       <template v-slot:body>Confirm password change?</template>
     </modal-change-password>
   </div>
-  <redirect-login v-else />
 </template>
 
 <script>
-import RedirectLogin from '@/components/login/RedirectLogin.vue';
 import NavBar from '@/components/nav/navbar/NavBar';
 import { useField, useForm } from 'vee-validate';
 import ModalChangePassword from '@/components/modals/ModalChangePassword';
@@ -71,7 +69,6 @@ export default {
   components: {
     ModalChangePassword,
     NavBar,
-    RedirectLogin,
   },
   methods: {
     submitClicked: function() {
