@@ -3,7 +3,7 @@
     <div class="top-metrics-container-inner">
       <top-metric
         :name-of-data="'Total Repaired Units'"
-        data-to-display="333.123"
+        :data-to-display="data.length.toString()"
       />
     </div>
     <div class="top-metrics-container-inner">
@@ -31,12 +31,14 @@
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
       <country-bar-chart-component
         :cardTitle="'Repaired Units Total'"
-        :amount="350.204"
+        :amount="data.length.toString()"
+        :data="data"
         style="z-index: 1000"
       />
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
       <repair-part-bar-chart-component
         :cardTitle="'Most Repaired Monthly'"
+        :data="data"
         style="z-index: 1000"
       />
     </div>
@@ -57,13 +59,30 @@ import RepairPartBarChartComponent from "@/components/admin_page/dashboard/singl
 import { createMap } from "@/assets/js/map.js";
 import DescriptionText from "../DescriptionText";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import { onMounted } from "vue";
 
 export default {
   name: "DashboardPage",
   setup() {
     const router = useRouter();
+    const store = useStore();
+    const retrievedData = [];
+
+    onMounted(() => {
+      store.dispatch("fetchAllRepairs");
+      //this.retrievedData = store.getters.getAllRepairs;
+    });
+
     return {
-      router
+      router,
+      store,
+      retrievedData
+    };
+  },
+  data() {
+    return {
+      data: this.store.getters.getAllRepairs
     };
   },
   components: {
@@ -136,9 +155,6 @@ export default {
     /*this.$nextTick(function() {
       createMap(23, 20, 2);
     });*/
-  },
-  data() {
-    return {};
   }
 };
 </script>
