@@ -10,6 +10,7 @@ const {
 const db = require("../db/mongo");
 
 const report = db.get("report");
+const camp = db.get("camp");
 
 router.get("/totalRepairs", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
@@ -21,6 +22,18 @@ router.get("/repairs-by-camp/:name", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
   const { name } = req.params;
   const data = await getPartsByCamp(name);
+  res.json(data);
+});
+router.get("/repairs-by-camp", async (req, res, next) => {
+  if (!req.user || !req.user.admin) return next();
+  const camps = await camp.find({});
+  const result = Promise.all(
+    camps.map(async (x) => await getPartsCountByCamp(x.name))
+  );
+  const arr = await result;
+  const data = camps.map((x, i) => {
+    return { ...x, campRepairs: arr.map((y) => y.map((z) => z.count))[i] };
+  });
   res.json(data);
 });
 router.get("/parts-by-camp/:name", async (req, res, next) => {
