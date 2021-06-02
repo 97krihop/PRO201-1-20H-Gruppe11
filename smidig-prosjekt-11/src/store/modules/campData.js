@@ -1,54 +1,52 @@
 import { get, post } from "axios";
 
 const state = {
-  data: null,
-  dataOfSelected: null
+  data: null
 };
 
 const mutations = {
   setCampData(state, value) {
     state.data = value;
-  },
-  setSelectedData(state, value) {
-    state.dataOfSelected = value;
   }
 };
 const getters = {
-  getCampData: state => state.data,
-  getSelectedData: state => state.dataOfSelected
+  getCampData: state => state.data
 };
 const actions = {
-  fetchCampData: async context => {
-    await post(
-      "http://localhost:3000/api/login",
-      {
-        username: "bright",
-        password: "admin"
-      },
-      { withCredentials: true }
-    );
-    const res = await get(
-      "http://localhost:3000/api/statistics/Repairs-by-month",
-      {
-        withCredentials: true
-      }
-    );
-    if (res.status === 200) context.commit("setCampData", res.data);
-  },
-  fetchSelectedCamp: async (context, value) => {
-    const res = await get(
-      `http://localhost:3000/api/statistics/repairs-by-camp/${value}`,
-      {
-        withCredentials: true
-      }
-    );
-    if (res.status === 200) context.commit("setSelectedData", res.data);
+  fetchCampData: async ({ commit }) => {
+    try {
+      await post(
+        "http://localhost:3000/api/login",
+        {
+          username: "bright",
+          password: "admin"
+        },
+        { withCredentials: true }
+      );
+      const res = await get(
+        "http://localhost:3000/api/statistics/repairs-by-camp",
+        {
+          withCredentials: true
+        }
+      );
+
+      const data = res.data.map(x => {
+        return {
+          id: x.name,
+          location: x.Country,
+          geoloc: x.coordinates,
+          campRepairs: x.campRepairs
+        };
+      });
+      commit("setCampData", data);
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 
 export default {
   state,
-
   mutations,
   getters,
   actions
