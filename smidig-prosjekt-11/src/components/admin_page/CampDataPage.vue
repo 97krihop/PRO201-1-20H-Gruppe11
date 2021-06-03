@@ -207,6 +207,7 @@ export default {
     function replaceResultsWithMap() {
       mapIsHidden.value = false;
       showSearchResults.value = false;
+      searchQuery.value = "";
     }
 
     function setSelectedCampName(name) {
@@ -214,6 +215,7 @@ export default {
     }
 
     function showResult(product) {
+      searchQuery.value = "";
       for (let i = 0; i < products.value.length; i++) {
         products.value[i].totalRepairs = product.campRepairs[i];
       }
