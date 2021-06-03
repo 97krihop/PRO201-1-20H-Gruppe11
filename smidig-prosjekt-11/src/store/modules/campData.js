@@ -1,4 +1,4 @@
-import { get, post } from "axios";
+import { get } from "axios";
 
 const state = {
   data: null
@@ -15,14 +15,6 @@ const getters = {
 const actions = {
   fetchCampData: async ({ commit }) => {
     try {
-      await post(
-        "http://localhost:3000/api/login",
-        {
-          username: "bright",
-          password: "admin"
-        },
-        { withCredentials: true }
-      );
       const res = await get(
         "http://localhost:3000/api/statistics/repairs-by-camp",
         {

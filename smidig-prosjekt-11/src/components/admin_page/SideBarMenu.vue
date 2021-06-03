@@ -145,7 +145,8 @@ export default {
   },
   watch: {
     // Selects "Camp Overview" when a camp is clicked from DashboardMainPage
-    selectedSection(newValue) {//, oldValue) {
+    selectedSection(newValue) {
+      //, oldValue) {
       this.selected = newValue;
     }
   },

@@ -7,6 +7,7 @@
     <div class="country-list-flex-container">
       <div class="pie-chart-countries">
         <vue3-chart-js
+          v-if="doughnutChart.data.datasets.length > 0"
           :id="doughnutChart.id"
           :type="doughnutChart.type"
           :data="doughnutChart.data"
@@ -42,50 +43,70 @@ export default {
     return {
       data: [],
       campList: [],
-      colorArray: ["#41B883", "#E46651", "#00D8FF", "#DD1B16", "#41B883"]
+      colorArray: ["#41B883", "#E46651", "#00D8FF", "#DD1B16", "#41B883"],
+      doughnutChart: {
+        type: "doughnut",
+        data: {
+          datasets: []
+        }
+        /*datasets: [
+            {
+              backgroundColor: [
+                "#41B883",
+                "#E46651",
+                "#00D8FF",
+                "#DD1B16",
+                "#DF1C19"
+              ],
+              data: [40, 20, 80, 10, 7]
+            }
+          ]*/
+      }
     };
   },
   setup() {
     const store = useStore();
-
-    const doughnutChart = {
-      type: "doughnut",
-      data: {
-        datasets: [
-          {
-            backgroundColor: [
-              "#41B883",
-              "#E46651",
-              "#00D8FF",
-              "#DD1B16",
-              "#DF1C19"
-            ],
-            data: [40, 20, 80, 10, 7]
-          }
-        ]
-      }
-    };
-
     return {
-      doughnutChart,
       store
     };
   },
   methods: {
+    initializePieChart1: function() {
+      const entryColors = [];
+      const entryData = [];
+      for (let entry of this.campList) {
+        console.log(entry);
+        entryColors.push(entry.color);
+        entryData.push(entry.amount);
+      }
+      this.doughnutChart.data.datasets = [
+        {
+          backgroundColor: entryColors,
+          data: entryData
+        }
+      ];
+    },
     updateRepairData: function() {
       this.data = this.store.getters.getAllRepairs;
       const campList = [];
-      let colorIndex = 0;
-      let colorArray = this.colorArray;
+
+      function generateRandomColor() {
+        let randomColor = "#";
+        let Char = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+        for (let i = 0; i < 6; i++) {
+          randomColor = randomColor + Char[Math.floor(Math.random() * 16)];
+        }
+        return randomColor;
+      }
 
       for (let entity of this.data) {
         if (!campList.find(el => el.camp === entity.campName)) {
           campList.push({
             camp: entity.campName,
-            color: colorArray[colorIndex],
+            color: generateRandomColor(),
             amount: 1
           });
-          colorIndex++;
         } else {
           const campNameIndex = campList.findIndex(
             el => el.camp === entity.campName
@@ -102,7 +123,9 @@ export default {
   },
   components: { Vue3ChartJs },
   mounted() {
+    //Needs to run before initializing piecharts
     this.updateRepairData();
+    this.initializePieChart1();
   },
 
   computed: {}
@@ -160,6 +183,10 @@ export default {
   border: 1px solid #d1d1d1;
   border-radius: 5px;
   box-shadow: 3px 3px 12px #e8e8e8;
+}
+.inline-elements {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.1em;
 }
 .country-list-flex-container {
   display: grid;
