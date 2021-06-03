@@ -4,7 +4,7 @@
       <nav-bar />
     </div>
     <div class="container">
-      <form @submit="submitClicked">
+      <form @submit.prevent="modalShow">
         <div class="wrapper">
           <div class="input" id="username-wrapper">
             <label>User: </label>
@@ -13,6 +13,16 @@
           <div class="input" id="location-wrapper">
             <label>Location: </label>
             <p class="value-text">{{ user.campName }}</p>
+          </div>
+          <div class="input">
+            <label>Old Password: </label>
+            <input
+              v-model="oldPassword"
+              type="password"
+              placeholder="Enter Old Password"
+              required
+            />
+            <span>{{ oldPasswordError }} <br /></span>
           </div>
           <div class="input">
             <label>New Password: </label>
@@ -44,11 +54,8 @@
     </div>
     <modal-change-password
       v-if="showModal === true"
-      @close="closeModal"
-      @commit="
-        onSubmit();
-        showToast();
-      "
+      @close="modalHide"
+      @commit="onSubmit"
     >
       <template v-slot:body>Confirm password change?</template>
     </modal-change-password>
@@ -59,36 +66,25 @@
 import NavBar from "@/components/nav/navbar/NavBar";
 import { useField, useForm } from "vee-validate";
 import ModalChangePassword from "@/components/modals/ModalChangePassword";
+import { useStore } from "vuex";
+import { getCurrentInstance, ref } from "vue";
+import axios from "axios";
 
 export default {
-  data() {
-    return {
-      user: this.$store.getters.getUserData,
-      ListOfRepairs: [],
-      showModal: false
-    };
-  },
   name: "Repair",
   components: {
     ModalChangePassword,
     NavBar
   },
-  methods: {
-    submitClicked: function() {
-      if (this.password.length >= 6 && this.confirmPassword === this.password) {
-        this.showModal = true;
-      }
-    },
-    closeModal: function() {
-      this.showModal = false;
-    },
-    showToast: function() {
-      this.$toast.success(`Password changed`, {
-        position: "bottom"
-      });
-    }
-  },
   setup() {
+    const store = useStore();
+    const { ctx: _this } = getCurrentInstance();
+    const user = store.getters.getUserData;
+    const showModal = ref(false);
+    const { handleSubmit, isSubmitting } = useForm({
+      validationSchema: schema
+    });
+
     const schema = {
       password(value) {
         return value && value.length >= 6
@@ -99,18 +95,8 @@ export default {
         return value === password.value ? true : "Password must match";
       }
     };
-    const { handleSubmit, isSubmitting } = useForm({
-      validationSchema: schema
-    });
-
-    const onSubmit = handleSubmit((values, { resetForm }) => {
-      console.log(values); // send data to API
-
-      // reset the form and the field values to their initial values
-      resetForm();
-    });
-    const { errorMessage: usernameError, value: username } = useField(
-      "username"
+    const { errorMessage: oldPasswordError, value: oldPassword } = useField(
+      "oldPassword"
     );
     const { errorMessage: passwordError, value: password } = useField(
       "password"
@@ -119,9 +105,34 @@ export default {
       "confirmPassword"
     );
 
+    const modalShow = () => (showModal.value = true);
+    const modalHide = () => (showModal.value = false);
+    const showToast = () =>
+      _this.$toast.success(`Password changed`, {
+        position: "bottom"
+      });
+    const onSubmit = handleSubmit((values, { resetForm }) => {
+      modalHide();
+      try {
+        axios.patch(
+          "http://localhost:3000/api/edit",
+          { ...values, confirmPassword: undefined },
+          { withCredentials: true }
+        );
+        resetForm();
+        showToast();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
     return {
-      username,
-      usernameError,
+      modalShow,
+      modalHide,
+      showModal,
+      user,
+      oldPasswordError,
+      oldPassword,
       password,
       passwordError,
       confirmPassword,
