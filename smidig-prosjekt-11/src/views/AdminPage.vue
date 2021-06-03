@@ -2,9 +2,12 @@
   <div v-if="isAdmin === true">
     <base-site>
       <div class="grid-layout">
+        <!-- Using v-bind on selectedSection to let SideBarMenu know when
+             CampDataPage is routed from a camp click in DashboardMainPage -->
         <side-bar-menu
           class="side-bar"
           :routeFromParent="routedInParent"
+          :selectedSection="selectedSection"
           v-on:childToParent="recievedClickInChildSideMenu"
         />
         <div class="component-section-container">
