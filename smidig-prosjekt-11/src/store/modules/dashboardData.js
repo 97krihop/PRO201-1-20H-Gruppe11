@@ -1,4 +1,4 @@
-import { post, get } from "axios";
+import {  get } from "axios";
 
 const state = {
   allRepairs: []
@@ -22,14 +22,6 @@ const getters = {
 const actions = {
   fetchAllRepairs: async function({ commit }) {
     try {
-      await post(
-        "http://localhost:3000/api/login",
-        {
-          username: "bright",
-          password: "admin"
-        },
-        { withCredentials: true }
-      );
       const res = await get("http://localhost:3000/api/parts", {
         withCredentials: true
       });
