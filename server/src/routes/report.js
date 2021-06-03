@@ -53,6 +53,7 @@ router.post("/", async (req, res) => {
       return { ...x, username: req.user.username, campName: req.user.campName };
     });
     try {
+      console.log(data)
       await report.insert(data);
       res.sendStatus(200);
     } catch (e) {

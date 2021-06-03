@@ -47,7 +47,7 @@ function randomDate() {
 
 const fn = () => {
   const body = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 80; i++) {
     const parts = [];
     const randomNumber = Math.floor(Math.random() * 4) + 1;
     for (let j = 0; j < randomNumber; j++) {

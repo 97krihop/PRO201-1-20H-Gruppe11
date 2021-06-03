@@ -17,13 +17,13 @@ const sessionParser = session({
   secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false,
-  // store: MongoStore.create({
-  //   mongoUrl: process.env.MONGO_URL,
-  //   dbName: "bright",
-  //   crypto: {
-  //     secret: process.env.MONGO_SECRET || "squirrel",
-  //   },
-  // }),
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL,
+    dbName: "bright",
+    crypto: {
+      secret: process.env.MONGO_SECRET || "squirrel"
+    }
+  })
 });
 
 if (app.get("env") === "production") {
@@ -34,7 +34,7 @@ if (app.get("env") === "production") {
 const rateSpeedLimit = rateSpeedLimiter({
   delayAfter: 50, // slow down limit (in reqs)
   windowMs: 1 * 60 * 1000, // time where limit applies
-  delayMs: 2500, // slow down time
+  delayMs: 2500 // slow down time
 });
 
 //use middleware
@@ -45,7 +45,7 @@ app.use(rateSpeedLimit);
 app.use(
   cors({
     origin: ["http://localhost:8080", "http://example2.com"],
-    credentials: true,
+    credentials: true
   })
 );
 //Passport initialization
