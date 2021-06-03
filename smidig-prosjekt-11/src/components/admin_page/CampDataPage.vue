@@ -402,8 +402,8 @@ h3 {
   height: 64px;
   margin: 8px;
   border: 8px solid #fff;
-  left: 36vw;
-  top: 25vh;
+  left: 40vw;
+  top: 30vh;
   z-index: 100;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
