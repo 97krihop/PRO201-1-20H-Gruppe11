@@ -37,24 +37,20 @@
       </div>
 
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
-      <transition name="fade">
-        <country-bar-chart-component
-          v-show="isMapLoading === false"
-          :cardTitle="'Repaired Units Total'"
-          :amount="data.length.toString()"
-          :repairData="data"
-          style="z-index: 1000"
-        />
-      </transition>
-      <transition name="fade">
-        <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
-        <repair-part-bar-chart-component
-          v-show="isMapLoading === false"
-          :cardTitle="'Most Repaired Monthly'"
-          :repairData="data"
-          style="z-index: 1000"
-        />
-      </transition>
+      <country-bar-chart-component
+        v-show="isMapLoading === false"
+        :cardTitle="'Repaired Units Total'"
+        :amount="data.length.toString()"
+        :repairData="data"
+        style="z-index: 1000"
+      />
+      <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
+      <repair-part-bar-chart-component
+        v-show="isMapLoading === false"
+        :cardTitle="'Most Repaired Monthly'"
+        :repairData="data"
+        style="z-index: 1000"
+      />
     </div>
   </div>
 
