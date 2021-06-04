@@ -1,101 +1,100 @@
-import axios from "axios";
+import axios from 'axios';
 
 const state = {
-  authStatus: "",
-  regStatus: "",
-  userData: null
+  authStatus: '',
+  regStatus: '',
 };
 
 const mutations = {
   // Authentication mutations
   authRequest(state) {
-    state.authStatus = "loading";
+    state.authStatus = 'loading';
   },
-  authSuccess(state, userData) {
-    state.userData = userData;
-    state.authStatus = "success";
+  authSuccess(state) {
+    state.authStatus = 'success';
   },
   authError(state) {
-    state.authStatus = "error";
-    state.userData = null;
+    state.authStatus = 'error';
   },
   authLogout(state) {
-    state.authStatus = "";
-    state.userData = null;
+    state.authStatus = '';
+    window.sessionStorage.removeItem("user-data");
   },
   // Register mutations
   regRequest(state) {
-    state.regStatus = "loading";
+    state.regStatus = 'loading';
   },
   regSuccess(state) {
-    state.regStatus = "success";
+    state.regStatus = 'success';
   },
   regError(state) {
-    state.regStatus = "error";
-  }
+    state.regStatus = 'error';
+  },
 };
 
 const actions = {
   async authenticate({ commit }, user) {
-    commit("authRequest");
+    const sessionStorage = window.sessionStorage;
+    commit('authRequest');
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/login", user, {
-          withCredentials: true
+        .post('http://localhost:3000/api/login', user, {
+          withCredentials: true,
         })
-        .then(res => {
-          commit("authSuccess", res.data);
+        .then((res) => {
+          commit('authSuccess', res.data);
+          sessionStorage.setItem('user-data', JSON.stringify(res.data));
           resolve(res);
         })
-        .catch(error => {
-          commit("authError");
+        .catch((error) => {
+          commit('authError');
           reject(error);
         });
     });
   },
   logout({ commit }) {
     return new Promise((resolve, reject) => {
-      commit("authLogout");
+      commit('authLogout');
       axios
-        .get("http://localhost:3000/api/logout")
-        .then(res => {
+        .get('http://localhost:3000/api/logout')
+        .then((res) => {
           resolve(res);
         })
-        .catch(error => {
+        .catch((error) => {
           reject(error);
         });
       resolve();
     });
   },
   createUser({ commit }, userValues) {
-    commit("regRequest");
+    commit('regRequest');
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/register", userValues, {
-          withCredentials: true
+        .post('http://localhost:3000/api/register', userValues, {
+          withCredentials: true,
         })
-        .then(res => {
-          commit("regSuccess");
+        .then((res) => {
+          commit('regSuccess');
           resolve(res);
         })
-        .catch(error => {
-          commit("regError");
+        .catch((error) => {
+          commit('regError');
           reject(error);
         });
       resolve();
     });
-  }
+  },
 };
 
 const getters = {
-  getUserData(state) {
-    return state.userData;
-  }
+  getUserData() {
+    return JSON.parse(window.sessionStorage.getItem("user-data"));
+  },
 };
 
 export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
