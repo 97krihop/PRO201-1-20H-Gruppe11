@@ -1,15 +1,5 @@
 <template>
   <div id="button-div">
-    <!-- <router-link
-      v-if="isAdmin === true"
-      tag="button"
-      to="/admin"
-      type="button"
-      class="font-standardText button home-learn-ico-src home-ico-style"
-    >
-    <icon-base iconName="home" iconColor="#2c2a29"></icon-base>
-      <h4>Admin</h4>
-    </router-link> -->
 
     <home-select-button
       v-for="(val, index) in buttonValues"
@@ -19,6 +9,13 @@
       :routerLinkDest="val.destination"
     />
 
+    <home-select-button
+    v-if="isAdmin"
+      iconName="equalizer"
+      buttonTitle="Admin"
+      routerLinkDest="admin"
+    />
+
     <modal-error-message v-if="showModal === true" @close="showModal = false">
       <template v-slot:body>E-learning is not implemented yet</template>
     </modal-error-message>
@@ -26,17 +23,17 @@
 </template>
 
 <script>
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-import ModalErrorMessage from "../../components/modals/ModalErrorMessage.vue";
-import { ref } from "vue";
-import HomeSelectButton from "./HomeSelectButton";
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import ModalErrorMessage from '../../components/modals/ModalErrorMessage.vue';
+import { ref } from 'vue';
+import HomeSelectButton from './HomeSelectButton';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     ModalErrorMessage,
-    HomeSelectButton
+    HomeSelectButton,
   },
   setup() {
     const store = useStore();
@@ -45,41 +42,30 @@ export default {
     return {
       store,
       router,
-      showModal
+      showModal,
     };
   },
-  methods: {
-    retrieveIsAdmin() {
-      const result = useStore().getters.getIsAdmin;
-      if (result === false) {
-        this.router.push({ name: "Home" });
-      } else {
-        return true;
-      }
-    }
+  computed: {
+    isAdmin() {
+      return useStore().getters.getUserData.admin;
+    },
   },
   data() {
     return {
-      isAdmin: this.retrieveIsAdmin(),
       buttonValues: [
         {
-          icon: "wrench",
-          title: "Register repairs",
-          destination: "repair"
+          icon: 'wrench',
+          title: 'Register repairs',
+          destination: 'repair',
         },
         {
-          icon: "education",
-          title: "E-Learning",
-          destination: "notimplemented"
+          icon: 'education',
+          title: 'E-Learning',
+          destination: 'notimplemented',
         },
-        {
-          icon: "equalizer",
-          title: "Admin",
-          destination: "admin"
-        }
-      ]
+      ],
     };
-  }
+  },
 };
 </script>
 
