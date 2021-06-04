@@ -1,6 +1,5 @@
 <template>
   <div id="button-div">
-
     <home-select-button
       v-for="(val, index) in buttonValues"
       :key="index"
@@ -10,7 +9,7 @@
     />
 
     <home-select-button
-    v-if="isAdmin"
+      v-if="isAdmin"
       iconName="equalizer"
       buttonTitle="Admin"
       routerLinkDest="admin"
@@ -23,17 +22,17 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import ModalErrorMessage from '../../components/modals/ModalErrorMessage.vue';
-import { ref } from 'vue';
-import HomeSelectButton from './HomeSelectButton';
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import ModalErrorMessage from "../../components/modals/ModalErrorMessage.vue";
+import { ref } from "vue";
+import HomeSelectButton from "./HomeSelectButton";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     ModalErrorMessage,
-    HomeSelectButton,
+    HomeSelectButton
   },
   setup() {
     const store = useStore();
@@ -42,30 +41,30 @@ export default {
     return {
       store,
       router,
-      showModal,
+      showModal
     };
   },
   computed: {
     isAdmin() {
       return useStore().getters.getUserData.admin;
-    },
+    }
   },
   data() {
     return {
       buttonValues: [
         {
-          icon: 'wrench',
-          title: 'Register repairs',
-          destination: 'repair',
+          icon: "wrench",
+          title: "Register repairs",
+          destination: "repair"
         },
         {
-          icon: 'education',
-          title: 'E-Learning',
-          destination: 'notimplemented',
-        },
-      ],
+          icon: "education",
+          title: "E-Learning",
+          destination: "notimplemented"
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 

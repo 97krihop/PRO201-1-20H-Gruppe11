@@ -7,7 +7,7 @@ const {
   getPartsByCamp,
   getPartsCountByCamp,
   getPartsByLastMount,
-  getPartsByLastDay
+  getPartsByLastDay,
 } = require("../controllers/PartStatisticsController");
 const db = require("../db/mongo");
 
@@ -35,29 +35,29 @@ router.get("/repairs-by-camp", async (req, res, next) => {
         name: "Pugnido",
         Country: "ethiopia",
 
-        coordinates: [7.681051391626661, 34.00543212890625]
+        coordinates: [7.681051391626661, 34.00543212890625],
       },
       {
         name: "Katumba",
         Country: "Tanzania",
 
-        coordinates: [-6.287998672327658, 31.02813720703125]
+        coordinates: [-6.287998672327658, 31.02813720703125],
       },
       {
         name: "Hagadera",
         Country: "Kenya",
-        coordinates: [0.17028783523693297, 40.5230712890625]
+        coordinates: [0.17028783523693297, 40.5230712890625],
       },
       {
         name: "Yida",
         Country: "South Sudan",
-        coordinates: [10.244654445228324, 30.047607421875]
-      }
+        coordinates: [10.244654445228324, 30.047607421875],
+      },
     ]);
-  const arr = await Promise.all(camps.map(x => getPartsCountByCamp(x.name)));
+  const arr = await Promise.all(camps.map((x) => getPartsCountByCamp(x.name)));
   const data = camps.map((x, i) => ({
     ...x,
-    campRepairs: arr[i].map(x => x.count)
+    campRepairs: arr[i].map((x) => x.count),
   }));
   res.json(data);
 });

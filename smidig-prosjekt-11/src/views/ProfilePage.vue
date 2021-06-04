@@ -84,7 +84,7 @@ export default {
     const { handleSubmit, isSubmitting } = useForm({
       validationSchema: schema
     });
-    
+
     const ud = JSON.parse(window.sessionStorage.getItem("user-data"));
     console.log(ud);
 
