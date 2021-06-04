@@ -28,6 +28,13 @@
 
   <div id="mapid" class="map-container">
     <div class="metric-chart-container">
+      <!-- Loading Icon -->
+      <div class="lds-ring" v-if="isMapLoading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
       <country-bar-chart-component
         :cardTitle="'Repaired Units Total'"
@@ -79,10 +86,13 @@ export default {
       }
     ];
 
+    const isMapLoading = ref(true);
     onMounted(async () => {
+      console.log(isMapLoading);
       await store.dispatch("fetchAllRepairs");
       await store.dispatch("fetchCampData");
       campData.value = await store.getters.getCampData;
+      isMapLoading.value = false;
 
       createMap(
         23,
@@ -105,7 +115,8 @@ export default {
     return {
       router,
       store,
-      retrievedData
+      retrievedData,
+      isMapLoading
     };
   },
   data() {
@@ -158,5 +169,44 @@ export default {
   height: 200px;
   padding: 30px;
   text-align: center;
+}
+
+/* Loading Icon */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  left: 36vw;
+  top: 25vh;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #abcd transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

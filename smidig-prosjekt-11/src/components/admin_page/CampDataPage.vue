@@ -24,6 +24,13 @@
     class="description-text-element"
     description-text="Select a camp to display corresponding data"
   ></description-text>
+  <!-- Loading Icon -->
+  <div class="lds-ring" v-if="isMapLoading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
   <div
     v-bind:style="[mapIsHidden ? { display: 'none' } : { height: '70%' }]"
     id="mapid"
@@ -68,6 +75,7 @@ import { useStore } from "vuex";
 
 export default {
   name: "CampDataPage",
+  emits: ["camp"],
   props: {
     resetCamp: {
       type: Function
@@ -79,7 +87,7 @@ export default {
       type: String
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const bol = true;
     const store = useStore();
     const { ctx: _this } = getCurrentInstance();
@@ -151,10 +159,11 @@ export default {
             .indexOf(searchQuery.value.toLowerCase()) !== -1
       )
     );
-
+    const isMapLoading = ref(true);
     onMounted(async () => {
       await store.dispatch("fetchCampData");
       campData.value = await store.getters.getCampData;
+      isMapLoading.value = false;
       createMap(
         23,
         20,
@@ -186,7 +195,7 @@ export default {
         }
         updateData();
         props?.editRoute("Camps");
-        props?.resetCamp();
+        emit("camp");
       }
     });
     const updateData = () => {
@@ -207,6 +216,7 @@ export default {
     function replaceResultsWithMap() {
       mapIsHidden.value = false;
       showSearchResults.value = false;
+      searchQuery.value = "";
     }
 
     function setSelectedCampName(name) {
@@ -214,6 +224,7 @@ export default {
     }
 
     function showResult(product) {
+      searchQuery.value = "";
       for (let i = 0; i < products.value.length; i++) {
         products.value[i].totalRepairs = product.campRepairs[i];
       }
@@ -236,7 +247,8 @@ export default {
       replaceMapWithResults,
       replaceResultsWithMap,
       setSelectedCampName,
-      showResult
+      showResult,
+      isMapLoading
     };
   },
   components: {
@@ -372,5 +384,45 @@ h3 {
   box-shadow: 5px 5px 21px 4px rgba(90, 89, 89, 0.31);
   border-radius: 15px;
   padding: 15px;
+}
+
+/* Loading Icon */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  left: 40vw;
+  top: 30vh;
+  z-index: 100;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #abcd transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

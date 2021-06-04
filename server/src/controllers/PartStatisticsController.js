@@ -5,6 +5,17 @@ const getPartsByCamp = async (param) => {
   return await reports.find({ campName: param });
 };
 
+const getPartsByLastMount = async () => {
+  const date = new Date()
+  date.setMonth(date.getMonth()-1)
+  return await reports.find({ createdAt: {$gt: date}});
+};
+const getPartsByLastDay = async () => {
+  const date = new Date()
+  date.setDate(date.getDate()-1)
+  return await reports.find({ createdAt: {$gt: date}});
+};
+
 const getPartsCountByCamp = async (param) => {
   const names = [
     "Lamp",
@@ -83,6 +94,8 @@ const getRepsByNamePerMonth = async (name) => {
 };
 
 module.exports = {
+  getPartsByLastDay,
+  getPartsByLastMount,
   getRepairsCountByMonth,
   getPartsCountArray,
   getRepsByNamePerMonth,
