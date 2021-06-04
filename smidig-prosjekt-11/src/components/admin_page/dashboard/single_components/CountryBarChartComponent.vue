@@ -71,11 +71,10 @@ export default {
     };
   },
   methods: {
-    initializePieChart1: function() {
+    initializePieChart: function() {
       const entryColors = [];
       const entryData = [];
       for (let entry of this.campList) {
-        console.log(entry);
         entryColors.push(entry.color);
         entryData.push(entry.amount);
       }
@@ -118,6 +117,18 @@ export default {
           };
         }
       }
+      function compare(a, b) {
+        if (a.amount < b.amount) {
+          return -1;
+        }
+        if (a.amount > b.amount) {
+          return 1;
+        }
+        return 0;
+      }
+      campList.sort(compare);
+      campList.reverse();
+
       this.campList = campList;
     }
   },
@@ -125,7 +136,7 @@ export default {
   mounted() {
     //Needs to run before initializing piecharts
     this.updateRepairData();
-    this.initializePieChart1();
+    this.initializePieChart();
   },
 
   computed: {}

@@ -15,13 +15,13 @@
     <div class="top-metrics-container-inner">
       <top-metric
         :name-of-data="'Most Repaired Part Today'"
-        data-to-display="Lamp"
+        :data-to-display="getMostRepairedPartDaily()"
       />
     </div>
     <div class="top-metrics-container-inner">
       <top-metric
         :name-of-data="'Most Repaired Part Monthly'"
-        data-to-display="Battery"
+        :data-to-display="getMostRepairedPartMonthly()"
       />
     </div>
   </div>
@@ -35,21 +35,29 @@
         <div></div>
         <div></div>
       </div>
+
       <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
-      <country-bar-chart-component
-        :cardTitle="'Repaired Units Total'"
-        :amount="data.length.toString()"
-        :repairData="data"
-        style="z-index: 1000"
-      />
-      <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
-      <repair-part-bar-chart-component
-        :cardTitle="'Most Repaired Monthly'"
-        :repairData="data"
-        style="z-index: 1000"
-      />
+      <transition name="fade">
+        <country-bar-chart-component
+          v-show="isMapLoading === false"
+          :cardTitle="'Repaired Units Total'"
+          :amount="data.length.toString()"
+          :repairData="data"
+          style="z-index: 1000"
+        />
+      </transition>
+      <transition name="fade">
+        <!--<repair-part-bar-chart-component style="z-index: 1000" />-->
+        <repair-part-bar-chart-component
+          v-show="isMapLoading === false"
+          :cardTitle="'Most Repaired Monthly'"
+          :repairData="data"
+          style="z-index: 1000"
+        />
+      </transition>
     </div>
   </div>
+
   <description-text
     description-text="Map of camps and metric details"
   ></description-text>
@@ -88,8 +96,9 @@ export default {
 
     const isMapLoading = ref(true);
     onMounted(async () => {
-      console.log(isMapLoading);
       await store.dispatch("fetchAllRepairs");
+      await store.dispatch("fetchMonthlyRepairs");
+      await store.dispatch("fetchDailyRepairs");
       await store.dispatch("fetchCampData");
       campData.value = await store.getters.getCampData;
       isMapLoading.value = false;
@@ -131,6 +140,12 @@ export default {
     TopMetric
   },
   methods: {
+    getMostRepairedPartMonthly() {
+      return this.store.getters.getMostRepairedPartMonthly;
+    },
+    getMostRepairedPartDaily() {
+      return this.store.getters.getMostRepairedPartDaily;
+    },
     showAlert() {
       alert("Klikka på stats");
     }
@@ -208,5 +223,15 @@ export default {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
