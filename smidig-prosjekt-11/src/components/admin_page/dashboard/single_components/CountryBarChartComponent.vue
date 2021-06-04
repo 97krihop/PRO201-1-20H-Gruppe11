@@ -19,7 +19,7 @@
         :key="entry.camp"
         class="country-list-item"
       >
-        <p class="inline-elements">{{ entry.camp }}</p>
+        <p class="inline-elements">{{ entry.camp }}: {{ entry.amount }}</p>
         <div
           class="country-color-box"
           :style="{ backgroundColor: entry.color }"
