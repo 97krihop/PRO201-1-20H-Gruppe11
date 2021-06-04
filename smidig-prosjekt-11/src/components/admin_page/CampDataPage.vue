@@ -35,9 +35,7 @@
     v-bind:style="[mapIsHidden ? { display: 'none' } : { height: '70%' }]"
     id="mapid"
     class="map-container"
-  >
-
-  </div>
+  ></div>
 
   <div v-if="mapIsHidden" class="showMapBtn">
     <button v-on:click="replaceResultsWithMap">Show map</button>
@@ -77,6 +75,7 @@ import { useStore } from "vuex";
 
 export default {
   name: "CampDataPage",
+  emits: ["camp"],
   props: {
     resetCamp: {
       type: Function
@@ -88,7 +87,7 @@ export default {
       type: String
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const bol = true;
     const store = useStore();
     const { ctx: _this } = getCurrentInstance();
@@ -196,7 +195,7 @@ export default {
         }
         updateData();
         props?.editRoute("Camps");
-        props?.resetCamp();
+        emit("camp");
       }
     });
     const updateData = () => {
@@ -407,7 +406,7 @@ h3 {
   z-index: 100;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #ABCD transparent transparent transparent;
+  border-color: #abcd transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;

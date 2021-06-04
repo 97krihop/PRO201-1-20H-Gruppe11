@@ -27,8 +27,8 @@ router.get("/repairs-by-camp/:name", async (req, res, next) => {
 router.get("/repairs-by-camp", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
   let camps = await camp.find({});
-  if (camps.length === 0) {
-    await camp.insert([
+  if (camps.length === 0)
+    camps = await camp.insert([
       {
         name: "Pugnido",
         Country: "ethiopia",
@@ -52,15 +52,11 @@ router.get("/repairs-by-camp", async (req, res, next) => {
         coordinates: [10.244654445228324, 30.047607421875],
       },
     ]);
-    camps = await camp.find({});
-  }
-  const result = Promise.all(
-    camps.map(async (x) => await getPartsCountByCamp(x.name))
-  );
-  const arr = await result;
-  const data = camps.map((x, i) => {
-    return { ...x, campRepairs: arr.map((y) => y.map((z) => z.count))[i] };
-  });
+  const arr = await Promise.all(camps.map((x) => getPartsCountByCamp(x.name)));
+  const data = camps.map((x, i) => ({
+    ...x,
+    campRepairs: arr[i].map((x) => x.count),
+  }));
   res.json(data);
 });
 router.get("/parts-by-camp/:name", async (req, res, next) => {

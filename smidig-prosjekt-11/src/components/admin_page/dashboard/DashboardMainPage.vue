@@ -190,7 +190,7 @@ export default {
   top: 25vh;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #ABCD transparent transparent transparent;
+  border-color: #abcd transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;

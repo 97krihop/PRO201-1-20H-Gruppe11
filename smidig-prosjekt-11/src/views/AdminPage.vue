@@ -20,7 +20,7 @@
             v-if="selectedSection === 'Camps'"
             v-bind:routedCampName="campNameToRoute"
             :resetCamp="resetCamp"
-            :editRoute="editRoute"
+            v-on:camp="editRoute"
           />
           <user-administration-page v-if="selectedSection === 'Users'" />
           <camp-administration-page v-if="selectedSection === 'CampsAdmin'" />
