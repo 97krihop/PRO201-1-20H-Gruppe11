@@ -1,12 +1,28 @@
 import { get } from "axios";
 
 const state = {
-  allRepairs: []
+  allRepairs: [],
+  monthlyRepairs: [],
+  dailyRepairs: [],
+  mostRepairedPartDaily: "",
+  mostRepairedPartMonthly: ""
 };
 
 const mutations = {
-  addRepairs(state, payload) {
+  commitAllRepairs(state, payload) {
     state.allRepairs = payload;
+  },
+  commitMonthlyRepairs(state, payload) {
+    state.monthlyRepairs = payload;
+  },
+  commitDailyRepairs(state, payload) {
+    state.dailyRepairs = payload;
+  },
+  commitMostRepairedPartDaily(state, payload) {
+    state.mostRepairedPartDaily = payload;
+  },
+  commitMostRepairedPartMonthly(state, payload) {
+    state.mostRepairedPartMonthly = payload;
   },
   emptyArray(state) {
     state.allRepairs = [];
@@ -16,6 +32,18 @@ const mutations = {
 const getters = {
   getAllRepairs(state) {
     return state.allRepairs;
+  },
+  getMonthlyRepairs(state) {
+    return state.monthlyRepairs;
+  },
+  getDailyRepairs(state) {
+    return state.dailyRepairs;
+  },
+  getMostRepairedPartMonthly(state) {
+    return state.mostRepairedPartMonthly;
+  },
+  getMostRepairedPartDaily(state) {
+    return state.mostRepairedPartDaily;
   }
 };
 
@@ -26,7 +54,37 @@ const actions = {
         withCredentials: true
       });
       const data = res.data;
-      commit("addRepairs", data);
+      commit("commitAllRepairs", data);
+      return res.status === 200;
+    } catch (e) {
+      return false;
+    }
+  },
+  fetchMonthlyRepairs: async function({ commit }) {
+    try {
+      const res = await get(
+        "http://localhost:3000/api/statistics/Parts-By-LastMonth",
+        {
+          withCredentials: true
+        }
+      );
+      const data = res.data;
+      commit("commitMonthlyRepairs", data);
+      return res.status === 200;
+    } catch (e) {
+      return false;
+    }
+  },
+  fetchDailyRepairs: async function({ commit }) {
+    try {
+      const res = await get(
+        "http://localhost:3000/api/statistics/Parts-By-LastDay",
+        {
+          withCredentials: true
+        }
+      );
+      const data = res.data;
+      commit("commitDailyRepairs", data);
       return res.status === 200;
     } catch (e) {
       return false;

@@ -87,7 +87,7 @@ router.get("/repairs-by-month/:name", async (req, res, next) => {
   res.json(data);
 });
 
-router.get("/Parts-By-LastMount", async (req, res, next) => {
+router.get("/Parts-By-LastMonth", async (req, res, next) => {
   if (!req.user || !req.user.admin) return next();
   const data = await getPartsByLastMount();
   res.json(data);

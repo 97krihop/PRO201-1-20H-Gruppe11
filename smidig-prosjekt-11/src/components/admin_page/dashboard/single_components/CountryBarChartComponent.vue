@@ -19,7 +19,7 @@
         :key="entry.camp"
         class="country-list-item"
       >
-        <p class="inline-elements">{{ entry.camp }}</p>
+        <p class="inline-elements">{{ entry.camp }}: {{ entry.amount }}</p>
         <div
           class="country-color-box"
           :style="{ backgroundColor: entry.color }"
@@ -71,11 +71,10 @@ export default {
     };
   },
   methods: {
-    initializePieChart1: function() {
+    initializePieChart: function() {
       const entryColors = [];
       const entryData = [];
       for (let entry of this.campList) {
-        console.log(entry);
         entryColors.push(entry.color);
         entryData.push(entry.amount);
       }
@@ -99,33 +98,53 @@ export default {
         }
         return randomColor;
       }
-
-      for (let entity of this.data) {
-        if (!campList.find(el => el.camp === entity.campName)) {
-          campList.push({
-            camp: entity.campName,
-            color: generateRandomColor(),
-            amount: 1
-          });
-        } else {
-          const campNameIndex = campList.findIndex(
-            el => el.camp === entity.campName
-          );
-          campList[campNameIndex] = {
-            camp: campList[campNameIndex].camp,
-            color: campList[campNameIndex].color,
-            amount: campList[campNameIndex].amount + 1
-          };
+      function compare(a, b) {
+        if (a.amount < b.amount) {
+          return -1;
         }
+        if (a.amount > b.amount) {
+          return 1;
+        }
+        return 0;
       }
-      this.campList = campList;
+
+      if (this.data.length > 0) {
+        for (let entity of this.data) {
+          if (!campList.find(el => el.camp === entity.campName)) {
+            campList.push({
+              camp: entity.campName,
+              color: generateRandomColor(),
+              amount: 1
+            });
+          } else {
+            const campNameIndex = campList.findIndex(
+              el => el.camp === entity.campName
+            );
+            campList[campNameIndex] = {
+              camp: campList[campNameIndex].camp,
+              color: campList[campNameIndex].color,
+              amount: campList[campNameIndex].amount + 1
+            };
+          }
+        }
+        campList.sort(compare);
+        campList.reverse();
+        this.campList = campList;
+      } else {
+        campList.push({
+          camp: "N/A",
+          color: generateRandomColor(),
+          amount: 1
+        });
+        this.campList = campList;
+      }
     }
   },
   components: { Vue3ChartJs },
   mounted() {
     //Needs to run before initializing piecharts
     this.updateRepairData();
-    this.initializePieChart1();
+    this.initializePieChart();
   },
 
   computed: {}
@@ -182,7 +201,6 @@ export default {
   margin-top: 10px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  box-shadow: 3px 3px 12px #e8e8e8;
 }
 .inline-elements {
   font-family: "Open Sans", sans-serif;
