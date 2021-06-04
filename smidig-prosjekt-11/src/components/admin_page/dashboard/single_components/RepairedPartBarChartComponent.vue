@@ -17,7 +17,7 @@
         :key="entry.partName"
         class="country-list-item"
       >
-        <p class="inline-elements">{{ entry.partName }}</p>
+        <p class="inline-elements">{{ entry.partName }}: {{ entry.amount }}</p>
         <div
           class="country-color-box"
           :style="{ backgroundColor: entry.color }"
@@ -84,26 +84,6 @@ export default {
         return randomColor;
       }
 
-      for (let entity of this.data) {
-        for (let part of entity.parts) {
-          if (!repairListInner.find(el => el.partName === part.partName)) {
-            repairListInner.push({
-              partName: part.partName,
-              color: generateRandomColor(),
-              amount: 1
-            });
-          } else {
-            const partNameIndex = repairListInner.findIndex(
-              el => el.partName === part.partName
-            );
-            repairListInner[partNameIndex] = {
-              partName: repairListInner[partNameIndex].partName,
-              color: repairListInner[partNameIndex].color,
-              amount: repairListInner[partNameIndex].amount + 1
-            };
-          }
-        }
-      }
       function compare(a, b) {
         if (a.amount < b.amount) {
           return -1;
@@ -113,13 +93,44 @@ export default {
         }
         return 0;
       }
-      repairListInner.sort(compare);
-      repairListInner.reverse();
-      this.store.commit(
-        "commitMostRepairedPartMonthly",
-        repairListInner[0].partName
-      );
-      this.repairList = repairListInner;
+
+      if (this.data.length > 0) {
+        for (let entity of this.data) {
+          for (let part of entity.parts) {
+            if (!repairListInner.find(el => el.partName === part.partName)) {
+              repairListInner.push({
+                partName: part.partName,
+                color: generateRandomColor(),
+                amount: 1
+              });
+            } else {
+              const partNameIndex = repairListInner.findIndex(
+                el => el.partName === part.partName
+              );
+              repairListInner[partNameIndex] = {
+                partName: repairListInner[partNameIndex].partName,
+                color: repairListInner[partNameIndex].color,
+                amount: repairListInner[partNameIndex].amount + 1
+              };
+            }
+          }
+        }
+
+        repairListInner.sort(compare);
+        repairListInner.reverse();
+        this.store.commit(
+          "commitMostRepairedPartMonthly",
+          repairListInner[0].partName
+        );
+        this.repairList = repairListInner;
+      } else {
+        repairListInner.push({
+          partName: "N/A",
+          color: generateRandomColor(),
+          amount: 1
+        });
+        this.repairList = repairListInner;
+      }
     },
     initializePieChart: function() {
       const entryColors = [];
@@ -190,7 +201,6 @@ export default {
   margin-top: 10px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  box-shadow: 3px 3px 12px #e8e8e8;
 }
 .inline-elements {
   font-family: "Open Sans", sans-serif;

@@ -98,25 +98,6 @@ export default {
         }
         return randomColor;
       }
-
-      for (let entity of this.data) {
-        if (!campList.find(el => el.camp === entity.campName)) {
-          campList.push({
-            camp: entity.campName,
-            color: generateRandomColor(),
-            amount: 1
-          });
-        } else {
-          const campNameIndex = campList.findIndex(
-            el => el.camp === entity.campName
-          );
-          campList[campNameIndex] = {
-            camp: campList[campNameIndex].camp,
-            color: campList[campNameIndex].color,
-            amount: campList[campNameIndex].amount + 1
-          };
-        }
-      }
       function compare(a, b) {
         if (a.amount < b.amount) {
           return -1;
@@ -126,10 +107,37 @@ export default {
         }
         return 0;
       }
-      campList.sort(compare);
-      campList.reverse();
 
-      this.campList = campList;
+      if (this.data.length > 0) {
+        for (let entity of this.data) {
+          if (!campList.find(el => el.camp === entity.campName)) {
+            campList.push({
+              camp: entity.campName,
+              color: generateRandomColor(),
+              amount: 1
+            });
+          } else {
+            const campNameIndex = campList.findIndex(
+              el => el.camp === entity.campName
+            );
+            campList[campNameIndex] = {
+              camp: campList[campNameIndex].camp,
+              color: campList[campNameIndex].color,
+              amount: campList[campNameIndex].amount + 1
+            };
+          }
+        }
+        campList.sort(compare);
+        campList.reverse();
+        this.campList = campList;
+      } else {
+        campList.push({
+          camp: "N/A",
+          color: generateRandomColor(),
+          amount: 1
+        });
+        this.campList = campList;
+      }
     }
   },
   components: { Vue3ChartJs },
@@ -193,7 +201,6 @@ export default {
   margin-top: 10px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  box-shadow: 3px 3px 12px #e8e8e8;
 }
 .inline-elements {
   font-family: "Open Sans", sans-serif;

@@ -137,10 +137,20 @@ export default {
   },
   methods: {
     getMostRepairedPartMonthly() {
-      return this.store.getters.getMostRepairedPartMonthly;
+      const mostRepairedMonthly = this.store.getters.getMostRepairedPartMonthly;
+      if (mostRepairedMonthly.length > 0) {
+        return mostRepairedMonthly;
+      } else {
+        return "N/A";
+      }
     },
     getMostRepairedPartDaily() {
-      return this.store.getters.getMostRepairedPartDaily;
+      const mostRepairedDaily = this.store.getters.getMostRepairedPartDaily;
+      if (mostRepairedDaily.length > 0) {
+        return mostRepairedDaily;
+      } else {
+        return "N/A";
+      }
     },
     showAlert() {
       alert("Klikka på stats");
