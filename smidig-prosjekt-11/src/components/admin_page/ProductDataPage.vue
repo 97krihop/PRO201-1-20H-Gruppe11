@@ -20,7 +20,7 @@
           :name-of-data="allParts.name"
           :data-to-display="getSumAllParts()"
           :metric-icon-src="allParts.imgName"
-          display-image="{{true}}"
+          :display-image="true"
         />
       </div>
 
@@ -35,7 +35,7 @@
           :name-of-data="product.partName"
           :data-to-display="sumPartsOfType(product.partNumber)"
           :metric-icon-src="product.imgName"
-          display-image="{{true}}"
+          :display-image="true"
         />
       </div>
     </div>
