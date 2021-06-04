@@ -71,15 +71,16 @@ import { createMap } from "@/assets/js/map.js";
 import DescriptionText from "../DescriptionText";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { /*getCurrentInstance,*/ onMounted, ref } from "vue";
 
 export default {
   name: "DashboardPage",
-  setup() {
+  emits: ["childToParent"],
+  setup(_, { emit }) {
     const router = useRouter();
     const store = useStore();
     const retrievedData = [];
-    const { ctx: _this } = getCurrentInstance();
+    //const { ctx: _this } = getCurrentInstance();
     const campData = ref([]);
     const products = [
       {
@@ -113,7 +114,7 @@ export default {
       );
 
       function childMapClick(param) {
-        _this.$emit("childToParent", param);
+        emit("childToParent", param);
       }
     });
 

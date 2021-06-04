@@ -194,7 +194,7 @@ export default {
             campData.value[campIndex].campRepairs[i];
         }
         updateData();
-        props?.editRoute("Camps");
+        //props?.editRoute("Camps");
         emit("camp");
       }
     });
