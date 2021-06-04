@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 
   try {
     let value = await schema.validateAsync(req.body);
-
+    console.log(JSON.stringify(value))
     const data = value.map((x) => {
       return { ...x, username: req.user.username, campName: req.user.campName };
     });
@@ -59,7 +59,8 @@ router.post("/", async (req, res) => {
       res.status(500).send({ error: e });
     }
   } catch (err) {
-    return res.status(400).json({ error: err });
+    console.log(err)
+    return res.status(400).json(err);
   }
 });
 
