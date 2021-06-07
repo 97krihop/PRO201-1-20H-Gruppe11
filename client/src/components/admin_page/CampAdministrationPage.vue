@@ -1,12 +1,7 @@
 <template>
   <div class="container">
     <h1>Add new Camp</h1>
-    <form
-      @submit.prevent="
-        submit();
-        showToast();
-      "
-    >
+    <form @submit.prevent="submit">
       <div class="wrapper">
         <div class="input">
           <label>Camp name: </label>
@@ -45,15 +40,6 @@
             <i>{{ error }}</i>
           </span>
         </div>
-        <!--<div class="input">
-          <label>Sunbells: </label>
-          <input
-            v-model="campAmount"
-            type="number"
-            placeholder="Enter number of Sunbells"
-            required
-          />
-        </div> -->
         <div>
           <button id="submit-btn" type="submit">
             Submit
@@ -65,24 +51,23 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { getCurrentInstance, ref } from "vue";
 import { post } from "axios";
 
 export default {
   name: "CampAdministrationPage",
-  methods: {
-    showToast: function() {
-      this.$toast.success(`Camp created`, {
-        position: "bottom"
-      });
-    }
-  },
   setup() {
+    const { ctx: _this } = getCurrentInstance();
     const name = ref("");
     const Country = ref("");
     const geo = ref("");
     const error = ref(null);
 
+    const showToast = () => {
+      _this.$toast.success(`Camp created`, {
+        position: "bottom"
+      });
+    };
     const submit = async () => {
       const location = geo.value.split(",");
       error.value = null;
@@ -99,6 +84,7 @@ export default {
         name.value = "";
         Country.value = "";
         geo.value = "";
+        showToast();
       } catch (e) {
         error.value = "something went wrong";
       }

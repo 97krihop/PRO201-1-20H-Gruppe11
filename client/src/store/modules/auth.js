@@ -2,7 +2,8 @@ import axios from "axios";
 
 const state = {
   authStatus: "",
-  regStatus: ""
+  regStatus: "",
+  user: null
 };
 
 const mutations = {
@@ -10,7 +11,8 @@ const mutations = {
   authRequest(state) {
     state.authStatus = "loading";
   },
-  authSuccess(state) {
+  authSuccess(state, value) {
+    state.user = value;
     state.authStatus = "success";
   },
   authError(state) {
@@ -18,7 +20,8 @@ const mutations = {
   },
   authLogout(state) {
     state.authStatus = "";
-    window.sessionStorage.removeItem("user-data");
+    state.regStatus = "";
+    state.user = null;
   },
   // Register mutations
   regRequest(state) {
@@ -34,7 +37,6 @@ const mutations = {
 
 const actions = {
   async authenticate({ commit }, user) {
-    const sessionStorage = window.sessionStorage;
     commit("authRequest");
     return new Promise((resolve, reject) => {
       axios
@@ -43,7 +45,6 @@ const actions = {
         })
         .then(res => {
           commit("authSuccess", res.data);
-          sessionStorage.setItem("user-data", JSON.stringify(res.data));
           resolve(res);
         })
         .catch(error => {
@@ -77,9 +78,9 @@ const actions = {
           commit("regSuccess");
           resolve(res);
         })
-        .catch(error => {
+        .catch(() => {
           commit("regError");
-          reject(error);
+          reject(null);
         });
       resolve();
     });
@@ -87,9 +88,7 @@ const actions = {
 };
 
 const getters = {
-  getUserData() {
-    return JSON.parse(window.sessionStorage.getItem("user-data"));
-  }
+  getUserData: state => state.user
 };
 
 export default {

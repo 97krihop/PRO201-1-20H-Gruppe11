@@ -87,7 +87,7 @@ export default {
       type: String
     }
   },
-  setup(props, { emit }) {
+  setup: function(props, { emit }) {
     const bol = true;
     const store = useStore();
     const { ctx: _this } = getCurrentInstance();
@@ -152,11 +152,14 @@ export default {
     const searchedProducts = computed(() =>
       campData.value.filter(
         product =>
-          product.id.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !==
-            -1 ||
-          product.location
-            .toLowerCase()
-            .indexOf(searchQuery.value.toLowerCase()) !== -1
+          !(
+            product.id
+              .toLowerCase()
+              .indexOf(searchQuery.value.toLowerCase()) === -1 &&
+            product.location
+              .toLowerCase()
+              .indexOf(searchQuery.value.toLowerCase()) === -1
+          )
       )
     );
     const isMapLoading = ref(true);
@@ -181,20 +184,16 @@ export default {
         setSelectedCampName(props.routedCampName);
         replaceMapWithResults();
         // Get index of selected camp by comparing name
-        let campIndex = 0;
-        for (let i = 0; i < campData.value.length; i++) {
-          if (campData.value[i].id === props.routedCampName) {
-            campIndex = i;
-            break;
-          }
-        }
+
+        const campIndex = campData.value.findIndex(
+          camp => camp.id === props.routedCampName
+        );
 
         for (let i = 0; i < products.value.length; i++) {
           products.value[i].totalRepairs =
             campData.value[campIndex].campRepairs[i];
         }
         updateData();
-        //props?.editRoute("Camps");
         emit("camp");
       }
     });
@@ -244,9 +243,7 @@ export default {
       showSearchResults,
       mapIsHidden,
       delayedHide,
-      replaceMapWithResults,
       replaceResultsWithMap,
-      setSelectedCampName,
       showResult,
       isMapLoading
     };
@@ -393,6 +390,7 @@ h3 {
   width: 80px;
   height: 80px;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -408,15 +406,19 @@ h3 {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #abcd transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);

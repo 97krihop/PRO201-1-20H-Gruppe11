@@ -54,7 +54,7 @@ import { useStore } from "vuex";
 
 export default {
   name: "ProductDataPage",
-  setup() {
+  setup: function() {
     const chartRef = ref(null);
     const store = useStore();
     const data = ref(null);
@@ -209,7 +209,7 @@ export default {
       updateChartWithAllParts();
     });
 
-    watchEffect(() => chartRef.value?.update());
+    watchEffect(() => chartRef?.value?.update());
 
     // Adds a single repaired part to the dataBank array
     function addPart(partNumber, monthNumber) {
@@ -219,7 +219,7 @@ export default {
     // Updates the chart when an element is clicked
     async function updateData(product) {
       // Remove all checks
-      this.allParts.isChecked = false;
+      allParts.value.isChecked = false;
       for (let i = 0; i < productImages.value.length; i++) {
         productImages.value[i].isChecked = false;
       }
@@ -232,12 +232,12 @@ export default {
             data: getSumPartsArray()
           }
         ];
-        this.allParts.isChecked = true;
+        allParts.value.isChecked = true;
       } else {
         barChart.data.datasets[0] = dataBank.value[product.partNumber - 1];
         product.isChecked = true;
       }
-      chartRef.value.update();
+      chartRef?.value?.update();
     }
 
     function updateChartWithAllParts() {
@@ -251,15 +251,11 @@ export default {
     }
 
     function sumPartsOfType(productIndex) {
-      var sum = 0;
-      for (let i = 0; i < dataBank.value[productIndex - 1].data.length; i++) {
-        sum += dataBank.value[productIndex - 1].data[i];
-      }
-      return sum;
+      return dataBank.value[productIndex - 1].data.reduce((x, y) => x + y);
     }
 
     function getSumAllParts() {
-      var sum = 0;
+      let sum = 0;
       for (let i = 0; i < dataBank.value[0].data.length; i++) {
         for (let j = 0; j < dataBank.value.length; j++) {
           sum += dataBank.value[j].data[i];

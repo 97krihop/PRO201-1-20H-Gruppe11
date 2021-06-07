@@ -26,6 +26,11 @@ export default createStore({
         "productData"
       ],
       key: "bright"
+    }),
+    createPersistedState({
+      paths: ["auth"],
+      storage: window.sessionStorage,
+      key: "bright"
     })
   ]
 });
