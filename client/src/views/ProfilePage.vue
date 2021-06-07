@@ -85,9 +85,6 @@ export default {
       validationSchema: schema
     });
 
-    const ud = JSON.parse(window.sessionStorage.getItem("user-data"));
-    console.log(ud);
-
     const schema = {
       password(value) {
         return value && value.length >= 6
@@ -116,17 +113,13 @@ export default {
       });
     const onSubmit = handleSubmit((values, { resetForm }) => {
       modalHide();
-      try {
-        axios.patch(
-          "http://localhost:3000/api/edit",
-          { ...values, confirmPassword: undefined },
-          { withCredentials: true }
-        );
-        resetForm();
-        showToast();
-      } catch (e) {
-        console.error(e);
-      }
+      axios.patch(
+        "http://localhost:3000/api/edit",
+        { ...values, confirmPassword: undefined },
+        { withCredentials: true }
+      );
+      resetForm();
+      showToast();
     });
 
     return {
@@ -174,9 +167,9 @@ export default {
     width: 100%;
     border-radius: 5px;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
-      0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
-      0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
-      0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07), -2px -3px #899599;
 
     .value-text {
       color: white;
