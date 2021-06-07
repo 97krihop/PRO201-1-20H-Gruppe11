@@ -36,6 +36,7 @@
           <icon-base
             v-show="showRepair === false"
             id="plus-btn"
+            ref="plusbtn"
             iconName="plus"
             iconColor="#2C2A29"
             icon-hover-color="#787370"
@@ -95,6 +96,7 @@ export default {
     },
     addRepair() {
       // show new overlay
+      //document.activeElement.blur();
       this.showRepair = true;
       this.$store.commit("updateBtn", true);
     },

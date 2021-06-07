@@ -6,7 +6,7 @@
       :iconName="val.icon"
       :buttonTitle="val.title"
       :routerLinkDest="val.destination"
-      tabindex="0"
+      :tabindex="tabindex + 1"
     />
 
     <home-select-button
@@ -14,7 +14,7 @@
       iconName="equalizer"
       buttonTitle="Admin"
       routerLinkDest="admin"
-      tabindex="0"
+      :tabindex="tabindex + 1"
     />
 
     <modal-error-message v-if="showModal === true" @close="showModal = false">
@@ -35,6 +35,13 @@ export default {
   components: {
     ModalErrorMessage,
     HomeSelectButton
+  },
+  props: {
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0
+    }
   },
   setup() {
     const store = useStore();

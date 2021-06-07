@@ -23,7 +23,7 @@
           type="text"
           :v-model="serialNr"
           placeholder="Example: 1234 5678"
-          tabindex="0"
+          :tabindex="tabindex + 1"
         />
       </div>
     </div>
@@ -49,7 +49,7 @@
           :key="product.partNumber"
           @click="selectPart(product)"
           @keydown.enter="selectPart(product)"
-          tabindex="0"
+          :tabindex="tabindex + 1"
         >
           <img
             class="part-icon"
@@ -71,7 +71,7 @@
           iconHeight="100%"
           v-on:click="closePopup"
           @keydown.enter="closePopup"
-          tabindex="0"
+          :tabindex="tabindex + 1"
         />
       </div>
     </div>
@@ -85,7 +85,7 @@
         @keydown.enter="submitPartsSelected"
         iconWidth="100%"
         iconHeight="100%"
-        tabindex="0"
+        :tabindex="tabindex + 1"
       />
     </div>
   </div>
@@ -103,6 +103,13 @@ export default {
     ModalErrorMessage,
     ModalNoSerialNumberMessage,
     IconBase
+  },
+  props: {
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 1
+    }
   },
   data() {
     return {

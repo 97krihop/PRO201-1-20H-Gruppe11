@@ -18,7 +18,8 @@
           placeholder="Enter Username"
           name="username"
           required
-          tabindex="0"
+          tabindex="1"
+          ref="firstFocus"
         />
       </div>
       <div>
@@ -31,12 +32,12 @@
           placeholder="Enter Password"
           name="password"
           required
-          tabindex="0"
+          tabindex="2"
         />
       </div>
       <div>
         <!-- submit button -->
-        <input id="login-submit" type="submit" value="Log in" tabindex="0" />
+        <input id="login-submit" type="submit" value="Log in" tabindex="3" />
       </div>
     </form>
   </div>
