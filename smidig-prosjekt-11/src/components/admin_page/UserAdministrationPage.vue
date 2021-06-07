@@ -1,14 +1,7 @@
 <template>
   <div class="container">
     <h1>Add new User</h1>
-    <form
-      @submit="
-        () => {
-          onSubmit();
-          showToast();
-        }
-      "
-    >
+    <form @submit="onSubmit">
       <div class="wrapper">
         <div class="input">
           <label>Username: </label>
@@ -43,9 +36,9 @@
         <div class="input">
           <label>User Camp: </label>
           <select v-model="campName" required>
-            <option v-for="camp in camps" :key="camp.name">{{
-              camp.name
-            }}</option>
+            <option v-for="camp in camps" :key="camp.name"
+              >{{ camp.name }}
+            </option>
           </select>
         </div>
         <div class="admin-check">
@@ -66,33 +59,18 @@
 <script>
 import { useField, useForm } from "vee-validate";
 import { useStore } from "vuex";
+import { getCurrentInstance, ref } from "vue";
 
 export default {
   name: "UserAdministrationPage",
-  data() {
-    return {
-      camps: []
-      // formMessage: ""
-    };
-  },
-  methods: {
-    showToast: function() {
-      this.$toast.success(`User created`, {
-        position: "bottom"
-      });
-    }
-  },
-  // computed: {
-  //   formMessageExists() {
-  //     return this.formMessage !== "";
-  //   }
-  // },
   async created() {
     const response = await fetch("http://localhost:3000/api/camp");
     this.camps = await response.json();
   },
   setup() {
+    const { ctx: _this } = getCurrentInstance();
     const store = useStore();
+    const camps = ref([]);
 
     const schema = {
       username(value) {
@@ -116,33 +94,20 @@ export default {
       validationSchema: schema
     });
 
-    const onSubmit = handleSubmit((values, { resetForm }) => {
+    const onSubmit = handleSubmit(async (values, { resetForm }) => {
       delete values.confirmPassword;
-
-      store
-        .dispatch("createUser", values)
-        .then(() => {
-          // reset the form and the field values to their initial values
-          resetForm();
-          //this.formMessage = "New user created";
-
-          // Success message display
-        })
-        .catch(error => {
-          console.error("errorcatch", error);
-          resetForm();
-          switch (error.response.status) {
-            case 400:
-              //this.formMessage = 'Invalid username/password';
-              break;
-            case 409:
-              //this.formMessage = 'Username already exists';
-              break;
-            case 500:
-            //this.formMessage = 'Internal server error';
-          }
-        });
+      const res = await store.dispatch("createUser", values);
+      if (res !== null) {
+        resetForm();
+        showToast();
+      }
     });
+
+    const showToast = () => {
+      _this.$toast.success(`User created`, {
+        position: "bottom"
+      });
+    };
 
     const { errorMessage: usernameError, value: username } = useField(
       "username"
@@ -158,6 +123,7 @@ export default {
     const { value: admin } = useField("admin");
 
     return {
+      camps,
       username,
       usernameError,
       password,
@@ -190,6 +156,7 @@ export default {
   }
 
   @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
   h1 {
     margin-top: 7vh;
     font-size: 1.5em;
@@ -198,6 +165,7 @@ export default {
     font-family: "Open Sans", sans-serif;
     color: #828b96;
   }
+
   .wrapper {
     background: #2c2a29;
     padding: 2rem;

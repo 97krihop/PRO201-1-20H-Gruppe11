@@ -6,13 +6,8 @@
 <script>
 export default {
   name: "DescriptionText",
-  components: {},
   props: {
     descriptionText: String
-  },
-  setup() {},
-  data() {
-    return {};
   }
 };
 </script>

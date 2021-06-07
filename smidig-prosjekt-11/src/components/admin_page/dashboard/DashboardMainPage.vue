@@ -71,7 +71,7 @@ import { createMap } from "@/assets/js/map.js";
 import DescriptionText from "../DescriptionText";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { /*getCurrentInstance,*/ onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 
 export default {
   name: "DashboardPage",
@@ -80,7 +80,7 @@ export default {
     const router = useRouter();
     const store = useStore();
     const retrievedData = [];
-    //const { ctx: _this } = getCurrentInstance();
+
     const campData = ref([]);
     const products = [
       {
