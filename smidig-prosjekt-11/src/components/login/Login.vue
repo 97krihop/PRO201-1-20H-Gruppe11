@@ -18,6 +18,7 @@
           placeholder="Enter Username"
           name="username"
           required
+          tabindex="0"
         />
       </div>
       <div>
@@ -30,11 +31,12 @@
           placeholder="Enter Password"
           name="password"
           required
+          tabindex="0"
         />
       </div>
       <div>
         <!-- submit button -->
-        <input id="login-submit" type="submit" value="Log in" />
+        <input id="login-submit" type="submit" value="Log in" tabindex="0" />
       </div>
     </form>
   </div>
@@ -103,7 +105,7 @@ export default {
       margin-bottom: 1.5rem;
       color: #2c2a29;
       font-weight: bold;
-      outline: none;
+      //outline: none;
     }
 
     .login-input {

@@ -42,6 +42,8 @@
             iconWidth="100%"
             iconHeight="100%"
             v-on:click="addRepair()"
+            @keydown.enter="addRepair()"
+            tabindex="0"
           />
         </div>
       </div>
@@ -134,7 +136,7 @@ export default {
 #plus-btn {
   margin: 2.5vh auto;
   width: 3vw;
-  outline: none;
+  //outline: none;
   border-radius: 50%;
   cursor: pointer;
 }

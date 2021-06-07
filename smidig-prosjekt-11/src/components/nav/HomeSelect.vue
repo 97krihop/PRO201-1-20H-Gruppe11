@@ -6,6 +6,7 @@
       :iconName="val.icon"
       :buttonTitle="val.title"
       :routerLinkDest="val.destination"
+      tabindex="0"
     />
 
     <home-select-button
@@ -13,6 +14,7 @@
       iconName="equalizer"
       buttonTitle="Admin"
       routerLinkDest="admin"
+      tabindex="0"
     />
 
     <modal-error-message v-if="showModal === true" @close="showModal = false">

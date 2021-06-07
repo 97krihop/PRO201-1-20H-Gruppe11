@@ -51,7 +51,7 @@ export default {
   cursor: pointer;
   width: 90%;
   height: 6vh;
-  outline: none;
+  //outline: none;
   transition: 150ms;
   display: flex;
   align-items: center;

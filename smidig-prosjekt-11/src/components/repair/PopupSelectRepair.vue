@@ -23,6 +23,7 @@
           type="text"
           :v-model="serialNr"
           placeholder="Example: 1234 5678"
+          tabindex="0"
         />
       </div>
     </div>
@@ -47,6 +48,8 @@
           v-for="product in productImages"
           :key="product.partNumber"
           @click="selectPart(product)"
+          @keydown.enter="selectPart(product)"
+          tabindex="0"
         >
           <img
             class="part-icon"
@@ -67,6 +70,8 @@
           iconWidth="100%"
           iconHeight="100%"
           v-on:click="closePopup"
+          @keydown.enter="closePopup"
+          tabindex="0"
         />
       </div>
     </div>
@@ -77,8 +82,10 @@
         iconColor="#6A975A"
         icon-hover-color="#006400"
         @click="submitPartsSelected"
+        @keydown.enter="submitPartsSelected"
         iconWidth="100%"
         iconHeight="100%"
+        tabindex="0"
       />
     </div>
   </div>
@@ -91,9 +98,6 @@ import IconBase from "../ui/IconBase.vue";
 
 export default {
   name: "PopupSelect",
-  props: {
-    pictures: Array
-  },
   emits: ["onClose", "onCloseRepair"],
   components: {
     ModalErrorMessage,
@@ -111,56 +115,47 @@ export default {
         Type: Number,
         Required: true
       },
-      productImages: [
-        {
+      productImages: [{
           partNumber: "1",
           partName: "Lamp",
           imgName: "ic-part-lamp",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "2",
           partName: "12V charger",
           imgName: "ic-part-adapter-charger",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "3",
           partName: "Battery",
           imgName: "ic-part-battery",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "4",
           partName: "Power button",
           imgName: "ic-part-button",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "5",
           partName: "Light bulb",
           imgName: "ic-part-lightbulb",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "6",
           partName: "Screen",
           imgName: "ic-part-screen",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "7",
           partName: "Socket charger",
           imgName: "ic-part-socket-charger",
           isChecked: false
-        },
-        {
+        },{
           partNumber: "8",
           partName: "Solar panel",
           imgName: "ic-part-solar-panel",
           isChecked: false
-        }
-      ],
+      }],
       partsChosen: []
     };
   },
