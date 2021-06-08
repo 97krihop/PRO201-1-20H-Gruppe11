@@ -122,47 +122,56 @@ export default {
         Type: Number,
         Required: true
       },
-      productImages: [{
+      productImages: [
+        {
           partNumber: "1",
           partName: "Lamp",
           imgName: "ic-part-lamp",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "2",
           partName: "12V charger",
           imgName: "ic-part-adapter-charger",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "3",
           partName: "Battery",
           imgName: "ic-part-battery",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "4",
           partName: "Power button",
           imgName: "ic-part-button",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "5",
           partName: "Light bulb",
           imgName: "ic-part-lightbulb",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "6",
           partName: "Screen",
           imgName: "ic-part-screen",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "7",
           partName: "Socket charger",
           imgName: "ic-part-socket-charger",
           isChecked: false
-        },{
+        },
+        {
           partNumber: "8",
           partName: "Solar panel",
           imgName: "ic-part-solar-panel",
           isChecked: false
-      }],
+        }
+      ],
       partsChosen: []
     };
   },

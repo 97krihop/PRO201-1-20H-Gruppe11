@@ -4,7 +4,11 @@
 
     <div class="logo-container">
       <router-link class="logo-link" to="/">
-        <img id="logo-img" src="@/assets/images/logo-bright.svg" alt="to home" />
+        <img
+          id="logo-img"
+          src="@/assets/images/logo-bright.svg"
+          alt="to home"
+        />
       </router-link>
     </div>
     <ul

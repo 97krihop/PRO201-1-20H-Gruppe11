@@ -81,7 +81,11 @@
         }"
         tabindex="-1"
       >
-        <button id="forward-btn" v-if="getStatus === false" :tabindex="tabindex + 1">
+        <button
+          id="forward-btn"
+          v-if="getStatus === false"
+          :tabindex="tabindex + 1"
+        >
           <span class="font-standardText"
             >Submit
             <span style="font-size: 1.1em;">{{ updateTotalProducts }}</span>
