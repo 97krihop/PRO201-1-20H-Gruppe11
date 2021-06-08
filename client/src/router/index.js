@@ -55,7 +55,6 @@ import store from "../store";
 
 router.beforeEach((to, from, next) => {
   const userData = store.getters.getUserData;
-  console.log(userData);
   if (to.path !== "/login" && !userData) {
     next("/login");
   } else if (to.path === "/login" && userData) {

@@ -36,8 +36,8 @@
         <div class="input">
           <label>User Camp: </label>
           <select v-model="campName" required>
-            <option v-for="camp in camps" :key="camp.name"
-              >{{ camp.name }}
+            <option v-for="camp in camps" :key="camp.name">
+              {{ camp.name }}
             </option>
           </select>
         </div>
@@ -50,7 +50,6 @@
             Submit
           </button>
         </div>
-        <!-- <div class="form-message" v-if="formMessageExists">{{ formMessage }}</div> -->
       </div>
     </form>
   </div>
@@ -59,19 +58,19 @@
 <script>
 import { useField, useForm } from "vee-validate";
 import { useStore } from "vuex";
-import { getCurrentInstance, ref } from "vue";
+import { getCurrentInstance, onMounted, ref } from "vue";
+import { get } from "axios";
 
 export default {
   name: "UserAdministrationPage",
-  async created() {
-    const response = await fetch("http://localhost:3000/api/camp");
-    this.camps = await response.json();
-  },
   setup() {
     const { ctx: _this } = getCurrentInstance();
     const store = useStore();
     const camps = ref([]);
-
+    onMounted(async () => {
+      const { data } = await get("http://localhost:3000/api/camp");
+      camps.value = data;
+    });
     const schema = {
       username(value) {
         return value && value.length >= 6

@@ -93,7 +93,6 @@ export default {
         }
         return 0;
       }
-      console.log(this.data);
       if (this.data.length > 0) {
         for (let entity of this.data) {
           for (let part of entity.parts) {
