@@ -14,6 +14,8 @@
           v-for="product in productImages"
           :key="product.partNumber"
           @click="selectPart(product)"
+          @keydown.enter="selectPart(product)"
+          tabindex="0"
         >
           <img
             class="part-icon"
@@ -47,6 +49,8 @@
         iconWidth="100%"
         iconHeight="100%"
         v-on:click="closePopup"
+        @keydown.enter="closePopup"
+        tabindex="0"
       />
     </div>
 
@@ -57,8 +61,10 @@
         iconColor="#6A975A"
         icon-hover-color="#006400"
         @click="submitPartsSelected"
+        @keydown.enter="submitPartsSelected"
         iconWidth="100%"
         iconHeight="100%"
+        tabindex="0"
       />
     </div>
   </div>

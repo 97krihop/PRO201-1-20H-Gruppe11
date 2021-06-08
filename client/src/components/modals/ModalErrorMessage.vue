@@ -27,6 +27,7 @@
               class="btn-green font-standardText"
               @click="close"
               aria-label="Close modal"
+              tabindex="0"
             >
               OK
             </button>

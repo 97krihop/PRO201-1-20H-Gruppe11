@@ -57,6 +57,7 @@
         :class="{
           'next-btn-none': isSuccessfulReport
         }"
+        tabindex="-1"
       >
         <icon-base
           class="progress-bar-buttons"
@@ -66,6 +67,8 @@
           iconWidth="100%"
           iconHeight="100%"
           icon-hover-color="#98DA81"
+          :tabindex="tabindex + 1"
+          alt="back to home"
         />
       </router-link>
 
@@ -76,8 +79,9 @@
         :class="{
           'next-btn-none': isSuccessfulReport || updateTotalProducts < 1
         }"
+        tabindex="-1"
       >
-        <button id="forward-btn" v-if="getStatus === false">
+        <button id="forward-btn" v-if="getStatus === false" :tabindex="tabindex + 1">
           <span class="font-standardText"
             >Submit
             <span style="font-size: 1.1em;">{{ updateTotalProducts }}</span>
@@ -100,6 +104,13 @@ import IconBase from "@/components/ui/IconBase";
 export default {
   name: "Progress bar",
   components: { IconBase },
+  props: {
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 1
+    }
+  },
   data() {
     return {
       isSuccessfulReport: false,
@@ -231,7 +242,7 @@ export default {
       top: 14px;
       background-color: #9fd18b;
       color: #2c2a29;
-      outline: none;
+      //outline: none;
       box-shadow: -2px -2px #666666;
       transition: 150ms;
 

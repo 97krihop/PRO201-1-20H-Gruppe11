@@ -36,12 +36,15 @@
           <icon-base
             v-show="showRepair === false"
             id="plus-btn"
+            ref="plusbtn"
             iconName="plus"
             iconColor="#2C2A29"
             icon-hover-color="#787370"
             iconWidth="100%"
             iconHeight="100%"
             v-on:click="addRepair()"
+            @keydown.enter="addRepair()"
+            tabindex="0"
           />
         </div>
       </div>
@@ -93,6 +96,7 @@ export default {
     },
     addRepair() {
       // show new overlay
+      //document.activeElement.blur();
       this.showRepair = true;
       this.$store.commit("updateBtn", true);
     },
@@ -134,7 +138,7 @@ export default {
 #plus-btn {
   margin: 2.5vh auto;
   width: 3vw;
-  outline: none;
+  //outline: none;
   border-radius: 50%;
   cursor: pointer;
 }

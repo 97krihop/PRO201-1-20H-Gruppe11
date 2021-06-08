@@ -27,6 +27,7 @@
               class="btn-green font-standardText"
               @click="commit"
               aria-label="Close modal"
+              tabindex="0"
             >
               Yes
             </button>
@@ -35,6 +36,7 @@
               class="btn-green font-standardText"
               @click="close"
               aria-label="Close modal"
+              tabindex="0"
             >
               No
             </button>
