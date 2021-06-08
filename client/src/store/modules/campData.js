@@ -16,7 +16,7 @@ const actions = {
   fetchCampData: async ({ commit }) => {
     try {
       const res = await get(
-        "https://morning-harbor-19907.herokuapp.com/api/statistics/repairs-by-camp",
+        `${process.env.VUE_APP_SERVER_URL}/api/statistics/repairs-by-camp`,
         {
           withCredentials: true
         }

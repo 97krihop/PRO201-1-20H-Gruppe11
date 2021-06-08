@@ -40,7 +40,7 @@ const actions = {
     commit("authRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post("https://morning-harbor-19907.herokuapp.com/api/login", user, {
+        .post(`${process.env.VUE_APP_SERVER_URL}/api/login`, user, {
           withCredentials: true
         })
         .then(res => {
@@ -57,7 +57,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit("authLogout");
       axios
-        .get("https://morning-harbor-19907.herokuapp.com/api/logout")
+        .get(`${process.env.VUE_APP_SERVER_URL}/api/logout`)
         .then(res => {
           resolve(res);
         })
@@ -71,13 +71,9 @@ const actions = {
     commit("regRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post(
-          "https://morning-harbor-19907.herokuapp.com/api/register",
-          userValues,
-          {
-            withCredentials: true
-          }
-        )
+        .post(`${process.env.VUE_APP_SERVER_URL}/api/register`, userValues, {
+          withCredentials: true
+        })
         .then(res => {
           commit("regSuccess");
           resolve(res);

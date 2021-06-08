@@ -50,12 +50,9 @@ const getters = {
 const actions = {
   fetchAllRepairs: async function({ commit }) {
     try {
-      const res = await get(
-        "https://morning-harbor-19907.herokuapp.com/api/parts",
-        {
-          withCredentials: true
-        }
-      );
+      const res = await get(`${process.env.VUE_APP_SERVER_URL}/api/parts`, {
+        withCredentials: true
+      });
       const data = res.data;
       commit("commitAllRepairs", data);
       return res.status === 200;
@@ -66,7 +63,7 @@ const actions = {
   fetchMonthlyRepairs: async function({ commit }) {
     try {
       const res = await get(
-        "https://morning-harbor-19907.herokuapp.com/api/statistics/Parts-By-LastMonth",
+        `${process.env.VUE_APP_SERVER_URL}/api/statistics/Parts-By-LastMonth`,
         {
           withCredentials: true
         }
@@ -81,7 +78,7 @@ const actions = {
   fetchDailyRepairs: async function({ commit }) {
     try {
       const res = await get(
-        "https://morning-harbor-19907.herokuapp.com/api/statistics/Parts-By-LastDay",
+        `${process.env.VUE_APP_SERVER_URL}/api/statistics/Parts-By-LastDay`,
         {
           withCredentials: true
         }

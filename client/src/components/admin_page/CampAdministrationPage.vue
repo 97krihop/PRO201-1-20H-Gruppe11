@@ -73,7 +73,7 @@ export default {
       error.value = null;
       try {
         await post(
-          "https://morning-harbor-19907.herokuapp.com/api/camp",
+          `${process.env.SERVER_URL}/api/camp`,
           {
             name: name.value,
             Country: Country.value,
