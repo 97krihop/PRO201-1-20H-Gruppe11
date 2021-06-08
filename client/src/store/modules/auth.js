@@ -40,7 +40,7 @@ const actions = {
     commit("authRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/login", user, {
+        .post("https://morning-harbor-19907.herokuapp.com/api/login", user, {
           withCredentials: true
         })
         .then(res => {
@@ -57,7 +57,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit("authLogout");
       axios
-        .get("http://localhost:3000/api/logout")
+        .get("https://morning-harbor-19907.herokuapp.com/api/logout")
         .then(res => {
           resolve(res);
         })
@@ -71,9 +71,13 @@ const actions = {
     commit("regRequest");
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:3000/api/register", userValues, {
-          withCredentials: true
-        })
+        .post(
+          "https://morning-harbor-19907.herokuapp.com/api/register",
+          userValues,
+          {
+            withCredentials: true
+          }
+        )
         .then(res => {
           commit("regSuccess");
           resolve(res);

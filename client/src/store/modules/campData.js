@@ -16,7 +16,7 @@ const actions = {
   fetchCampData: async ({ commit }) => {
     try {
       const res = await get(
-        "http://localhost:3000/api/statistics/repairs-by-camp",
+        "https://morning-harbor-19907.herokuapp.com/api/statistics/repairs-by-camp",
         {
           withCredentials: true
         }

@@ -50,9 +50,12 @@ const getters = {
 const actions = {
   fetchAllRepairs: async function({ commit }) {
     try {
-      const res = await get("http://localhost:3000/api/parts", {
-        withCredentials: true
-      });
+      const res = await get(
+        "https://morning-harbor-19907.herokuapp.com/api/parts",
+        {
+          withCredentials: true
+        }
+      );
       const data = res.data;
       commit("commitAllRepairs", data);
       return res.status === 200;
@@ -63,7 +66,7 @@ const actions = {
   fetchMonthlyRepairs: async function({ commit }) {
     try {
       const res = await get(
-        "http://localhost:3000/api/statistics/Parts-By-LastMonth",
+        "https://morning-harbor-19907.herokuapp.com/api/statistics/Parts-By-LastMonth",
         {
           withCredentials: true
         }
@@ -78,7 +81,7 @@ const actions = {
   fetchDailyRepairs: async function({ commit }) {
     try {
       const res = await get(
-        "http://localhost:3000/api/statistics/Parts-By-LastDay",
+        "https://morning-harbor-19907.herokuapp.com/api/statistics/Parts-By-LastDay",
         {
           withCredentials: true
         }

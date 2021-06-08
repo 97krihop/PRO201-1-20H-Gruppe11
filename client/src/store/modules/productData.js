@@ -14,9 +14,12 @@ const getters = {
 };
 const actions = {
   fetchAllParts: async context => {
-    const res = await get("http://localhost:3000/api/parts", {
-      withCredentials: true
-    });
+    const res = await get(
+      "https://morning-harbor-19907.herokuapp.com/api/parts",
+      {
+        withCredentials: true
+      }
+    );
     if (res.status === 200) context.commit("setData", res.data);
   }
 };

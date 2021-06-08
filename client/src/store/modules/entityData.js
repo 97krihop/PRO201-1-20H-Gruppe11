@@ -51,7 +51,7 @@ const actions = {
   postRepairs: async function({ commit, state }) {
     try {
       const res = await post(
-        "http://localhost:3000/api/report",
+        "https://morning-harbor-19907.herokuapp.com/api/report",
         [...state.entityArray].map(e => {
           return {
             serialNumber:

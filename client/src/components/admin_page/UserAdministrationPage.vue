@@ -68,7 +68,9 @@ export default {
     const store = useStore();
     const camps = ref([]);
     onMounted(async () => {
-      const { data } = await get("http://localhost:3000/api/camp");
+      const { data } = await get(
+        "https://morning-harbor-19907.herokuapp.com/api/camp"
+      );
       camps.value = data;
     });
     const schema = {

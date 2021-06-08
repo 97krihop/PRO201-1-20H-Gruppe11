@@ -113,7 +113,7 @@ export default {
     const onSubmit = handleSubmit((values, { resetForm }) => {
       modalHide();
       axios.patch(
-        "http://localhost:3000/api/edit",
+        "https://morning-harbor-19907.herokuapp.com/api/edit",
         { ...values, confirmPassword: undefined },
         { withCredentials: true }
       );
