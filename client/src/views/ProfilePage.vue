@@ -113,7 +113,7 @@ export default {
     const onSubmit = handleSubmit((values, { resetForm }) => {
       modalHide();
       axios.patch(
-        `${process.env.SERVER_URL}/api/edit`,
+        `${process.env.VUE_APP_SERVER_URL}/api/edit`,
         { ...values, confirmPassword: undefined },
         { withCredentials: true }
       );
