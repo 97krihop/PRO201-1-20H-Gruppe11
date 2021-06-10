@@ -12,8 +12,7 @@ const app = express();
 const passport = require("passport");
 const initializePassport = require("./config/passport");
 
-<<<<<<< HEAD
-const store =
+/*const store =
   process.env.NODE_ENV === "production"
     ? MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
@@ -30,8 +29,7 @@ const sessionParser = session({
   resave: false,
   saveUninitialized: false,
   store: store,
-});
-=======
+});*/
 const sessionParser =
   process.env.NODE_ENV === "production"
     ? session({
@@ -58,7 +56,6 @@ const sessionParser =
         resave: false,
         saveUninitialized: false,
       });
->>>>>>> 72f275ab391e6fd41aa1faad06685749ae1b3f85
 
 if (app.get("env") === "production") app.set("trust proxy", 1); // trust first proxy
 
