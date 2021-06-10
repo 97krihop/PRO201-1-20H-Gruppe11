@@ -63,10 +63,11 @@
         </div>
       </div>
       <div class="close-container-ic">
-        <button type="button"
-                v-on:click="closePopup"
-                @keydown.enter="closePopup"
-                :tabindex="tabindex + 1"
+        <button
+          type="button"
+          v-on:click="closePopup"
+          @keydown.enter="closePopup"
+          :tabindex="tabindex + 1"
         >
           <icon-base
             class="close-repair-ic"
@@ -491,7 +492,6 @@ export default {
   }
 }
 
-
 /*
 https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/#accessible-close-buttons
 */
@@ -508,11 +508,11 @@ https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-com
   margin: -1px;
 }
 
-.h3 { 
-    display: block;
-    font-size: 1.1em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+.h3 {
+  display: block;
+  font-size: 1.1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 </style>

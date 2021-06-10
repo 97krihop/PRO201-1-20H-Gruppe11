@@ -43,10 +43,7 @@
       />
     </div>
     <div class="close-container-ic">
-      <button type="button"
-        v-on:click="closePopup"
-        @keydown.enter="closePopup"
-      >
+      <button type="button" v-on:click="closePopup" @keydown.enter="closePopup">
         <icon-base
           class="close-repair-ic"
           iconName="cross"
@@ -60,7 +57,8 @@
     </div>
 
     <div class="submit-container-ic">
-      <button type="button"
+      <button
+        type="button"
         @click="submitPartsSelected"
         @keydown.enter="submitPartsSelected"
       >
@@ -409,11 +407,11 @@ https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-com
   margin: -1px;
 }
 
-.h3 { 
-    display: block;
-    font-size: 1.1em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+.h3 {
+  display: block;
+  font-size: 1.1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 </style>
